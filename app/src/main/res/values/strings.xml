@@ -2,4 +2,7 @@
     <string name="app_name">SixJars</string>
     <string name="action_settings">Settings</string>
     <string name="img_of_bottle">img of bottle</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
 </resources>

@@ -1,13 +1,15 @@
 package org.itstep.android5.vetroumova.newbeginning.sixjars;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +28,18 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        ImageView image = (ImageView)findViewById(R.id.imageViewNEC);
+        image.setBackgroundResource(R.drawable.jar_anim);
+        AnimationDrawable animation = (AnimationDrawable)image.getBackground();
+        //Управлять объектом AnimationDrawable можно через методы start() и stop().
+        animation.start();
+        /*if( !animation.isRunning()) {
+            image.setBackgroundResource(R.drawable.jar_anim_continue);
+            animation = (AnimationDrawable)image.getBackground();
+            animation.start();
+        }*/
+
     }
 
     @Override

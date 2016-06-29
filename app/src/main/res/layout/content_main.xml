@@ -11,71 +11,73 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="org.itstep.android5.vetroumova.newbeginning.sixjars.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/textView"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Hello World!"
         android:layout_gravity="top|center_horizontal"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:gravity="center"
+        android:weightSum="6">
 
         <ImageView
         android:id="@+id/imageViewNEC"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="52dp"
+        android:layout_height="118dp"
         android:layout_weight="1"
-        android:contentDescription="@string/img_of_bottle" />
+        android:contentDescription="@string/img_of_bottle"
+        android:layout_margin="5dp"/>
 
         <ImageView
             android:id="@+id/imageViewFFA"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="52dp"
+            android:layout_height="118dp"
             android:layout_weight="1"
-            android:src="@drawable/empty_jar"
-            android:layout_margin="5dp"
-            android:contentDescription="@string/img_of_bottle" />
+            android:contentDescription="@string/img_of_bottle"
+            android:layout_margin="5dp"/>
 
         <ImageView
             android:id="@+id/imageViewEDU"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="52dp"
+            android:layout_height="118dp"
             android:layout_weight="1"
-            android:src="@drawable/blue_full"
-            android:layout_margin="5dp"
-            android:contentDescription="@string/img_of_bottle" />
+            android:contentDescription="@string/img_of_bottle"
+            android:layout_margin="5dp"/>
 
         <ImageView
             android:id="@+id/imageViewLTSS"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="52dp"
+            android:layout_height="118dp"
             android:layout_weight="1"
-            android:src="@drawable/clear_full"
-            android:layout_margin="5dp"
-            android:contentDescription="@string/img_of_bottle" />
+            android:contentDescription="@string/img_of_bottle"
+            android:layout_margin="5dp"/>
 
         <ImageView
             android:id="@+id/imageViewPLAY"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="52dp"
+            android:layout_height="118dp"
             android:layout_weight="1"
-            android:src="@drawable/clear_full"
-            android:layout_margin="5dp"
-            android:contentDescription="@string/img_of_bottle" />
+            android:contentDescription="@string/img_of_bottle"
+            android:layout_margin="5dp"/>
 
         <ImageView
             android:id="@+id/imageViewGIVE"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="52dp"
+            android:layout_height="118dp"
             android:layout_weight="1"
-            android:src="@drawable/blue_full"
-            android:layout_margin="5dp"
-            android:contentDescription="@string/img_of_bottle" />
+            android:contentDescription="@string/img_of_bottle"
+            android:layout_margin="5dp"/>
 
     </LinearLayout>
 

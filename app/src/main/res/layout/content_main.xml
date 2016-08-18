@@ -37,6 +37,7 @@
         android:layout_height="118dp"
         android:layout_weight="1"
         android:contentDescription="@string/img_of_bottle"
+            android:src="@drawable/jar"
         android:layout_margin="5dp"/>
 
         <ImageView

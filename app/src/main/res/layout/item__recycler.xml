@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <ImageView
+        android:id="@+id/itemImage"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/jar"
+        android:layout_margin="@dimen/image_margin" />
+
+    <LinearLayout
+        android:id="@+id/itemInfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/itemNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/item_name_of_jar"
+            android:textSize="@dimen/item_title_dimension"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:textColor="@color/colorPrimaryDark"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/itemBalanceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/item_balance_text"
+            android:textSize="@dimen/item_balance_dimension"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:textColor="@color/colorPrimaryTextDark"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/itemDescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/item_description_text"
+            android:textSize="@dimen/item_description_dimension"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:textColor="@color/colorSecondaryText" />
+
+    </LinearLayout>
+
+</LinearLayout>

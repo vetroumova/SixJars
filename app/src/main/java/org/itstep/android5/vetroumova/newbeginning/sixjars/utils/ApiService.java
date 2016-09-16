@@ -1,4 +1,4 @@
-package org.itstep.android5.vetroumova.newbeginning.sixjars;
+package org.itstep.android5.vetroumova.newbeginning.sixjars.utils;
 
 
 import java.util.ArrayList;

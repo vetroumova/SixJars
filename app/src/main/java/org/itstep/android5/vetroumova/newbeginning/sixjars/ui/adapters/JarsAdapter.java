@@ -1,14 +1,11 @@
 package org.itstep.android5.vetroumova.newbeginning.sixjars.ui.adapters;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +17,8 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import rx.Observable;
+import rx.subjects.PublishSubject;
 
 //import com.bumptech.glide.Glide;
 
@@ -28,6 +27,10 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
     final Context context;
     private Realm realm;
     private LayoutInflater inflater;
+
+    private final PublishSubject<Jar> jarInAdapterPublishSubject = PublishSubject.create();
+
+
 
     public JarsAdapter(Context context) {
 
@@ -56,8 +59,11 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
         // set the title and the snippet
         holder.textID.setText(jar.getJar_id());
         holder.textName.setText(jar.getJar_name());
-        holder.textTotal.setText(String.valueOf(jar.getTotalCash()) + " Uah");
-        holder.textDescription.setText(jar.getJar_info());
+        String total = String.format(context.getString(R.string.item_balance_text), jar.getTotalCash());
+        holder.textTotal.setText(total);
+        //TODO sets percentage from Prefs
+        holder.textPercentage.setText(context.getString(R.string.item_percentage_text, 0));
+        //holder.textDescription.setText(jar.getJar_info());
 
         /*// load the background image
         if (book.getImageUrl() != null) {
@@ -67,9 +73,15 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
                     .fitCenter()
                     .into(holder.imageBackground);
         }*/
-        holder.imageJar.setImageResource(R.drawable.jar);
+        int fullness = (int) jar.getTotalCash();
+        if (fullness > 0) {
+            holder.imageJar.setImageResource(R.drawable.jar_with_water);
+        } else {
+            holder.imageJar.setImageResource(R.drawable.jar);
+        }
 
         //remove single match from realm
+        //TODO make a swipe delete
         holder.card.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -104,7 +116,11 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
             @Override
             public void onClick(View v) {
 
-                inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                //int itemJarPosition = position;
+
+                jarInAdapterPublishSubject.onNext(jar);
+
+                /*inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View content = inflater.inflate(R.layout.edit_item, null);
                 final EditText editID = (EditText) content.findViewById(R.id.id_edit);
                 final EditText editName = (EditText) content.findViewById(R.id.name_edit);
@@ -142,9 +158,14 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
                             }
                         });
                 AlertDialog dialog = builder.create();
-                dialog.show();
+                dialog.show();*/
             }
         });
+    }
+
+
+    public Observable<Jar> getPositionClicks() {
+        return jarInAdapterPublishSubject.asObservable();
     }
 
     // return the size of your data set (invoked by the layout manager)
@@ -162,18 +183,20 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
         public TextView textID;
         public TextView textName;
         public TextView textTotal;
-        public TextView textDescription;
+        public TextView textPercentage;
+        //public TextView textDescription;
         public ImageView imageJar;
 
         public CardViewHolder(View itemView) {
             // standard view holder pattern with Butterknife view injection
             super(itemView);
 
-            card = (CardView) itemView.findViewById(R.id.itemCardJars);
+            card = (CardView) itemView.findViewById(R.id.itemFragmentCardJars);
             textID = (TextView) itemView.findViewById(R.id.itemIdText);
             textName = (TextView) itemView.findViewById(R.id.itemNameText);
             textTotal = (TextView) itemView.findViewById(R.id.itemBalanceText);
-            textDescription = (TextView) itemView.findViewById(R.id.itemDescriptionText);
+            textPercentage = (TextView) itemView.findViewById(R.id.itemPercentageText);
+            //textDescription = (TextView) itemView.findViewById(R.id.itemDescriptionText);
             imageJar = (ImageView) itemView.findViewById(R.id.itemImage);
         }
     }

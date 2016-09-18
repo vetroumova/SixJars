@@ -13,7 +13,7 @@
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
     <string name="item_name_of_jar">Name Of Jar</string>
-    <string name="item_balance_text">0 uah</string>
+    <string name="item_balance_text">%1$.2f uah</string>
     <string name="item_description_text">Description or JAR and some useful information</string>
 
     <string name="db_jar_id_NEC">NEC</string>
@@ -53,5 +53,10 @@
         Деньги из этого кувшина не тратятся ни при каких условиях, а используются для инвестиций
         и получения пассивного дохода</string>
     <string name="item_id_of_jar">ID of Jar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="item_percentage_text">%1$d %% of JARS</string>
+    <string name="jar">jar</string>
+    <string name="item_name_in_fragment_text">( %1$s )</string>
 
 </resources>

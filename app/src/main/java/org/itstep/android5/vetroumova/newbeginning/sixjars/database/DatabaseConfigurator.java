@@ -13,9 +13,9 @@ import io.realm.RealmConfiguration;
  */
 public final class DatabaseConfigurator {
 
-    private static final int SCHEMA_VERSION = 1;
+    //private static final int SCHEMA_VERSION = 1;
     //added friends
-    //private static final int SCHEMA_VERSION = 2;
+    private static final int SCHEMA_VERSION = 0;
 
     private static final String REALM_NAME = App.class.getPackage().getName() + ".realm";
 
@@ -33,7 +33,7 @@ public final class DatabaseConfigurator {
                 .schemaVersion(SCHEMA_VERSION)/*
                 .migration(getMigration())*/
                 //added from "Realm" project
-                .deleteRealmIfMigrationNeeded()
+                //.deleteRealmIfMigrationNeeded()
                 .build();
     }
 

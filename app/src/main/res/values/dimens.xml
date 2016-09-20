@@ -32,4 +32,5 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="margin_large">16dp</dimen>
     <dimen name="item_giant_title_dimension">36dp</dimen>
     <dimen name="text_big_margin">12dp</dimen>
+    <dimen name="button_text_sp_dimension">10sp</dimen>
 </resources>

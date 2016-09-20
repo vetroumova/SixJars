@@ -15,6 +15,8 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 
+import java.util.List;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
@@ -27,6 +29,7 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
     final Context context;
     private Realm realm;
     private LayoutInflater inflater;
+    private List<Integer> percentJars;
 
     private final PublishSubject<Jar> jarInAdapterPublishSubject = PublishSubject.create();
 
@@ -50,6 +53,8 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position) {
 
         realm = RealmManager.getInstance().getRealm();
+        //TODO CHECK
+        percentJars = Prefs.with(context).getPercentage();
 
         // get the article
         final Jar jar = getItem(position);
@@ -62,7 +67,8 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
         String total = String.format(context.getString(R.string.item_balance_text), jar.getTotalCash());
         holder.textTotal.setText(total);
         //TODO sets percentage from Prefs
-        holder.textPercentage.setText(context.getString(R.string.item_percentage_text, 0));
+        //holder.textPercentage.setText(context.getString(R.string.item_percentage_text, 0));
+        holder.textPercentage.setText(context.getString(R.string.item_percentage_text, percentJars.get(position)));
         //holder.textDescription.setText(jar.getJar_info());
 
         /*// load the background image

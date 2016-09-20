@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SixJars</string>
     <string name="action_settings">Налаштування</string>
     <string name="add_widget">Додати віджет</string>
     <string name="configure">Налаштувати</string>
@@ -16,4 +15,19 @@
     <string name="db_jar_info_PLAY">Нельзя все время посвящать экономии и работе,         нужно уметь отдыхать и развлекаться. На деньги из этого кувшина можно сходить         в японский ресторан, на боулинг или в картинг-клуб. Доставьте себе и близким удовольствие         без чувства вины за излишне потраченные деньги.</string>
     <string name="db_jar_name_NEC">Поточні витрати</string>
     <string name="db_jar_name_PLAY">Розваги</string>
+    <string name="default_settings_text">СТАНДАРТНІ</string>
+    <string name="hint_settings_text">Натисніть ЗБЕРЕГТИ для запису в налаштування</string>
+    <string name="item_id_of_jar">ID пляшки</string>
+    <string name="app_name">Шість Пляшок</string>
+    <string name="img_of_bottle">Зображення пляшки</string>
+    <string name="item_balance_text">%1$.2f ГРН</string>
+    <string name="item_name_in_fragment_text">(%1$s)</string>
+    <string name="item_description_text">Опис пляшки</string>
+    <string name="item_name_of_jar">Назва пляшки</string>
+    <string name="jar">пляшка</string>
+    <string name="restore_settings_text">ВІДНОВИТИ</string>
+    <string name="save_settings_text">ЗБЕРЕГТИ</string>
+    <string name="item_percentage_text">%1$d %% розподілу</string>
+    <string name="set_the_percentage_of_jars">Налаштуйте % розбиття сум по пляшкам</string>
+    <string name="cash_balance_text">Баланс %1$.2f ГРН</string>
 </resources>

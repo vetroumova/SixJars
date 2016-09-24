@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemCardCashflow"
+    style="@style/AppTheme.Card.Margins"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/margin_normal">
+
+    <android.support.percent.PercentRelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <!--public static final String ID_FIELD = "id";
+        public static final String DATE_FIELD = "date";
+        public static final String SUM_FIELD = "sum";
+        public static final String CURR_PERC_FIELD = "currpercent";
+        public static final String JAR_FIELD = "jar";-->
+
+        <TextView
+            android:id="@+id/itemCashIdText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="100%"
+            app:layout_heightPercent="30%"
+            app:layout_marginLeftPercent="5%"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/item_id_of_cash"
+            android:textSize="@dimen/cash_id_dimension"
+            android:textColor="@color/colorSecondaryText"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/itemCashDateText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="50%"
+            app:layout_heightPercent="30%"
+            android:text="@string/item_date_of_cash"
+            android:textSize="@dimen/cash_date_dimension"
+            android:textColor="@color/colorPrimaryTextDark"
+            android:layout_below="@+id/itemCashIdText"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/itemCashSumText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="50%"
+            app:layout_heightPercent="30%"
+            android:text="@string/item_sum_of_cash"
+            android:textSize="@dimen/cash_date_dimension"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_toRightOf="@+id/itemCashDateText"
+            android:layout_alignBottom="@+id/itemCashDateText"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/itemCashJarText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="50%"
+            app:layout_heightPercent="30%"
+            android:text="@string/item_jar_of_cash"
+            android:textSize="@dimen/cash_jar_dimension"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_below="@+id/itemCashDateText"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/itemCashPercentageText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="50%"
+            app:layout_heightPercent="30%"
+            android:text="@string/item_perc_of_cash"
+            android:textSize="@dimen/cash_date_dimension"
+            android:textColor="@color/colorAccent"
+            android:layout_toRightOf="@+id/itemCashJarText"
+            android:layout_alignBottom="@+id/itemCashJarText"
+            android:gravity="center" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+</android.support.v7.widget.CardView>
+
+

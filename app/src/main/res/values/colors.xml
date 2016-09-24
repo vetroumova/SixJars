@@ -10,6 +10,7 @@
     <color name="colorSecondaryText">#757575</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorBottle">@color/colorPrimaryDark</color>
+    <color name="colorSelected">#2100a5ff</color>
     <color name="colorWater">@color/colorPrimary</color>
     <color name="colorWhiteBG">#ffffffff</color>
     <color name="colorTranspBG">#55ffffff</color>

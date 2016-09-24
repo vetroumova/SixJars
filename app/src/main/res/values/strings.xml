@@ -64,6 +64,15 @@
     <string name="percent_sign_text" translatable="false">%</string>
     <string name="default_settings_text">DEFAULT</string>
     <string name="set_the_percentage_of_jars">Set the percentage of JARS</string>
-    <string name="cash_balance_text">Balance: %1$.2f UAH</string>
+    <string name="cash_balance_text"><b>%1$.2f</b> UAH</string>
+    <string name="enter_sum_text">Enter a sum</string>
+    <string name="choose_jar_text">You must choose a jar!</string>
+    <string name="add_a_new_cash">ADD A NEW CASH</string>
+    <string name="enter_a_sum">enter a sum</string>
+    <string name="item_id_of_cash">cashflow ID</string>
+    <string name="item_date_of_cash">date of cashflow</string>
+    <string name="item_sum_of_cash">cash SUM</string>
+    <string name="item_jar_of_cash">cashflow Jar</string>
+    <string name="item_perc_of_cash">cashflow\'s jar Percentage</string>
 
 </resources>

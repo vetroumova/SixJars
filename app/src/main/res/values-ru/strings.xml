@@ -29,5 +29,5 @@
     <string name="save_settings_text">СОХРАНИТЬ</string>
     <string name="item_percentage_text">%1$d %% распределения</string>
     <string name="set_the_percentage_of_jars">Настройте % разбиения сумм по кувшинам</string>
-    <string name="cash_balance_text">Баланс %1$.2f ГРН</string>
+    <string name="cash_balance_text"><b>%1$.2f</b> ГРН</string>
 </resources>

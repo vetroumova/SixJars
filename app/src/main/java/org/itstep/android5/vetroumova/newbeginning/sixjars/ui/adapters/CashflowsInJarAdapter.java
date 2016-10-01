@@ -13,6 +13,8 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Cashflow;
 
+import java.text.SimpleDateFormat;
+
 import io.realm.Realm;
 import rx.Observable;
 import rx.subjects.PublishSubject;
@@ -56,11 +58,13 @@ public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
 
         // set the text
         //Date currentDate = Calendar.getInstance().getTime();
-        java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
-        String formattedCurrentDate = dateFormat.format(cashflow.getDate());
+        //java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
+        //String formattedCurrentDate = dateFormat.format(cashflow.getDate());
 
-        //holder.textCashDate.setText(String.valueOf(cashflow.getDate()));
-        holder.textCashDate.setText(formattedCurrentDate);
+        //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yy HH:mm", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy  HH:mm");
+        String formatted = simpleDateFormat.format(cashflow.getDate());
+        holder.textCashDate.setText(formatted);
         String total = String.format(context.getString(R.string.item_balance_text), cashflow.getSum());
         holder.textCashSum.setText(total);
 

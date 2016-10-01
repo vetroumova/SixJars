@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
@@ -18,7 +17,6 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 import rx.Observable;
 import rx.subjects.PublishSubject;
 
@@ -44,7 +42,8 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // inflate a new card view
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_jar_recycler, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_jar_recycler,
+                parent, false);
         return new CardViewHolder(view);
     }
 
@@ -53,7 +52,6 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position) {
 
         realm = RealmManager.getInstance().getRealm();
-        //TODO CHECK
         percentJars = Prefs.with(context).getPercentage();
 
         // get the article
@@ -66,11 +64,8 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
         holder.textName.setText(jar.getJar_name());
         String total = String.format(context.getString(R.string.item_balance_text), jar.getTotalCash());
         holder.textTotal.setText(total);
-        //TODO sets percentage from Prefs
-        //holder.textPercentage.setText(context.getString(R.string.item_percentage_text, 0));
         holder.textPercentage.setText(context.getString(R.string.item_percentage_text,
                 percentJars.get(position)));
-        //holder.textDescription.setText(jar.getJar_info());
 
         /*// load the background image
         if (book.getImageUrl() != null) {
@@ -80,24 +75,62 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
                     .fitCenter()
                     .into(holder.imageBackground);
         }*/
-        int fullness = (int) jar.getTotalCash();
-        if (fullness > 0) {
-            holder.imageJar.setImageResource(R.drawable.jar_with_water);
-        } else {
-            holder.imageJar.setImageResource(R.drawable.jar);
-        }
+        holder.imageJar.setImageResource(jar.getTotalCash() > 0 ?
+                R.drawable.jar_with_water : R.drawable.jar);
 
-        //remove single match from realm
-        //TODO make a swipe delete
-        holder.card.setOnLongClickListener(new View.OnLongClickListener() {
+        //add a negative cashflow
+        //TODO make a swipe delete?
+        /*holder.card.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
 
-                RealmResults<Jar> results = realm.where(Jar.class).findAll();
+                inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View content = inflater.inflate(R.layout.edit_item, null);
+                final EditText editID = (EditText) content.findViewById(R.id.id_edit);
+                final EditText editName = (EditText) content.findViewById(R.id.name_edit);
+                final EditText editThumbnail = (EditText) content.findViewById(R.id.thumbnail_edit);
 
-                // Get the book title to show it in toast message
-                Jar jarItem = results.get(position);
-                String title = jarItem.getJar_id() + " " + jarItem.getJar_name();
+                editID.setText(jar.getJar_id());
+                editName.setText(jar.getJar_name());
+                //TODO
+                editThumbnail.setText(jar.getJar_info());
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setView(content)
+                        .setTitle("Edit Jar")
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                RealmResults<Jar> results = realm.where(Jar.class).findAll();
+
+                                realm.beginTransaction();
+                                results.get(position).setJar_id(editID.getText().toString());
+                                results.get(position).setJar_name(editName.getText().toString());
+                                results.get(position).setJar_info(editThumbnail.getText().toString());
+
+                                realm.commitTransaction();
+
+                                notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                //RealmResults<Jar> results = realm.where(Jar.class).findAll();
+
+                // Get the jar title to show it in toast message
+                //Jar jarItem = results.get(position);
+                //String title = jarItem.getJar_id() + " " + jarItem.getJar_name();
+
+                RealmManager.getInstance().addCashToJar(jar.getJar_id(),)
 
                 // All changes to data must happen in a transaction
                 realm.beginTransaction();
@@ -109,13 +142,11 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
                 if (results.size() == 0) {
                     Prefs.with(context).setPreLoad(false);
                 }
-
                 notifyDataSetChanged();
-
                 Toast.makeText(context, title + " is removed from Realm", Toast.LENGTH_SHORT).show();
                 return false;
             }
-        });
+        });*/
 
         //update single match from realm
         holder.card.setOnClickListener(new View.OnClickListener() {

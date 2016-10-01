@@ -23,18 +23,25 @@ public final class DatabaseConfigurator {
     }
 
     public static void configureDatabase(@NonNull final Context context) {
+        //@NonNull final Context context was in parameters
         Realm.setDefaultConfiguration(getConfiguration(context));
     }
 
     @NonNull
     private static RealmConfiguration getConfiguration(@NonNull final Context context) {
-        return new RealmConfiguration.Builder(context)
+        /*private static RealmConfiguration getConfiguration(@NonNull final Context context) {*/
+        return new RealmConfiguration.Builder()
                 .name(REALM_NAME)
-                .schemaVersion(SCHEMA_VERSION)/*
-                .migration(getMigration())*/
-                //added from "Realm" project
+                .schemaVersion(SCHEMA_VERSION)
                 //.deleteRealmIfMigrationNeeded()
                 .build();
+        /*.Builder(context)
+                .name(REALM_NAME)
+                .schemaVersion(SCHEMA_VERSION)*//*
+                .migration(getMigration())*//*
+                //added from "Realm" project
+                //.deleteRealmIfMigrationNeeded()
+                .build();*/
     }
 
 /*    @NonNull

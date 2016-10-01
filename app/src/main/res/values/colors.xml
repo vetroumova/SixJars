@@ -8,11 +8,12 @@
     <color name="colorWhiteTextAndIcons">#FFFFFF</color>
     <color name="colorPrimaryTextDark">#212121</color>
     <color name="colorSecondaryText">#757575</color>
+    <color name="colorHintText">#a1a1a1</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorBottle">@color/colorPrimaryDark</color>
     <color name="colorSelected">#2100a5ff</color>
     <color name="colorWater">@color/colorPrimary</color>
     <color name="colorWhiteBG">#ffffffff</color>
-    <color name="colorTranspBG">#55ffffff</color>
+    <color name="colorTranspBG">#78ffffff</color>
     <color name="colorShadowBG">#e0000000</color>
 </resources>

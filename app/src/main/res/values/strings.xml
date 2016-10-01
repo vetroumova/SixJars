@@ -74,5 +74,9 @@
     <string name="item_sum_of_cash">cash SUM</string>
     <string name="item_jar_of_cash">cashflow Jar</string>
     <string name="item_perc_of_cash">cashflow\'s jar Percentage</string>
+    <string name="no_cashflows">No cashflows</string>
+    <string name="added_sum_text">New Sum Added</string>
+    <string name="not_added_sum_text">Not added, not enougth cash in jar</string>
+    <string name="spend_a_cash_text">spend a cash</string>
 
 </resources>

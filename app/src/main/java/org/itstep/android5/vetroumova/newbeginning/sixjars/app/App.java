@@ -20,13 +20,11 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         Realm.init(getApplicationContext());
-        // in "Realm" all stuff in App, not in DatabaseConfigurator
-        /*DatabaseConfigurator.configureDatabase(getApplicationContext());*/
-        //getApplicationContext() was in parameters
 
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
-                .name(Realm.DEFAULT_REALM_NAME)
-                .schemaVersion(0)
+                //.name(Realm.DEFAULT_REALM_NAME)
+                .name(REALM_NAME)
+                .schemaVersion(SCHEMA_VERSION)
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);

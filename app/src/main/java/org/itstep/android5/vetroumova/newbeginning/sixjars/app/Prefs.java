@@ -24,7 +24,8 @@ public class Prefs {
 
     public Prefs(Context context) {
 
-        sharedPreferences = context.getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = context.getApplicationContext()
+                .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
     public static Prefs with(Context context) {

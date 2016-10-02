@@ -346,7 +346,7 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
                     + spendSum + " - " + resultAdd);
             Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
                     : R.string.not_added_sum_text), Toast.LENGTH_SHORT).show();
-            //setBalance();
+            spendCashEdit.setText("");
             jarBalance.setText(getString(R.string.cash_balance_text, jar.getTotalCash()));
             jarImage.setImageResource(jar.getTotalCash() > 0 ? R.drawable.jar_with_water : R.drawable.jar);
             setRealmCashAdapter(RealmManager.with(this).getCashflowInJar(jarIDString));

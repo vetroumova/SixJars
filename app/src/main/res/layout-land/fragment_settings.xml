@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/margin_large"
                 android:gravity="center"
                 android:text="@string/set_the_percentage_of_jars"
                 android:textAllCaps="true"
@@ -37,9 +38,8 @@
                 android:id="@+id/percentageSettingsGrid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/settingsTitleText"
                 android:layout_centerInParent="true"
-                android:columnCount="3"
+                android:columnCount="6"
                 android:padding="@dimen/margin_normal">
 
                 <LinearLayout
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_small"
                     android:inputType="number"
                     android:singleLine="true"
@@ -91,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/margin_large"
                     android:gravity="center"
                     android:text="@string/percent_sign_text"
                     android:textAllCaps="true"
@@ -99,12 +99,13 @@
                     android:textSize="@dimen/item_balance_dimension"
                     android:textStyle="bold" />
 
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginLeft="@dimen/margin_large"
                     android:layout_marginRight="@dimen/margin_normal"
                     android:orientation="vertical">
 
@@ -136,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_small"
                     android:inputType="number"
                     android:singleLine="true"
@@ -193,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_small"
                     android:inputType="number"
                     android:singleLine="true"
@@ -206,7 +207,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/margin_large"
                     android:gravity="center"
                     android:text="@string/percent_sign_text"
                     android:textAllCaps="true"
@@ -219,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginLeft="@dimen/margin_large"
                     android:layout_marginRight="@dimen/margin_normal"
                     android:orientation="vertical">
 
@@ -250,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_small"
                     android:inputType="number"
                     android:singleLine="true"
@@ -307,7 +308,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_small"
                     android:inputType="number"
                     android:singleLine="true"
@@ -320,7 +321,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/margin_large"
                     android:gravity="center"
                     android:text="@string/percent_sign_text"
                     android:textAllCaps="true"
@@ -333,7 +334,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginLeft="@dimen/margin_large"
                     android:layout_marginRight="@dimen/margin_normal"
                     android:orientation="vertical">
 
@@ -364,7 +365,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_small"
                     android:inputType="number"
                     android:singleLine="true"
@@ -384,16 +385,16 @@
                     android:textColor="@color/colorSecondaryText"
                     android:textSize="@dimen/item_balance_dimension"
                     android:textStyle="bold" />
+
             </GridLayout>
 
             <Button
                 android:id="@+id/saveSettingsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_below="@+id/percentageSettingsGrid"
+                android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/margin_normal"
-                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_large"
                 android:layout_toStartOf="@+id/restoreSettingsButton"
                 android:background="@drawable/jar_widget_bg"
                 android:maxWidth="72dp"
@@ -406,10 +407,10 @@
                 android:id="@+id/restoreSettingsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_alignBottom="@id/saveSettingsButton"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_large"
                 android:background="@drawable/jar_widget_bg"
                 android:maxWidth="72dp"
                 android:shadowColor="@color/cardview_dark_background"
@@ -421,9 +422,9 @@
                 android:id="@+id/defaultSettingsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_alignBottom="@id/saveSettingsButton"
+                android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_large"
                 android:layout_toEndOf="@+id/restoreSettingsButton"
                 android:background="@drawable/jar_widget_bg"
                 android:maxWidth="72dp"
@@ -431,7 +432,6 @@
                 android:text="@string/default_settings_text"
                 android:textColor="@color/colorBottle"
                 android:textSize="@dimen/button_text_sp_dimension" />
-
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </FrameLayout>

@@ -13,129 +13,129 @@
         <android.support.percent.PercentRelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/activity_horizontal_margin"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="@dimen/activity_horizontal_margin">
 
             <TextView
                 android:id="@+id/itemFragmentIdText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_widthPercent="100%"
-                app:layout_heightPercent="6%"
-                app:layout_marginTopPercent="2%"
+                android:gravity="center"
                 android:text="@string/item_id_of_jar"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/item_title_dimension"
                 android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                android:textAllCaps="true"
-                android:gravity="center" />
+                app:layout_heightPercent="6%"
+                app:layout_marginTopPercent="2%"
+                app:layout_widthPercent="100%" />
 
             <TextView
                 android:id="@+id/itemFragmentNameText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_widthPercent="100%"
-                app:layout_heightPercent="6%"
-                app:layout_marginTopPercent="2%"
+                android:layout_below="@+id/itemFragmentIdText"
+                android:gravity="center"
                 android:text="@string/item_name_of_jar"
+                android:textAllCaps="true"
+                android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/item_balance_dimension"
                 android:textStyle="bold"
-                android:textColor="@color/colorSecondaryText"
-                android:textAllCaps="true"
-                android:layout_below="@+id/itemFragmentIdText"
-                android:gravity="center" />
+                app:layout_heightPercent="6%"
+                app:layout_marginTopPercent="2%"
+                app:layout_widthPercent="100%" />
 
             <ImageView
                 android:id="@+id/itemFragmentImage"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_widthPercent="30%"
-                app:layout_heightPercent="15%"
-                app:layout_marginTopPercent="3%"
-                android:src="@drawable/jar"
-                android:layout_margin="@dimen/image_margin_fragment"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/itemFragmentNameText"
+                android:layout_margin="@dimen/image_margin_fragment"
+                android:clickable="true"
                 android:contentDescription="@string/jar"
-                android:clickable="true" />
+                android:src="@drawable/jar"
+                app:layout_heightPercent="15%"
+                app:layout_marginTopPercent="3%"
+                app:layout_widthPercent="30%" />
 
             <TextView
                 android:id="@+id/itemFragmentBalanceText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_widthPercent="60%"
-                app:layout_heightPercent="5%"
-                app:layout_marginTopPercent="2%"
-                android:text="@string/item_balance_text"
-                android:textSize="@dimen/item_balance_dimension"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryTextDark"
-                android:textAllCaps="true"
+                android:layout_alignTop="@+id/itemFragmentImage"
                 android:layout_marginLeft="@dimen/text_margin"
                 android:layout_marginRight="@dimen/text_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_alignTop="@+id/itemFragmentImage"
-                android:layout_toRightOf="@id/itemFragmentImage" />
+                android:layout_toRightOf="@id/itemFragmentImage"
+                android:text="@string/item_balance_text"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryTextDark"
+                android:textSize="@dimen/item_balance_dimension"
+                android:textStyle="bold"
+                app:layout_heightPercent="5%"
+                app:layout_marginTopPercent="2%"
+                app:layout_widthPercent="60%" />
 
             <TextView
                 android:id="@+id/itemFragmentPercentageText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_widthPercent="60%"
+                android:layout_below="@+id/itemFragmentBalanceText"
+                android:layout_marginStart="@dimen/text_margin"
+                android:layout_toRightOf="@+id/itemFragmentImage"
+                android:text="@string/item_percentage_text"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/item_balance_dimension"
                 app:layout_heightPercent="5%"
                 app:layout_marginTopPercent="2%"
-                android:text="@string/item_percentage_text"
-                android:textSize="@dimen/item_balance_dimension"
-                android:textColor="@color/colorAccent"
-                android:layout_marginStart="@dimen/text_margin"
-                android:layout_below="@+id/itemFragmentBalanceText"
-                android:layout_toRightOf="@+id/itemFragmentImage" />
+                app:layout_widthPercent="60%" />
 
             <TextView
                 android:id="@+id/itemFragmentDescriptionText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_widthPercent="90%"
+                android:layout_below="@+id/itemFragmentImage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_large"
+                android:text="@string/item_description_text"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/item_description_dimension"
                 app:layout_heightPercent="10%"
                 app:layout_marginTopPercent="2%"
-                android:text="@string/item_description_text"
-                android:textSize="@dimen/item_description_dimension"
-                android:textColor="@color/colorSecondaryText"
-                android:layout_below="@+id/itemFragmentImage"
-                android:layout_marginTop="@dimen/margin_large"
-                android:layout_centerHorizontal="true" />
+                app:layout_widthPercent="90%" />
 
             <TextView
                 android:id="@+id/cashAddText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_widthPercent="50%"
-                app:layout_heightPercent="8%"
-                app:layout_marginTopPercent="2%"
-                app:layout_marginLeftPercent="2%"
-                app:layout_marginRightPercent="2%"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
                 android:text="@string/add_a_new_cash"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/item_name_dimension"
                 android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:gravity="center" />
+                app:layout_heightPercent="8%"
+                app:layout_marginLeftPercent="2%"
+                app:layout_marginRightPercent="2%"
+                app:layout_marginTopPercent="2%"
+                app:layout_widthPercent="50%" />
 
             <EditText
                 android:id="@+id/cashAddEdit"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_widthPercent="40%"
-                app:layout_heightPercent="8%"
-                app:layout_marginTopPercent="2%"
-                app:layout_marginLeftPercent="2%"
-                android:hint="@string/enter_a_sum"
-                android:textSize="@dimen/item_name_dimension"
-                android:textColor="@color/colorSecondaryText"
-                android:layout_toRightOf="@+id/cashAddText"
                 android:layout_alignBottom="@+id/cashAddText"
-                android:gravity="center" />
+                android:layout_toRightOf="@+id/cashAddText"
+                android:gravity="center"
+                android:hint="@string/enter_sum_text"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/item_name_dimension"
+                app:layout_heightPercent="8%"
+                app:layout_marginLeftPercent="2%"
+                app:layout_marginTopPercent="2%"
+                app:layout_widthPercent="40%" />
 
         </android.support.percent.PercentRelativeLayout>
 

@@ -30,4 +30,17 @@
     <string name="item_percentage_text">%1$d %% распределения</string>
     <string name="set_the_percentage_of_jars">Настройте % разбиения сумм по кувшинам</string>
     <string name="cash_balance_text"><b>%1$.2f</b> ГРН</string>
+    <string name="to_all_jars_by_percentage">Распределить в %</string>
+    <string name="spend_a_cash_text">Потратить</string>
+    <string name="not_added_sum_text">Недостаточно средств</string>
+    <string name="no_cashflows">Нет оборота средств</string>
+    <string name="item_sum_of_cash">Сумма</string>
+    <string name="item_perc_of_cash">% распределения</string>
+    <string name="item_jar_of_cash">кувшин</string>
+    <string name="item_id_of_cash">ID денежного потока</string>
+    <string name="item_date_of_cash">Дата денежного потока</string>
+    <string name="enter_sum_text">Введите сумму</string>
+    <string name="choose_jar_text">Выберите кувшин</string>
+    <string name="added_sum_text">Новая сумма добавленна</string>
+    <string name="add_a_new_cash">ДОБАВИТЬ СУММУ</string>
 </resources>

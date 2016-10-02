@@ -30,4 +30,17 @@
     <string name="item_percentage_text">%1$d %% розподілу</string>
     <string name="set_the_percentage_of_jars">Налаштуйте % розбиття сум по пляшкам</string>
     <string name="cash_balance_text"><b>%1$.2f</b> ГРН</string>
+    <string name="to_all_jars_by_percentage">Розподілити в %</string>
+    <string name="spend_a_cash_text">Витратити</string>
+    <string name="not_added_sum_text">Недостатньо коштів</string>
+    <string name="no_cashflows">Немає обороту коштів</string>
+    <string name="item_sum_of_cash">Сума</string>
+    <string name="item_perc_of_cash">% розподілу</string>
+    <string name="item_jar_of_cash">пляшка</string>
+    <string name="item_id_of_cash">ID грошового потоку</string>
+    <string name="item_date_of_cash">Дата грошового потоку</string>
+    <string name="enter_sum_text">Введіть суму</string>
+    <string name="choose_jar_text">Виберіть пляшку</string>
+    <string name="added_sum_text">Нова сума додана</string>
+    <string name="add_a_new_cash">ДОДАТИ СУМУ</string>
 </resources>

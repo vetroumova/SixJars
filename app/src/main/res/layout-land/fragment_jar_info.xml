@@ -13,7 +13,8 @@
 
         <android.support.percent.PercentRelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center"
             android:padding="@dimen/margin_normal">
 
@@ -26,8 +27,8 @@
                 android:clickable="true"
                 android:contentDescription="@string/jar"
                 android:src="@drawable/jar"
-                app:layout_heightPercent="20%"
-                app:layout_widthPercent="30%" />
+                app:layout_heightPercent="30%"
+                app:layout_widthPercent="15%" />
 
             <TextView
                 android:id="@+id/itemFragmentIdText"
@@ -41,8 +42,8 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/item_title_dimension"
                 android:textStyle="bold"
-                app:layout_heightPercent="6%"
-                app:layout_widthPercent="60%" />
+                app:layout_heightPercent="12%"
+                app:layout_widthPercent="30%" />
 
             <TextView
                 android:id="@+id/itemFragmentNameText"
@@ -56,9 +57,9 @@
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/item_balance_dimension"
                 android:textStyle="bold"
-                app:layout_heightPercent="5%"
+                app:layout_heightPercent="7%"
                 app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="60%" />
+                app:layout_widthPercent="30%" />
 
 
             <TextView
@@ -73,9 +74,9 @@
                 android:textColor="@color/colorPrimaryTextDark"
                 android:textSize="@dimen/item_balance_dimension"
                 android:textStyle="bold"
-                app:layout_heightPercent="4%"
+                app:layout_heightPercent="6%"
                 app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="60%" />
+                app:layout_widthPercent="30%" />
 
             <TextView
                 android:id="@+id/itemFragmentPercentageText"
@@ -88,37 +89,37 @@
                 android:text="@string/item_percentage_text"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/item_balance_dimension"
-                app:layout_heightPercent="4%"
+                app:layout_heightPercent="6%"
                 app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="60%" />
+                app:layout_widthPercent="30%" />
 
             <TextView
                 android:id="@+id/itemFragmentDescriptionText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_alignRight="@+id/itemFragmentPercentageText"
                 android:layout_below="@+id/itemFragmentPercentageText"
-                android:layout_centerHorizontal="true"
                 android:text="@string/item_description_text"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="15%"
+                app:layout_heightPercent="40%"
                 app:layout_marginTopPercent="2%"
-                app:layout_widthPercent="90%" />
+                app:layout_widthPercent="42%" />
 
             <TextView
                 android:id="@+id/itemCashSpendText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_alignLeft="@+id/itemFragmentDescriptionText"
-                android:layout_below="@+id/itemFragmentDescriptionText"
+                android:layout_alignBottom="@+id/itemFragmentIdText"
+                android:layout_toRightOf="@+id/itemFragmentIdText"
                 android:gravity="center"
                 android:text="@string/spend_a_cash_text"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/item_balance_dimension"
                 android:textStyle="bold"
-                app:layout_heightPercent="10%"
+                app:layout_heightPercent="14%"
                 app:layout_marginTopPercent="2%"
-                app:layout_widthPercent="30%" />
+                app:layout_widthPercent="16%" />
 
             <EditText
                 android:id="@+id/itemCashSpendEdit"
@@ -131,15 +132,14 @@
                 android:inputType="numberDecimal"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="10%"
-                app:layout_widthPercent="30%" />
+                app:layout_heightPercent="14%"
+                app:layout_widthPercent="16%" />
 
             <Button
                 android:id="@+id/itemCashSpendButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_alignBottom="@+id/itemCashSpendEdit"
-                android:layout_alignRight="@+id/itemFragmentDescriptionText"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/itemCashSpendEdit"
                 android:background="@drawable/jar_button_transp_orange_bg"
@@ -148,10 +148,9 @@
                 android:text="@string/save_settings_text"
                 android:textColor="@color/colorBottle"
                 android:textSize="@dimen/button_text_sp_dimension"
-                app:layout_heightPercent="8%"
-                app:layout_marginBottomPercent="1%"
+                app:layout_heightPercent="14%"
                 app:layout_marginLeftPercent="2%"
-                app:layout_widthPercent="25%" />
+                app:layout_widthPercent="14%" />
 
             <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/noCashCard"
@@ -159,11 +158,12 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_below="@+id/itemCashSpendText"
+                android:layout_toRightOf="@id/itemFragmentBalanceText"
                 android:backgroundTint="@color/colorTranspBG"
                 app:cardCornerRadius="@dimen/margin_normal"
-                app:layout_heightPercent="35%"
+                app:layout_heightPercent="60%"
                 app:layout_marginTopPercent="3%"
-                app:layout_widthPercent="100%">
+                app:layout_widthPercent="45%">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/cashRecycler"
@@ -185,10 +185,6 @@
                     android:textStyle="bold" />
 
             </android.support.v7.widget.CardView>
-
-
         </android.support.percent.PercentRelativeLayout>
-
     </android.support.v7.widget.CardView>
-
 </FrameLayout>

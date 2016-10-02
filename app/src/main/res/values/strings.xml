@@ -68,7 +68,6 @@
     <string name="enter_sum_text">Enter a sum</string>
     <string name="choose_jar_text">You must choose a jar!</string>
     <string name="add_a_new_cash">ADD A NEW CASH</string>
-    <string name="enter_a_sum">enter a sum</string>
     <string name="item_id_of_cash">cashflow ID</string>
     <string name="item_date_of_cash">date of cashflow</string>
     <string name="item_sum_of_cash">cash SUM</string>
@@ -77,6 +76,7 @@
     <string name="no_cashflows">No cashflows</string>
     <string name="added_sum_text">New Sum Added</string>
     <string name="not_added_sum_text">Not added, not enougth cash in jar</string>
-    <string name="spend_a_cash_text">spend a cash</string>
+    <string name="spend_a_cash_text">Spend a cash</string>
+    <string name="to_all_jars_by_percentage">To all JARS by %</string>
 
 </resources>

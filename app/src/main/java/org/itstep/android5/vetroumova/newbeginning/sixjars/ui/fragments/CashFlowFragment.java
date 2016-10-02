@@ -25,6 +25,7 @@ import java.util.List;
 import io.realm.Realm;
 
 public class CashFlowFragment extends Fragment implements View.OnClickListener {
+    public static final String ARG_JAR_ID = "jarID";
 
     private static final List<String> jarIDs
             = Arrays.asList("NEC", "PLAY", "GIVE", "EDU", "LTSS", "FFA");
@@ -51,7 +52,7 @@ public class CashFlowFragment extends Fragment implements View.OnClickListener {
     RelativeLayout jarLTSS;
     RelativeLayout jarFFA;
     Button saveButton;
-    private String jarID = "NoID";
+    private String jarID;
     private float sum;
     private int currPercent;
     private List<Jar> jars; //to add in all by percentage
@@ -68,6 +69,11 @@ public class CashFlowFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         //get realm instance
         this.realm = RealmManager.with(this).getRealm();
+        if (savedInstanceState == null) {
+            jarID = "NoID";
+        } else {
+            jarID = savedInstanceState.getString(ARG_JAR_ID, "NoID");
+        }
     }
 
     @Override
@@ -124,6 +130,7 @@ public class CashFlowFragment extends Fragment implements View.OnClickListener {
         saveButton.setOnClickListener(this);
 
         setBalance();
+        setCheckedJar();
         return view;
     }
 
@@ -180,11 +187,11 @@ public class CashFlowFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        //TODO change a textColor
+
         switch (v.getId()) {
             case R.id.addAllJars: {
                 jarID = (jarID.equals("AllJars") ? "NoID" : "AllJars");
-                jarID = "AllJars";  //TODO IN here
+                //jarID = "AllJars";  //TODO IN here
                 break;
             }
             case R.id.addNECJar: {
@@ -231,6 +238,9 @@ public class CashFlowFragment extends Fragment implements View.OnClickListener {
                                     + sumInJar + " - " + resultAdd);
                             Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
                                     : R.string.not_added_sum_text), Toast.LENGTH_SHORT).show();
+                            if (resultAdd) {
+                                sumEditText.setText("");
+                            }
                         }
                         setBalance();
                     } else if (jarID.equals("NoID")) {
@@ -243,6 +253,9 @@ public class CashFlowFragment extends Fragment implements View.OnClickListener {
                                 + sum + " - " + resultAdd);
                         Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
                                 : R.string.not_added_sum_text), Toast.LENGTH_SHORT).show();
+                        if (resultAdd) {
+                            sumEditText.setText("");
+                        }
                         setBalance();
                     }
                 }
@@ -251,5 +264,11 @@ public class CashFlowFragment extends Fragment implements View.OnClickListener {
             break;
         }
         setCheckedJar(); //to other cases different from save
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        outState.putString(ARG_JAR_ID, jarID);
     }
 }

@@ -1,0 +1,332 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_normal"
+    tools:context=".ui.fragments.SettingsFragment">
+
+    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/itemFragmentCardJars"
+        style="@style/AppTheme.Card.Margins"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:shadowColor="@color/cardview_dark_background"
+        app:cardCornerRadius="@dimen/margin_normal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:id="@+id/settingsTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/set_the_percentage_of_jars"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/item_name_dimension"
+                android:textStyle="bold" />
+
+            <GridLayout
+                android:id="@+id/percentageSettingsGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/settingsTitleText"
+                android:columnCount="4"
+                android:padding="@dimen/margin_large">
+
+                <TextView
+                    android:id="@+id/settingsNECText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginRight="@dimen/margin_large"
+                    android:text="@string/db_jar_id_NEC"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/settingsNECEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:gravity="center"
+                    android:text="@string/percent_sign_text"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/saveSettingsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_rowSpan="2"
+                    android:background="@drawable/jar_widget_bg"
+                    android:maxWidth="72dp"
+                    android:shadowColor="@color/cardview_dark_background"
+                    android:text="@string/save_settings_text"
+                    android:textColor="@color/colorBottle"
+                    android:textSize="@dimen/button_text_sp_dimension" />
+
+                <TextView
+                    android:id="@+id/settingsPLAYText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginRight="@dimen/margin_large"
+                    android:text="@string/db_jar_id_PLAY"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/settingsPLAYEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:gravity="center"
+                    android:text="@string/percent_sign_text"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/settingsGIVEText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginRight="@dimen/margin_large"
+                    android:text="@string/db_jar_id_GIVE"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/settingsGIVEEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:gravity="center"
+                    android:text="@string/percent_sign_text"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/restoreSettingsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_rowSpan="2"
+                    android:background="@drawable/jar_widget_bg"
+                    android:maxWidth="72dp"
+                    android:shadowColor="@color/cardview_dark_background"
+                    android:text="@string/restore_settings_text"
+                    android:textColor="@color/colorBottle"
+                    android:textSize="@dimen/button_text_sp_dimension" />
+
+
+                <TextView
+                    android:id="@+id/settingsEDUText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginRight="@dimen/margin_large"
+                    android:text="@string/db_jar_id_EDU"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/settingsEDUEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:gravity="center"
+                    android:text="@string/percent_sign_text"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/settingsLTSSText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginRight="@dimen/margin_large"
+                    android:text="@string/db_jar_id_LTSS"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/settingsLTSSEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:gravity="center"
+                    android:text="@string/percent_sign_text"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/defaultSettingsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_rowSpan="2"
+                    android:background="@drawable/jar_widget_bg"
+                    android:maxWidth="72dp"
+                    android:shadowColor="@color/cardview_dark_background"
+                    android:text="@string/default_settings_text"
+                    android:textColor="@color/colorBottle"
+                    android:textSize="@dimen/button_text_sp_dimension" />
+
+                <TextView
+                    android:id="@+id/settingsFFAText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginRight="@dimen/margin_large"
+                    android:text="@string/db_jar_id_FFA"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/settingsFFAEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:gravity="center"
+                    android:text="@string/percent_sign_text"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold" />
+
+            </GridLayout>
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

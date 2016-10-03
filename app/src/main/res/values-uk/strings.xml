@@ -43,4 +43,6 @@
     <string name="choose_jar_text">Виберіть пляшку</string>
     <string name="added_sum_text">Нова сума додана</string>
     <string name="add_a_new_cash">ДОДАТИ СУМУ</string>
+    <string name="exit_text">Зачинити програму</string>
+    <string name="want_exit_text">Ви дійсно хочете вийти?</string>
 </resources>

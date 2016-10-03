@@ -63,8 +63,6 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     private RecyclerView realmRecycler;
     private TextView noCashTextView;
 
-    private OnRecyclerCashItemTouchListener mListener;
-
     private PublishSubject<Cashflow> cashInRecyclerPublishSubject = PublishSubject.create();
     private PublishSubject<Long> cashDeletedPublishSubject = PublishSubject.create();
     private CompositeSubscription recyclerCashSubscriptions;
@@ -279,26 +277,9 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         this.jarIDString = jarID;
     }
 
-/*
-
-    private void setRealmData() {
-
-        //RealmManager.initialiseJars(getApplicationContext());
-        RealmManager.initialiseJars(getContext());
-
-        //TODO CHECK - WAS with(this) in activity
-        Prefs.with(getContext()).setPreLoad(true);
-
-    }*/
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(View view) {
-        if (mListener != null) {
-            mListener.onRecyclerCashItemTouch(view);
-        }
-    }
 
     public Observable<Cashflow> getCashflowItem() {
+        //todo check
         if (cashInRecyclerPublishSubject.asObservable() == null) {
             cashInRecyclerPublishSubject.onNext(new Cashflow());
         }
@@ -309,25 +290,14 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         return cashDeletedPublishSubject.asObservable();
     }
 
-    /*public JarsAdapter getRealmJarsAdapter() {
-        return realmJarsAdapter;
-    }*/
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        /*if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
         //TODO CHECK
         //realm.close();
         recyclerCashSubscriptions.clear();
@@ -360,21 +330,6 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     public void onSaveInstanceState(Bundle outState) {
 
         outState.putString(ARG_JAR_ID, jarIDString);
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnRecyclerCashItemTouchListener {
-        // TODO: Update argument type and name
-        void onRecyclerCashItemTouch(View view);
     }
 
 }

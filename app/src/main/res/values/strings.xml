@@ -78,5 +78,9 @@
     <string name="not_added_sum_text">Not added, not enougth cash in jar</string>
     <string name="spend_a_cash_text">Spend a cash</string>
     <string name="to_all_jars_by_percentage">To all JARS by %</string>
+    <string name="exit_text">Close SixJars</string>
+    <string name="want_exit_text">Do you really want to exit?</string>
+    <string name="yes_text">YES</string>
+    <string name="no_text">NO</string>
 
 </resources>

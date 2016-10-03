@@ -43,4 +43,6 @@
     <string name="choose_jar_text">Выберите кувшин</string>
     <string name="added_sum_text">Новая сумма добавленна</string>
     <string name="add_a_new_cash">ДОБАВИТЬ СУММУ</string>
+    <string name="exit_text">Закрыть программу</string>
+    <string name="want_exit_text">Вы действительно хотите выйти?</string>
 </resources>

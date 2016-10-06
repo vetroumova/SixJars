@@ -103,6 +103,11 @@ public class MainActivity extends AppCompatActivity {
                     .fade_in, android.R.animator.fade_out)*/
                     //TODO check if needed
                     .hide(recyclerFragment)
+                    .hide(settingsFragment)
+                    .hide(statisticsFragment)
+                    .hide(helpFragment)
+                    .hide(jarInfoFragment)
+                    .show(cashFlowFragment)
                     .addToBackStack("RECYCLER")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
@@ -198,6 +203,12 @@ public class MainActivity extends AppCompatActivity {
                                 //TODO CHECK FOR DUPLICATES
                                 .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
                                 .show(recyclerFragment)
+                                //TODO normal checking of fragments enabled & visible
+                                .hide(jarInfoFragment)
+                                .hide(settingsFragment)
+                                .hide(statisticsFragment)
+                                .hide(helpFragment)
+                                .hide(cashFlowFragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         fab.setVisibility(View.VISIBLE);
@@ -215,7 +226,12 @@ public class MainActivity extends AppCompatActivity {
                         }else {*/
                         fragmentManager.beginTransaction()
                                 .replace(R.id.content_layout, settingsFragment)
+                                .show(settingsFragment)
                                 .hide(recyclerFragment)
+                                .hide(statisticsFragment)
+                                .hide(helpFragment)
+                                .hide(cashFlowFragment)
+                                .hide(jarInfoFragment)
                                 //.addToBackStack("RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
@@ -226,7 +242,12 @@ public class MainActivity extends AppCompatActivity {
                     case 2: {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.content_layout, statisticsFragment)
+                                .show(statisticsFragment)
                                 .hide(recyclerFragment)
+                                .hide(settingsFragment)
+                                .hide(helpFragment)
+                                .hide(cashFlowFragment)
+                                .hide(jarInfoFragment)
                                 //.addToBackStack("RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
@@ -236,8 +257,13 @@ public class MainActivity extends AppCompatActivity {
                     case 3: {
                         fragmentManager.beginTransaction()
                                 //.replace(R.id.content_layout, helpFragment)
-                                .replace(R.id.content_layout, cashFlowFragment)
+                                .replace(R.id.content_layout, helpFragment)
+                                .show(helpFragment)
                                 .hide(recyclerFragment)
+                                .hide(settingsFragment)
+                                .hide(statisticsFragment)
+                                .hide(cashFlowFragment)
+                                .hide(jarInfoFragment)
                                 //.addToBackStack("RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
@@ -252,9 +278,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && fragmentManager.getBackStackEntryCount() == 0) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
+                    //TODO normal checking of fragments enabled & visible
+                    .hide(jarInfoFragment)
+                    .hide(settingsFragment)
+                    .hide(statisticsFragment)
+                    .hide(helpFragment)
+                    .hide(cashFlowFragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
         }
@@ -272,6 +304,11 @@ public class MainActivity extends AppCompatActivity {
                             Log.d(TAG, jarInfoFragment.toString());
                             fragmentManager.beginTransaction()
                                     .hide(recyclerFragment)
+                                    .hide(settingsFragment)
+                                    .hide(statisticsFragment)
+                                    .hide(helpFragment)
+                                    .hide(cashFlowFragment)
+                                    .show(jarInfoFragment)
                                     .add(R.id.content_layout, jarInfoFragment)
                                     .addToBackStack("JarInfo")
                                     .commit();
@@ -476,41 +513,19 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
 
             back_pressed = System.currentTimeMillis();
-            /*LayoutInflater inflater = MainActivity.this.getLayoutInflater();
-            View content = inflater.inflate(R.layout.exit_dialog, null);
-            final TextView exitText = (TextView) content.findViewById(R.id.exitDialogText);
-            final Button noButton = (Button)content.findViewById(R.id.exitNoButton);
-            final Button yesButton = (Button)content.findViewById(R.id.exitYesButton);
-            exitText.setText(R.string.want_exit_text);
-
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-            alertDialog.setView(content);
-            //alertDialog.setTitle(R.string.exit_text);
-            //alertDialog.setMessage(R.string.want_exit_text);
-
-            noButton.setOnClickListener( new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.cancel();
-                }
-            }{
-                public void onClick(DialogInterface dialog,int which) {
-                    Intent intent = new Intent(Intent.ACTION_MAIN);
-                    intent.addCategory(Intent.CATEGORY_HOME);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
-            });
-            alertDialog.setNegativeButton(R.string.no_text, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-
-            alertDialog.show();*/
             return;
+        } else {
+            // how to clear backstack to recycler
         }
-        super.onBackPressed();
+
+        try {
+            super.onBackPressed();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, e.getMessage());
+            //TODO check
+            fragmentManager.popBackStackImmediate();
+        }
+
     }
 
     @Override

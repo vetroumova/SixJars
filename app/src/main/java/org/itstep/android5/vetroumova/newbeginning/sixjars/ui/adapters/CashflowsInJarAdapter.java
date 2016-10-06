@@ -24,12 +24,11 @@ import rx.subjects.PublishSubject;
 public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
 
     final Context context;
-    private Realm realm;
-    private LayoutInflater inflater;
-    //private List<Integer> percentJars;
-
     private final PublishSubject<Cashflow> cashflowInAdapterPublishSubject = PublishSubject.create();
     private final PublishSubject<Long> cashflowDeletePublishSubject = PublishSubject.create();
+    //private List<Integer> percentJars;
+    private Realm realm;
+    private LayoutInflater inflater;
 
 
     public CashflowsInJarAdapter(Context context) {
@@ -55,27 +54,12 @@ public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
         final Cashflow cashflow = getItem(position);
         // cast the generic view holder to our specific one
         final CashCardViewHolder holder = (CashCardViewHolder) viewHolder;
-
-        // set the text
-        //Date currentDate = Calendar.getInstance().getTime();
-        //java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
-        //String formattedCurrentDate = dateFormat.format(cashflow.getDate());
-
         //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yy HH:mm", Locale.getDefault());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy  HH:mm");
         String formatted = simpleDateFormat.format(cashflow.getDate());
         holder.textCashDate.setText(formatted);
         String total = String.format(context.getString(R.string.item_balance_text), cashflow.getSum());
         holder.textCashSum.setText(total);
-
-        /*// load the background image
-        if (book.getImageUrl() != null) {
-            Glide.with(context)
-                    .load(book.getImageUrl().replace("https", "http"))
-                    .asBitmap()
-                    .fitCenter()
-                    .into(holder.imageBackground);
-        }*/
 
         //remove single match from realm
         //TODO make a swipe delete
@@ -85,11 +69,15 @@ public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
 
                 long cashID = cashflow.getId();
 
-                RealmManager.getInstance().deleteCashflow(cashID);
-                notifyDataSetChanged();
-                cashflowDeletePublishSubject.onNext(cashID);
-                Toast.makeText(context, cashID + " is removed from Realm",
-                        Toast.LENGTH_SHORT).show();
+                if (!RealmManager.getInstance().deleteCashflow(cashID)) {
+                    Toast.makeText(context, cashID + " NOT removed from Realm, not enough money",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    notifyDataSetChanged();
+                    cashflowDeletePublishSubject.onNext(cashID);
+                    Toast.makeText(context, cashID + " is removed from Realm",
+                            Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
         });

@@ -158,17 +158,21 @@ public class RealmManager {
         realm.delete(Cashflow.class);
     }
 
-    public void deleteCashflow(long cashflowID) {
-        realm.beginTransaction();
-        Cashflow cashflow = realm.where(Cashflow.class)
-                .equalTo("id", cashflowID).findFirst();
+    public boolean deleteCashflow(long cashflowID) {
+        Cashflow cash = realm.where(Cashflow.class).equalTo("id", cashflowID).findFirst();
+        float cashInJar = cash.getJar().getTotalCash();
+        if (cashInJar - cash.getSum() < 0) {
+            return false;
+        } else {
+            realm.beginTransaction();
+            Jar currentJar = cash.getJar();
+            cash.deleteFromRealm();
+            realm.commitTransaction();
 
-        //TODO rewrite on RealmManager
-        Jar currentJar = cashflow.getJar();
-        cashflow.deleteFromRealm();
-        realm.commitTransaction();
+            checkSumTotalInJar(currentJar.getJar_id());
+            return true;
+        }
 
-        checkSumTotalInJar(currentJar.getJar_id());
     }
 
     public float checkSumTotalInJar(String jarID) {

@@ -3,27 +3,32 @@
     <string name="action_settings">Налаштування</string>
     <string name="add_widget">Додати віджет</string>
     <string name="configure">Налаштувати</string>
-    <string name="db_jar_info_EDU">Из этого кувшина деньги тратятся на образование,         как напрямую (оплата обучения, репетиторов), так и на покупку книг, фильмов,         посещение тренингов и т.п.</string>
-    <string name="db_jar_info_FFA">Данный кувшин – залог Вашего финансового благополучия.         Деньги из этого кувшина не тратятся ни при каких условиях, а используются для инвестиций         и получения пассивного дохода</string>
-    <string name="db_jar_info_GIVE">Деньги из этого кувшина можно использовать на цели          благотворительности либо на подарки друзьям, близким, соседям.          Дарите любовь, внимание и подарки, это так согревает душу. Чем проще Вы          расстаетесь с деньгами (не транжирите, нет, а отдаете, дарите),          тем быстрее они к Вам вернутся.</string>
-    <string name="db_jar_info_LTSS">На этом счету аккумулируются деньги,         которые могут быть использованы и как «подушка безопасности» (резервный фонд),         и как накопления на крупные покупки (отпуск, машина, телевизор, лечение зубов и т.п.).         Наличие денег на данном счету позволит Вам с честью выдержать финансовые испытания,         избежать кабальных долгов, чувствовать себя уверенно.</string>
+
+    <string name="db_jar_info_EDU">Из этой банки деньги тратятся на образование, как напрямую (оплата обучения, репетиторов), так и на покупку книг, фильмов, посещение тренингов и т.п.</string>
+    <string name="db_jar_info_FFA">Данная банка – залог Вашего финансового благополучия. Деньги из этой банки не тратятся ни при каких условиях, а используются для инвестиций и получения пассивного дохода.</string>
+    <string name="db_jar_info_GIVE">Деньги из этой банки можно использовать на цели благотворительности либо на подарки друзьям, близким, соседям.</string>
+    <string name="db_jar_info_LTSS">На этом счету аккумулируются деньги, которые могут быть использованы и как «подушка безопасности» (резервный фонд), и как накопления на крупные покупки (отпуск, машина, телевизор, лечение зубов и т.п.).</string>
+    <string name="db_jar_info_NEC">В этой банке лежат деньги на текущие расходы: питание, коммунальные платежи, одежда, аренда, транспорт, медицина и т.п.</string>
+    <string name="db_jar_info_PLAY">На деньги из этой банки можно сходить в японский ресторан, на боулинг или в картинг-клуб. Развлечения, одним словом...</string>
+
     <string name="db_jar_name_EDU">Освіта</string>
     <string name="db_jar_name_LTSS">Заощадження</string>
     <string name="db_jar_name_GIVE">Подарунки</string>
     <string name="db_jar_name_FFA">Фінансова  незалежність</string>
-    <string name="db_jar_info_NEC">В этом кувшине лежат деньги на текущие расходы: питание,    ьные платежи, одежда, аренда, транспорт, медицина и т.п.</string>
-    <string name="db_jar_info_PLAY">Нельзя все время посвящать экономии и работе,         нужно уметь отдыхать и развлекаться. На деньги из этого кувшина можно сходить         в японский ресторан, на боулинг или в картинг-клуб. Доставьте себе и близким удовольствие         без чувства вины за излишне потраченные деньги.</string>
     <string name="db_jar_name_NEC">Поточні витрати</string>
     <string name="db_jar_name_PLAY">Розваги</string>
+
     <string name="default_settings_text">СТАНДАРТНІ</string>
     <string name="hint_settings_text">Натисніть ЗБЕРЕГТИ для запису в налаштування</string>
     <string name="item_id_of_jar">ID пляшки</string>
     <string name="app_name">Шість Пляшок</string>
     <string name="img_of_bottle">Зображення пляшки</string>
+
     <string name="item_balance_text">%1$.2f ГРН</string>
     <string name="item_name_in_fragment_text">(%1$s)</string>
     <string name="item_description_text">Опис пляшки</string>
     <string name="item_name_of_jar">Назва пляшки</string>
+
     <string name="jar">пляшка</string>
     <string name="restore_settings_text">ВІДНОВИТИ</string>
     <string name="save_settings_text">ЗБЕРЕГТИ</string>
@@ -34,15 +39,22 @@
     <string name="spend_a_cash_text">Витратити</string>
     <string name="not_added_sum_text">Недостатньо коштів</string>
     <string name="no_cashflows">Немає обороту коштів</string>
+
     <string name="item_sum_of_cash">Сума</string>
     <string name="item_perc_of_cash">% розподілу</string>
     <string name="item_jar_of_cash">пляшка</string>
     <string name="item_id_of_cash">ID грошового потоку</string>
     <string name="item_date_of_cash">Дата грошового потоку</string>
+
     <string name="enter_sum_text">Введіть суму</string>
     <string name="choose_jar_text">Виберіть пляшку</string>
     <string name="added_sum_text">Нова сума додана</string>
     <string name="add_a_new_cash">ДОДАТИ СУМУ</string>
     <string name="exit_text">Зачинити програму</string>
     <string name="want_exit_text">Ви дійсно хочете вийти?</string>
+    <string name="appwidget_text">Пляшки</string>
+    <string name="enter_widget_name_text">вигадайте ім\'я віджета</string>
+    <string name="yes_text">ДА</string>
+    <string name="no_text">НЕТ</string>
+
 </resources>

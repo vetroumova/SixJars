@@ -207,8 +207,6 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
 
                             realm = RealmManager.with(this).getRealm();
                             setRealmCashAdapter(RealmManager.with(this).getCashflowInJar(jarIDString));
-                            //realm.refresh();
-                            //realm.waitForChange();
                             jar = RealmManager.with(this).getJar(jarIDString);
                             Log.d("VOlga", "reSum : " + jar.getTotalCash());
                             Toast.makeText(getContext(), "reSum : " + jar.getTotalCash(),

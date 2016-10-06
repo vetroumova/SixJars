@@ -26,7 +26,8 @@ public class Cashflow extends RealmObject {
     private float sum;
     private int currpercent;
     private Jar jar;
-    //TODO check
+    //TODO
+    //private String description;
     //private Point lutLong;
 
     public Cashflow() {

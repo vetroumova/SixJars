@@ -2,112 +2,202 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/widget_bg"
-    android:orientation="horizontal"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="78dp"
         android:layout_height="90dp"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:layout_margin="@dimen/widget_button_margin"
         android:background="@drawable/jar_widget_bg"
-        android:layout_margin="@dimen/widget_button_margin">
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/jar_infoView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:gravity="center"
+            android:text="Account Name"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/item_description_dimension"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/jar_sumView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="10000 UAH"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/item_description_dimension"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        android:gravity="center"
+            android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/appwidget_first_jar"
             android:layout_width="31dp"
             android:layout_height="71dp"
             android:layout_margin="3dp"
-            android:src="@drawable/jar"
             android:background="@color/colorWhiteBG"
-            android:contentDescription="@string/appwidget_text" />
+            android:contentDescription="@string/appwidget_text"
+            android:src="@drawable/jar" />
 
         <TextView
             android:id="@+id/jar_textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/widget_margin"
+            android:text="@string/nec_text"
             android:textColor="@color/colorBottle"
             android:textSize="@dimen/widget_text_size_v"
-            android:textStyle="bold"
-            android:layout_marginLeft="@dimen/widget_margin"
-            android:text="@string/appwidget_text_v" />
+            android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="78dp"
         android:layout_height="90dp"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:layout_margin="@dimen/widget_button_margin"
         android:background="@drawable/jar_widget_bg"
-        android:layout_margin="@dimen/widget_button_margin">
-
-        <ImageButton
-            android:id="@+id/appwidget_second_jar"
-            android:layout_width="31dp"
-            android:layout_height="71dp"
-            android:layout_margin="3dp"
-            android:src="@drawable/jar"
-            android:background="@color/colorWhiteBG"
-            android:contentDescription="@string/appwidget_text" />
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/jar_textView2"
+            android:id="@+id/jar_infoView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBottle"
-            android:textSize="@dimen/widget_text_size_v"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:gravity="center"
+            android:text="Account Name"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/item_description_dimension"
             android:textStyle="bold"
-            android:layout_marginLeft="@dimen/widget_margin"
-            android:text="@string/play_text" />
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/jar_sumView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="10000 UAH"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/item_description_dimension"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/appwidget_second_jar"
+                android:layout_width="31dp"
+                android:layout_height="71dp"
+                android:layout_margin="3dp"
+                android:background="@color/colorWhiteBG"
+                android:contentDescription="@string/appwidget_text"
+                android:src="@drawable/jar" />
+
+            <TextView
+                android:id="@+id/jar_textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/widget_margin"
+                android:text="@string/nec_text"
+                android:textColor="@color/colorBottle"
+                android:textSize="@dimen/widget_text_size_v"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="78dp"
         android:layout_height="90dp"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:layout_margin="@dimen/widget_button_margin"
         android:background="@drawable/jar_widget_bg"
-        android:layout_margin="@dimen/widget_button_margin">
-
-        <ImageButton
-            android:id="@+id/appwidget_third_jar"
-            android:layout_width="31dp"
-            android:layout_height="71dp"
-            android:layout_margin="3dp"
-            android:src="@drawable/jar"
-            android:background="@color/colorWhiteBG"
-            android:contentDescription="@string/appwidget_text" />
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/jar_textView3"
+            android:id="@+id/jar_infoView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBottle"
-            android:textSize="@dimen/widget_text_size_v"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:gravity="center"
+            android:text="Account Name"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/item_description_dimension"
             android:textStyle="bold"
-            android:layout_marginLeft="@dimen/widget_margin"
-            android:text="@string/give_text" />
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/jar_sumView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="10000 UAH"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/item_description_dimension"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/appwidget_third_jar"
+                android:layout_width="31dp"
+                android:layout_height="71dp"
+                android:layout_margin="3dp"
+                android:background="@color/colorWhiteBG"
+                android:contentDescription="@string/appwidget_text"
+                android:src="@drawable/jar" />
+
+            <TextView
+                android:id="@+id/jar_textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/widget_margin"
+                android:text="@string/nec_text"
+                android:textColor="@color/colorBottle"
+                android:textSize="@dimen/widget_text_size_v"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="90dp"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_margin="@dimen/widget_button_margin"
         android:background="@drawable/jar_widget_bg"
-        android:layout_margin="@dimen/widget_button_margin">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/appwidget_go"
             android:layout_width="26dp"
             android:layout_height="59dp"
             android:layout_margin="3dp"
-            android:src="@drawable/ic_go_48dp"
             android:background="@color/colorWhiteBG"
-            android:contentDescription="@string/appwidget_text" />
+            android:contentDescription="@string/appwidget_text"
+            android:src="@drawable/ic_go_48dp" />
 
     </LinearLayout>
 

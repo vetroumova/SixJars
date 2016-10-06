@@ -3,46 +3,57 @@
     <string name="action_settings">Настройки</string>
     <string name="add_widget">Добавить виджет</string>
     <string name="configure">Настроить</string>
-    <string name="db_jar_info_EDU">Из этого кувшина деньги тратятся на образование,  как напрямую (оплата обучения, репетиторов), так и на покупку книг, фильмов,         посещение тренингов и т.п.</string>
-    <string name="db_jar_info_FFA">Данный кувшин – залог Вашего финансового благополучия.         Деньги из этого кувшина не тратятся ни при каких условиях, а используются для инвестиций         и получения пассивного дохода</string>
-    <string name="db_jar_info_GIVE">Деньги из этого кувшина можно использовать на цели          благотворительности либо на подарки друзьям, близким, соседям.          Дарите любовь, внимание и подарки, это так согревает душу. Чем проще Вы          расстаетесь с деньгами (не транжирите, нет, а отдаете, дарите),          тем быстрее они к Вам вернутся.</string>
-    <string name="db_jar_info_LTSS">На этом счету аккумулируются деньги,         которые могут быть использованы и как «подушка безопасности» (резервный фонд),         и как накопления на крупные покупки (отпуск, машина, телевизор, лечение зубов и т.п.).         Наличие денег на данном счету позволит Вам с честью выдержать финансовые испытания,         избежать кабальных долгов, чувствовать себя уверенно.</string>
+
+    <string name="db_jar_info_EDU">Из этой банки деньги тратятся на образование, как напрямую (оплата обучения, репетиторов), так и на покупку книг, фильмов, посещение тренингов и т.п.</string>
+    <string name="db_jar_info_FFA">Данная банка – залог Вашего финансового благополучия. Деньги из этой банки не тратятся ни при каких условиях, а используются для инвестиций и получения пассивного дохода.</string>
+    <string name="db_jar_info_GIVE">Деньги из этой банки можно использовать на цели благотворительности либо на подарки друзьям, близким, соседям.</string>
+    <string name="db_jar_info_LTSS">На этом счету аккумулируются деньги, которые могут быть использованы и как «подушка безопасности» (резервный фонд), и как накопления на крупные покупки (отпуск, машина, телевизор, лечение зубов и т.п.).</string>
+    <string name="db_jar_info_NEC">В этой банке лежат деньги на текущие расходы: питание, коммунальные платежи, одежда, аренда, транспорт, медицина и т.п.</string>
+    <string name="db_jar_info_PLAY">На деньги из этой банки можно сходить в японский ресторан, на боулинг или в картинг-клуб. Развлечения, одним словом...</string>
+
     <string name="db_jar_name_EDU">Образование</string>
     <string name="db_jar_name_FFA">Финансовая независимость</string>
     <string name="db_jar_name_GIVE">Подарки</string>
     <string name="db_jar_name_LTSS">Сбережения</string>
-    <string name="db_jar_info_NEC">В этом кувшине лежат деньги на текущие расходы: питание,    ьные платежи, одежда, аренда, транспорт, медицина и т.п.</string>
-    <string name="db_jar_info_PLAY">Нельзя все время посвящать экономии и работе,         нужно уметь отдыхать и развлекаться. На деньги из этого кувшина можно сходить         в японский ресторан, на боулинг или в картинг-клуб. Доставьте себе и близким удовольствие         без чувства вины за излишне потраченные деньги.</string>
     <string name="db_jar_name_NEC">Текущие расходы</string>
     <string name="db_jar_name_PLAY">Развлечения</string>
+
     <string name="default_settings_text">ПО УМОЛЧАНИЮ</string>
     <string name="hint_settings_text">Нажмите СОХРАНИТЬ для записи в настройки</string>
-    <string name="item_id_of_jar">ID кувшина</string>
-    <string name="app_name">Шесть Кувшинов</string>
-    <string name="img_of_bottle">Изображение кувшина</string>
+    <string name="item_id_of_jar">ID банки</string>
+    <string name="app_name">Шесть Банок</string>
+    <string name="img_of_bottle">Изображение банки</string>
+
     <string name="item_balance_text">%1$.2f ГРН</string>
     <string name="item_name_in_fragment_text">(%1$s)</string>
-    <string name="item_description_text">Описание кувшина</string>
-    <string name="item_name_of_jar">Наименование кувшина</string>
-    <string name="jar">кувшин</string>
+    <string name="item_description_text">Описание банки</string>
+    <string name="item_name_of_jar">Наименование банки</string>
+
+    <string name="jar">банка</string>
     <string name="restore_settings_text">ВОССТАНОВИТЬ</string>
     <string name="save_settings_text">СОХРАНИТЬ</string>
     <string name="item_percentage_text">%1$d %% распределения</string>
-    <string name="set_the_percentage_of_jars">Настройте % разбиения сумм по кувшинам</string>
+    <string name="set_the_percentage_of_jars">Настройте % разбиения сумм по банкам</string>
     <string name="cash_balance_text"><b>%1$.2f</b> ГРН</string>
     <string name="to_all_jars_by_percentage">Распределить в %</string>
     <string name="spend_a_cash_text">Потратить</string>
     <string name="not_added_sum_text">Недостаточно средств</string>
     <string name="no_cashflows">Нет оборота средств</string>
+
     <string name="item_sum_of_cash">Сумма</string>
     <string name="item_perc_of_cash">% распределения</string>
-    <string name="item_jar_of_cash">кувшин</string>
+    <string name="item_jar_of_cash">банка</string>
     <string name="item_id_of_cash">ID денежного потока</string>
     <string name="item_date_of_cash">Дата денежного потока</string>
+
     <string name="enter_sum_text">Введите сумму</string>
-    <string name="choose_jar_text">Выберите кувшин</string>
-    <string name="added_sum_text">Новая сумма добавленна</string>
+    <string name="choose_jar_text">Выберите банку</string>
+    <string name="added_sum_text">Новая сумма добавлена</string>
     <string name="add_a_new_cash">ДОБАВИТЬ СУММУ</string>
     <string name="exit_text">Закрыть программу</string>
     <string name="want_exit_text">Вы действительно хотите выйти?</string>
+    <string name="appwidget_text">Банки</string>
+    <string name="enter_widget_name_text">придумайте имя виджета</string>
+    <string name="yes_text">ДА</string>
+    <string name="no_text">НЕТ</string>
 </resources>

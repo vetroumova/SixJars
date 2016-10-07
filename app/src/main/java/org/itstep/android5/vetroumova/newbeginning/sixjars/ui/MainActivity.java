@@ -256,14 +256,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case 3: {
                         fragmentManager.beginTransaction()
-                                //.replace(R.id.content_layout, helpFragment)
                                 .replace(R.id.content_layout, helpFragment)
-                                .show(helpFragment)
                                 .hide(recyclerFragment)
                                 .hide(settingsFragment)
                                 .hide(statisticsFragment)
                                 .hide(cashFlowFragment)
                                 .hide(jarInfoFragment)
+                                .show(helpFragment)
                                 //.addToBackStack("RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
@@ -509,23 +508,33 @@ public class MainActivity extends AppCompatActivity {
             if (back_pressed + 2000 > System.currentTimeMillis())
                 super.onBackPressed();
             else
-                Toast.makeText(getBaseContext(), "Нажмите еще раз чтобы выйти",
+                Toast.makeText(getBaseContext(), R.string.click_to_exit_text,
                         Toast.LENGTH_SHORT).show();
 
             back_pressed = System.currentTimeMillis();
             return;
         } else {
-            // how to clear backstack to recycler
+            // TODO how to clear backstack to recycler
+            fragmentManager.popBackStackImmediate();
+            /*fragmentManager.beginTransaction()
+                    .add(R.id.content_layout, recyclerFragment, "RECYCLER")
+                    .show(recyclerFragment)
+                    .hide(jarInfoFragment)
+                    .hide(settingsFragment)
+                    .hide(statisticsFragment)
+                    .hide(helpFragment)
+                    .hide(cashFlowFragment)
+                    .commit();*/
+            fab.setVisibility(View.VISIBLE);
         }
-
+        /*
         try {
             super.onBackPressed();
         } catch (IllegalStateException e) {
             Log.d(TAG, e.getMessage());
             //TODO check
             fragmentManager.popBackStackImmediate();
-        }
-
+        }*/
     }
 
     @Override

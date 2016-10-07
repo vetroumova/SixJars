@@ -11,295 +11,376 @@
         android:layout_height="match_parent"
         app:cardCornerRadius="@dimen/margin_normal">
 
-        <android.support.percent.PercentRelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="@dimen/margin_normal">
+            android:fillViewport="true">
 
-            <TextView
-                android:id="@+id/tutorialTitleText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:text="@string/tutorial_title_text"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="15%"
-                app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="95%" />
-
-            <TextView
-                android:id="@+id/tutorialNECText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignLeft="@+id/tutorialNECImage"
-                android:layout_below="@+id/tutorialTitleText"
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/db_jar_id_NEC"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/item_balance_dimension"
-                android:textStyle="bold"
-                app:layout_heightPercent="6%"
-                app:layout_widthPercent="15%" />
+                android:padding="@dimen/margin_normal">
 
-            <ImageView
-                android:id="@+id/tutorialNECImage"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialNECText"
-                android:clickable="true"
-                android:contentDescription="@string/jar"
-                android:src="@drawable/jar_with_water"
-                app:layout_heightPercent="16%"
-                app:layout_widthPercent="15%" />
+                <TextView
+                    android:id="@+id/tutorialTitleText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_title_text"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="15%"
+                    app:layout_marginBottomPercent="2%"
+                    app:layout_marginTopPercent="1%"
+                    app:layout_widthPercent="95%" />
 
-            <TextView
-                android:id="@+id/tutorialNECPercentText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialNECImage"
-                android:gravity="center"
-                android:text="@string/item_balance_text"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryTextDark"
-                android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="6%"
-                app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="15%" />
+                <!--bottle-->
+                <TextView
+                    android:id="@+id/tutorialNECText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignLeft="@+id/tutorialNECImage"
+                    android:layout_below="@+id/tutorialTitleText"
+                    android:gravity="center"
+                    android:text="@string/db_jar_id_NEC"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="6%"
+                    app:layout_widthPercent="15%" />
 
-            <TextView
-                android:id="@+id/tutorialPLAYText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignLeft="@+id/tutorialPLAYImage"
-                android:layout_below="@+id/tutorialTitleText"
-                android:gravity="center"
-                android:text="@string/db_jar_id_PLAY"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/item_balance_dimension"
-                android:textStyle="bold"
-                app:layout_heightPercent="6%"
-                app:layout_widthPercent="15%" />
+                <ImageView
+                    android:id="@+id/tutorialNECImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialNECText"
+                    android:clickable="true"
+                    android:contentDescription="@string/jar"
+                    android:src="@drawable/jar_with_water"
+                    app:layout_heightPercent="16%"
+                    app:layout_widthPercent="15%" />
 
-            <ImageView
-                android:id="@+id/tutorialPLAYImage"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialPLAYText"
-                android:clickable="true"
-                android:contentDescription="@string/jar"
-                android:src="@drawable/jar_with_water"
-                app:layout_heightPercent="16%"
-                app:layout_widthPercent="15%" />
+                <TextView
+                    android:id="@+id/tutorialNECPercentText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialNECImage"
+                    android:gravity="center"
+                    android:text="55%"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryTextDark"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="6%"
+                    app:layout_marginTopPercent="1%"
+                    app:layout_widthPercent="15%" />
 
-            <TextView
-                android:id="@+id/tutorialPLAYPercentText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialPLAYImage"
-                android:gravity="center"
-                android:text="@string/item_balance_text"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryTextDark"
-                android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="6%"
-                app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="15%" />
+                <!--next bottle-->
+                <TextView
+                    android:id="@+id/tutorialPLAYText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignLeft="@+id/tutorialPLAYImage"
+                    android:layout_below="@+id/tutorialTitleText"
+                    android:gravity="center"
+                    android:text="@string/db_jar_id_PLAY"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="6%"
+                    app:layout_widthPercent="15%" />
 
-            <TextView
-                android:id="@+id/tutorialGIVEText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignLeft="@+id/tutorialGIVEImage"
-                android:layout_below="@+id/tutorialTitleText"
-                android:gravity="center"
-                android:text="@string/db_jar_id_GIVE"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/item_balance_dimension"
-                android:textStyle="bold"
-                app:layout_heightPercent="6%"
-                app:layout_widthPercent="15%" />
+                <ImageView
+                    android:id="@+id/tutorialPLAYImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialPLAYText"
+                    android:layout_toRightOf="@+id/tutorialNECImage"
+                    android:clickable="true"
+                    android:contentDescription="@string/jar"
+                    android:src="@drawable/jar_with_water"
+                    app:layout_heightPercent="16%"
+                    app:layout_widthPercent="15%" />
 
-            <ImageView
-                android:id="@+id/tutorialGIVEImage"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialGIVEText"
-                android:clickable="true"
-                android:contentDescription="@string/jar"
-                android:src="@drawable/jar_with_water"
-                app:layout_heightPercent="16%"
-                app:layout_widthPercent="15%" />
+                <TextView
+                    android:id="@+id/tutorialPLAYPercentText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignLeft="@+id/tutorialPLAYImage"
+                    android:layout_below="@+id/tutorialPLAYImage"
+                    android:gravity="center"
+                    android:text="10%"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryTextDark"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="6%"
+                    app:layout_marginTopPercent="1%"
+                    app:layout_widthPercent="15%" />
 
-            <TextView
-                android:id="@+id/tutorialGIVEPercentText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialGIVEImage"
-                android:gravity="center"
-                android:text="@string/item_balance_text"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryTextDark"
-                android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="6%"
-                app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="15%" />
+                <!--next bottle-->
+                <TextView
+                    android:id="@+id/tutorialGIVEText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignLeft="@+id/tutorialGIVEImage"
+                    android:layout_below="@+id/tutorialTitleText"
+                    android:gravity="center"
+                    android:text="@string/db_jar_id_GIVE"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="6%"
+                    app:layout_widthPercent="15%" />
 
-            <TextView
-                android:id="@+id/tutorialEDUmText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignLeft="@+id/tutorialNECImage"
-                android:layout_below="@+id/tutorialTitleText"
-                android:gravity="center"
-                android:text="@string/db_jar_id_NEC"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/item_balance_dimension"
-                android:textStyle="bold"
-                app:layout_heightPercent="6%"
-                app:layout_widthPercent="15%" />
+                <ImageView
+                    android:id="@+id/tutorialGIVEImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialGIVEText"
+                    android:layout_toRightOf="@+id/tutorialPLAYImage"
+                    android:clickable="true"
+                    android:contentDescription="@string/jar"
+                    android:src="@drawable/jar_with_water"
+                    app:layout_heightPercent="16%"
+                    app:layout_widthPercent="15%" />
 
-            <ImageView
-                android:id="@+id/tutorialNECImage"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialNECText"
-                android:clickable="true"
-                android:contentDescription="@string/jar"
-                android:src="@drawable/jar_with_water"
-                app:layout_heightPercent="16%"
-                app:layout_widthPercent="15%" />
+                <TextView
+                    android:id="@+id/tutorialGIVEPercentText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignLeft="@+id/tutorialGIVEImage"
+                    android:layout_below="@+id/tutorialGIVEImage"
+                    android:gravity="center"
+                    android:text="5%"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryTextDark"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="6%"
+                    app:layout_marginTopPercent="1%"
+                    app:layout_widthPercent="15%" />
 
-            <TextView
-                android:id="@+id/tutorialNECPercentText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialNECImage"
-                android:gravity="center"
-                android:text="@string/item_balance_text"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryTextDark"
-                android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="6%"
-                app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="15%" />
+                <!--next bottle-->
+                <TextView
+                    android:id="@+id/tutorialEDUText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignLeft="@+id/tutorialEDUImage"
+                    android:layout_below="@+id/tutorialTitleText"
+                    android:gravity="center"
+                    android:text="@string/db_jar_id_EDU"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="6%"
+                    app:layout_widthPercent="15%" />
 
-            <TextView
-                android:id="@+id/tutorialNECText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignLeft="@+id/tutorialNECImage"
-                android:layout_below="@+id/tutorialTitleText"
-                android:gravity="center"
-                android:text="@string/db_jar_id_NEC"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/item_balance_dimension"
-                android:textStyle="bold"
-                app:layout_heightPercent="6%"
-                app:layout_widthPercent="15%" />
+                <ImageView
+                    android:id="@+id/tutorialEDUImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialEDUText"
+                    android:layout_toRightOf="@+id/tutorialGIVEImage"
+                    android:clickable="true"
+                    android:contentDescription="@string/jar"
+                    android:src="@drawable/jar_with_water"
+                    app:layout_heightPercent="16%"
+                    app:layout_widthPercent="15%" />
 
-            <ImageView
-                android:id="@+id/tutorialNECImage"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialNECText"
-                android:clickable="true"
-                android:contentDescription="@string/jar"
-                android:src="@drawable/jar_with_water"
-                app:layout_heightPercent="16%"
-                app:layout_widthPercent="15%" />
+                <TextView
+                    android:id="@+id/tutorialEDUPercentText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignLeft="@+id/tutorialEDUImage"
+                    android:layout_below="@+id/tutorialEDUImage"
+                    android:gravity="center"
+                    android:text="10%"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryTextDark"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="6%"
+                    app:layout_marginTopPercent="1%"
+                    app:layout_widthPercent="15%" />
 
-            <TextView
-                android:id="@+id/tutorialNECPercentText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialNECImage"
-                android:gravity="center"
-                android:text="@string/item_balance_text"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryTextDark"
-                android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="6%"
-                app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="15%" />
+                <!--next bottle-->
+                <TextView
+                    android:id="@+id/tutorialLTSSText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignLeft="@+id/tutorialLTSSImage"
+                    android:layout_below="@+id/tutorialTitleText"
+                    android:gravity="center"
+                    android:text="@string/db_jar_id_LTSS"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="6%"
+                    app:layout_widthPercent="15%" />
 
-            <TextView
-                android:id="@+id/tutorialNECText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignLeft="@+id/tutorialNECImage"
-                android:layout_below="@+id/tutorialTitleText"
-                android:gravity="center"
-                android:text="@string/db_jar_id_NEC"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/item_balance_dimension"
-                android:textStyle="bold"
-                app:layout_heightPercent="6%"
-                app:layout_widthPercent="15%" />
+                <ImageView
+                    android:id="@+id/tutorialLTSSImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialLTSSText"
+                    android:layout_toRightOf="@+id/tutorialEDUImage"
+                    android:clickable="true"
+                    android:contentDescription="@string/jar"
+                    android:src="@drawable/jar_with_water"
+                    app:layout_heightPercent="16%"
+                    app:layout_widthPercent="15%" />
 
-            <ImageView
-                android:id="@+id/tutorialNECImage"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialNECText"
-                android:clickable="true"
-                android:contentDescription="@string/jar"
-                android:src="@drawable/jar_with_water"
-                app:layout_heightPercent="16%"
-                app:layout_widthPercent="15%" />
+                <TextView
+                    android:id="@+id/tutorialLTSSPercentText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignLeft="@+id/tutorialLTSSImage"
+                    android:layout_below="@+id/tutorialLTSSImage"
+                    android:gravity="center"
+                    android:text="10%"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryTextDark"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="6%"
+                    app:layout_marginTopPercent="1%"
+                    app:layout_widthPercent="15%" />
 
-            <TextView
-                android:id="@+id/tutorialNECPercentText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/tutorialNECImage"
-                android:gravity="center"
-                android:text="@string/item_balance_text"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryTextDark"
-                android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="6%"
-                app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="15%" />
+                <!--next bottle-->
+                <TextView
+                    android:id="@+id/tutorialFFAText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignLeft="@+id/tutorialFFAImage"
+                    android:layout_below="@+id/tutorialTitleText"
+                    android:gravity="center"
+                    android:text="@string/db_jar_id_FFA"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="6%"
+                    app:layout_widthPercent="15%" />
+
+                <ImageView
+                    android:id="@+id/tutorialFFAImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialFFAText"
+                    android:layout_toRightOf="@+id/tutorialLTSSImage"
+                    android:clickable="true"
+                    android:contentDescription="@string/jar"
+                    android:src="@drawable/jar_with_water"
+                    app:layout_heightPercent="16%"
+                    app:layout_widthPercent="15%" />
+
+                <TextView
+                    android:id="@+id/tutorialFFAPercentText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignLeft="@+id/tutorialFFAImage"
+                    android:layout_below="@+id/tutorialFFAImage"
+                    android:gravity="center"
+                    android:text="10%"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryTextDark"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="6%"
+                    app:layout_marginTopPercent="1%"
+                    app:layout_widthPercent="15%" />
+
+                <!--description text-->
+                <TextView
+                    android:id="@+id/tutorialDescriptionText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialNECPercentText"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_description_text"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="15%"
+                    app:layout_marginTopPercent="3%"
+                    app:layout_widthPercent="95%" />
 
 
-            <!--<TextView
-                android:id="@+id/itemFragmentPercentageText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/itemFragmentBalanceText"
-                android:layout_marginStart="@dimen/text_margin"
-                android:layout_toRightOf="@+id/itemFragmentImage"
-                android:gravity="center"
-                android:text="@string/item_percentage_text"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/item_balance_dimension"
-                app:layout_heightPercent="4%"
-                app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="60%" />
+                <!--recycler & item image & text-->
 
-            <TextView
-                android:id="@+id/itemFragmentDescriptionText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/itemFragmentPercentageText"
-                android:layout_centerHorizontal="true"
-                android:text="@string/item_description_text"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="15%"
-                app:layout_marginTopPercent="2%"
-                app:layout_widthPercent="90%" />-->
+                <ImageView
+                    android:id="@+id/tutorialRecyclerImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialDescriptionText"
+                    android:src="@drawable/main_recycler_item_click"
+                    app:layout_heightPercent="30%"
+                    app:layout_marginTopPercent="3%"
+                    app:layout_widthPercent="45%" />
 
-        </android.support.percent.PercentRelativeLayout>
+                <ImageView
+                    android:id="@+id/tutorialItemImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialDescriptionText"
+                    android:layout_toRightOf="@id/tutorialRecyclerImage"
+                    android:src="@drawable/item_save_cashflow"
+                    app:layout_heightPercent="30%"
+                    app:layout_marginTopPercent="3%"
+                    app:layout_widthPercent="45%" />
+
+                <TextView
+                    android:id="@+id/tutorialRecyclerText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialRecyclerImage"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_description_text"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="15%"
+                    app:layout_marginTopPercent="3%"
+                    app:layout_widthPercent="95%" />
+
+
+                <!--cashflow image & text-->
+                <!--<ImageView
+                    android:id="@+id/tutorialCashflowImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_heightPercent="30%"
+                    app:layout_marginTopPercent="3%"
+                    app:layout_widthPercent="45%"
+                    android:src="@drawable/main_recycler_item_click"
+                    android:layout_below="@+id/tutorialDescriptionText"
+                    android:layout_alignParentLeft="true" />
+                <ImageView
+                    android:id="@+id/tutorialCashflowImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_heightPercent="30%"
+                    app:layout_marginTopPercent="3%"
+                    app:layout_widthPercent="45%"
+                    android:src="@drawable/main_recycler_item_click"
+                    android:layout_below="@+id/tutorialDescriptionText"
+                    android:layout_alignParentLeft="true" />
+                <TextView
+                    android:id="@+id/tutorialcashflowText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialCashflowImage"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_description_text"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="15%"
+                    app:layout_marginTopPercent="3%"
+                    app:layout_widthPercent="95%" />-->
+
+            </android.support.percent.PercentRelativeLayout>
+
+        </ScrollView>
 
     </android.support.v7.widget.CardView>
 

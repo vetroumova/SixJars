@@ -56,5 +56,8 @@
     <string name="enter_widget_name_text">вигадайте ім\'я віджета</string>
     <string name="yes_text">ДА</string>
     <string name="no_text">НЕТ</string>
+    <string name="click_to_exit_text">Натисніть ще раз, щоб вийти</string>
+    <string name="total_cash_balance_text"><b>Усього: %1$.2f</b> ГРН</string>
+    <string name="enter_the_description">Додайте примітку</string>
 
 </resources>

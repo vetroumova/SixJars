@@ -48,6 +48,7 @@
     <string name="default_settings_text">DEFAULT</string>
     <string name="set_the_percentage_of_jars">Set the percentage of JARS</string>
     <string name="cash_balance_text"><b>%1$.2f</b> UAH</string>
+    <string name="total_cash_balance_text"><b>Total: %1$.2f</b> UAH</string>
     <string name="enter_sum_text">Enter a sum</string>
     <string name="choose_jar_text">You must choose a jar!</string>
     <string name="add_a_new_cash">ADD A NEW CASH</string>
@@ -68,7 +69,7 @@
     <string name="enter_widget_name_text">enter a widget name</string>
     <string name="tutorial_title_text" formatted="false">Метод «кувшинов» (JARS budgeting) /n  Данный метод – некоторое развитие метода конвертов. Классический метод конвертов использовали наши мамы и бабушки, он проверен временем, прост и действенен. Идея очень проста – для каждой важной категории расходов заводится специальный конверт, на нем подписывается название и сумма. Если закончились деньги в конверте «Питание», придется взять их из другого менее важного конверта, а на будущий месяц пересмотреть сумму этого конверта. Деньги, которые остались в конвертахв конце месяца, можно отложить в накопления или потратить на развлечения,
 в зависимости от их количества и Ваших финансовых целей./nАвтор метода «кувшинов» предлагает взять 6 «кувшинов» (к примеру, стеклянных баночек, но и конверты тоже подойдут) и каждый из них подписать в соответствии с целями,на которые будут потрачены деньги из данного кувшина:</string>
-    <string name="click_to_exit_text">Нажмите еще раз чтобы выйти</string>
+    <string name="click_to_exit_text">Press back one more time to exit</string>
     <string name="tutorial_description_text" formatted="false">Самое необходимое или текущие траты (Necessity Account, NEC) - 55%. В этом кувшине лежат деньги на текущие расходы: питание, коммунальные платежи, одежда,
   аренда, транспорт, медицина и т.п./nСчет финансовой свободы (Financial Freedom Account, FFA) - 10%. Данный кувшин – залог
  Вашего финансового благополучия. Деньги из этого кувшина не тратятся ни при каких условиях, а используются для инвестиций и получения пассивного дохода./n
@@ -82,4 +83,17 @@
  вашим семейным бюджетом. Все что нужно, это распределить деньги по нескольким категориям и придерживаться нехитрых правил. А точнее одного правила. /n
 "Никогда не берите деньги на расходы из кувшина, предназначенного для других трат." /n/n Вы научитесь жить по средствам. По крайне мере будете стараться. Полностью откажетесь от кредитов
     и денег в долг.</string>
+    <string name="text_0" translatable="false">0</string>
+    <string name="enter_the_description">Enter the description</string>
+    <string name="text_1" translatable="false">1</string>
+    <string name="text_2" translatable="false">2</string>
+    <string name="text_3" translatable="false">3</string>
+    <string name="text_4" translatable="false">4</string>
+    <string name="text_5" translatable="false">5</string>
+    <string name="text_6" translatable="false">6</string>
+    <string name="text_7" translatable="false">7</string>
+    <string name="text_8" translatable="false">8</string>
+    <string name="text_9" translatable="false">9</string>
+    <string name="text_point" translatable="false">.</string>
+
 </resources>

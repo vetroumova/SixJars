@@ -24,7 +24,7 @@ import java.util.List;
 
 import io.realm.Realm;
 
-public class CashFlowFragment extends Fragment implements View.OnClickListener {
+public class AddCashFlowFragment extends Fragment implements View.OnClickListener {
     public static final String ARG_JAR_ID = "jarID";
 
     private static final List<String> jarIDs
@@ -60,7 +60,7 @@ public class CashFlowFragment extends Fragment implements View.OnClickListener {
     private float sumOfJars;
 
 
-    public CashFlowFragment() {
+    public AddCashFlowFragment() {
         // Required empty public constructor
     }
 
@@ -80,7 +80,7 @@ public class CashFlowFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_cash_flow, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_cash_flow, container, false);
 
         sumEditText = (EditText) view.findViewById(R.id.cashAddEdit);
         DigitsKeyListener digitsKeyListener = DigitsKeyListener.getInstance(true, true);

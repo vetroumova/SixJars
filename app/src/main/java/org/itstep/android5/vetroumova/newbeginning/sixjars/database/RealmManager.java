@@ -202,10 +202,12 @@ public class RealmManager {
             realm.beginTransaction();
             long id = realmManagerInstance.getJars().size() + System.currentTimeMillis();
             Cashflow cashflow = realm.createObject(Cashflow.class, id);
-            //cashflow.setId(realmManagerInstance.getJars().size() + System.currentTimeMillis());
+            //TODO DatePicker, description from edittext, path of photo
             cashflow.setDate(new Date(System.currentTimeMillis()));
             cashflow.setSum(cashSum);
             cashflow.setCurrpercent(currPerc);
+            cashflow.setDescription("");
+            cashflow.setPhoto("");
             cashflow.setJar(jar);
             Log.d("VOlga", "New Cash : " + cashflow.getId() + ", " + cashflow.getDate() + ", "
                     + cashflow.getSum() + ", " + cashflow.getCurrpercent());
@@ -222,6 +224,30 @@ public class RealmManager {
                     .equalTo("jar_id", jarID)
                     .findFirst().setTotalCash(currTotal + cashSum);
             realm.commitTransaction();
+            return true;
+        }
+    }
+
+    public boolean editCash(long cashflowID, float cashSum, Date newDate, String description) {
+
+        Cashflow cash = realm.where(Cashflow.class).equalTo("id", cashflowID).findFirst();
+        float cashInJar = cash.getJar().getTotalCash();
+        //TODO check for negatives
+        if ((cashInJar - cash.getSum() + cashSum) < 0) {
+            return false;
+        }
+        //TODO check if needed DatePick checking
+        /*else if(newDate > ) {
+
+            }*/
+        else {
+            realm.beginTransaction();
+            Jar currentJar = cash.getJar();
+            cash.setSum(cashSum);
+            cash.setDate(newDate);
+            cash.setDescription(description);
+            realm.commitTransaction();
+            checkSumTotalInJar(currentJar.getJar_id());
             return true;
         }
     }

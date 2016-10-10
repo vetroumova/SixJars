@@ -14,6 +14,8 @@ public class Cashflow extends RealmObject {
     public static final String DATE_FIELD = "date";
     public static final String SUM_FIELD = "sum";
     public static final String CURR_PERC_FIELD = "currpercent";
+    public static final String DESC_FIELD = "description";
+    public static final String PHOTO_FIELD = "photo";
     public static final String JAR_FIELD = "jar";
     //public static final String LUTLONG_FIELD = "lutlong";
 
@@ -25,6 +27,8 @@ public class Cashflow extends RealmObject {
     private Date date;
     private float sum;
     private int currpercent;
+    private String description;
+    private String photo;   //TODO path to photo
     private Jar jar;
     //TODO
     //private String description;
@@ -63,6 +67,22 @@ public class Cashflow extends RealmObject {
 
     public void setCurrpercent(int currpercent) {
         this.currpercent = currpercent;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public Jar getJar() {

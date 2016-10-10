@@ -1,0 +1,224 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.SpendFragment">
+
+    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/itemFragmentCardJars"
+        style="@style/AppTheme.Card.Margins"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:shadowColor="@color/cardview_dark_background"
+        app:cardCornerRadius="@dimen/margin_normal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="@dimen/margin_normal">
+
+            <TextView
+                android:id="@+id/spendCashInputText"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_margin="@dimen/margin_large"
+                android:background="@drawable/jar_widget_bg"
+                android:focusable="false"
+                android:gravity="right|center_vertical"
+                android:padding="@dimen/margin_large"
+                android:text="@string/text_0"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/item_title_dimension"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/spendCashDescriptionText"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/spendCashInputText"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:layout_marginRight="@dimen/margin_large"
+                android:gravity="right|center_vertical"
+                android:hint="@string/enter_the_description"
+                android:padding="@dimen/margin_large"
+                android:textSize="@dimen/item_description_dimension" />
+
+            <GridLayout
+                android:id="@+id/percentageSettingsGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spendCashDescriptionText"
+                android:layout_centerInParent="true"
+                android:columnCount="3"
+                android:padding="@dimen/margin_normal"
+                android:rowCount="4">
+
+                <Button
+                    android:id="@+id/spend1Button"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_large"
+                    android:text="@string/text_1"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_title_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/spend2Button"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_large"
+                    android:text="@string/text_2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_title_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/spend3Button"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_large"
+                    android:text="@string/text_3"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_title_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/spend4Button"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_large"
+                    android:text="@string/text_4"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_title_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/spend5Button"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_large"
+                    android:text="@string/text_5"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_title_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/spend6Button"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_large"
+                    android:text="@string/text_6"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_title_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/spend7Button"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_large"
+                    android:text="@string/text_7"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_title_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/spend8Button"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_large"
+                    android:text="@string/text_8"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_title_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/spend9Button"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_large"
+                    android:text="@string/text_9"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_title_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/spend0Button"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_large"
+                    android:text="@string/text_0"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_title_dimension"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/spendDecimalButton"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:layout_columnSpan="2"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_large"
+                    android:text="@string/text_point"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_title_dimension"
+                    android:textStyle="bold" />
+            </GridLayout>
+
+            <Button
+                android:id="@+id/spendSaveButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/percentageSettingsGrid"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:layout_marginRight="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:background="@drawable/jar_widget_bg"
+                android:maxWidth="72dp"
+                android:shadowColor="@color/cardview_dark_background"
+                android:text="@string/spend_a_cash_text"
+                android:textColor="@color/colorBottle"
+                android:textSize="@dimen/item_name_dimension" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

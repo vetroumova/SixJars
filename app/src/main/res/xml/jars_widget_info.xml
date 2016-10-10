@@ -5,7 +5,6 @@
     android:initialLayout="@layout/jars_widget"
     android:minHeight="40dp"
     android:minWidth="250dp"
-    android:previewImage="@drawable/jar"
-    android:resizeMode="horizontal|vertical"
+    android:previewImage="@mipmap/ic_launcher"
     android:updatePeriodMillis="86400000"
     android:widgetCategory="home_screen|keyguard"></appwidget-provider>

@@ -19,11 +19,12 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.adapters.RxRecyclerAdapter;
-import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.CashFlowFragment;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.AddCashFlowFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.HelpFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.JarInfoFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.RecyclerFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.SettingsFragment;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.SpendFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.StatisticsFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.utils.DebugLogger;
 
@@ -61,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
     private SettingsFragment settingsFragment;
     private StatisticsFragment statisticsFragment;
     private HelpFragment helpFragment;
-    private CashFlowFragment cashFlowFragment;
+    private AddCashFlowFragment addCashFlowFragment;
+    private SpendFragment spendFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
         settingsFragment = new SettingsFragment();
         statisticsFragment = new StatisticsFragment();
         helpFragment = new HelpFragment();
-        cashFlowFragment = new CashFlowFragment();
+        addCashFlowFragment = new AddCashFlowFragment();
+        spendFragment = new SpendFragment();
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -98,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
             //        .setAction("Cashflow", null).show();
             Log.d(TAG, "FAB");
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_layout, cashFlowFragment)
+                    //.replace(R.id.content_layout, addCashFlowFragment)
+                    .replace(R.id.content_layout, spendFragment)
                     /*.setCustomAnimations(android.R.animator
                     .fade_in, android.R.animator.fade_out)*/
                     //TODO check if needed
@@ -107,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
                     .hide(statisticsFragment)
                     .hide(helpFragment)
                     .hide(jarInfoFragment)
-                    .show(cashFlowFragment)
+                    //.show(addCashFlowFragment)
+                    .show(spendFragment)
                     .addToBackStack("RECYCLER")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
@@ -164,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
         contentLayout = (FrameLayout) findViewById(R.id.content_layout);
         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
-        itemSettings = new AHBottomNavigationItem("Settings", R.drawable.ic_settings_white_24dp);
+        itemSettings = new AHBottomNavigationItem(getString(R.string.action_settings),
+                R.drawable.ic_settings_white_24dp);
         itemStatistics = new AHBottomNavigationItem("Statistics", R.drawable.ic_statistics_chart_white_24dp);
         itemTutorial = new AHBottomNavigationItem("Tutorial", R.drawable.ic_help_white_24dp);
         itemAbout = new AHBottomNavigationItem("JARS", R.drawable.jar);
@@ -208,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                                 .hide(settingsFragment)
                                 .hide(statisticsFragment)
                                 .hide(helpFragment)
-                                .hide(cashFlowFragment)
+                                .hide(addCashFlowFragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         fab.setVisibility(View.VISIBLE);
@@ -230,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
                                 .hide(recyclerFragment)
                                 .hide(statisticsFragment)
                                 .hide(helpFragment)
-                                .hide(cashFlowFragment)
+                                .hide(addCashFlowFragment)
                                 .hide(jarInfoFragment)
                                 //.addToBackStack("RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -246,9 +252,9 @@ public class MainActivity extends AppCompatActivity {
                                 .hide(recyclerFragment)
                                 .hide(settingsFragment)
                                 .hide(helpFragment)
-                                .hide(cashFlowFragment)
+                                .hide(addCashFlowFragment)
                                 .hide(jarInfoFragment)
-                                //.addToBackStack("RECYCLER")
+                                .addToBackStack("RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         fab.setVisibility(View.VISIBLE);
@@ -260,10 +266,10 @@ public class MainActivity extends AppCompatActivity {
                                 .hide(recyclerFragment)
                                 .hide(settingsFragment)
                                 .hide(statisticsFragment)
-                                .hide(cashFlowFragment)
+                                .hide(addCashFlowFragment)
                                 .hide(jarInfoFragment)
                                 .show(helpFragment)
-                                //.addToBackStack("RECYCLER")
+                                .addToBackStack("RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         fab.setVisibility(View.INVISIBLE);
@@ -285,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
                     .hide(settingsFragment)
                     .hide(statisticsFragment)
                     .hide(helpFragment)
-                    .hide(cashFlowFragment)
+                    .hide(addCashFlowFragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
         }
@@ -306,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
                                     .hide(settingsFragment)
                                     .hide(statisticsFragment)
                                     .hide(helpFragment)
-                                    .hide(cashFlowFragment)
+                                    .hide(addCashFlowFragment)
                                     .show(jarInfoFragment)
                                     .add(R.id.content_layout, jarInfoFragment)
                                     .addToBackStack("JarInfo")
@@ -496,6 +502,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         //TODO work with fragments
         outState.putBoolean("IsSavedInst", true);
+        /*if (fragmentManager.findFragmentByTag("RECYCLER") != null) {
+            fragmentManager.putFragment(outState, "backstackfragment", fragmentManager
+                    .findFragmentByTag("RECYCLER"));
+        }*/
         fragmentManager.putFragment(outState, "backstackfragment", fragmentManager
                 .findFragmentByTag("RECYCLER"));
         super.onSaveInstanceState(outState);
@@ -515,16 +525,19 @@ public class MainActivity extends AppCompatActivity {
             return;
         } else {
             // TODO how to clear backstack to recycler
-            fragmentManager.popBackStackImmediate();
-            /*fragmentManager.beginTransaction()
-                    .add(R.id.content_layout, recyclerFragment, "RECYCLER")
-                    .show(recyclerFragment)
-                    .hide(jarInfoFragment)
-                    .hide(settingsFragment)
-                    .hide(statisticsFragment)
-                    .hide(helpFragment)
-                    .hide(cashFlowFragment)
-                    .commit();*/
+            try {
+                fragmentManager.popBackStackImmediate();
+            } catch (NullPointerException e) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
+                        .show(recyclerFragment)
+                        .hide(jarInfoFragment)
+                        .hide(settingsFragment)
+                        .hide(statisticsFragment)
+                        .hide(helpFragment)
+                        .hide(addCashFlowFragment)
+                        .commit();
+            }
             fab.setVisibility(View.VISIBLE);
         }
         /*

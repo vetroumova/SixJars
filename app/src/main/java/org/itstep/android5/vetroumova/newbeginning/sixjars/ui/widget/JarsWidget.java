@@ -40,15 +40,27 @@ import java.util.Random;
 public class JarsWidget extends AppWidgetProvider {
 
     public static final String LOG_TAG = "VOlga";
-    private static final String ACTION_CLICK = "ACTION_CLICK";
+    private static final String ACTION_CLICK = "org.itstep.android5.vetroumova.newbeginning.sixjars.ui.widget.JarsWidget.ACTION_CLICK";
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        CharSequence widgetText = JarsWidgetConfigureActivity.loadTitlePref(context, appWidgetId);
+        //CharSequence widgetText = JarsWidgetConfigureActivity.loadTitlePref(context, appWidgetId);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
-        views.setTextViewText(R.id.appwidget_TextView, widgetText);
+        /*views.setTextViewText(R.id.appwidget_TextView, widgetText);*/
+        //String text = getString(R.string.nec_text);
+        views.setTextViewText(R.id.jar_textView1, "N/nE/nC");
+
+        //float sumNEC = ;
+        //String sumNECString = String.valueOf(sumNEC);
+
+        //views.setImageViewResource(R.id.appwidget_first_jar,
+        //       (sumNEC>0?R.drawable.jar_with_water:R.drawable.jar));
+
+        //views.setTextViewText(R.id.jar_sumView1,sumNECString);
+        views.setViewVisibility(R.id.jar_sumView1, 1);
+
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);

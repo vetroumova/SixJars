@@ -47,9 +47,7 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     TextView jarDescription;
     EditText spendCashEdit;
     Button spendCashSave;
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
     private Jar jar;
     private int percent;
     private float spendSum = 0; // to Bundle
@@ -65,6 +63,7 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
 
     private PublishSubject<Cashflow> cashInRecyclerPublishSubject = PublishSubject.create();
     private PublishSubject<Long> cashDeletedPublishSubject = PublishSubject.create();
+    private PublishSubject<Jar> spendCashPublishSubject = PublishSubject.create();
     private CompositeSubscription recyclerCashSubscriptions;
 
 
@@ -97,8 +96,6 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
             jarIDString = getArguments().getString(ARG_JAR_ID);
         }
         if (savedInstanceState != null) {
@@ -204,37 +201,33 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
                             Toast.makeText(getContext(), "deleted : " + deletedCashID,
                                     Toast.LENGTH_SHORT).show();
 
-
-                            realm = RealmManager.with(this).getRealm();
-                            setRealmCashAdapter(RealmManager.with(this).getCashflowInJar(jarIDString));
-                            jar = RealmManager.with(this).getJar(jarIDString);
-                            Log.d("VOlga", "reSum : " + jar.getTotalCash());
-                            Toast.makeText(getContext(), "reSum : " + jar.getTotalCash(),
-                                    Toast.LENGTH_SHORT).show();
-                            jarBalance.setText(getString(R.string.item_balance_text,
-                                    jar.getTotalCash()));
-
-                            jarImage.setImageResource(jar.getTotalCash() > 0 ?
-                                    R.drawable.jar_with_water : R.drawable.jar);
-
-                            /*final int fullnessAfterDelete = (int) jar.getTotalCash();
-                            if(fullnessAfterDelete > 0) {
-                                jarImage.setImageResource(R.drawable.jar_with_water);
-                            }
-                            else {
-                                jarImage.setImageResource(R.drawable.jar);
-                            }*/
-
+                            refreshData();
                             cashDeletedPublishSubject.onNext(deletedCashID);
                         },
                         error -> DebugLogger.log(error.getMessage())
                 );
+
 
         recyclerCashSubscriptions.add(cashClickSubscription);
 
         recyclerCashSubscriptions.add(cashDeleteSubscription);
 
         return view;
+    }
+
+    public void refreshData() {
+
+        realm = RealmManager.with(this).getRealm();
+        setRealmCashAdapter(RealmManager.with(this).getCashflowInJar(jarIDString));
+        jar = RealmManager.with(this).getJar(jarIDString);
+        Log.d("VOlga", "reSum : " + jar.getTotalCash());
+        Toast.makeText(getContext(), "reSum : " + jar.getTotalCash(),
+                Toast.LENGTH_SHORT).show();
+        jarBalance.setText(getString(R.string.item_balance_text,
+                jar.getTotalCash()));
+
+        jarImage.setImageResource(jar.getTotalCash() > 0 ?
+                R.drawable.jar_with_water : R.drawable.jar);
     }
 
     private void setupRecycler() {
@@ -288,6 +281,10 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         return cashDeletedPublishSubject.asObservable();
     }
 
+    public Observable<Jar> spendCashInJar() {
+        return spendCashPublishSubject.asObservable();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -303,13 +300,13 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (spendCashEdit.getText().toString().equals("")) {
+        /*if (spendCashEdit.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.enter_sum_text, Toast.LENGTH_SHORT).show();
         } else {
             // add to one jar or to all
             spendSum = Float.parseFloat(spendCashEdit.getText().toString());
             //adding in DB
-            boolean resultAdd = RealmManager.with(this).addCashToJar(jarIDString, -spendSum, percent);
+            boolean resultAdd = RealmManager.with(this).addCashToJar(jarIDString, -spendSum, percent,getString(R.string.new_income_text));
             Log.d("VOlga", "add to " + jarID + " new Cashflow "
                     + spendSum + " - " + resultAdd);
             Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
@@ -321,7 +318,10 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
             //TODO normal id
             long virtual = 0;
             cashDeletedPublishSubject.onNext(virtual);
-        }
+        }*/
+
+        //TODO CHECK JAR
+        spendCashPublishSubject.onNext(jar);
     }
 
     @Override

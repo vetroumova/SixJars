@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.CashInfoFragment">
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/itemFragmentCardJars"
@@ -21,8 +21,8 @@
                 android:id="@+id/cashIDText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text="@string/cash_id_text"
                 android:textAllCaps="true"
@@ -30,19 +30,79 @@
                 android:textSize="@dimen/item_title_dimension"
                 android:textStyle="bold"
                 android:translationZ="3dp"
+                app:layout_heightPercent="15%"
+                app:layout_widthPercent="50%" />
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignLeft="@+id/spendCashInputText"
+                android:layout_below="@+id/cashIDText"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="today"
                 app:layout_heightPercent="10%"
-                app:layout_widthPercent="60%" />
+                app:layout_widthPercent="25%" />
+
+            <TextView
+                android:id="@+id/timeTextView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignRight="@+id/spendCashInputText"
+                android:layout_below="@+id/cashIDText"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:layout_toRightOf="@+id/dateTextView"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="now"
+                app:layout_heightPercent="10%"
+                app:layout_widthPercent="25%" />
+
+            <TextView
+                android:id="@+id/spendCashInputText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/dateTextView"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginRight="@dimen/margin_normal"
+                android:background="@drawable/jar_widget_bg"
+                android:focusable="false"
+                android:gravity="right|center_vertical"
+                android:paddingRight="@dimen/margin_large"
+                android:text="@string/text_0"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/item_name_dimension"
+                android:textStyle="bold"
+                app:layout_heightPercent="15%"
+                app:layout_widthPercent="50%" />
+
+            <EditText
+                android:id="@+id/spendCashDescriptionText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@+id/spendCashInputText"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:layout_marginRight="@dimen/margin_large"
+                android:gravity="right|center_vertical"
+                android:hint="@string/enter_the_description"
+                android:padding="@dimen/margin_large"
+                android:textSize="@dimen/item_description_dimension"
+                app:layout_heightPercent="20%"
+                app:layout_widthPercent="50%" />
+
 
             <LinearLayout
                 android:id="@+id/cashEditJar"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_below="@+id/cashIDText"
-                android:layout_centerHorizontal="true"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/spendCashDescriptionText"
                 android:gravity="center"
-                app:layout_heightPercent="10%"
-                app:layout_marginPercent="1%"
-                app:layout_widthPercent="90%">
+                app:layout_heightPercent="20%"
+                app:layout_marginPercent="2%"
+                app:layout_widthPercent="50%">
 
                 <Button
                     android:id="@+id/cashEditNECButton"
@@ -124,67 +184,19 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/cashEditJar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_toRightOf="@id/cashEditJar"
                 android:gravity="center"
-                android:padding="@dimen/margin_small">
-
-                <TextView
-                    android:id="@+id/dateTextView"
-                    android:layout_width="160dp"
-                    android:layout_height="20dp"
-                    android:layout_alignLeft="@+id/spendCashInputText"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginBottom="@dimen/margin_normal"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:text="today" />
-
-                <TextView
-                    android:id="@+id/timeTextView"
-                    android:layout_width="160dp"
-                    android:layout_height="20dp"
-                    android:layout_alignRight="@+id/spendCashInputText"
-                    android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_toRightOf="@+id/dateTextView"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:text="now" />
-
-                <TextView
-                    android:id="@+id/spendCashInputText"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@id/dateTextView"
-                    android:layout_marginLeft="@dimen/margin_normal"
-                    android:layout_marginRight="@dimen/margin_normal"
-                    android:background="@drawable/jar_widget_bg"
-                    android:focusable="false"
-                    android:gravity="right|center_vertical"
-                    android:paddingRight="@dimen/margin_large"
-                    android:text="@string/text_0"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/item_name_dimension"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/spendCashDescriptionText"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/spendCashInputText"
-                    android:layout_marginLeft="@dimen/margin_large"
-                    android:layout_marginRight="@dimen/margin_large"
-                    android:gravity="right|center_vertical"
-                    android:hint="@string/enter_the_description"
-                    android:padding="@dimen/margin_large"
-                    android:textSize="@dimen/item_description_dimension" />
+                android:padding="@dimen/margin_small"
+                android:translationZ="3dp"
+                app:layout_heightPercent="100%"
+                app:layout_widthPercent="40%">
 
                 <GridLayout
                     android:id="@+id/percentageSettingsGrid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/spendCashDescriptionText"
                     android:layout_centerInParent="true"
                     android:columnCount="3"
                     android:padding="@dimen/margin_normal"

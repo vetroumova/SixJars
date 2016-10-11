@@ -20,6 +20,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.adapters.RxRecyclerAdapter;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.AddCashFlowFragment;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.CashInfoFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.HelpFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.JarInfoFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.RecyclerFragment;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private HelpFragment helpFragment;
     private AddCashFlowFragment addCashFlowFragment;
     private SpendFragment spendFragment;
+    private CashInfoFragment cashInfoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         helpFragment = new HelpFragment();
         addCashFlowFragment = new AddCashFlowFragment();
         spendFragment = new SpendFragment();
+        cashInfoFragment = new CashInfoFragment();
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -101,8 +104,7 @@ public class MainActivity extends AppCompatActivity {
             //        .setAction("Cashflow", null).show();
             Log.d(TAG, "FAB");
             fragmentManager.beginTransaction()
-                    //.replace(R.id.content_layout, addCashFlowFragment)
-                    .replace(R.id.content_layout, spendFragment)
+                    .replace(R.id.content_layout, addCashFlowFragment)
                     /*.setCustomAnimations(android.R.animator
                     .fade_in, android.R.animator.fade_out)*/
                     //TODO check if needed
@@ -111,8 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     .hide(statisticsFragment)
                     .hide(helpFragment)
                     .hide(jarInfoFragment)
-                    //.show(addCashFlowFragment)
-                    .show(spendFragment)
+                    .show(addCashFlowFragment)
                     .addToBackStack("RECYCLER")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
@@ -328,6 +329,16 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),
                                     "cash clicked : " + cash.getId() + ", " + cash.getSum(),
                                     Toast.LENGTH_SHORT).show();
+
+                            fragmentManager.beginTransaction()
+                                    .add(R.id.content_layout, cashInfoFragment)
+                                    .hide(settingsFragment)
+                                    .hide(statisticsFragment)
+                                    .hide(helpFragment)
+                                    .hide(addCashFlowFragment)
+                                    .addToBackStack("CashEdit")
+                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                    .commit();
                         },
                         error -> DebugLogger.log(error.getMessage())
                 );
@@ -347,9 +358,44 @@ public class MainActivity extends AppCompatActivity {
                         error -> DebugLogger.log(error.getMessage())
                 );
 
+        Subscription spendCashInJar = jarInfoFragment.spendCashInJar()
+                .subscribe(jar -> {
+                    DebugLogger.log("open spendcash fragment : " + jar.getJar_id());
+                    Log.d(TAG, "open spendcash fragment : " + jar.getJar_id());
+                    Toast.makeText(getApplicationContext(), "open spendcash fragment : " + jar.getJar_id(),
+                            Toast.LENGTH_SHORT).show();
+                    //spendFragment = SpendFragment.newInstance(jar.getJar_id());
+                    spendFragment.setJarId(jar.getJar_id());
+                    fragmentManager.beginTransaction()
+                            .hide(recyclerFragment)
+                            .hide(settingsFragment)
+                            .hide(statisticsFragment)
+                            .hide(helpFragment)
+                            .hide(addCashFlowFragment)
+                            .show(spendFragment)
+                            .add(R.id.content_layout, spendFragment, "SPEND")
+                            .addToBackStack("Spend")
+                            .commit();
+                });
+
+        Subscription finishSpendCashSubscription = spendFragment.finishSpend()
+                .subscribe(isSpend -> {
+                    DebugLogger.log("spend cash and close : " + isSpend);
+                    Log.d(TAG, "spend cash and close : " + isSpend);
+                    Toast.makeText(getApplicationContext(), "spend cash and close : " + isSpend,
+                            Toast.LENGTH_SHORT).show();
+                    fragmentManager.popBackStackImmediate();
+                    fab.show();
+                    //rxRecyclerAdapter.notifyDataSetChanged();
+                    recyclerFragment.refreshRecycler();
+                    jarInfoFragment.refreshData();
+                });
+
         subscriptions.add(jarInRecyclerSubscription);
         subscriptions.add(cashClickSubscription);
         subscriptions.add(cashDeleteSubscription);
+        subscriptions.add(spendCashInJar);
+        subscriptions.add(finishSpendCashSubscription);
     }
 
 

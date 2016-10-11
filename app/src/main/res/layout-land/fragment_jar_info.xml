@@ -117,6 +117,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/item_balance_dimension"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_heightPercent="14%"
                 app:layout_marginTopPercent="2%"
                 app:layout_widthPercent="16%" />
@@ -132,6 +133,7 @@
                 android:inputType="numberDecimal"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/item_description_dimension"
+                android:visibility="gone"
                 app:layout_heightPercent="14%"
                 app:layout_widthPercent="16%" />
 
@@ -139,9 +141,9 @@
                 android:id="@+id/itemCashSpendButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_alignBottom="@+id/itemCashSpendEdit"
+                android:layout_alignBottom="@+id/itemFragmentIdText"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/itemCashSpendEdit"
+                android:layout_toRightOf="@+id/itemFragmentIdText"
                 android:background="@drawable/jar_button_transp_orange_bg"
                 android:gravity="center"
                 android:shadowColor="@color/cardview_dark_background"
@@ -149,20 +151,20 @@
                 android:textColor="@color/colorBottle"
                 android:textSize="@dimen/button_text_sp_dimension"
                 app:layout_heightPercent="14%"
-                app:layout_marginLeftPercent="2%"
-                app:layout_widthPercent="14%" />
+                app:layout_marginLeftPercent="4%"
+                app:layout_widthPercent="40%" />
 
             <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/noCashCard"
                 style="@style/AppTheme.Card.Margins"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_below="@+id/itemCashSpendText"
+                android:layout_below="@+id/itemCashSpendButton"
                 android:layout_toRightOf="@id/itemFragmentBalanceText"
                 android:backgroundTint="@color/colorTranspBG"
                 app:cardCornerRadius="@dimen/margin_normal"
                 app:layout_heightPercent="60%"
-                app:layout_marginTopPercent="3%"
+                app:layout_marginTopPercent="4%"
                 app:layout_widthPercent="45%">
 
                 <android.support.v7.widget.RecyclerView

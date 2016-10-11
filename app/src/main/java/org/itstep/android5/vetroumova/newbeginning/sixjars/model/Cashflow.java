@@ -31,7 +31,6 @@ public class Cashflow extends RealmObject {
     private String photo;   //TODO path to photo
     private Jar jar;
     //TODO
-    //private String description;
     //private Point lutLong;
 
     public Cashflow() {

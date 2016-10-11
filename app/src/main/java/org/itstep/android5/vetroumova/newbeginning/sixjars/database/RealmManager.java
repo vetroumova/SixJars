@@ -191,7 +191,7 @@ public class RealmManager {
 
     }
 
-    public boolean addCashToJar(String jarID, float cashSum, int currPerc) {
+    public boolean addCashToJar(String jarID, float cashSum, int currPerc, String description) {
 
         Jar jar = realm.where(Jar.class).equalTo("jar_id", jarID).findFirst();
 
@@ -206,7 +206,7 @@ public class RealmManager {
             cashflow.setDate(new Date(System.currentTimeMillis()));
             cashflow.setSum(cashSum);
             cashflow.setCurrpercent(currPerc);
-            cashflow.setDescription("");
+            cashflow.setDescription(description);
             cashflow.setPhoto("");
             cashflow.setJar(jar);
             Log.d("VOlga", "New Cash : " + cashflow.getId() + ", " + cashflow.getDate() + ", "

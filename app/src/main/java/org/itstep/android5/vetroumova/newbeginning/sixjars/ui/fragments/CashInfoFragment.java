@@ -3,6 +3,7 @@ package org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
  * Use the {@link CashInfoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CashInfoFragment extends Fragment {
+public class CashInfoFragment extends DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

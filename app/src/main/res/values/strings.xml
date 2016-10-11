@@ -95,5 +95,9 @@
     <string name="text_8" translatable="false">8</string>
     <string name="text_9" translatable="false">9</string>
     <string name="text_point" translatable="false">.</string>
+    <string name="new_income_text">New Income</string>
+    <string name="text_back">BACK</string>
+    <string name="backspace_text"><![CDATA[<<]]></string>
+    <string name="cash_id_text">cashflow ID</string>
 
 </resources>

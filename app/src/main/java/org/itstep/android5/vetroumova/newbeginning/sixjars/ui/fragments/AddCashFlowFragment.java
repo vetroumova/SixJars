@@ -233,7 +233,7 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
                             float sumInJar = sum * ((float) currPercent / 100);
                             //adding in DB
                             boolean resultAdd = RealmManager.with(this).addCashToJar(jarID, sumInJar,
-                                    currPercent);
+                                    currPercent, getString(R.string.new_income_text));
                             Log.d("VOlga", "add to " + jarID + " new Cashflow "
                                     + sumInJar + " - " + resultAdd);
                             Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
@@ -248,7 +248,8 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
                     } else {
                         currPercent = Prefs.with(getContext()).getPercentJar(jarID);
                         //adding in DB
-                        boolean resultAdd = RealmManager.with(this).addCashToJar(jarID, sum, currPercent);
+                        boolean resultAdd = RealmManager.with(this).addCashToJar(jarID, sum,
+                                currPercent, getString(R.string.new_income_text));
                         Log.d("VOlga", "add to " + jarID + " new Cashflow "
                                 + sum + " - " + resultAdd);
                         Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text

@@ -98,6 +98,8 @@
     <string name="new_income_text">New Income</string>
     <string name="text_back">BACK</string>
     <string name="backspace_text"><![CDATA[<<]]></string>
-    <string name="cash_id_text">cashflow ID</string>
+    <string name="cash_id_text">ID : %1$s</string>
+    <string name="edited_cashflow">Cashflow edited</string>
+    <string name="text_negative">-</string>
 
 </resources>

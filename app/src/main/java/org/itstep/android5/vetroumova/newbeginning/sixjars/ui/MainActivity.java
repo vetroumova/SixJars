@@ -330,18 +330,27 @@ public class MainActivity extends AppCompatActivity {
                                     "cash clicked : " + cash.getId() + ", " + cash.getSum(),
                                     Toast.LENGTH_SHORT).show();
 
+                            cashInfoFragment = CashInfoFragment.newInstance(cash.getId());
                             fragmentManager.beginTransaction()
                                     .add(R.id.content_layout, cashInfoFragment)
-                                    .hide(settingsFragment)
-                                    .hide(statisticsFragment)
-                                    .hide(helpFragment)
-                                    .hide(addCashFlowFragment)
                                     .addToBackStack("CashEdit")
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                     .commit();
                         },
                         error -> DebugLogger.log(error.getMessage())
                 );
+
+        Subscription finishEditCashSubscription = cashInfoFragment.isFinishEdit()
+                .subscribe(isEdited -> {
+                    DebugLogger.log("cash was edited : " + isEdited);
+                    Log.d(TAG, "cash was edited : " + isEdited);
+                    Toast.makeText(getApplicationContext(), "cash was edited : " + isEdited,
+                            Toast.LENGTH_SHORT).show();
+
+                    fragmentManager.popBackStackImmediate();
+                    refreshRecycler();
+                    jarInfoFragment.refreshData();
+                });
 
         Subscription cashDeleteSubscription = jarInfoFragment.refreshRecyclerArterDeleteItem()
                 .subscribe(deletedCashID -> {
@@ -594,6 +603,16 @@ public class MainActivity extends AppCompatActivity {
             //TODO check
             fragmentManager.popBackStackImmediate();
         }*/
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
     }
 
     @Override

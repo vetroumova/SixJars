@@ -28,7 +28,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/item_balance_dimension"
                 android:textStyle="bold"
-                app:layout_heightPercent="20%"
+                app:layout_heightPercent="24%"
                 app:layout_marginTopPercent="1%"
                 app:layout_widthPercent="25%" />
 
@@ -42,7 +42,7 @@
                 android:hint="@string/enter_sum_text"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="20%"
+                app:layout_heightPercent="24%"
                 app:layout_marginRightPercent="2%"
                 app:layout_marginTopPercent="1%"
                 app:layout_widthPercent="20%" />
@@ -55,7 +55,7 @@
                 android:layout_toRightOf="@+id/cashAddEdit"
                 android:background="@drawable/jar_widget_bg"
                 android:padding="@dimen/margin_normal"
-                app:layout_heightPercent="20%"
+                app:layout_heightPercent="24%"
                 app:layout_marginTopPercent="1%"
                 app:layout_widthPercent="45%">
 
@@ -443,8 +443,8 @@
                 android:text="@string/save_settings_text"
                 android:textColor="@color/colorBottle"
                 android:textSize="@dimen/button_large_text_sp_dimension"
-                app:layout_heightPercent="12%"
-                app:layout_marginBottomPercent="4%"
+                app:layout_heightPercent="16%"
+                app:layout_marginBottomPercent="1%"
                 app:layout_marginTopPercent="4%"
                 app:layout_widthPercent="50%" />
 

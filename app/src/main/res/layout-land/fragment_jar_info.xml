@@ -27,7 +27,7 @@
                 android:clickable="true"
                 android:contentDescription="@string/jar"
                 android:src="@drawable/jar"
-                app:layout_heightPercent="30%"
+                app:layout_heightPercent="45%"
                 app:layout_widthPercent="15%" />
 
             <TextView
@@ -57,7 +57,7 @@
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/item_balance_dimension"
                 android:textStyle="bold"
-                app:layout_heightPercent="7%"
+                app:layout_heightPercent="16%"
                 app:layout_marginTopPercent="1%"
                 app:layout_widthPercent="30%" />
 
@@ -89,7 +89,7 @@
                 android:text="@string/item_percentage_text"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/item_balance_dimension"
-                app:layout_heightPercent="6%"
+                app:layout_heightPercent="8%"
                 app:layout_marginTopPercent="1%"
                 app:layout_widthPercent="30%" />
 
@@ -99,6 +99,7 @@
                 android:layout_height="0dp"
                 android:layout_alignRight="@+id/itemFragmentPercentageText"
                 android:layout_below="@+id/itemFragmentPercentageText"
+                android:gravity="center"
                 android:text="@string/item_description_text"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/item_description_dimension"
@@ -147,10 +148,10 @@
                 android:background="@drawable/jar_button_transp_orange_bg"
                 android:gravity="center"
                 android:shadowColor="@color/cardview_dark_background"
-                android:text="@string/save_settings_text"
+                android:text="@string/spend_a_cash_text"
                 android:textColor="@color/colorBottle"
-                android:textSize="@dimen/button_text_sp_dimension"
-                app:layout_heightPercent="14%"
+                android:textSize="@dimen/item_balance_dimension"
+                app:layout_heightPercent="20%"
                 app:layout_marginLeftPercent="4%"
                 app:layout_widthPercent="40%" />
 
@@ -163,7 +164,7 @@
                 android:layout_toRightOf="@id/itemFragmentBalanceText"
                 android:backgroundTint="@color/colorTranspBG"
                 app:cardCornerRadius="@dimen/margin_normal"
-                app:layout_heightPercent="60%"
+                app:layout_heightPercent="70%"
                 app:layout_marginTopPercent="4%"
                 app:layout_widthPercent="45%">
 

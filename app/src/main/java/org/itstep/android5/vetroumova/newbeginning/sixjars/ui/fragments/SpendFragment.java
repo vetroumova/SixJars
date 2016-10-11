@@ -71,7 +71,7 @@ public class SpendFragment extends Fragment implements View.OnClickListener {
             jarId = getArguments().getString(JAR_ID);
             valueString.append(getArguments().getString(VALUE, "0"));
         }
-        realmManager = RealmManager.getInstance();
+        realmManager = RealmManager.with(this);
     }
 
     @Override
@@ -209,17 +209,20 @@ public class SpendFragment extends Fragment implements View.OnClickListener {
                     return;
                 }
 
-                boolean isAdded = realmManager.addCashToJar(jarId, spendSum,
-                        Prefs.with(getContext()).getPercentJar(jarId),
-                        spendCashDescriptionEdit.getText().toString());
-                if (isAdded) {
-                    valueString.delete(0, valueString.length());
-                    valueString.append("0");
-                    Toast.makeText(getContext(), R.string.added_sum_text, Toast.LENGTH_SHORT).show();
-                    finishSpendSubject.onNext(isAdded);
-                    break;
-                } else {
-                    Toast.makeText(getContext(), R.string.not_added_sum_text, Toast.LENGTH_SHORT).show();
+                //TODO check
+                if (spendSum > 0) {
+                    boolean isAdded = realmManager.addCashToJar(jarId, spendSum,
+                            Prefs.with(getContext()).getPercentJar(jarId),
+                            spendCashDescriptionEdit.getText().toString());
+                    if (isAdded) {
+                        valueString.delete(0, valueString.length());
+                        valueString.append("0");
+                        Toast.makeText(getContext(), R.string.added_sum_text, Toast.LENGTH_SHORT).show();
+                        finishSpendSubject.onNext(isAdded);
+                        break;
+                    } else {
+                        Toast.makeText(getContext(), R.string.not_added_sum_text, Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 

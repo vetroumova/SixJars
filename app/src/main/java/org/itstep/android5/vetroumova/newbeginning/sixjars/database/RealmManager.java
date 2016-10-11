@@ -136,6 +136,52 @@ public class RealmManager {
         return realm.where(Jar.class).equalTo("jar_id", id).findFirst();
     }
 
+    public boolean editCashflow(long cashID, Date newDate, float newSum, String description, String jarID) {
+
+        Cashflow oldCashflow = realm.where(Cashflow.class).equalTo("id", cashID).findFirst();
+        Cashflow newCashflow = new Cashflow();
+        Jar oldJar = oldCashflow.getJar();
+        Jar newJar = realm.where(Jar.class).equalTo("id", jarID).findFirst();
+        //TODO CHECK
+        newCashflow.setId(cashID);
+        newCashflow.setDate(newDate);
+        //TODO check for negatives in both jars
+        newCashflow.setSum(newSum);
+        newCashflow.setCurrpercent(oldCashflow.getCurrpercent());
+        newCashflow.setDescription(description);
+        newCashflow.setPhoto("");
+        newCashflow.setJar(newJar);
+
+        if (newJar.equals(oldJar)) {
+            //check for negatives
+            if ((oldJar.getTotalCash() - oldCashflow.getSum() + newSum) < 0) {
+                return false;
+            } else {
+                realm.beginTransaction();
+                realm.copyToRealmOrUpdate(newCashflow);
+                realm.commitTransaction();
+                return true;
+            }
+        }
+        //if different jars
+        else {
+            if ((oldJar.getTotalCash() - oldCashflow.getSum()) < 0 || (newJar.getTotalCash() + newSum) < 0) {
+                return false;
+            } else {
+                realm.beginTransaction();
+                realm.copyToRealmOrUpdate(newCashflow);
+                realm.commitTransaction();
+                return true;
+            }
+        }
+    }
+
+    public Cashflow getCashflowByID(long cashID) {
+        return realm.where(Cashflow.class)
+                .equalTo("id", cashID)
+                .findFirst();
+    }
+
     public RealmResults<Cashflow> getAllCashflow() {
         return realm.where(Cashflow.class).findAllSorted("date", Sort.DESCENDING);
     }

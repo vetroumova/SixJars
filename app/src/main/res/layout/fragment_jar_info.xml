@@ -148,11 +148,25 @@
                 android:shadowColor="@color/cardview_dark_background"
                 android:text="@string/spend_a_cash_text"
                 android:textColor="@color/colorBottle"
-                android:textSize="@dimen/button_text_sp_dimension"
+                android:textSize="@dimen/item_description_dimension"
                 app:layout_heightPercent="8%"
                 app:layout_marginBottomPercent="1%"
-                app:layout_marginLeftPercent="2%"
-                app:layout_widthPercent="90%" />
+                app:layout_widthPercent="36%" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/itemCashSpendButton"
+                android:gravity="center"
+                android:shadowColor="@color/cardview_dark_background"
+                android:text="@string/delete_cash_info_text"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/item_description_dimension"
+                app:layout_heightPercent="8%"
+                app:layout_marginBottomPercent="2%"
+                app:layout_marginLeftPercent="1%"
+                app:layout_widthPercent="54%" />
 
             <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/noCashCard"

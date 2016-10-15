@@ -37,28 +37,32 @@
                 android:id="@+id/dateTextView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_alignLeft="@+id/spendCashInputText"
-                android:layout_below="@+id/cashIDText"
-                android:layout_marginBottom="@dimen/margin_normal"
+                android:layout_below="@+id/cashEditJar"
+                android:layout_margin="@dimen/margin_normal"
+                android:background="@color/colorAccent"
                 android:clickable="true"
                 android:gravity="center"
                 android:text="today"
+                android:textColor="@color/colorWhiteTextAndIcons"
+                android:textSize="@dimen/item_balance_dimension"
                 app:layout_heightPercent="10%"
-                app:layout_widthPercent="26%" />
+                app:layout_widthPercent="23%" />
 
             <TextView
                 android:id="@+id/timeTextView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_alignRight="@+id/spendCashInputText"
-                android:layout_below="@+id/cashIDText"
-                android:layout_marginBottom="@dimen/margin_normal"
+                android:layout_below="@+id/cashEditJar"
+                android:layout_margin="@dimen/margin_normal"
                 android:layout_toRightOf="@+id/dateTextView"
+                android:background="@color/colorAccent"
                 android:clickable="true"
                 android:gravity="center"
                 android:text="now"
+                android:textColor="@color/colorWhiteTextAndIcons"
+                android:textSize="@dimen/item_balance_dimension"
                 app:layout_heightPercent="10%"
-                app:layout_widthPercent="26%" />
+                app:layout_widthPercent="23%" />
 
             <TextView
                 android:id="@+id/cashEditInputText"
@@ -93,7 +97,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/cashEditDescriptionText"
+                android:layout_below="@+id/cashIDText"
                 android:gravity="center"
                 app:layout_heightPercent="20%"
                 app:layout_marginTopPercent="2%"

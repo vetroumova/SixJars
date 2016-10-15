@@ -97,9 +97,14 @@
     <string name="text_point" translatable="false">.</string>
     <string name="new_income_text">New Income</string>
     <string name="text_back">BACK</string>
-    <string name="backspace_text"><![CDATA[<<]]></string>
-    <string name="cash_id_text">ID : %1$s</string>
+    <string name="backspace_text" translatable="false"><![CDATA[<<]]></string>
+    <string name="cash_id_text" translatable="false">ID : %1$s</string>
     <string name="edited_cashflow">Cashflow edited</string>
-    <string name="text_negative">-</string>
+    <string name="text_negative" translatable="false">-</string>
+    <string name="delete_not_edit_text">For delete a cashflow, press back and long press on cashflow in list</string>
+    <string name="delete_cash_info_text">To delete a cashflow longpress on item</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

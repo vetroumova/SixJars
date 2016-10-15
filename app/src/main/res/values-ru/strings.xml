@@ -59,4 +59,9 @@
     <string name="click_to_exit_text">Нажмите еще раз, чтобы выйти</string>
     <string name="total_cash_balance_text"><b>Всего: %1$.2f</b> ГРН</string>
     <string name="enter_the_description">Добавьте примечание</string>
+    <string name="delete_cash_info_text">Для удаления суммы - долгое нажатие на эл-те списка</string>
+    <string name="delete_not_edit_text">Для удаления суммы - кнопка "назад" и долгое нажатие на эл-те списка</string>
+    <string name="new_income_text">Новое пополнение</string>
+    <string name="edited_cashflow">Сумма скорректирована</string>
+    <string name="text_back">НАЗАД</string>
 </resources>

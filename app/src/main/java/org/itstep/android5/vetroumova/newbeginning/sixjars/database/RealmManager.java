@@ -136,16 +136,39 @@ public class RealmManager {
         return realm.where(Jar.class).equalTo("jar_id", id).findFirst();
     }
 
+    /*public boolean editCash(long cashflowID, float cashSum, Date newDate, String description) {
+
+        Cashflow cash = realm.where(Cashflow.class).equalTo("id", cashflowID).findFirst();
+        float cashInJar = cash.getJar().getTotalCash();
+        //TODO check for negatives
+        if ((cashInJar - cash.getSum() + cashSum) < 0) {
+            return false;
+        }
+        //TODO check if needed DatePick checking
+        *//*else if(newDate > ) {
+
+            }*//*
+        else {
+            realm.beginTransaction();
+            Jar currentJar = cash.getJar();
+            cash.setSum(cashSum);
+            cash.setDate(newDate);
+            cash.setDescription(description);
+            realm.commitTransaction();
+            checkSumTotalInJar(currentJar.getJar_id());
+            return true;
+        }
+    }*/
+
     public boolean editCashflow(long cashID, Date newDate, float newSum, String description, String jarID) {
 
         Cashflow oldCashflow = realm.where(Cashflow.class).equalTo("id", cashID).findFirst();
         Cashflow newCashflow = new Cashflow();
         Jar oldJar = oldCashflow.getJar();
-        Jar newJar = realm.where(Jar.class).equalTo("id", jarID).findFirst();
-        //TODO CHECK
+        Jar newJar = realm.where(Jar.class).equalTo("jar_id", jarID).findFirst();
         newCashflow.setId(cashID);
+        //TODO if date is less than first income - how to correct
         newCashflow.setDate(newDate);
-        //TODO check for negatives in both jars
         newCashflow.setSum(newSum);
         newCashflow.setCurrpercent(oldCashflow.getCurrpercent());
         newCashflow.setDescription(description);
@@ -160,6 +183,7 @@ public class RealmManager {
                 realm.beginTransaction();
                 realm.copyToRealmOrUpdate(newCashflow);
                 realm.commitTransaction();
+                checkSumTotalInJar(oldJar.getJar_id());
                 return true;
             }
         }
@@ -171,6 +195,8 @@ public class RealmManager {
                 realm.beginTransaction();
                 realm.copyToRealmOrUpdate(newCashflow);
                 realm.commitTransaction();
+                checkSumTotalInJar(oldJar.getJar_id());
+                checkSumTotalInJar(newJar.getJar_id());
                 return true;
             }
         }
@@ -270,30 +296,6 @@ public class RealmManager {
                     .equalTo("jar_id", jarID)
                     .findFirst().setTotalCash(currTotal + cashSum);
             realm.commitTransaction();
-            return true;
-        }
-    }
-
-    public boolean editCash(long cashflowID, float cashSum, Date newDate, String description) {
-
-        Cashflow cash = realm.where(Cashflow.class).equalTo("id", cashflowID).findFirst();
-        float cashInJar = cash.getJar().getTotalCash();
-        //TODO check for negatives
-        if ((cashInJar - cash.getSum() + cashSum) < 0) {
-            return false;
-        }
-        //TODO check if needed DatePick checking
-        /*else if(newDate > ) {
-
-            }*/
-        else {
-            realm.beginTransaction();
-            Jar currentJar = cash.getJar();
-            cash.setSum(cashSum);
-            cash.setDate(newDate);
-            cash.setDescription(description);
-            realm.commitTransaction();
-            checkSumTotalInJar(currentJar.getJar_id());
             return true;
         }
     }

@@ -13,14 +13,20 @@ public class Prefs {
 
     private static final String PRE_LOAD = "preLoad";
     private static final String PREFS_NAME = "prefs";
-    private static Prefs prefsInstance;
-    private final SharedPreferences sharedPreferences;
     private static final String PERC_NEC = "NEC";
     private static final String PERC_PLAY = "PLAY";
     private static final String PERC_GIVE = "GIVE";
     private static final String PERC_EDU = "EDU";
     private static final String PERC_LTSS = "LTSS";
     private static final String PERC_FFA = "FFA";
+    private static final String MAX_NEC = "max_sum_NEC";
+    private static final String MAX_PLAY = "max_sum_PLAY";
+    private static final String MAX_GIVE = "max_sum_GIVE";
+    private static final String MAX_EDU = "max_sum_EDU";
+    private static final String MAX_LTSS = "max_sum_LTSS";
+    private static final String MAX_FFA = "max_sum_FFA";
+    private static Prefs prefsInstance;
+    private final SharedPreferences sharedPreferences;
 
     public Prefs(Context context) {
 
@@ -36,27 +42,15 @@ public class Prefs {
         return prefsInstance;
     }
 
+    public boolean getPreLoad() {
+        return sharedPreferences.getBoolean(PRE_LOAD, false);
+    }
+
     public void setPreLoad(boolean totalTime) {
 
         sharedPreferences
                 .edit()
                 .putBoolean(PRE_LOAD, totalTime)
-                .apply();
-    }
-
-    public boolean getPreLoad() {
-        return sharedPreferences.getBoolean(PRE_LOAD, false);
-    }
-
-    public void setPercentage(List<Integer> percentJars) {
-        sharedPreferences
-                .edit()
-                .putInt(PERC_NEC, percentJars.get(0))
-                .putInt(PERC_PLAY, percentJars.get(1))
-                .putInt(PERC_GIVE, percentJars.get(2))
-                .putInt(PERC_EDU, percentJars.get(3))
-                .putInt(PERC_LTSS, percentJars.get(4))
-                .putInt(PERC_FFA, percentJars.get(5))
                 .apply();
     }
 
@@ -69,6 +63,18 @@ public class Prefs {
         percentJars.add(sharedPreferences.getInt(PERC_LTSS, 10));
         percentJars.add(sharedPreferences.getInt(PERC_FFA, 10));
         return percentJars;
+    }
+
+    public void setPercentage(List<Integer> percentJars) {
+        sharedPreferences
+                .edit()
+                .putInt(PERC_NEC, percentJars.get(0))
+                .putInt(PERC_PLAY, percentJars.get(1))
+                .putInt(PERC_GIVE, percentJars.get(2))
+                .putInt(PERC_EDU, percentJars.get(3))
+                .putInt(PERC_LTSS, percentJars.get(4))
+                .putInt(PERC_FFA, percentJars.get(5))
+                .apply();
     }
 
     public int getPercentJar(String id) {
@@ -100,5 +106,59 @@ public class Prefs {
             }
         }
         return percent;
+    }
+
+    public float[] getMaxVolumes() {
+        float[] maxVolumesJars = new float[6];
+        maxVolumesJars[0] = sharedPreferences.getFloat(MAX_NEC, 55f);
+        maxVolumesJars[1] = sharedPreferences.getFloat(MAX_PLAY, 10f);
+        maxVolumesJars[2] = sharedPreferences.getFloat(MAX_GIVE, 10f);
+        maxVolumesJars[3] = sharedPreferences.getFloat(MAX_EDU, 5f);
+        maxVolumesJars[4] = sharedPreferences.getFloat(MAX_LTSS, 10f);
+        maxVolumesJars[5] = sharedPreferences.getFloat(MAX_FFA, 10f);
+        return maxVolumesJars;
+    }
+
+    public void setMaxVolumes(float[] maxVolumesJars) {
+        sharedPreferences
+                .edit()
+                .putFloat(PERC_NEC, maxVolumesJars[0])
+                .putFloat(PERC_PLAY, maxVolumesJars[1])
+                .putFloat(PERC_GIVE, maxVolumesJars[2])
+                .putFloat(PERC_EDU, maxVolumesJars[3])
+                .putFloat(PERC_LTSS, maxVolumesJars[4])
+                .putFloat(PERC_FFA, maxVolumesJars[5])
+                .apply();
+    }
+
+    public float getMaxVolumeJar(String id) {
+        float maxVolume = 0;
+        switch (id) {
+            case PERC_NEC: {
+                maxVolume = sharedPreferences.getFloat(MAX_NEC, 55f);
+                break;
+            }
+            case PERC_PLAY: {
+                maxVolume = sharedPreferences.getFloat(MAX_PLAY, 10f);
+                break;
+            }
+            case PERC_GIVE: {
+                maxVolume = sharedPreferences.getFloat(MAX_GIVE, 5f);
+                break;
+            }
+            case PERC_EDU: {
+                maxVolume = sharedPreferences.getFloat(MAX_EDU, 10f);
+                break;
+            }
+            case PERC_LTSS: {
+                maxVolume = sharedPreferences.getFloat(MAX_LTSS, 10f);
+                break;
+            }
+            case PERC_FFA: {
+                maxVolume = sharedPreferences.getFloat(MAX_FFA, 10f);
+                break;
+            }
+        }
+        return maxVolume;
     }
 }

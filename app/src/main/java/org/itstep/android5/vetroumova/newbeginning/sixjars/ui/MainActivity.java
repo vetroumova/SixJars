@@ -402,10 +402,13 @@ public class MainActivity extends AppCompatActivity {
 
         subscriptions.add(jarInRecyclerSubscription);
         subscriptions.add(cashClickSubscription);
+        subscriptions.add(finishEditCashSubscription);
         subscriptions.add(cashDeleteSubscription);
         subscriptions.add(spendCashInJar);
         subscriptions.add(finishSpendCashSubscription);
     }
+
+
 
 
         /*rxList = (RecyclerView) findViewById(R.id.rxRecycler);

@@ -66,10 +66,10 @@
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
                     android:contentDescription="@string/appwidget_text"
-                    android:src="@drawable/jar_with_water"
                     app:layout_heightPercent="90%"
                     app:layout_marginLeftPercent="2%"
-                    app:layout_widthPercent="25%" />
+                    app:layout_widthPercent="25%"
+                    app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
                     android:id="@+id/addAllJars_textView"
@@ -121,10 +121,10 @@
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
                     android:contentDescription="@string/appwidget_text"
-                    android:src="@drawable/jar"
                     app:layout_heightPercent="90%"
                     app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%" />
+                    app:layout_widthPercent="30%"
+                    app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
                     android:id="@+id/addNECJar_textView"
@@ -175,10 +175,10 @@
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
                     android:contentDescription="@string/appwidget_text"
-                    android:src="@drawable/jar"
                     app:layout_heightPercent="90%"
                     app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%" />
+                    app:layout_widthPercent="30%"
+                    app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
                     android:id="@+id/addPLAYJar_textView"
@@ -229,10 +229,10 @@
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
                     android:contentDescription="@string/appwidget_text"
-                    android:src="@drawable/jar"
                     app:layout_heightPercent="90%"
                     app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%" />
+                    app:layout_widthPercent="30%"
+                    app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
                     android:id="@+id/addGIVEJar_textView"
@@ -283,10 +283,10 @@
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
                     android:contentDescription="@string/appwidget_text"
-                    android:src="@drawable/jar"
                     app:layout_heightPercent="90%"
                     app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%" />
+                    app:layout_widthPercent="30%"
+                    app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
                     android:id="@+id/addEDUJar_textView"
@@ -337,10 +337,10 @@
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
                     android:contentDescription="@string/appwidget_text"
-                    android:src="@drawable/jar"
                     app:layout_heightPercent="90%"
                     app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%" />
+                    app:layout_widthPercent="30%"
+                    app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
                     android:id="@+id/addLTSSJar_textView"
@@ -391,10 +391,10 @@
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
                     android:contentDescription="@string/appwidget_text"
-                    android:src="@drawable/jar"
                     app:layout_heightPercent="90%"
                     app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%" />
+                    app:layout_widthPercent="30%"
+                    app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
                     android:id="@+id/addFFAJar_textView"

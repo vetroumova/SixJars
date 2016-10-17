@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.itstep.android5.vetroumova.newbeginning.sixjars.BottleDrawableManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
@@ -146,7 +147,7 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         // get all Object with ID
         jar = RealmManager.with(this).getJar(jarIDString);
 
-        jarImage.setImageResource(jar.getTotalCash() > 0 ? R.drawable.jar_with_water : R.drawable.jar);
+        jarImage.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), jarIDString));
 
         jarID.setText(jar.getJar_id());
         jarName.setText(getString(R.string.item_name_in_fragment_text, jar.getJar_name()));
@@ -226,8 +227,7 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         jarBalance.setText(getString(R.string.item_balance_text,
                 jar.getTotalCash()));
 
-        jarImage.setImageResource(jar.getTotalCash() > 0 ?
-                R.drawable.jar_with_water : R.drawable.jar);
+        jarImage.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), jarIDString));
     }
 
     private void setupRecycler() {

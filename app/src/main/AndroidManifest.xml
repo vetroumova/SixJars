@@ -26,7 +26,7 @@
 
         <receiver
             android:name=".ui.widget.JarsWidget"
-            android:icon="@drawable/empty_jar"
+            android:icon="@drawable/water_to_jar_empty"
             android:label="SixJars">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

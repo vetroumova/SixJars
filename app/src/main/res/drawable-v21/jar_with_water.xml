@@ -1,8 +1,8 @@
-<vector android:height="71dp"
-    android:viewportHeight="1180.0"
-    android:viewportWidth="527.0"
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="31dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:height="71dp"
+    android:viewportHeight="1180.0"
+    android:viewportWidth="527.0">
     <path
         android:name="vector_jar"
         android:fillColor="@color/colorBottle"
@@ -37,6 +37,5 @@
             437.5, 877.9, 435.5,  849   C435.8, 785.1  430, 721.2  433.2, 657.3
             C434.5, 573.7 442.8, 490.2  442.2, 406.6 C436.8, 356.7, 415.3, 308.8
             383.1, 270.3 L148.3, 270.3z" />
-
 
 </vector>

@@ -70,38 +70,42 @@ public class RealmManager {
 
                 Jar jar = new Jar();
                 jar.setJar_id(context.getResources().getString(R.string.db_jar_id_NEC));
+                jar.setJar_float_id(0f);
                 jar.setJar_name(context.getResources().getString(R.string.db_jar_name_NEC));
                 jar.setJar_info(context.getResources().getString(R.string.db_jar_info_NEC));
                 realm.copyToRealmOrUpdate(jar);
 
                 jar = new Jar();
                 jar.setJar_id(context.getResources().getString(R.string.db_jar_id_PLAY));
+                jar.setJar_float_id(1f);
                 jar.setJar_name(context.getResources().getString(R.string.db_jar_name_PLAY));
                 jar.setJar_info(context.getResources().getString(R.string.db_jar_info_PLAY));
                 realm.copyToRealmOrUpdate(jar);
 
                 jar = new Jar();
                 jar.setJar_id(context.getResources().getString(R.string.db_jar_id_GIVE));
+                jar.setJar_float_id(2f);
                 jar.setJar_name(context.getResources().getString(R.string.db_jar_name_GIVE));
                 jar.setJar_info(context.getResources().getString(R.string.db_jar_info_GIVE));
                 realm.copyToRealmOrUpdate(jar);
 
                 jar = new Jar();
-                //TODO check
-                //jar.setJar_id(context.getResources().getString(R.string.db_jar_id_EDU));
                 jar.setJar_id("EDU");
+                jar.setJar_float_id(3f);
                 jar.setJar_name(context.getResources().getString(R.string.db_jar_name_EDU));
                 jar.setJar_info(context.getResources().getString(R.string.db_jar_info_EDU));
                 realm.copyToRealmOrUpdate(jar);
 
                 jar = new Jar();
                 jar.setJar_id(context.getResources().getString(R.string.db_jar_id_LTSS));
+                jar.setJar_float_id(4f);
                 jar.setJar_name(context.getResources().getString(R.string.db_jar_name_LTSS));
                 jar.setJar_info(context.getResources().getString(R.string.db_jar_info_LTSS));
                 realm.copyToRealmOrUpdate(jar);
 
                 jar = new Jar();
                 jar.setJar_id(context.getResources().getString(R.string.db_jar_id_FFA));
+                jar.setJar_float_id(5f);
                 jar.setJar_name(context.getResources().getString(R.string.db_jar_name_FFA));
                 jar.setJar_info(context.getResources().getString(R.string.db_jar_info_FFA));
                 realm.copyToRealmOrUpdate(jar);
@@ -263,7 +267,7 @@ public class RealmManager {
 
     }
 
-    public boolean addCashToJar(String jarID, float cashSum, int currPerc, String description) {
+    public boolean addCashToJar(String jarID, float cashSum, Date date, int currPerc, String description) {
 
         Jar jar = realm.where(Jar.class).equalTo("jar_id", jarID).findFirst();
 
@@ -274,8 +278,8 @@ public class RealmManager {
             realm.beginTransaction();
             long id = realmManagerInstance.getJars().size() + System.currentTimeMillis();
             Cashflow cashflow = realm.createObject(Cashflow.class, id);
-            //TODO DatePicker, description from edittext, path of photo
-            cashflow.setDate(new Date(System.currentTimeMillis()));
+            //TODO path of photo
+            cashflow.setDate(date);
             cashflow.setSum(cashSum);
             cashflow.setCurrpercent(currPerc);
             cashflow.setDescription(description);

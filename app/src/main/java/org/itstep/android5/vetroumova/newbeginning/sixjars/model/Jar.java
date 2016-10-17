@@ -21,9 +21,8 @@ public class Jar extends RealmObject {
 
     private String jar_name;
     private String jar_info;
-    //private RealmList<Cashflow> cashflows;
-    //TODO method getCountTotal() summing all of Cashflow sums, initial 0
     private float totalCash;
+    private float jar_float_id;
     //private int jar_color;
 
     public Jar() {
@@ -53,14 +52,6 @@ public class Jar extends RealmObject {
         this.jar_info = jar_info;
     }
 
-    /*public RealmList<Cashflow> getCashflows() {
-        return cashflows;
-    }
-*/
-    /*public void setCashflows(RealmList<Cashflow> cashflows) {
-        this.cashflows = cashflows;
-    }*/
-
     public float getTotalCash() {
         return totalCash;
     }
@@ -69,6 +60,13 @@ public class Jar extends RealmObject {
         this.totalCash = totalCash;
     }
 
+    public float getJar_float_id() {
+        return jar_float_id;
+    }
+
+    public void setJar_float_id(float jar_float_id) {
+        this.jar_float_id = jar_float_id;
+    }
 
     /*public int getJar_color() {
         return jar_color;

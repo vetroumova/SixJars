@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.itstep.android5.vetroumova.newbeginning.sixjars.BottleDrawableManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
@@ -25,11 +26,10 @@ import rx.subjects.PublishSubject;
 public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
 
     final Context context;
+    private final PublishSubject<Jar> jarInAdapterPublishSubject = PublishSubject.create();
     private Realm realm;
     private LayoutInflater inflater;
     private List<Integer> percentJars;
-
-    private final PublishSubject<Jar> jarInAdapterPublishSubject = PublishSubject.create();
 
 
 
@@ -75,8 +75,8 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
                     .fitCenter()
                     .into(holder.imageBackground);
         }*/
-        holder.imageJar.setImageResource(jar.getTotalCash() > 0 ?
-                R.drawable.jar_with_water : R.drawable.jar);
+        holder.imageJar.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(context),
+                jar.getJar_id()));
 
         //add a negative cashflow
         //TODO make a swipe delete?

@@ -2,7 +2,7 @@ package org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.method.DigitsKeyListener;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +14,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.itstep.android5.vetroumova.newbeginning.sixjars.BottleDrawableManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
@@ -83,8 +85,8 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
         View view = inflater.inflate(R.layout.fragment_add_cash_flow, container, false);
 
         sumEditText = (EditText) view.findViewById(R.id.cashAddEdit);
-        DigitsKeyListener digitsKeyListener = DigitsKeyListener.getInstance(true, true);
-        sumEditText.setKeyListener(digitsKeyListener);
+        sumEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        sumEditText.setSelection(sumEditText.getText().length());
 
         getCurrBalanceJars = (TextView) view.findViewById(R.id.currBalanceJars);
         currBalanceNEC = (TextView) view.findViewById(R.id.currBalanceNECJar);
@@ -134,15 +136,15 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
         return view;
     }
 
-    private void setBottles(List<Jar> jars) {
+    private void setBottles() {
 
-        bottlesAll.setImageResource(sumOfJars > 0 ? R.drawable.jar_with_water : R.drawable.jar);
-        bottleNEC.setImageResource(jars.get(0).getTotalCash() > 0 ? R.drawable.jar_with_water : R.drawable.jar);
-        bottlePLAY.setImageResource(jars.get(1).getTotalCash() > 0 ? R.drawable.jar_with_water : R.drawable.jar);
-        bottleGIVE.setImageResource(jars.get(2).getTotalCash() > 0 ? R.drawable.jar_with_water : R.drawable.jar);
-        bottleEDU.setImageResource(jars.get(3).getTotalCash() > 0 ? R.drawable.jar_with_water : R.drawable.jar);
-        bottleLTSS.setImageResource(jars.get(4).getTotalCash() > 0 ? R.drawable.jar_with_water : R.drawable.jar);
-        bottleFFA.setImageResource(jars.get(5).getTotalCash() > 0 ? R.drawable.jar_with_water : R.drawable.jar);
+        bottlesAll.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), "AllJars"));
+        bottleNEC.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), "NEC"));
+        bottlePLAY.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), "PLAY"));
+        bottleGIVE.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), "GIVE"));
+        bottleEDU.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), "EDU"));
+        bottleLTSS.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), "LTSS"));
+        bottleFFA.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), "FFA"));
 
         setCheckedJar();
     }
@@ -182,7 +184,7 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
         }
         getCurrBalanceJars.setText(getString(R.string.cash_balance_text, sumOfJars));
 
-        setBottles(jars);
+        setBottles();
     }
 
     @Override
@@ -233,13 +235,16 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
                             float sumInJar = sum * ((float) currPercent / 100);
                             //adding in DB
                             boolean resultAdd = RealmManager.with(this).addCashToJar(jarID, sumInJar,
-                                    currPercent, getString(R.string.new_income_text));
+                                    new Date(System.currentTimeMillis()), currPercent, getString(R.string.new_income_text));
                             Log.d("VOlga", "add to " + jarID + " new Cashflow "
                                     + sumInJar + " - " + resultAdd);
                             Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
                                     : R.string.not_added_sum_text), Toast.LENGTH_SHORT).show();
                             if (resultAdd) {
                                 sumEditText.setText("");
+                                //new MaxVolume for bottle
+                                Prefs.with(getContext()).setMaxVolumeInJar(RealmManager.with(this)
+                                        .getJar(jarID).getTotalCash(), jarID);
                             }
                         }
                         setBalance();
@@ -249,13 +254,16 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
                         currPercent = Prefs.with(getContext()).getPercentJar(jarID);
                         //adding in DB
                         boolean resultAdd = RealmManager.with(this).addCashToJar(jarID, sum,
-                                currPercent, getString(R.string.new_income_text));
+                                new Date(System.currentTimeMillis()), currPercent, getString(R.string.new_income_text));
                         Log.d("VOlga", "add to " + jarID + " new Cashflow "
                                 + sum + " - " + resultAdd);
                         Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
                                 : R.string.not_added_sum_text), Toast.LENGTH_SHORT).show();
                         if (resultAdd) {
                             sumEditText.setText("");
+                            //new MaxVolume for bottle
+                            Prefs.with(getContext()).setMaxVolumeInJar(RealmManager.with(this)
+                                    .getJar(jarID).getTotalCash(), jarID);
                         }
                         setBalance();
                     }

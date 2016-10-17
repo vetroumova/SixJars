@@ -1,21 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="true">
-    <item android:duration="50" android:drawable="@drawable/empty_jar" />
-    <item android:duration="50" android:drawable="@drawable/blue__1" />
-    <item android:duration="50" android:drawable="@drawable/blue__2" />
-    <item android:duration="50" android:drawable="@drawable/blue__3" />
-    <item android:duration="50" android:drawable="@drawable/blue__4" />
-    <item android:duration="50" android:drawable="@drawable/blue__5" />
-    <item android:duration="50" android:drawable="@drawable/blue_0" />
-    <item android:duration="50" android:drawable="@drawable/blue_1" />
-    <item android:duration="50" android:drawable="@drawable/blue_2" />
-    <item android:duration="50" android:drawable="@drawable/blue_3" />
-    <item android:duration="50" android:drawable="@drawable/blue_4" />
-    <item android:duration="50" android:drawable="@drawable/blue_5" />
-    <item android:duration="50" android:drawable="@drawable/blue_6" />
-    <item android:duration="50" android:drawable="@drawable/blue_7" />
-    <item android:duration="50" android:drawable="@drawable/blue_8" />
-    <item android:duration="50" android:drawable="@drawable/blue_9" />
-    <item android:duration="50" android:drawable="@drawable/blue_full" />
+    <item
+        android:drawable="@drawable/water_to_jar_empty"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue__1"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue__2"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue__3"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue__4"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue__5"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue_0"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue_1"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue_2"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue_3"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue_4"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue_5"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue_6"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue_7"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue_8"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue_9"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/blue_full"
+        android:duration="50" />
 </animation-list>

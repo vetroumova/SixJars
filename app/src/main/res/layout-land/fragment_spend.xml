@@ -26,19 +26,32 @@
                 android:layout_height="50dp"
                 android:layout_alignLeft="@+id/spendCashInputText"
                 android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@color/colorAccent"
                 android:clickable="true"
                 android:gravity="center"
-                android:text="today" />
+                android:text="today"
+                android:textColor="@color/colorWhiteTextAndIcons"
+                android:textSize="@dimen/item_balance_dimension" />
 
             <TextView
                 android:id="@+id/timeTextView"
                 android:layout_width="110dp"
                 android:layout_height="50dp"
                 android:layout_alignRight="@+id/spendCashInputText"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_small"
                 android:layout_toRightOf="@+id/dateTextView"
+                android:background="@color/colorAccent"
                 android:clickable="true"
                 android:gravity="center"
-                android:text="now" />
+                android:text="now"
+                android:textColor="@color/colorWhiteTextAndIcons"
+                android:textSize="@dimen/item_balance_dimension" />
 
             <TextView
                 android:id="@+id/spendCashInputText"

@@ -2,6 +2,7 @@ package org.itstep.android5.vetroumova.newbeginning.sixjars.app;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,13 +123,28 @@ public class Prefs {
     public void setMaxVolumes(float[] maxVolumesJars) {
         sharedPreferences
                 .edit()
-                .putFloat(PERC_NEC, maxVolumesJars[0])
-                .putFloat(PERC_PLAY, maxVolumesJars[1])
-                .putFloat(PERC_GIVE, maxVolumesJars[2])
-                .putFloat(PERC_EDU, maxVolumesJars[3])
-                .putFloat(PERC_LTSS, maxVolumesJars[4])
-                .putFloat(PERC_FFA, maxVolumesJars[5])
+                .putFloat(MAX_NEC, maxVolumesJars[0])
+                .putFloat(MAX_PLAY, maxVolumesJars[1])
+                .putFloat(MAX_GIVE, maxVolumesJars[2])
+                .putFloat(MAX_EDU, maxVolumesJars[3])
+                .putFloat(MAX_LTSS, maxVolumesJars[4])
+                .putFloat(MAX_FFA, maxVolumesJars[5])
                 .apply();
+    }
+
+    public void setMaxVolumeInJar(float maxVolume, String id) {
+
+        String maxVolumePrefID = "max_sum_".concat(id);
+        float prevMaxVolume = sharedPreferences.getFloat(maxVolumePrefID, maxVolume);
+        //TODO check the maxValue scheme
+        if (prevMaxVolume > maxVolume) {
+            maxVolume = (prevMaxVolume + maxVolume) / 2;
+        }
+        sharedPreferences
+                .edit()
+                .putFloat(maxVolumePrefID, maxVolume)
+                .apply();
+        Log.d("VOlga", "new maxVolume: " + maxVolume + " in jar " + id);
     }
 
     public float getMaxVolumeJar(String id) {

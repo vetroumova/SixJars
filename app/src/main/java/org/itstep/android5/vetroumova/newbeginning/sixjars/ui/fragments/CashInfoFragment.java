@@ -111,6 +111,7 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
             newJarID = getArguments().getString(NEW_JAR, cashflow.getJar().getJar_id());
             newDate = getArguments().getString(NEW_DATE, "NoDate");
             newTime = getArguments().getString(NEW_TIME, "NoTime");
+            //partsOfDate = getArguments().getIntArray("parts");
         } else {
             cashflow = realmManager.getCashflowByID(cashflowID);
             valueString.append(String.valueOf(cashflow.getSum()));

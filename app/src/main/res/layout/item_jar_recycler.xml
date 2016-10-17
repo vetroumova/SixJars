@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical|start"
             android:layout_margin="@dimen/image_margin"
-            android:src="@drawable/jar" />
+            app:srcCompat="@drawable/water_to_jar_empty" />
 
         <LinearLayout
             android:id="@+id/itemInfoLayout"

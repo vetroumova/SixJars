@@ -115,6 +115,7 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
 
         spendCashValueText = (TextView) view.findViewById(R.id.spendCashInputText);
         spendCashDescriptionEdit = (EditText) view.findViewById(R.id.spendCashDescriptionText);
+        //spendCashDescriptionEdit.setText("");
 
         button1 = (Button) view.findViewById(R.id.spend1Button);
         button2 = (Button) view.findViewById(R.id.spend2Button);

@@ -16,11 +16,15 @@ public class BottleDrawableManager {
     private static RealmManager realmManager = RealmManager.getInstance();
     private static int[] jarDrawableResource = {R.drawable.water_to_jar_empty,
             R.drawable.water_to_jar8, R.drawable.water_to_jar7, R.drawable.water_to_jar6,
-            R.drawable.water_to_jar5, R.drawable.water_to_jar4, R.drawable.water_to_jar4,
-            R.drawable.water_to_jar3, R.drawable.water_to_jar3, R.drawable.water_to_jar1,
-            R.drawable.water_to_jar};
+            R.drawable.water_to_jar5, R.drawable.water_to_jar4, R.drawable.water_to_jar3,
+            R.drawable.water_to_jar2, R.drawable.water_to_jar1, R.drawable.water_to_jar};
+    //no empty anim
+    private static int[] jarAnimResource = {R.drawable.jar_anim_empty, R.drawable.jar_anim_minus8,
+            R.drawable.jar_anim_minus7, R.drawable.jar_anim_minus6, R.drawable.jar_anim_minus5,
+            R.drawable.jar_anim_minus4, R.drawable.jar_anim_minus3, R.drawable.jar_anim_minus2,
+            R.drawable.jar_anim_minus1, R.drawable.jar_anim};
 
-    public static int setDrawableJar(Prefs prefs, String jarId) {
+    public static int chooseFullnesInJar(Prefs prefs, String jarId) {
 
         int item = 0;
         float sum = 0;
@@ -46,27 +50,38 @@ public class BottleDrawableManager {
             //TODO will be more iterable
             float partOfMax = sum / maxVolume;
             if (partOfMax < 0.1f) {
-                item = 1;
+                item = 0;
             } else if (partOfMax < 0.2f) {
-                item = 2;
+                item = 1;
             } else if (partOfMax < 0.3f) {
-                item = 3;
+                item = 2;
             } else if (partOfMax < 0.4f) {
-                item = 4;
+                item = 3;
             } else if (partOfMax < 0.5f) {
-                item = 5;
+                item = 4;
             } else if (partOfMax < 0.6f) {
-                item = 6;
+                item = 5;
             } else if (partOfMax < 0.7f) {
-                item = 7;
+                item = 6;
             } else if (partOfMax < 0.8f) {
-                item = 8;
+                item = 7;
             } else if (partOfMax < 0.9f) {
-                item = 9;
+                item = 8;
             } else {
-                item = 10;
+                item = 9;
             }
         }
-        return jarDrawableResource[item];
+        return item;
+    }
+
+    public static int setDrawableJar(Prefs prefs, String jarId) {
+        int neededItem = chooseFullnesInJar(prefs, jarId);
+        return jarDrawableResource[neededItem];
+    }
+
+    public static int setAnimationJar(Prefs prefs, String jarId) {
+        int neededItem = chooseFullnesInJar(prefs, jarId);
+        return jarAnimResource[neededItem];
+
     }
 }

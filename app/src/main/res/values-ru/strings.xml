@@ -64,4 +64,8 @@
     <string name="new_income_text">Новое пополнение</string>
     <string name="edited_cashflow">Сумма скорректирована</string>
     <string name="text_back">НАЗАД</string>
+    <string name="jars_text">Банки</string>
+    <string name="statistics_text">Статистика</string>
+    <string name="tutorial_text">Помощь</string>
+    <string name="percentage_toast_text">Процент, по которому делится общая сумма при новом поступлении денег.</string>
 </resources>

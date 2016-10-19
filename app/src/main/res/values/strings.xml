@@ -39,6 +39,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="item_percentage_text">%1$d %% of JARS</string>
+    <string name="item_percentage_short_text">%1$d %%</string>
     <string name="jar">jar</string>
     <string name="item_name_in_fragment_text">( %1$s )</string>
     <string name="save_settings_text">SAVE</string>
@@ -106,5 +107,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="statistics_text">Statistics</string>
+    <string name="tutorial_text">Tutorial</string>
+    <string name="jars_text">JARS</string>
+    <string name="percentage_toast_text">Jar\'s percent, that explaining what sum goes to jar with new Total Income.</string>
 
 </resources>

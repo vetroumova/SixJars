@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -82,8 +83,14 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG,"In stack : " + count);*/
 
         if (savedInstanceState != null) {
-            recyclerFragment = (RecyclerFragment) fragmentManager.getFragment(savedInstanceState,
-                    "backstackfragment");
+            if (fragmentManager.getFragment(savedInstanceState, "backstackfragment")
+                    instanceof RecyclerFragment) {
+                recyclerFragment = (RecyclerFragment) fragmentManager.getFragment(savedInstanceState,
+                        "backstackfragment");
+            } else {
+                recyclerFragment = new RecyclerFragment();
+            }
+
         } else {
             recyclerFragment = new RecyclerFragment();
         }
@@ -107,14 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.content_layout, addCashFlowFragment)
                     /*.setCustomAnimations(android.R.animator
                     .fade_in, android.R.animator.fade_out)*/
-                    //TODO check if needed
-                    .hide(recyclerFragment)
-                    .hide(settingsFragment)
-                    .hide(statisticsFragment)
-                    .hide(helpFragment)
-                    .hide(jarInfoFragment)
-                    .show(addCashFlowFragment)
-                    .addToBackStack("RECYCLER")
+                    .addToBackStack("addCash")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
             fab.setVisibility(View.INVISIBLE);
@@ -164,17 +164,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //set toolbar
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         contentLayout = (FrameLayout) findViewById(R.id.content_layout);
         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
         itemSettings = new AHBottomNavigationItem(getString(R.string.action_settings),
                 R.drawable.ic_settings_white_24dp);
-        itemStatistics = new AHBottomNavigationItem("Statistics", R.drawable.ic_statistics_chart_white_24dp);
-        itemTutorial = new AHBottomNavigationItem("Tutorial", R.drawable.ic_help_white_24dp);
-        itemAbout = new AHBottomNavigationItem("JARS", R.drawable.jar);
+        itemStatistics = new AHBottomNavigationItem(getString(R.string.statistics_text),
+                R.drawable.ic_statistics_chart_white_24dp);
+        itemTutorial = new AHBottomNavigationItem(getString(R.string.tutorial_text),
+                R.drawable.ic_help_white_24dp);
+        itemAbout = new AHBottomNavigationItem(getString(R.string.jars_text),
+                R.drawable.water_to_jar_empty);
 
         bottomNavigation.addItem(itemAbout);
         bottomNavigation.addItem(itemSettings);
@@ -204,42 +207,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
                 int color = R.color.colorDivider;
+                //fragmentManager.popBackStackImmediate();
                 switch (position) {
                     case 0: {
                         fragmentManager.beginTransaction()
-                                //TODO CHECK FOR DUPLICATES
                                 .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
-                                .show(recyclerFragment)
-                                //TODO normal checking of fragments enabled & visible
-                                .hide(jarInfoFragment)
-                                .hide(settingsFragment)
-                                .hide(statisticsFragment)
-                                .hide(helpFragment)
-                                .hide(addCashFlowFragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         fab.setVisibility(View.VISIBLE);
                         break;
                     }
                     case 1: {
-                        /*if(fragmentManager.findFragmentById(R.id.content_layout)
-                                instanceof JarInfoFragment) {
-                            //do not add to backstack
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.content_layout, settingsFragment)
-                                    .hide(recyclerFragment)
-                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                    .commit();
-                        }else {*/
                         fragmentManager.beginTransaction()
                                 .replace(R.id.content_layout, settingsFragment)
-                                .show(settingsFragment)
-                                .hide(recyclerFragment)
-                                .hide(statisticsFragment)
-                                .hide(helpFragment)
-                                .hide(addCashFlowFragment)
-                                .hide(jarInfoFragment)
-                                //.addToBackStack("RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         /*}*/
@@ -249,13 +229,6 @@ public class MainActivity extends AppCompatActivity {
                     case 2: {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.content_layout, statisticsFragment)
-                                .show(statisticsFragment)
-                                .hide(recyclerFragment)
-                                .hide(settingsFragment)
-                                .hide(helpFragment)
-                                .hide(addCashFlowFragment)
-                                .hide(jarInfoFragment)
-                                .addToBackStack("RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         fab.setVisibility(View.VISIBLE);
@@ -264,13 +237,6 @@ public class MainActivity extends AppCompatActivity {
                     case 3: {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.content_layout, helpFragment)
-                                .hide(recyclerFragment)
-                                .hide(settingsFragment)
-                                .hide(statisticsFragment)
-                                .hide(addCashFlowFragment)
-                                .hide(jarInfoFragment)
-                                .show(helpFragment)
-                                .addToBackStack("RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         fab.setVisibility(View.INVISIBLE);
@@ -287,17 +253,9 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null && fragmentManager.getBackStackEntryCount() == 0) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
-                    //TODO normal checking of fragments enabled & visible
-                    .hide(jarInfoFragment)
-                    .hide(settingsFragment)
-                    .hide(statisticsFragment)
-                    .hide(helpFragment)
-                    .hide(addCashFlowFragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
         }
-        /*count = fragmentManager.getBackStackEntryCount();
-        Log.d(TAG,"In stack after recyc trans: " + count);*/
 
         Subscription jarInRecyclerSubscription = recyclerFragment.getJar()
                 .subscribe(jar -> {
@@ -309,14 +267,9 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             Log.d(TAG, jarInfoFragment.toString());
                             fragmentManager.beginTransaction()
-                                    .hide(recyclerFragment)
-                                    .hide(settingsFragment)
-                                    .hide(statisticsFragment)
-                                    .hide(helpFragment)
-                                    .hide(addCashFlowFragment)
-                                    .show(jarInfoFragment)
-                                    .add(R.id.content_layout, jarInfoFragment)
+                                    .replace(R.id.content_layout, jarInfoFragment)
                                     .addToBackStack("JarInfo")
+                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                     .commit();
                         },
                         error -> DebugLogger.log(error.getMessage())
@@ -332,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
 
                             cashInfoFragment = CashInfoFragment.newInstance(cash.getId());
                             fragmentManager.beginTransaction()
-                                    .add(R.id.content_layout, cashInfoFragment)
+                                    .replace(R.id.content_layout, cashInfoFragment)
                                     .addToBackStack("CashEdit")
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                     .commit();
@@ -348,8 +301,9 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
 
                     fragmentManager.popBackStackImmediate();
-                    refreshRecycler();
+                    recyclerFragment.refreshRecycler();
                     jarInfoFragment.refreshData();
+                    jarInfoFragment.refreshRecyclerArterDeleteItem();
                 });
 
         Subscription cashDeleteSubscription = jarInfoFragment.refreshRecyclerArterDeleteItem()
@@ -376,13 +330,13 @@ public class MainActivity extends AppCompatActivity {
                     //spendFragment = SpendFragment.newInstance(jar.getJar_id());
                     spendFragment.setJarId(jar.getJar_id());
                     fragmentManager.beginTransaction()
-                            .hide(recyclerFragment)
+                            /*.hide(recyclerFragment)
                             .hide(settingsFragment)
                             .hide(statisticsFragment)
                             .hide(helpFragment)
                             .hide(addCashFlowFragment)
-                            .show(spendFragment)
-                            .add(R.id.content_layout, spendFragment, "SPEND")
+                            .show(spendFragment)*/
+                            .replace(R.id.content_layout, spendFragment, "SPEND")
                             .addToBackStack("Spend")
                             .commit();
                 });
@@ -398,6 +352,7 @@ public class MainActivity extends AppCompatActivity {
                     //rxRecyclerAdapter.notifyDataSetChanged();
                     recyclerFragment.refreshRecycler();
                     jarInfoFragment.refreshData();
+                    jarInfoFragment.refreshRecyclerArterDeleteItem();
                 });
 
         subscriptions.add(jarInRecyclerSubscription);
@@ -464,73 +419,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
     }*/
-        /*imageNEC = (ImageView) findViewById(R.id.imageViewNEC);
-        imageFFA = (ImageView) findViewById(R.id.imageViewFFA);
-        imageEDU = (ImageView) findViewById(R.id.imageViewEDU);
-        imageLTSS = (ImageView) findViewById(R.id.imageViewLTSS);
-        imagePLAY = (ImageView) findViewById(R.id.imageViewPLAY);
-        imageGIVE = (ImageView) findViewById(R.id.imageViewGIVE);
 
-        //imageNEC.setBackgroundResource(R.drawable.jar_anim);
-        imageFFA.setBackgroundResource(R.drawable.jar_anim);
-        imageEDU.setBackgroundResource(R.drawable.jar_anim);
-        imageLTSS.setBackgroundResource(R.drawable.jar_anim);
-        imagePLAY.setBackgroundResource(R.drawable.jar_anim);
-        imageGIVE.setBackgroundResource(R.drawable.jar_anim);
-
-        //AnimationDrawable animationNEC = (AnimationDrawable) imageNEC.getBackground();
-        AnimationDrawable animationFFA = (AnimationDrawable) imageFFA.getBackground();
-        AnimationDrawable animationEDU = (AnimationDrawable) imageEDU.getBackground();
-        AnimationDrawable animationLTSS = (AnimationDrawable) imageLTSS.getBackground();
-        AnimationDrawable animationPLAY = (AnimationDrawable) imagePLAY.getBackground();
-        AnimationDrawable animationGIVE = (AnimationDrawable) imageGIVE.getBackground();
-
-        jars = new ArrayList<>();
-        //jars.add(animationNEC);
-        jars.add(animationFFA);
-        jars.add(animationEDU);
-        jars.add(animationLTSS);
-        jars.add(animationPLAY);
-        jars.add(animationGIVE);
-
-        //ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(6);
-        // Execute some code after 2 seconds have passed
-        *//*Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                my_button.setBackgroundResource(R.drawable.defaultcard);
-            }
-        }, 2000);*//*
-
-        //Управлять объектом AnimationDrawable можно через методы start() и stop().
-        *//*animationNEC.start();
-        animationFFA.start();
-        animationEDU.start();
-        animationLTSS.start();
-        animationPLAY.start();
-        animationGIVE.start();*//*
-
-        CountDownTimer countDownTimer = new CountDownTimer(3500, 500) {
-            int i = 0;
-            @Override
-            public void onTick(long millisUntilFinished) {
-                // do something after 1s
-                if (i < jars.size()) {
-                    jars.get(i).start();
-                    i++;
-                    Log.d(TAG,"Tick " + i + " animation");
-                }
-            }
-            @Override
-            public void onFinish() {
-                // do something end times 5s
-                Log.d(TAG,"Finish animation");
-            }
-        }.start();
-    }*/
-
-    public void refreshRecycler() {
+    public void refreshRxRecycler() {
         rxRecyclerAdapter.notifyDataSetChanged();
     }
 
@@ -564,6 +454,7 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager.putFragment(outState, "backstackfragment", fragmentManager
                     .findFragmentByTag("RECYCLER"));
         }*/
+        //nullpointer
         fragmentManager.putFragment(outState, "backstackfragment", fragmentManager
                 .findFragmentByTag("RECYCLER"));
         super.onSaveInstanceState(outState);
@@ -586,15 +477,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 fragmentManager.popBackStackImmediate();
             } catch (NullPointerException e) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
-                        .show(recyclerFragment)
-                        .hide(jarInfoFragment)
-                        .hide(settingsFragment)
-                        .hide(statisticsFragment)
-                        .hide(helpFragment)
-                        .hide(addCashFlowFragment)
-                        .commit();
+                Log.d("VOlga", "No backstack onBackPressed");
             }
             fab.setVisibility(View.VISIBLE);
         }

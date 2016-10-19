@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.BottleDrawableManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
@@ -64,8 +65,15 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
         holder.textName.setText(jar.getJar_name());
         String total = String.format(context.getString(R.string.item_balance_text), jar.getTotalCash());
         holder.textTotal.setText(total);
-        holder.textPercentage.setText(context.getString(R.string.item_percentage_text,
+        holder.textPercentage.setText(context.getString(R.string.item_percentage_short_text,
                 percentJars.get(position)));
+        holder.textPercentage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, context.getString(R.string.percentage_toast_text),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
         /*// load the background image
         if (book.getImageUrl() != null) {

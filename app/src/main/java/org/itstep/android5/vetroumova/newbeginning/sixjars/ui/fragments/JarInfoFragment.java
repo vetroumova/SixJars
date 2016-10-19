@@ -1,6 +1,7 @@
 package org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -147,7 +148,31 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         // get all Object with ID
         jar = RealmManager.with(this).getJar(jarIDString);
 
-        jarImage.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), jarIDString));
+        //jarImage.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), jarIDString));
+        jarImage.setImageResource(BottleDrawableManager.setAnimationJar(Prefs.with(getContext()), jarIDString));
+
+        AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
+
+        //Управлять объектом AnimationDrawable можно через методы start() и stop().
+        animation.start();
+
+        /*CountDownTimer countDownTimer = new CountDownTimer(3500, 500) {
+            int i = 0;
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // do something after 1s
+                if (i < jars.size()) {
+                    jars.get(i).start();
+                    i++;
+                    Log.d(TAG,"Tick " + i + " animation");
+                }
+            }
+            @Override
+            public void onFinish() {
+                // do something end times 5s
+                Log.d(TAG,"Finish animation");
+            }
+        }.start();*/
 
         jarID.setText(jar.getJar_id());
         jarName.setText(getString(R.string.item_name_in_fragment_text, jar.getJar_name()));

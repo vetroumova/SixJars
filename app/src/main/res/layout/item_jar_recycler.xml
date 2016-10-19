@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
@@ -70,11 +71,15 @@
                     android:id="@+id/itemPercentageText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_margin"
-                    android:layout_marginStart="@dimen/text_big_margin"
-                    android:text="@string/item_percentage_text"
+                    android:layout_marginBottom="@dimen/text_margin"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:layout_marginTop="@dimen/text_margin"
+                    android:clickable="true"
+                    android:text="@string/item_percentage_short_text"
                     android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/item_balance_dimension" />
+                    android:textSize="@dimen/item_name_dimension"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

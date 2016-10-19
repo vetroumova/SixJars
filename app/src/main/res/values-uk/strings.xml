@@ -64,5 +64,9 @@
     <string name="delete_not_edit_text">Для видалення суми - кнопка "назад" та довгий натиск на эл-ті переліку</string>
     <string name="edited_cashflow">Сума скоригована</string>
     <string name="text_back">НАЗАД</string>
+    <string name="jars_text">Пляшки</string>
+    <string name="statistics_text">Статистика</string>
+    <string name="tutorial_text">Поміч</string>
+    <string name="percentage_toast_text">Відсоток, в якому розподілюється загальна сума нового поповнення.</string>
 
 </resources>

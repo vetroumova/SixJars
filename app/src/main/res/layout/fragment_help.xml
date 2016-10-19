@@ -59,9 +59,9 @@
                     android:layout_below="@+id/tutorialNECText"
                     android:clickable="true"
                     android:contentDescription="@string/jar"
-                    android:src="@drawable/blue_7"
                     app:layout_heightPercent="16%"
-                    app:layout_widthPercent="15%" />
+                    app:layout_widthPercent="15%"
+                    app:srcCompat="@drawable/water_to_jar3" />
 
                 <TextView
                     android:id="@+id/tutorialNECPercentText"
@@ -101,9 +101,9 @@
                     android:layout_toRightOf="@+id/tutorialNECImage"
                     android:clickable="true"
                     android:contentDescription="@string/jar"
-                    android:src="@drawable/blue_1"
                     app:layout_heightPercent="16%"
-                    app:layout_widthPercent="15%" />
+                    app:layout_widthPercent="15%"
+                    app:srcCompat="@drawable/water_to_jar7" />
 
                 <TextView
                     android:id="@+id/tutorialPLAYPercentText"
@@ -144,9 +144,9 @@
                     android:layout_toRightOf="@+id/tutorialPLAYImage"
                     android:clickable="true"
                     android:contentDescription="@string/jar"
-                    android:src="@drawable/blue__4"
                     app:layout_heightPercent="16%"
-                    app:layout_widthPercent="15%" />
+                    app:layout_widthPercent="15%"
+                    app:srcCompat="@drawable/water_to_jar8" />
 
                 <TextView
                     android:id="@+id/tutorialGIVEPercentText"
@@ -187,9 +187,9 @@
                     android:layout_toRightOf="@+id/tutorialGIVEImage"
                     android:clickable="true"
                     android:contentDescription="@string/jar"
-                    android:src="@drawable/blue_1"
                     app:layout_heightPercent="16%"
-                    app:layout_widthPercent="15%" />
+                    app:layout_widthPercent="15%"
+                    app:srcCompat="@drawable/water_to_jar7" />
 
                 <TextView
                     android:id="@+id/tutorialEDUPercentText"
@@ -230,9 +230,9 @@
                     android:layout_toRightOf="@+id/tutorialEDUImage"
                     android:clickable="true"
                     android:contentDescription="@string/jar"
-                    android:src="@drawable/blue_1"
                     app:layout_heightPercent="16%"
-                    app:layout_widthPercent="15%" />
+                    app:layout_widthPercent="15%"
+                    app:srcCompat="@drawable/water_to_jar7" />
 
                 <TextView
                     android:id="@+id/tutorialLTSSPercentText"
@@ -273,9 +273,9 @@
                     android:layout_toRightOf="@+id/tutorialLTSSImage"
                     android:clickable="true"
                     android:contentDescription="@string/jar"
-                    android:src="@drawable/blue_1"
                     app:layout_heightPercent="16%"
-                    app:layout_widthPercent="15%" />
+                    app:layout_widthPercent="15%"
+                    app:srcCompat="@drawable/water_to_jar7" />
 
                 <TextView
                     android:id="@+id/tutorialFFAPercentText"

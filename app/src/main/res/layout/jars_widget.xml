@@ -5,182 +5,188 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="78dp"
+    <RelativeLayout
+        android:id="@+id/appwidget_first_jar"
+        android:layout_width="82dp"
         android:layout_height="90dp"
         android:layout_margin="@dimen/widget_button_margin"
-        android:background="@drawable/jar_widget_bg"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/jar_infoView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:gravity="center"
-            android:text="Account Name"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/item_description_dimension"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/jar_sumView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:text="10000 UAH"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/item_description_dimension"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-        android:gravity="center"
-            android:orientation="horizontal">
+        android:background="@drawable/jar_widget_bg">
 
         <ImageButton
-            android:id="@+id/appwidget_first_jar"
+            android:id="@+id/jar_imageView1"
             android:layout_width="31dp"
             android:layout_height="71dp"
+            android:layout_centerInParent="true"
             android:layout_margin="3dp"
             android:background="@color/colorWhiteBG"
             android:contentDescription="@string/appwidget_text"
-            android:src="@drawable/water_to_jar_empty" />
+            android:scaleType="centerInside"
+            android:src="@drawable/jar_with_bubbles" />
 
         <TextView
             android:id="@+id/jar_textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/widget_margin"
-            android:text="@string/nec_text"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/db_jar_id_NEC"
             android:textColor="@color/colorBottle"
-            android:textSize="@dimen/widget_text_size_v"
+            android:textSize="@dimen/item_balance_dimension"
             android:textStyle="bold" />
-        </LinearLayout>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/jar_infoView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="false"
+            android:layout_below="@+id/jar_textView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/account_name"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/widget_text_size"
+            android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="78dp"
+        <TextView
+            android:id="@+id/jar_sumView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="false"
+            android:layout_below="@+id/jar_infoView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_small"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/item_description_dimension"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/appwidget_second_jar"
+        android:layout_width="82dp"
         android:layout_height="90dp"
         android:layout_margin="@dimen/widget_button_margin"
-        android:background="@drawable/jar_widget_bg"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:background="@drawable/jar_widget_bg">
+
+        <ImageButton
+            android:id="@+id/jar_imageView2"
+            android:layout_width="31dp"
+            android:layout_height="71dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="3dp"
+            android:background="@color/colorWhiteBG"
+            android:contentDescription="@string/appwidget_text"
+            android:scaleType="centerInside"
+            android:src="@drawable/jar_with_bubbles" />
+
+        <TextView
+            android:id="@+id/jar_textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/db_jar_id_PLAY"
+            android:textColor="@color/colorBottle"
+            android:textSize="@dimen/item_balance_dimension"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/jar_infoView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:gravity="center"
-            android:text="Account Name"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/item_description_dimension"
-            android:textStyle="bold"
-            android:visibility="gone" />
+            android:layout_alignParentEnd="false"
+            android:layout_below="@+id/jar_textView2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/account_name"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/widget_text_size"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/jar_sumView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:text="10000 UAH"
+            android:layout_alignParentEnd="false"
+            android:layout_below="@+id/jar_infoView2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_small"
+            android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/item_description_dimension"
-            android:textStyle="bold"
-            android:visibility="gone" />
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+    </RelativeLayout>
 
-            <ImageButton
-                android:id="@+id/appwidget_second_jar"
-                android:layout_width="31dp"
-                android:layout_height="71dp"
-                android:layout_margin="3dp"
-                android:background="@color/colorWhiteBG"
-                android:contentDescription="@string/appwidget_text"
-                android:src="@drawable/water_to_jar_empty" />
-
-            <TextView
-                android:id="@+id/jar_textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/widget_margin"
-                android:text="@string/nec_text"
-                android:textColor="@color/colorBottle"
-                android:textSize="@dimen/widget_text_size_v"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="78dp"
+    <RelativeLayout
+        android:id="@+id/appwidget_third_jar"
+        android:layout_width="82dp"
         android:layout_height="90dp"
         android:layout_margin="@dimen/widget_button_margin"
-        android:background="@drawable/jar_widget_bg"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:background="@drawable/jar_widget_bg">
+
+        <ImageButton
+            android:id="@+id/jar_imageView3"
+            android:layout_width="31dp"
+            android:layout_height="71dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="3dp"
+            android:background="@color/colorWhiteBG"
+            android:contentDescription="@string/appwidget_text"
+            android:scaleType="centerInside"
+            android:src="@drawable/jar_with_bubbles" />
+
+        <TextView
+            android:id="@+id/jar_textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/db_jar_id_NEC"
+            android:textColor="@color/colorBottle"
+            android:textSize="@dimen/item_balance_dimension"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/jar_infoView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:gravity="center"
-            android:text="Account Name"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/item_description_dimension"
-            android:textStyle="bold"
-            android:visibility="gone" />
+            android:layout_alignParentEnd="false"
+            android:layout_below="@+id/jar_textView3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/account_name"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/widget_text_size"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/jar_sumView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:text="10000 UAH"
+            android:layout_alignParentEnd="false"
+            android:layout_below="@+id/jar_infoView3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_small"
+            android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/item_description_dimension"
-            android:textStyle="bold"
-            android:visibility="gone" />
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/appwidget_third_jar"
-                android:layout_width="31dp"
-                android:layout_height="71dp"
-                android:layout_margin="3dp"
-                android:background="@color/colorWhiteBG"
-                android:contentDescription="@string/appwidget_text"
-                android:src="@drawable/water_to_jar_empty" />
-
-            <TextView
-                android:id="@+id/jar_textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/widget_margin"
-                android:text="@string/nec_text"
-                android:textColor="@color/colorBottle"
-                android:textSize="@dimen/widget_text_size_v"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="50dp"

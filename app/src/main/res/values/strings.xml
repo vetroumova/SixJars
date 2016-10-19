@@ -111,5 +111,6 @@
     <string name="tutorial_text">Tutorial</string>
     <string name="jars_text">JARS</string>
     <string name="percentage_toast_text">Jar\'s percent, that explaining what sum goes to jar with new Total Income.</string>
+    <string name="account_name">Account Name</string>
 
 </resources>

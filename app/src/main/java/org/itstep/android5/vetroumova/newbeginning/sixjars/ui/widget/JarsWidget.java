@@ -8,10 +8,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 
-import java.util.Random;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.Locale;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Implementation of App Widget functionality.
@@ -47,10 +56,10 @@ public class JarsWidget extends AppWidgetProvider {
 
         //CharSequence widgetText = JarsWidgetConfigureActivity.loadTitlePref(context, appWidgetId);
         // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
+        //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
         /*views.setTextViewText(R.id.appwidget_TextView, widgetText);*/
         //String text = getString(R.string.nec_text);
-        views.setTextViewText(R.id.jar_textView1, "N/nE/nC");
+        //views.setTextViewText(R.id.jar_textView1, "N/nE/nC");
 
         //float sumNEC = ;
         //String sumNECString = String.valueOf(sumNEC);
@@ -59,15 +68,18 @@ public class JarsWidget extends AppWidgetProvider {
         //       (sumNEC>0?R.drawable.jar_with_water:R.drawable.jar));
 
         //views.setTextViewText(R.id.jar_sumView1,sumNECString);
-        views.setViewVisibility(R.id.jar_sumView1, 1);
+        //views.setViewVisibility(R.id.jar_textView1, 1);
 
 
         // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+        //appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+
+        //TODO check, not RealmManager?
+        Realm realm = Realm.getDefaultInstance();
 
         ComponentName thisWidget = new ComponentName(context, JarsWidget.class);
 
@@ -78,15 +90,46 @@ public class JarsWidget extends AppWidgetProvider {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }*/
         for (int widgetId : allWidgetsIds) {
-            //create some random data
-            int number = (new Random().nextInt(100));
+
+            updateAppWidget(context, appWidgetManager, widgetId, realm);
+
+            RealmResults<Jar> jars = realm.where(Jar.class).findAllSorted("jar_float_id", Sort.ASCENDING);
+            ArrayList<Float> jarsSumList = new ArrayList<>();
+
+            for (Jar jar : jars) {
+                jarsSumList.add(jar.getTotalCash());
+                Log.d(LOG_TAG, "add " + jar.getJar_id() + " sum " + jar.getTotalCash() + " in " + widgetId);
+                Toast.makeText(context, "add " + jar.getJar_id() + " sum " + jar.getTotalCash()
+                        + " in " + widgetId, Toast.LENGTH_SHORT).show();
+            }
 
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
 
-            Log.d(LOG_TAG, "Clicking " + String.valueOf(number) + " " + widgetId);
-
             //Set the text
-            remoteViews.setTextViewText(R.id.jar_textView1, String.valueOf(number));
+            DecimalFormatSymbols s = new DecimalFormatSymbols();
+            //s.setDecimalSeparator('.');
+            DecimalFormat f = new DecimalFormat("#,###0.00", s);
+            String sum1 = (f.format(jars.get(0).getTotalCash()));
+            String sum2 = (f.format(jars.get(1).getTotalCash()));
+            String sum3 = (f.format(jars.get(2).getTotalCash()));
+            String sum4 = (f.format(jars.get(3).getTotalCash()));
+            String sum5 = (f.format(jars.get(4).getTotalCash()));
+            String sum6 = (f.format(jars.get(5).getTotalCash()));
+
+            //TODO use locale
+            Locale locale = Locale.getDefault();
+
+            remoteViews.setTextViewText(R.id.jar_textView1, String.valueOf(jars.get(0).getJar_id()));
+            remoteViews.setTextViewText(R.id.jar_infoView1, String.valueOf(jars.get(0).getJar_name()));
+            remoteViews.setTextViewText(R.id.jar_sumView1, sum1.concat(" ГРН"));
+
+            remoteViews.setTextViewText(R.id.jar_textView2, String.valueOf(jars.get(1).getJar_id()));
+            remoteViews.setTextViewText(R.id.jar_infoView2, String.valueOf(jars.get(1).getJar_name()));
+            remoteViews.setTextViewText(R.id.jar_sumView2, sum2.concat(" ГРН"));
+
+            remoteViews.setTextViewText(R.id.jar_textView3, String.valueOf(jars.get(2).getJar_id()));
+            remoteViews.setTextViewText(R.id.jar_infoView3, String.valueOf(jars.get(2).getJar_name()));
+            remoteViews.setTextViewText(R.id.jar_sumView3, sum3.concat(" ГРН"));
 
             //Register an onClickListener
             Intent intent = new Intent(context, JarsWidget.class);
@@ -101,6 +144,77 @@ public class JarsWidget extends AppWidgetProvider {
 
             appWidgetManager.updateAppWidget(widgetId, remoteViews);
         }
+        realm.close();
+    }
+
+
+    private void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                                 int appWidgetId, Realm realm) {
+        Log.d("VOlga", "updating widget with id " + appWidgetId);
+
+        /*String taskListId = prefHelper.getWidgetTaskListId(appWidgetId);
+
+        // Set up the intent that starts the TasksWidgetService, which will
+        // provide the views for this collection.
+        Intent intent = new Intent(context, TasksWidgetService.class);
+
+        intent.putExtra(TaskDetailActivity.EXTRA_TASK_LIST_ID, taskListId);
+
+        // Add the app widget ID to the intent extras.
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+*/
+        // Instantiate the RemoteViews object for the app widget layout.
+        //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
+
+        // Set up the RemoteViews object to use a RemoteViews adapter.
+        // This adapter connects to a RemoteViewsService  through the specified intent.
+        // This is how you populate the data.
+        //views.setRemoteAdapter(R.id.widget_task_list, intent);
+
+        // The empty view is displayed when the collection has no items.
+        // It should be in the same layout used to instantiate the RemoteViews
+        // object above.
+//        views.setEmptyView(R.id.stack_view, R.id.empty_view);
+
+        // This section makes it possible for items to have individualized behavior.
+        // It does this by setting up a pending intent template. Individuals items of a collection
+        // cannot set up their own pending intents. Instead, the collection as a whole sets
+        // up a pending intent template, and the individual items set a fillInIntent
+        // to create unique behavior on an item-by-item basis.
+        //Intent taskDetailIntent = TaskDetailActivity.getIntentTemplate(context, taskListId);
+        //taskDetailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //PendingIntent taskDetailPendingIntent = PendingIntent.getActivity(context, 0, taskDetailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        //views.setPendingIntentTemplate(R.id.widget_task_list, taskDetailPendingIntent);
+
+        //
+        // Do additional processing specific to this app widget...
+        //
+
+        //RealmResults<Jar> jarList = realm.where(Jar.class).findAll();
+
+        // The task list can be null when upgrading the Realm scheme, prevent crashing
+        /*if (taskList != null) {
+            // Set the task list title
+            views.setTextViewText(R.id.task_list_title, taskList.getTitle());
+        }*/
+
+        // Setup the header
+        /*Intent viewTaskListIntent = new Intent(context, MainActivity.class);
+        viewTaskListIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent viewTaskListPendingIntent = PendingIntent.getActivity(context, 0, viewTaskListIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setOnClickPendingIntent(R.id.task_list_header, viewTaskListPendingIntent);*/
+
+        // Setup the Add Task button
+        // Set the icon
+        /*views.setImageViewResource(R.id.add_task, R.drawable.ic_add_white_24dp);
+        // Set the click action
+        Intent addTaskIntent = EditTaskActivity.getTaskCreateIntent(context, taskListId);
+        addTaskIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, addTaskIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setOnClickPendingIntent(R.id.add_task, pendingIntent);*/
+
+
     }
 
     @Override

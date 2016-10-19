@@ -284,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
 
                             cashInfoFragment = CashInfoFragment.newInstance(cash.getId());
+                            //cashInfoFragment.setCashflowID(cash.getId());
                             fragmentManager.beginTransaction()
                                     .replace(R.id.content_layout, cashInfoFragment)
                                     .addToBackStack("CashEdit")
@@ -327,16 +328,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "open spendcash fragment : " + jar.getJar_id());
                     Toast.makeText(getApplicationContext(), "open spendcash fragment : " + jar.getJar_id(),
                             Toast.LENGTH_SHORT).show();
-                    //spendFragment = SpendFragment.newInstance(jar.getJar_id());
                     spendFragment.setJarId(jar.getJar_id());
                     fragmentManager.beginTransaction()
-                            /*.hide(recyclerFragment)
-                            .hide(settingsFragment)
-                            .hide(statisticsFragment)
-                            .hide(helpFragment)
-                            .hide(addCashFlowFragment)
-                            .show(spendFragment)*/
-                            .replace(R.id.content_layout, spendFragment, "SPEND")
+                            .replace(R.id.content_layout, spendFragment, "spend")
                             .addToBackStack("Spend")
                             .commit();
                 });
@@ -450,10 +444,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         //TODO work with fragments
         outState.putBoolean("IsSavedInst", true);
-        /*if (fragmentManager.findFragmentByTag("RECYCLER") != null) {
-            fragmentManager.putFragment(outState, "backstackfragment", fragmentManager
-                    .findFragmentByTag("RECYCLER"));
-        }*/
         //nullpointer
         fragmentManager.putFragment(outState, "backstackfragment", fragmentManager
                 .findFragmentByTag("RECYCLER"));
@@ -481,14 +471,6 @@ public class MainActivity extends AppCompatActivity {
             }
             fab.setVisibility(View.VISIBLE);
         }
-        /*
-        try {
-            super.onBackPressed();
-        } catch (IllegalStateException e) {
-            Log.d(TAG, e.getMessage());
-            //TODO check
-            fragmentManager.popBackStackImmediate();
-        }*/
     }
 
     @Override

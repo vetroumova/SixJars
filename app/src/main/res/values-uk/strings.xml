@@ -55,7 +55,7 @@
     <string name="appwidget_text">Пляшки</string>
     <string name="enter_widget_name_text">вигадайте ім\'я віджета</string>
     <string name="yes_text">ДА</string>
-    <string name="no_text">НЕТ</string>
+    <string name="no_text">НІ</string>
     <string name="click_to_exit_text">Натисніть ще раз, щоб вийти</string>
     <string name="total_cash_balance_text"><b>Усього: %1$.2f</b> ГРН</string>
     <string name="enter_the_description">Додайте примітку</string>
@@ -68,5 +68,14 @@
     <string name="statistics_text">Статистика</string>
     <string name="tutorial_text">Поміч</string>
     <string name="percentage_toast_text">Відсоток, в якому розподілюється загальна сума нового поповнення.</string>
+    <string name="statistics_pie_hole_title">Витрати\nв пляшках</string>
+    <string name="statistics_pie_title">\nВитрати</string>
+    <string name="statistics">Статистика витрат та надходженнь</string>
+    <string name="account_name">Назва статті витрат</string>
+    <string name="statistics_bar_title">Надходження v</string>
+    <string name="statistics_income_text">Надходження</string>
+    <string name="statistics_payments_text">Витрати</string>
+    <string name="no_data_chart_text">Немає даних</string>
+    <string name="statistics_bar_title2">s витрати</string>
 
 </resources>

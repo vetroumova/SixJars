@@ -188,6 +188,7 @@ public class RealmManager {
                 realm.copyToRealmOrUpdate(newCashflow);
                 realm.commitTransaction();
                 checkSumTotalInJar(oldJar.getJar_id());
+
                 return true;
             }
         }
@@ -213,7 +214,20 @@ public class RealmManager {
     }
 
     public RealmResults<Cashflow> getAllCashflow() {
-        return realm.where(Cashflow.class).findAllSorted("date", Sort.DESCENDING);
+         /*Observable<Cashflow> result = realm.where(Cashflow.class)
+                 .findAllSortedAsync("date", Sort.DESCENDING).asObservable()
+                //.filter(result.isLoaded())
+                .filter(result.isLoaded())
+                .first()
+                .subscribe(realmObject -> {
+                    if (realmObject.isValid()) {
+                        // Non-null realmObject
+                    } else {
+                        // null realmObject
+                    }
+                });
+        return result;*/
+        return null;
     }
 
     public RealmResults<Cashflow> getCashflowInJar(String jarID) {

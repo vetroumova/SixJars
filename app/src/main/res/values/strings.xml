@@ -39,7 +39,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="item_percentage_text">%1$d %% of JARS</string>
-    <string name="item_percentage_short_text">%1$d %%</string>
+    <string name="item_percentage_short_text" translatable="false">%1$d %%</string>
     <string name="jar">jar</string>
     <string name="item_name_in_fragment_text">( %1$s )</string>
     <string name="save_settings_text">SAVE</string>
@@ -112,5 +112,13 @@
     <string name="jars_text">JARS</string>
     <string name="percentage_toast_text">Jar\'s percent, that explaining what sum goes to jar with new Total Income.</string>
     <string name="account_name">Account Name</string>
+    <string name="statistics_pie_title">\nPayments</string>
+    <string name="statistics_pie_hole_title">Payments \n in jars</string>
+    <string name="statistics">STATISTICS</string>
+    <string name="statistics_bar_title">income v</string>
+    <string name="no_data_chart_text">NO DATA</string>
+    <string name="statistics_payments_text">Payments</string>
+    <string name="statistics_income_text">Income</string>
+    <string name="statistics_bar_title2">s payments</string>
 
 </resources>

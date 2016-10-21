@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Cashflow;
 
@@ -428,6 +429,7 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
             }
             case R.id.spendSaveButton: {
                 float newSum = 0;
+                float oldSum = cashflow.getSum();   // for Prefs
                 try {
                     newSum = Float.parseFloat(valueString.toString());
                 } catch (NumberFormatException e) {
@@ -442,13 +444,22 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
                         /*valueString.delete(0, valueString.length());
                         valueString.append("0");*/
                         Toast.makeText(getContext(), R.string.edited_cashflow, Toast.LENGTH_SHORT).show();
+
+                        //to correct maxvalue in prefs
+                        // не учитывает перевод в разные кувшины
+                        if (oldSum > 0 && oldSum < newSum) {
+                            Prefs.with(getContext()).setMaxVolumeInJar(
+                                    cashflow.getJar().getTotalCash(), cashflow.getJar().getJar_id());
+                        }
                         finishEditSubject.onNext(isEdited);
                         break;
                     } else {
-                        Toast.makeText(getContext(), R.string.not_added_sum_text, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.not_added_sum_text,
+                                Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getContext(), R.string.delete_not_edit_text, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.delete_not_edit_text,
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         }

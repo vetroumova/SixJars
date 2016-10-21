@@ -134,12 +134,19 @@ public class Prefs {
 
     public void setMaxVolumeInJar(float maxVolume, String id) {
 
+        //maxVolume in params - new TotalSum in jar
+
         String maxVolumePrefID = "max_sum_".concat(id);
         float prevMaxVolume = sharedPreferences.getFloat(maxVolumePrefID, maxVolume);
         //TODO check the maxValue scheme
         if (prevMaxVolume > maxVolume) {
             maxVolume = (prevMaxVolume + maxVolume) / 2;
         }
+        /*float totalInJar = RealmManager.getInstance().getJar(id).getTotalCash();
+        if(maxVolume < totalInJar) {
+            //check the totalSum resum before it
+            maxVolume = totalInJar;
+        }*/
         sharedPreferences
                 .edit()
                 .putFloat(maxVolumePrefID, maxVolume)

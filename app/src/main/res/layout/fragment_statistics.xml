@@ -11,54 +11,107 @@
         android:layout_height="match_parent"
         app:cardCornerRadius="@dimen/margin_normal">
 
-        <android.support.percent.PercentRelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="@dimen/margin_normal">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/statisticsTextView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center_horizontal|top"
-                android:text="STATISTICS"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/item_title_dimension"
-                android:textStyle="bold"
-                app:layout_heightPercent="6%"
-                app:layout_marginTopPercent="2%"
-                app:layout_widthPercent="100%" />
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="@dimen/margin_normal">
 
-            <!--<com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chartLinear"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/statisticsTextView"
-                app:layout_heightPercent="25%"
-                app:layout_marginTopPercent="2%"
-                app:layout_widthPercent="100%" />-->
+                <TextView
+                    android:id="@+id/statisticsTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center_horizontal|top"
+                    android:shadowColor="@color/cardview_dark_background"
+                    android:text="@string/statistics"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_name_dimension"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="15%"
+                    app:layout_marginTopPercent="2%"
+                    app:layout_widthPercent="100%" />
 
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/statJarBarChart"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/statisticsTextView"
-                app:layout_heightPercent="40%"
-                app:layout_marginTopPercent="2%"
-                app:layout_widthPercent="100%" />
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/statJarPieChart"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/statisticsTextView"
+                    app:layout_heightPercent="80%"
+                    app:layout_marginPercent="1%"
+                    app:layout_widthPercent="100%" />
 
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/statJarPieChart"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/statJarBarChart"
-                app:layout_heightPercent="40%"
-                app:layout_marginTopPercent="2%"
-                app:layout_widthPercent="100%" />
 
-        </android.support.percent.PercentRelativeLayout>
+                <!--<com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartLinear"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/statisticsTextView"
+                    app:layout_heightPercent="25%"
+                    app:layout_marginTopPercent="2%"
+                    app:layout_widthPercent="100%" />-->
+
+                <TextView
+                    android:id="@+id/statisticsBarTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/statJarPieChart"
+                    android:gravity="center_horizontal"
+                    android:shadowColor="@color/cardview_dark_background"
+                    android:text="@string/statistics_bar_title"
+                    android:textAlignment="textEnd"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="8%"
+                    app:layout_marginTopPercent="4%"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/statisticsBarTextView2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/statJarPieChart"
+                    android:layout_toRightOf="@+id/statisticsBarTextView"
+                    android:gravity="center_horizontal"
+                    android:shadowColor="@color/cardview_dark_background"
+                    android:text="@string/statistics_bar_title2"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/item_balance_dimension"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="8%"
+                    app:layout_marginTopPercent="4%"
+                    app:layout_widthPercent="50%" />
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/statJarBarChart"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/statisticsBarTextView"
+                    app:layout_heightPercent="80%"
+                    app:layout_marginPercent="1%"
+                    app:layout_widthPercent="100%" />
+
+                <TextView
+                    android:id="@+id/statisticsSpaceTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/statJarBarChart"
+                    android:text="@string/statistics_bar_title2"
+                    android:visibility="invisible"
+                    app:layout_heightPercent="5%"
+                    app:layout_widthPercent="100%" />
+
+            </android.support.percent.PercentRelativeLayout>
+        </ScrollView>
 
     </android.support.v7.widget.CardView>
 

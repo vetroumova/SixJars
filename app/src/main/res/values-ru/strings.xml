@@ -68,4 +68,14 @@
     <string name="statistics_text">Статистика</string>
     <string name="tutorial_text">Помощь</string>
     <string name="percentage_toast_text">Процент, по которому делится общая сумма при новом поступлении денег.</string>
+    <string name="statistics_pie_hole_title">Расходы\nв "банках"</string>
+    <string name="tutorial_description_text"></string>
+    <string name="statistics_pie_title">\nРасходы</string>
+    <string name="statistics">Статистика расходов и поступлений</string>
+    <string name="account_name">Наименование статьи расходов</string>
+    <string name="statistics_bar_title">Поступления v</string>
+    <string name="statistics_income_text">Поступления</string>
+    <string name="statistics_payments_text">Расходы</string>
+    <string name="no_data_chart_text">Нет данных</string>
+    <string name="statistics_bar_title2">s Расходы</string>
 </resources>

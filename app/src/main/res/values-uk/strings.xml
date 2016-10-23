@@ -24,7 +24,7 @@
     <string name="app_name">Шість Пляшок</string>
     <string name="img_of_bottle">Зображення пляшки</string>
 
-    <string name="item_balance_text">%1$.2f ГРН</string>
+    <string name="item_balance_text">%1$s ГРН</string>
     <string name="item_name_in_fragment_text">(%1$s)</string>
     <string name="item_description_text">Опис пляшки</string>
     <string name="item_name_of_jar">Назва пляшки</string>

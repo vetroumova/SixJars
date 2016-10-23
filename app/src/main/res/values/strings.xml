@@ -12,7 +12,7 @@
     <string name="configure">Widget name</string>
     <string name="add_widget">Add widget</string>
     <string name="item_name_of_jar">Name Of Jar</string>
-    <string name="item_balance_text">%1$.2f uah</string>
+    <string name="item_balance_text">%1$s uah</string>
     <string name="item_description_text">Description of JAR and some useful information</string>
 
     <string name="db_jar_id_NEC" translatable="false">NEC</string>

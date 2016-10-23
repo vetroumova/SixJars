@@ -14,6 +14,7 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 import java.util.Date;
 
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -24,6 +25,7 @@ public class RealmManager {
 
     //from Realm
     private static RealmManager realmManagerInstance;
+    private static RealmChangeListener listener;
     private final Realm realm;
 
     public RealmManager(Application application) {
@@ -47,6 +49,25 @@ public class RealmManager {
         return realmManagerInstance;
     }
 
+    //TODO CHECK !!!
+    /*public static RealmManager with(Activity activity, RealmChangeListener realmChangeListener) {
+
+        if (realmManagerInstance == null) {
+            realmManagerInstance = new RealmManager(activity.getApplication());
+        }
+        realmManagerInstance.realm.addChangeListener(realmChangeListener);
+        return realmManagerInstance;
+    }
+
+    public static RealmManager with(Fragment fragment, RealmChangeListener realmChangeListener) {
+
+        if (realmManagerInstance == null) {
+            realmManagerInstance = new RealmManager(fragment.getActivity().getApplication());
+        }
+        realmManagerInstance.realm.addChangeListener(realmChangeListener);
+        return realmManagerInstance;
+    }*/
+
     public static RealmManager with(Application application) {
 
         if (realmManagerInstance == null) {
@@ -61,7 +82,7 @@ public class RealmManager {
 
     @NonNull
     public static void initialiseJars(final Context context) {
-        final Realm realm = Realm.getDefaultInstance();
+        final Realm realm = RealmManager.getInstance().getRealm();
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -111,6 +132,9 @@ public class RealmManager {
                 realm.copyToRealmOrUpdate(jar);
             }
         });
+
+        //already have listener in constructor
+        //realm.addChangeListener(listener);
     }
 
     // for statistics
@@ -120,7 +144,6 @@ public class RealmManager {
         final RealmResults<Jar> result = realm.where(Jar.class)
                 //was findAllSortedAsync
                 .findAllSorted(Jar.ID_FIELD);
-        realm.close();
         return result;
     }
 
@@ -233,7 +256,9 @@ public class RealmManager {
     public RealmResults<Cashflow> getCashflowInJar(String jarID) {
         return realm.where(Cashflow.class)
                 .equalTo("jar.jar_id", jarID)
-                .findAllSorted("date", Sort.DESCENDING);
+                .findAllSortedAsync("date", Sort.DESCENDING);
+        //.findAllSorted("date", Sort.DESCENDING);
+
     }
 
     public RealmResults<Cashflow> getCashflowInJarFromDate(String jarID, Date fromDayToNow) {

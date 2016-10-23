@@ -27,6 +27,7 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.adapters.RealmCash
 import org.itstep.android5.vetroumova.newbeginning.sixjars.utils.DebugLogger;
 
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import rx.Observable;
 import rx.Subscription;
@@ -54,10 +55,8 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     private int percent;
     private float spendSum = 0; // to Bundle
     private Realm realm;
+    private RealmChangeListener realmListener;
 
-    //recycler cashflow
-    //REALM
-    //private CashflowsAdapter cashflowsInJarAdapter;
     private CashflowsInJarAdapter cashflowsInJarAdapter;
     private LayoutInflater inflater;
     private RecyclerView realmRecycler;
@@ -103,27 +102,6 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         if (savedInstanceState != null) {
             jarIDString = savedInstanceState.getString(ARG_JAR_ID);
         }
-
-        //get realm instance
-        this.realm = RealmManager.with(this).getRealm();/*
-        realm.setAutoRefresh(true);
-        realm.addChangeListener(new RealmChangeListener<Realm>() {
-            @Override
-            public void onChange(Realm element) {
-                RealmManager.getInstance().checkSumTotalInJar(jarIDString);
-                setRealmCashAdapter(RealmManager.getInstance().getCashflowInJar(jarIDString));
-                jar = RealmManager.getInstance().getJar(jarIDString);
-                Log.d("VOlga", "reSum in listener : " + jar.getTotalCash());
-                Toast.makeText(getContext(),"reSum in listener : " + jar.getTotalCash(),
-                        Toast.LENGTH_SHORT).show();
-                jarBalance.setText(getString(R.string.item_balance_text,
-                        jar.getTotalCash()));
-
-                jarImage.setImageResource(jar.getTotalCash()>0?
-                        R.drawable.jar_with_water:R.drawable.jar);
-                cashflowsInJarAdapter.notifyDataSetChanged();
-            }
-        });*/
 
         recyclerCashSubscriptions = new CompositeSubscription();
     }
@@ -193,14 +171,20 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
             setRealmData();
         }*/
 
-
-        //RealmManager.with(this).refresh();
-        //realm.waitForChange();
         realm = RealmManager.with(this).getRealm();
+        /*realmListener = new RealmChangeListener() {
+            @Override
+            public void onChange(Object element) {
+                refreshData();
+            }
+        };
+        realm.addChangeListener(realmListener);*/
         // get all persisted objects
         // create the helper adapter and notify data set changes
         // changes will be reflected automatically
-        setRealmCashAdapter(RealmManager.with(this).getCashflowInJar(jarIDString));
+
+        //setRealmCashAdapter(RealmManager.with(this).getCashflowInJar(jarIDString));
+        refreshData();
 
         /*Snackbar.make(contentLayout, "Press card item for edit, long press to remove item",
                 Snackbar.LENGTH_SHORT).show();*/
@@ -243,16 +227,43 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
 
     public void refreshData() {
 
-        realm = RealmManager.with(this).getRealm();
-        setRealmCashAdapter(RealmManager.with(this).getCashflowInJar(jarIDString));
+        noCashTextView.setVisibility(View.INVISIBLE);
+        //TODO progressbardialog fragment
+        /*ProgressDialog pDialog  = ProgressDialog.show(getContext(), null,
+                null, true);
+        pDialog.setCancelable(true);
+        pDialog.setOnCancelListener(dialog -> {
+            //do something with long work to cancel;
+        });*/
         jar = RealmManager.with(this).getJar(jarIDString);
-        Log.d("VOlga", "reSum : " + jar.getTotalCash());
-        Toast.makeText(getContext(), "reSum : " + jar.getTotalCash(),
-                Toast.LENGTH_SHORT).show();
-        jarBalance.setText(getString(R.string.item_balance_text,
-                jar.getTotalCash()));
+        //realm = RealmManager.with(this).getRealm();
+        RealmResults<Cashflow> cashflowRealmResults =
+                RealmManager.with(this).getCashflowInJar(jarIDString);
+        cashflowRealmResults.addChangeListener(new RealmChangeListener<RealmResults<Cashflow>>() {
+            @Override
+            public void onChange(RealmResults<Cashflow> element) {
+                if (element.isLoaded() && element.isValid()) {
+                    setRealmCashAdapter(cashflowRealmResults);
+                    //jar = RealmManager.with(this).getJar(jarIDString);
+                    Log.d("VOlga", "reSum : " + jar.getTotalCash());
+                    Toast.makeText(getContext(), "reSum : " + jar.getTotalCash(),
+                            Toast.LENGTH_SHORT).show();
+                    jarBalance.setText(getString(R.string.item_balance_text,
+                            jar.getTotalCash()));
 
-        jarImage.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), jarIDString));
+                    jarImage.setImageResource(BottleDrawableManager.setDrawableJar
+                            (Prefs.with(getContext()), jarIDString));
+
+
+                    //getFragmentManager().popBackStackImmediate();
+                    //pDialog.dismiss();
+                }
+            }
+        });
+
+        jarImage.setImageResource(BottleDrawableManager.setDrawableJar
+                (Prefs.with(getContext()), jarIDString));
+
     }
 
     private void setupRecycler() {
@@ -319,7 +330,6 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     public void onDetach() {
         super.onDetach();
         //TODO CHECK
-        //realm.close();
         recyclerCashSubscriptions.clear();
     }
 

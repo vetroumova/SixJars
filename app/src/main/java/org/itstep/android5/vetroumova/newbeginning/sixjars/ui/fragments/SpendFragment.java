@@ -331,7 +331,8 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
                         finishSpendSubject.onNext(isAdded);
                         break;
                     } else {
-                        Toast.makeText(getContext(), R.string.not_added_sum_text, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.not_added_sum_text,
+                                Toast.LENGTH_SHORT).show();
                         Log.d("VOlga", getString(R.string.not_added_sum_text));
                     }
                 }
@@ -383,19 +384,4 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
         splitDateToParts(fullDate);
         setDateTimeView(fullDate);
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-/*    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }*/
 }

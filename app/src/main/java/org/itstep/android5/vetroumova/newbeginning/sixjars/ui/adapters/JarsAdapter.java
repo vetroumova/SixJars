@@ -16,6 +16,8 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 import io.realm.Realm;
@@ -63,7 +65,12 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
         // set the title and the snippet
         holder.textID.setText(jar.getJar_id());
         holder.textName.setText(jar.getJar_name());
-        String total = String.format(context.getString(R.string.item_balance_text), jar.getTotalCash());
+        //Set the text
+        DecimalFormatSymbols s = new DecimalFormatSymbols();
+        //s.setDecimalSeparator('.');
+        DecimalFormat f = new DecimalFormat("##,##0.00", s);
+        String sum = (f.format(jar.getTotalCash()));
+        String total = String.format(context.getString(R.string.item_balance_text), sum);
         holder.textTotal.setText(total);
         holder.textPercentage.setText(context.getString(R.string.item_percentage_short_text,
                 percentJars.get(position)));

@@ -54,7 +54,7 @@
             <TextView
                 android:id="@+id/spendCashInputText"
                 android:layout_width="240dp"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:layout_below="@+id/dateTextView"
                 android:layout_margin="@dimen/margin_normal"
                 android:background="@drawable/jar_widget_bg"
@@ -70,19 +70,19 @@
                 android:id="@+id/spendCashDescriptionText"
                 android:layout_width="240dp"
                 android:layout_height="50dp"
+                android:layout_alignStart="@+id/spendCashInputText"
                 android:layout_below="@+id/spendCashInputText"
-                android:layout_margin="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_normal"
                 android:gravity="right|center_vertical"
                 android:hint="@string/enter_the_description"
-                android:padding="@dimen/margin_large"
+                android:padding="@dimen/margin_normal"
                 android:textSize="@dimen/item_description_dimension" />
 
             <GridLayout
                 android:id="@+id/spendCashButtonGrid"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/margin_normal"
                 android:layout_toRightOf="@+id/spendCashDescriptionText"
                 android:columnCount="3"
                 android:padding="@dimen/margin_normal"

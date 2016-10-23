@@ -174,8 +174,6 @@ public class RecyclerFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        //TODO CHECK
-        //realm.close();
         recyclerSubscriptions.clear();
     }
 

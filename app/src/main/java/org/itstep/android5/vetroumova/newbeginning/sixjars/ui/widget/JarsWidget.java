@@ -8,14 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
 import java.util.Locale;
 
 import io.realm.Realm;
@@ -49,108 +47,99 @@ import io.realm.Sort;
 public class JarsWidget extends AppWidgetProvider {
 
     public static final String LOG_TAG = "VOlga";
-    private static final String ACTION_CLICK = "org.itstep.android5.vetroumova.newbeginning.sixjars.ui.widget.JarsWidget.ACTION_CLICK";
+    public static int FIRST_JARS = 0;
+    /* private static final String ACTION_CLICK
+             = "org.itstep.android5.vetroumova.newbeginning.sixjars.ui.widget.JarsWidget.ACTION_CLICK";*/
+    public static String NEXT_JARS_CLICK = "nextThreeJars";
+    private static Realm realm = Realm.getDefaultInstance();
+    private static Boolean isNextJars = false;
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+    public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                                       int widgetId) {
+        Log.d("VOlga", "updating widget with id " + widgetId);
 
-        //CharSequence widgetText = JarsWidgetConfigureActivity.loadTitlePref(context, appWidgetId);
-        // Construct the RemoteViews object
-        //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
-        /*views.setTextViewText(R.id.appwidget_TextView, widgetText);*/
-        //String text = getString(R.string.nec_text);
-        //views.setTextViewText(R.id.jar_textView1, "N/nE/nC");
+        realm = Realm.getDefaultInstance();
+        RealmResults<Jar> jars = realm.where(Jar.class).findAllSorted("jar_float_id", Sort.ASCENDING);
+        /*ArrayList<Float> jarsSumList = new ArrayList<>();
 
-        //float sumNEC = ;
-        //String sumNECString = String.valueOf(sumNEC);
-
-        //views.setImageViewResource(R.id.appwidget_first_jar,
-        //       (sumNEC>0?R.drawable.jar_with_water:R.drawable.jar));
-
-        //views.setTextViewText(R.id.jar_sumView1,sumNECString);
-        //views.setViewVisibility(R.id.jar_textView1, 1);
-
-
-        // Instruct the widget manager to update the widget
-        //appWidgetManager.updateAppWidget(appWidgetId, views);
-    }
-
-    @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-
-        //TODO check, not RealmManager?
-        Realm realm = Realm.getDefaultInstance();
-
-        ComponentName thisWidget = new ComponentName(context, JarsWidget.class);
-
-        int[] allWidgetsIds = appWidgetManager.getAppWidgetIds(thisWidget);
-
-        // There may be multiple widgets active, so update all of them
-        /*for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
+        for (Jar jar : jars) {
+            jarsSumList.add(jar.getTotalCash());
+            Log.d(LOG_TAG, "add " + jar.getJar_id() + " sum " + jar.getTotalCash() + " in " + widgetId);
+            Toast.makeText(context, "add " + jar.getJar_id() + " sum " + jar.getTotalCash()
+                    + " in " + widgetId, Toast.LENGTH_SHORT).show();
         }*/
-        for (int widgetId : allWidgetsIds) {
 
-            updateAppWidget(context, appWidgetManager, widgetId, realm);
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
 
-            RealmResults<Jar> jars = realm.where(Jar.class).findAllSorted("jar_float_id", Sort.ASCENDING);
-            ArrayList<Float> jarsSumList = new ArrayList<>();
+        //Set the text
+        DecimalFormatSymbols s = new DecimalFormatSymbols();
+        //s.setDecimalSeparator('.');
+        DecimalFormat f = new DecimalFormat("##,##0.00", s);
+        String sum0 = (f.format(jars.get(0).getTotalCash()));
+        String sum1 = (f.format(jars.get(1).getTotalCash()));
+        String sum2 = (f.format(jars.get(2).getTotalCash()));
+        String sum3 = (f.format(jars.get(3).getTotalCash()));
+        String sum4 = (f.format(jars.get(4).getTotalCash()));
+        String sum5 = (f.format(jars.get(5).getTotalCash()));
 
-            for (Jar jar : jars) {
-                jarsSumList.add(jar.getTotalCash());
-                Log.d(LOG_TAG, "add " + jar.getJar_id() + " sum " + jar.getTotalCash() + " in " + widgetId);
-                Toast.makeText(context, "add " + jar.getJar_id() + " sum " + jar.getTotalCash()
-                        + " in " + widgetId, Toast.LENGTH_SHORT).show();
-            }
+        //TODO use locale
+        Locale locale = Locale.getDefault();
 
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
+        if (isNextJars) {
+            remoteViews.setTextViewText(R.id.jar_textView1, String.valueOf(jars.get(3).getJar_id()));
+            remoteViews.setTextViewText(R.id.jar_infoView1, String.valueOf(jars.get(3).getJar_name()));
+            remoteViews.setTextViewText(R.id.jar_sumView1, sum3.concat(" ГРН"));
 
-            //Set the text
-            DecimalFormatSymbols s = new DecimalFormatSymbols();
-            //s.setDecimalSeparator('.');
-            DecimalFormat f = new DecimalFormat("#,###0.00", s);
-            String sum1 = (f.format(jars.get(0).getTotalCash()));
-            String sum2 = (f.format(jars.get(1).getTotalCash()));
-            String sum3 = (f.format(jars.get(2).getTotalCash()));
-            String sum4 = (f.format(jars.get(3).getTotalCash()));
-            String sum5 = (f.format(jars.get(4).getTotalCash()));
-            String sum6 = (f.format(jars.get(5).getTotalCash()));
+            remoteViews.setTextViewText(R.id.jar_textView2, String.valueOf(jars.get(4).getJar_id()));
+            remoteViews.setTextViewText(R.id.jar_infoView2, String.valueOf(jars.get(4).getJar_name()));
+            remoteViews.setTextViewText(R.id.jar_sumView2, sum4.concat(" ГРН"));
 
-            //TODO use locale
-            Locale locale = Locale.getDefault();
-
+            remoteViews.setTextViewText(R.id.jar_textView3, String.valueOf(jars.get(5).getJar_id()));
+            remoteViews.setTextViewText(R.id.jar_infoView3, String.valueOf(jars.get(5).getJar_name()));
+            remoteViews.setTextViewText(R.id.jar_sumView3, sum5.concat(" ГРН"));
+        } else {
             remoteViews.setTextViewText(R.id.jar_textView1, String.valueOf(jars.get(0).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView1, String.valueOf(jars.get(0).getJar_name()));
-            remoteViews.setTextViewText(R.id.jar_sumView1, sum1.concat(" ГРН"));
+            remoteViews.setTextViewText(R.id.jar_sumView1, sum0.concat(" ГРН"));
 
             remoteViews.setTextViewText(R.id.jar_textView2, String.valueOf(jars.get(1).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView2, String.valueOf(jars.get(1).getJar_name()));
-            remoteViews.setTextViewText(R.id.jar_sumView2, sum2.concat(" ГРН"));
+            remoteViews.setTextViewText(R.id.jar_sumView2, sum1.concat(" ГРН"));
 
             remoteViews.setTextViewText(R.id.jar_textView3, String.valueOf(jars.get(2).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView3, String.valueOf(jars.get(2).getJar_name()));
-            remoteViews.setTextViewText(R.id.jar_sumView3, sum3.concat(" ГРН"));
+            remoteViews.setTextViewText(R.id.jar_sumView3, sum2.concat(" ГРН"));
+        }
 
-            //Register an onClickListener
-            Intent intent = new Intent(context, JarsWidget.class);
+        //Register an onClickListener
+            /*Intent intent = new Intent(context, JarsWidget.class);
 
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
 
             PendingIntent pendingIntent = PendingIntent.getBroadcast
-                    (context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    (context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);*/
 
-            remoteViews.setOnClickPendingIntent(R.id.appwidget_first_jar, pendingIntent);
+            /*Intent intent = new Intent(context, MainActivity.class);
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);  // Identifies the particular widget...
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            // Make the pending intent unique...
+            intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+            PendingIntent pendIntent = PendingIntent.getActivity(context, 0, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);*/
 
-            appWidgetManager.updateAppWidget(widgetId, remoteViews);
-        }
-        realm.close();
-    }
+        //to set next jars
+        Intent intentNextJars = new Intent(context, JarsWidget.class);
+        intentNextJars.putExtra("widgetId", widgetId);
+        intentNextJars.setAction(NEXT_JARS_CLICK);
+        PendingIntent pendingIntentNextJars = PendingIntent.getBroadcast(context, 0,
+                intentNextJars, 0);
 
+        remoteViews.setOnClickPendingIntent(R.id.appwidget_go, pendingIntentNextJars);
 
-    private void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                 int appWidgetId, Realm realm) {
-        Log.d("VOlga", "updating widget with id " + appWidgetId);
+        appWidgetManager.updateAppWidget(widgetId, remoteViews);
+
+        //realm.close();
 
         /*String taskListId = prefHelper.getWidgetTaskListId(appWidgetId);
 
@@ -213,19 +202,34 @@ public class JarsWidget extends AppWidgetProvider {
         addTaskIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, addTaskIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.add_task, pendingIntent);*/
+    }
 
+    @Override
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
+        ComponentName thisWidget = new ComponentName(context, JarsWidget.class);
+
+        //int[] allWidgetsIds = appWidgetManager.getAppWidgetIds(thisWidget);
+
+        // There may be multiple widgets active, so update all of them
+        for (int widgetId : appWidgetIds) {
+            updateAppWidget(context, appWidgetManager, widgetId);
+        }
+        realm.close();
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (intent.getAction().equals(ACTION_CLICK)) {
-
+        if (intent.getAction().equals(NEXT_JARS_CLICK)) {
+            ComponentName thisWidget = new ComponentName(context, JarsWidget.class);
+            int[] allWidgetsIds = AppWidgetManager.getInstance(context).getAppWidgetIds(thisWidget);
+            isNextJars = !isNextJars;
+            this.onUpdate(context, AppWidgetManager.getInstance(context), allWidgetsIds);
+            /*this.updateAppWidget(context,AppWidgetManager.getInstance(context),
+                    intent.getIntExtra("widgetID",allWidgetsIds[0]));*/
         }
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
-
     }
 
     @Override

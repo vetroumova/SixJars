@@ -1,6 +1,5 @@
 package org.itstep.android5.vetroumova.newbeginning.sixjars.ui;
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -33,7 +32,6 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.utils.DebugLogger;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.Realm;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -48,8 +46,9 @@ public class MainActivity extends AppCompatActivity {
     AHBottomNavigationItem itemStatistics;
     AHBottomNavigationItem itemTutorial;
     AHBottomNavigationItem itemAbout;
+
     //RecyclerView rxList;
-    ArrayList<AnimationDrawable> jars;
+    //ArrayList<AnimationDrawable> jars;
     private RxRecyclerAdapter rxRecyclerAdapter = new RxRecyclerAdapter();
     private LinearLayoutManager layoutManager;
     private CompositeSubscription subscriptions = new CompositeSubscription();
@@ -487,7 +486,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         //TODO CHECK
-        Realm.getDefaultInstance().close();
+        //Realm.getDefaultInstance().close();
         subscriptions.clear();
     }
 }

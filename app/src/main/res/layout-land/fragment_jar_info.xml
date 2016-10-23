@@ -74,7 +74,7 @@
                 android:textColor="@color/colorPrimaryTextDark"
                 android:textSize="@dimen/item_balance_dimension"
                 android:textStyle="bold"
-                app:layout_heightPercent="6%"
+                app:layout_heightPercent="8%"
                 app:layout_marginTopPercent="1%"
                 app:layout_widthPercent="26%" />
 

@@ -77,5 +77,16 @@
     <string name="statistics_payments_text">Витрати</string>
     <string name="no_data_chart_text">Немає даних</string>
     <string name="statistics_bar_title2">s витрати</string>
+    <string name="global_pour_to_ffa_text">Залишок з пляшок - в FFA</string>
+    <string name="no_pour_text">Не зливати залишок з пляшок від попередніх надходжень</string>
+    <string name="no_poured_text">Залишок від попередніх надходжень залишився в пляшках.</string>
+    <string name="not_from_ffa_text">Залишок від попередніх надходжень злили в LTSS (окрім FFA)</string>
+    <string name="pour_to_ffa_text">Залишок від попередніх надходжень зливаємо в FFA (окрім LTSS)</string>
+    <string name="pour_to_ltss_text">Залишок від попередніх надходжень зливаємо в LTSS (окрім FFA)</string>
+    <string name="poured_text">Залишок від попередніх надходжень зливаємо в </string>
+    <string name="tutorial_title_text">Метод «глечиків» (JARS budgeting)</string>
+    <string name="pour_button_text">Далі</string>
+    <string name="global_pour_to_ltss_text">Залишок з пляшок - в LTSS (окрім FFA)</string>
+    <string name="title_pour_in_jar">Злити залишок від попередніх надходжень в пляшку для зберігання коштів?</string>
 
 </resources>

@@ -16,7 +16,7 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="stroke_widget_bg">3dp</dimen>
     <dimen name="widget_text_size">10sp</dimen>
     <dimen name="widget_text_size_v">12sp</dimen>
-    <dimen name="widget_button_margin">3dp</dimen>
+    <dimen name="widget_button_margin">2dp</dimen>
 
     <dimen name="text_margin">5dp</dimen>
     <dimen name="image_margin">20dp</dimen>
@@ -25,6 +25,7 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="item_title_dimension">24sp</dimen>
     <dimen name="item_balance_dimension">14sp</dimen>
     <dimen name="item_description_dimension">12sp</dimen>
+    <dimen name="small_description_dimension">8sp</dimen>
     <dimen name="item_name_dimension">18sp</dimen>
 
     <dimen name="cash_id_dimension">8sp</dimen>

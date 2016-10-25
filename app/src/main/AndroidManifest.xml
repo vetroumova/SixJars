@@ -16,7 +16,9 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,10 +32,7 @@
             android:label="SixJars">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="org.itstep.android5.vetroumova.newbeginning.sixjars.ui.widget.JarsWidget.ACTION_CLICK" />
+                <action android:name="android.appwidget.action.ACTION_WIDGET_RECEIVER" />
             </intent-filter>
 
             <meta-data

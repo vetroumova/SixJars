@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
-import android.widget.Toast;
 
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
@@ -42,8 +41,8 @@ public class DatePickerFragment extends DialogFragment
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        Toast.makeText(getContext(), "Year: " + view.getYear() + " Month: " + view.getMonth()
-                + " Day: " + view.getDayOfMonth(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Year: " + view.getYear() + " Month: " + view.getMonth()
+        // + " Day: " + view.getDayOfMonth(), Toast.LENGTH_SHORT).show();
         // Notice the use of `getTargetFragment` which will be set when the dialog is displayed
         OnNewDateListener listener = (OnNewDateListener) getTargetFragment();
         listener.onNewDate(year, month, day);

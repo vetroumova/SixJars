@@ -127,7 +127,8 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         jar = RealmManager.with(this).getJar(jarIDString);
 
         //jarImage.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), jarIDString));
-        jarImage.setImageResource(BottleDrawableManager.setAnimationJar(Prefs.with(getContext()), jarIDString));
+        jarImage.setImageResource(BottleDrawableManager
+                .setAnimationJar(Prefs.with(getContext()), jarIDString));
 
         AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
 
@@ -195,9 +196,9 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
                                     + cash.getDate() + ", " + cash.getSum());
                             Log.d("VOlga", "recycler cash info: " + cash.getId() + ", "
                                     + cash.getDate() + ", " + cash.getSum());
-                            Toast.makeText(getContext(), "recycler cash info: " + cash.getId() + ", "
-                                            + cash.getDate() + ", " + cash.getSum(),
-                                    Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(), "recycler cash info: " + cash.getId() + ", "
+                            //+ cash.getDate() + ", " + cash.getSum(),
+                            //Toast.LENGTH_SHORT).show();
 
                             cashInRecyclerPublishSubject.onNext(cash);
                         },
@@ -227,7 +228,7 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
 
     public void refreshData() {
 
-        noCashTextView.setVisibility(View.INVISIBLE);
+        //noCashTextView.setVisibility(View.INVISIBLE);
         //TODO progressbardialog fragment
         /*ProgressDialog pDialog  = ProgressDialog.show(getContext(), null,
                 null, true);
@@ -239,31 +240,30 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         //realm = RealmManager.with(this).getRealm();
         RealmResults<Cashflow> cashflowRealmResults =
                 RealmManager.with(this).getCashflowInJar(jarIDString);
-        cashflowRealmResults.addChangeListener(new RealmChangeListener<RealmResults<Cashflow>>() {
+        /*cashflowRealmResults.addChangeListener(new RealmChangeListener<RealmResults<Cashflow>>() {
             @Override
             public void onChange(RealmResults<Cashflow> element) {
                 if (element.isLoaded() && element.isValid()) {
                     setRealmCashAdapter(cashflowRealmResults);
                     //jar = RealmManager.with(this).getJar(jarIDString);
-                    Log.d("VOlga", "reSum : " + jar.getTotalCash());
-                    Toast.makeText(getContext(), "reSum : " + jar.getTotalCash(),
-                            Toast.LENGTH_SHORT).show();
-                    jarBalance.setText(getString(R.string.item_balance_text,
-                            jar.getTotalCash()));
-
-                    jarImage.setImageResource(BottleDrawableManager.setDrawableJar
-                            (Prefs.with(getContext()), jarIDString));
-
-
                     //getFragmentManager().popBackStackImmediate();
                     //pDialog.dismiss();
                 }
             }
-        });
+        });*/
 
-        jarImage.setImageResource(BottleDrawableManager.setDrawableJar
+        setRealmCashAdapter(cashflowRealmResults);
+        Log.d("VOlga", "reSum : " + jar.getTotalCash());
+        //Toast.makeText(getContext(), "reSum : " + jar.getTotalCash(),
+        //Toast.LENGTH_SHORT).show();
+        jarBalance.setText(getString(R.string.item_balance_text,
+                jar.getTotalCash()));
+
+        jarImage.setImageResource(BottleDrawableManager.setAnimationJar
                 (Prefs.with(getContext()), jarIDString));
-
+        AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
+        //Управлять объектом AnimationDrawable можно через методы start() и stop().
+        animation.start();
     }
 
     private void setupRecycler() {

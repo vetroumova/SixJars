@@ -179,6 +179,7 @@ public class StatisticsFragment extends SimpleChartFragment {
         for (int i = 0; i < count; i++) {
             Jar jar = resultsJar.get(i);
             String jarID = jar.getJar_id();
+            //TODO ASYNC
             float sumOfPaymentsInJar = realm.where(Cashflow.class)
                     .equalTo("jar.jar_id", jarID)
                     .lessThan("sum", 0f)
@@ -233,18 +234,22 @@ public class StatisticsFragment extends SimpleChartFragment {
             RealmResults<Jar> resultsJar = realm.where(Jar.class).findAll();
             Jar jar = resultsJar.get(i);
             String jarID = jar.getJar_id();
+
+            //TODO ASYNC
             float sumOfPaymentsInJar = realm.where(Cashflow.class)
                     .equalTo("jar.jar_id", jarID)
                     .lessThan("sum", 0f)
                     .findAll()
                     .sum("sum").floatValue();
             float sumOfIncome = jar.getTotalCash() - sumOfPaymentsInJar;
-            if (-sumOfPaymentsInJar > 0 || sumOfIncome > 0) {      //to not add jars with no cashflow
+            /*if (-sumOfPaymentsInJar > 1f || sumOfIncome > 1f) { */     //to not add jars with no cashflow
+            if (-sumOfPaymentsInJar < 1) {
+                sumOfPaymentsInJar = -sumOfPaymentsInJar;
                 float[] bars = {-sumOfPaymentsInJar, sumOfIncome};
+            }
                 //entries2.add(new BarEntry(jar.getJar_float_id(),bars, jarID));
                 entries2.add(new BarEntry(jar.getJar_float_id(), sumOfIncome));
                 entries2.add(new BarEntry(jar.getJar_float_id(), -sumOfPaymentsInJar));
-            }
             BarDataSet ds2 = new BarDataSet(entries2, getLabel(i));
             int[] colors = {R.color.colorPrimaryDark, R.color.colorAccent};
             ds2.setColors(ColorTemplate.createColors(getResources(), colors));

@@ -1,0 +1,211 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/colorTranspBG"
+    tools:context="org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.PourToJarFragment">
+
+    <android.support.percent.PercentRelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/margin_large">
+
+        <TextView
+            android:id="@+id/titlePourInJar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:padding="@dimen/margin_normal"
+            android:text="@string/title_pour_in_jar"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/item_name_dimension"
+            android:textStyle="bold"
+            app:layout_heightPercent="14%"
+            app:layout_marginBottomPercent="1%"
+            app:layout_widthPercent="100%" />
+
+        <android.support.percent.PercentRelativeLayout
+            android:id="@+id/pourNoJar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@+id/titlePourInJar"
+            android:background="@drawable/jar_widget_bg"
+            android:gravity="center"
+            android:padding="@dimen/margin_normal"
+            app:layout_heightPercent="8%"
+            app:layout_widthPercent="100%">
+
+            <TextView
+                android:id="@+id/addAllJars_textView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"
+                android:text="@string/no_pour_text"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/item_balance_dimension"
+                android:textStyle="bold"
+                app:layout_heightPercent="80%"
+                app:layout_widthPercent="90%" />
+
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            android:id="@+id/pourLTSSJar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@+id/pourNoJar"
+            android:background="@drawable/jar_widget_bg"
+            android:padding="@dimen/margin_normal"
+            app:layout_heightPercent="20%"
+            app:layout_marginRightPercent="4%"
+            app:layout_marginTopPercent="2%"
+            app:layout_widthPercent="44%">
+
+            <ImageView
+                android:id="@+id/pourLTSSJar_imageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignParentLeft="true"
+                android:contentDescription="@string/appwidget_text"
+                app:layout_heightPercent="90%"
+                app:layout_marginPercent="5%"
+                app:layout_widthPercent="30%"
+                app:srcCompat="@drawable/water_to_jar_empty" />
+
+            <TextView
+                android:id="@+id/pourLTSSJarIdText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/pourLTSSJar_imageView"
+                android:gravity="center"
+                android:text="@string/db_jar_id_LTSS"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/item_name_dimension"
+                android:textStyle="bold"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="50%" />
+
+            <TextView
+                android:id="@+id/pourLTSSJarNameText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@+id/pourLTSSJarIdText"
+                android:layout_toRightOf="@id/pourLTSSJar_imageView"
+                android:gravity="center"
+                android:text="@string/db_jar_name_LTSS"
+                android:textAlignment="center"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/small_description_dimension"
+                app:layout_heightPercent="25%"
+                app:layout_marginTopPercent="1%"
+                app:layout_widthPercent="50%" />
+
+            <TextView
+                android:id="@+id/pourLTSSJarBalanceText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignLeft="@+id/pourLTSSJarNameText"
+                android:layout_below="@+id/pourLTSSJarNameText"
+                android:gravity="center"
+                android:text="@string/cash_balance_text"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/item_description_dimension"
+                android:textStyle="bold"
+                app:layout_heightPercent="40%"
+                app:layout_widthPercent="50%" />
+
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            android:id="@+id/pourFFAJar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@+id/pourNoJar"
+            android:layout_toRightOf="@+id/pourLTSSJar"
+            android:background="@drawable/jar_widget_bg"
+            android:padding="@dimen/margin_normal"
+            app:layout_heightPercent="20%"
+            app:layout_marginTopPercent="2%"
+            app:layout_widthPercent="44%">
+
+            <ImageView
+                android:id="@+id/pourFFAJar_imageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignParentLeft="true"
+                android:contentDescription="@string/appwidget_text"
+                app:layout_heightPercent="90%"
+                app:layout_marginPercent="5%"
+                app:layout_widthPercent="30%"
+                app:srcCompat="@drawable/water_to_jar_empty" />
+
+            <TextView
+                android:id="@+id/pourFFAJarIdText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/pourFFAJar_imageView"
+                android:gravity="center"
+                android:text="@string/db_jar_id_FFA"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/item_name_dimension"
+                android:textStyle="bold"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="50%" />
+
+            <TextView
+                android:id="@+id/pourFFAJarNameText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@+id/pourFFAJarIdText"
+                android:layout_toRightOf="@id/pourFFAJar_imageView"
+                android:gravity="center"
+                android:text="@string/db_jar_name_FFA"
+                android:textAlignment="center"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/small_description_dimension"
+                app:layout_heightPercent="25%"
+                app:layout_marginTopPercent="1%"
+                app:layout_widthPercent="50%" />
+
+            <TextView
+                android:id="@+id/pourFFAJarBalanceText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignLeft="@+id/pourFFAJarNameText"
+                android:layout_below="@+id/pourFFAJarNameText"
+                android:gravity="center"
+                android:text="@string/cash_balance_text"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/item_description_dimension"
+                android:textStyle="bold"
+                app:layout_heightPercent="40%"
+                app:layout_widthPercent="50%" />
+
+        </android.support.percent.PercentRelativeLayout>
+
+        <Button
+            android:id="@+id/savePourButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@+id/pourLTSSJar"
+            android:background="@drawable/jar_button_transp_orange_bg"
+            android:shadowColor="@color/cardview_dark_background"
+            android:text="@string/pour_button_text"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBottle"
+            android:textSize="@dimen/button_large_text_sp_dimension"
+            android:textStyle="bold"
+            app:layout_heightPercent="10%"
+            app:layout_marginTopPercent="2%"
+            app:layout_widthPercent="100%" />
+    </android.support.percent.PercentRelativeLayout>
+</FrameLayout>

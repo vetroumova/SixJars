@@ -1,5 +1,7 @@
 package org.itstep.android5.vetroumova.newbeginning.sixjars.ui;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -27,6 +29,7 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.Recycler
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.SettingsFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.SpendFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.StatisticsFragment;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.widget.JarsWidget;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.utils.DebugLogger;
 
 import java.util.ArrayList;
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         /*int count = fragmentManager.getBackStackEntryCount();
-        Log.d(TAG,"In stack : " + count);*/
+        Log.d(TAG,"In stack : " + count);*//*
 
         if (savedInstanceState != null) {
             if (fragmentManager.getFragment(savedInstanceState, "backstackfragment")
@@ -92,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             recyclerFragment = new RecyclerFragment();
-        }
+        }*/
+        recyclerFragment = new RecyclerFragment();
         jarInfoFragment = new JarInfoFragment();
         settingsFragment = new SettingsFragment();
         statisticsFragment = new StatisticsFragment();
@@ -117,49 +121,6 @@ public class MainActivity extends AppCompatActivity {
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
             fab.setVisibility(View.INVISIBLE);
-
-            /*inflater = MainActivity.this.getLayoutInflater();
-            View content = inflater.inflate(R.layout.edit_item, null);
-            final EditText editID = (EditText) content.findViewById(R.id.id_edit);
-            final EditText editName = (EditText) content.findViewById(R.id.name_edit);
-            final EditText editThumbnail = (EditText) content.findViewById(R.id.thumbnail_edit);
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setView(content)
-                    .setTitle("Add jar")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            Jar jar = new Jar();
-                            jar.setJar_id(editID.getText().toString());
-                            jar.setJar_name(editName.getText().toString());
-                            jar.setJar_info(editThumbnail.getText().toString());
-
-                            if (editID.getText() == null || editID.getText().toString().equals("")
-                                    || editID.getText().toString().equals(" ")) {
-                                Toast.makeText(MainActivity.this, "Entry not saved, missing ID",
-                                Toast.LENGTH_SHORT).show();
-                            } else {
-                                // Persist your data easily
-                                realm.beginTransaction();
-                                realm.copyToRealm(jar);
-                                realm.commitTransaction();
-                                realmJarsAdapter.notifyDataSetChanged();
-                                // scroll the recycler view to bottom
-                                realmRecycler.scrollToPosition(RealmManager.getInstance().getAllJars().size() - 1);
-                            }
-                        }
-                    })
-                    .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            AlertDialog dialog = builder.create();
-            dialog.show();*/
         });
 
         //set toolbar
@@ -206,7 +167,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
                 int color = R.color.colorDivider;
-                //fragmentManager.popBackStackImmediate();
+                while (fragmentManager.getBackStackEntryCount() > 0) {
+                    fragmentManager.popBackStackImmediate();
+                }
+                Log.d("VOlga", "on Tab - backstack size after immediate "
+                        + fragmentManager.getBackStackEntryCount());
                 switch (position) {
                     case 0: {
                         fragmentManager.beginTransaction()
@@ -249,9 +214,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (savedInstanceState == null && fragmentManager.getBackStackEntryCount() == 0) {
+        //if (savedInstanceState == null && fragmentManager.getBackStackEntryCount() == 0) {
+        if (fragmentManager.getBackStackEntryCount() == 0
+                && !(fragmentManager.findFragmentById(R.id.content_layout) instanceof RecyclerFragment)) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
+                    //.addToBackStack("Recycler")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
         }
@@ -259,11 +227,11 @@ public class MainActivity extends AppCompatActivity {
         Subscription jarInRecyclerSubscription = recyclerFragment.getJar()
                 .subscribe(jar -> {
                             DebugLogger.log("opening a JAR info: " + jar.getJar_id());
-                            Toast.makeText(getApplicationContext(), "opening a JAR info: " + jar.getJar_id(),
-                                    Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(getApplicationContext(), "opening a JAR info: " + jar.getJar_id(),
+                            //Toast.LENGTH_SHORT).show();
                             jarInfoFragment.setJarID(jar.getJar_id());
-                            Toast.makeText(getApplicationContext(), jarInfoFragment.toString(),
-                                    Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), jarInfoFragment.toString(),
+                            //Toast.LENGTH_SHORT).show();
                             Log.d(TAG, jarInfoFragment.toString());
                             fragmentManager.beginTransaction()
                                     .replace(R.id.content_layout, jarInfoFragment)
@@ -278,9 +246,9 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(cash -> {
                             DebugLogger.log("cash clicked : " + cash.getId() + ", " + cash.getSum());
                             Log.d(TAG, "cash clicked : " + cash.getId() + ", " + cash.getSum());
-                            Toast.makeText(getApplicationContext(),
-                                    "cash clicked : " + cash.getId() + ", " + cash.getSum(),
-                                    Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),
+                            //"cash clicked : " + cash.getId() + ", " + cash.getSum(),
+                            //Toast.LENGTH_SHORT).show();
 
                             cashInfoFragment = CashInfoFragment.newInstance(cash.getId());
                             //cashInfoFragment.setCashflowID(cash.getId());
@@ -297,13 +265,14 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(isEdited -> {
                     DebugLogger.log("cash was edited : " + isEdited);
                     Log.d(TAG, "cash was edited : " + isEdited);
-                    Toast.makeText(getApplicationContext(), "cash was edited : " + isEdited,
-                            Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "cash was edited : " + isEdited,
+                    //Toast.LENGTH_SHORT).show();
 
-                    fragmentManager.popBackStackImmediate();
+                    //fragmentManager.popBackStackImmediate();
                     recyclerFragment.refreshRecycler();
                     jarInfoFragment.refreshData();
                     jarInfoFragment.refreshRecyclerArterDeleteItem();
+                    updateAllWidgets();
                 });
 
         Subscription cashDeleteSubscription = jarInfoFragment.refreshRecyclerArterDeleteItem()
@@ -312,11 +281,12 @@ public class MainActivity extends AppCompatActivity {
                                     + deletedCashID);
                             Log.d(TAG, "refreshing mainRecycler after deleted cash : "
                                     + deletedCashID);
-                            Toast.makeText(getApplicationContext(),
-                                    "refreshing mainRecycler after deleted cash : " + deletedCashID,
-                                    Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),
+                            //"refreshing mainRecycler after deleted cash : " + deletedCashID,
+                            //Toast.LENGTH_SHORT).show();
                             //rxRecyclerAdapter.notifyDataSetChanged();
                             recyclerFragment.refreshRecycler();
+                            updateAllWidgets();
                         },
                         error -> DebugLogger.log(error.getMessage())
                 );
@@ -325,8 +295,8 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(jar -> {
                     DebugLogger.log("open spendcash fragment : " + jar.getJar_id());
                     Log.d(TAG, "open spendcash fragment : " + jar.getJar_id());
-                    Toast.makeText(getApplicationContext(), "open spendcash fragment : " + jar.getJar_id(),
-                            Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "open spendcash fragment : " + jar.getJar_id(),
+                    //Toast.LENGTH_SHORT).show();
                     spendFragment.setJarId(jar.getJar_id());
                     fragmentManager.beginTransaction()
                             .replace(R.id.content_layout, spendFragment, "spend")
@@ -338,14 +308,16 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(isSpend -> {
                     DebugLogger.log("spend cash and close : " + isSpend);
                     Log.d(TAG, "spend cash and close : " + isSpend);
-                    Toast.makeText(getApplicationContext(), "spend cash and close : " + isSpend,
-                            Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "spend cash and close : " + isSpend,
+                    //Toast.LENGTH_SHORT).show();
+                    //TODO CHECK if working and close the spend
                     fragmentManager.popBackStackImmediate();
                     fab.show();
                     //rxRecyclerAdapter.notifyDataSetChanged();
                     recyclerFragment.refreshRecycler();
                     jarInfoFragment.refreshData();
                     jarInfoFragment.refreshRecyclerArterDeleteItem();
+                    updateAllWidgets();
                 });
 
         subscriptions.add(jarInRecyclerSubscription);
@@ -355,9 +327,6 @@ public class MainActivity extends AppCompatActivity {
         subscriptions.add(spendCashInJar);
         subscriptions.add(finishSpendCashSubscription);
     }
-
-
-
 
         /*rxList = (RecyclerView) findViewById(R.id.rxRecycler);
         for (int i = 0; i < 20; i++) {
@@ -444,8 +413,8 @@ public class MainActivity extends AppCompatActivity {
         //TODO work with fragments
         outState.putBoolean("IsSavedInst", true);
         //nullpointer
-        fragmentManager.putFragment(outState, "backstackfragment", fragmentManager
-                .findFragmentByTag("RECYCLER"));
+        /*fragmentManager.putFragment(outState, "backstackfragment", fragmentManager
+                .findFragmentByTag("RECYCLER"));*/
         super.onSaveInstanceState(outState);
     }
 
@@ -462,13 +431,23 @@ public class MainActivity extends AppCompatActivity {
             back_pressed = System.currentTimeMillis();
             return;
         } else {
-            // TODO how to clear backstack to recycler
+            /*// TODO how to clear backstack to recycler
             try {
                 fragmentManager.popBackStackImmediate();
             } catch (NullPointerException e) {
                 Log.d("VOlga", "No backstack onBackPressed");
-            }
+            }*/
             fab.setVisibility(View.VISIBLE);
+            super.onBackPressed();
+        }
+    }
+
+    //TODO check
+    private void updateAllWidgets() {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, JarsWidget.class));
+        if (appWidgetIds.length > 0) {
+            new JarsWidget().onUpdate(this, appWidgetManager, appWidgetIds);
         }
     }
 

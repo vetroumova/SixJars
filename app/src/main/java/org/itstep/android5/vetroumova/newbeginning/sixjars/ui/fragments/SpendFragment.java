@@ -168,13 +168,13 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
 
     public Date getDateTimeDataFromStrings(String date) {
         // from string to date
-        Toast.makeText(getContext(), "Concat : " + date, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Concat : " + date, Toast.LENGTH_SHORT).show();
         Log.d("VOlga", "Concat : " + date);
 
         SimpleDateFormat format = new SimpleDateFormat("d-M-yyyy H:mm");
         try {
             Date fullDate = format.parse(date);
-            Toast.makeText(getContext(), "Parsed : " + fullDate, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Parsed : " + fullDate, Toast.LENGTH_SHORT).show();
             Log.d("VOlga", "Parsed : " + fullDate);
             return fullDate;
 
@@ -304,18 +304,18 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
                 break;
             }
             case R.id.spendSaveButton: {
-                Toast.makeText(getContext(), "Click!!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Click!!", Toast.LENGTH_SHORT).show();
                 Log.d("VOlga", "Click!!");
                 float spendSum = 0;
                 try {
                     spendSum = -(Float.parseFloat(valueString.toString()));
-                    Toast.makeText(getContext(), "sum " + spendSum, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "sum " + spendSum, Toast.LENGTH_SHORT).show();
                     Log.d("VOlga", "sum " + spendSum);
                 } catch (NumberFormatException e) {
-                    Toast.makeText(getContext(), R.string.enter_sum_text, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), R.string.enter_sum_text, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(getContext(), "before adding", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "before adding", Toast.LENGTH_SHORT).show();
                 Log.d("VOlga", "before adding");
 
                 if (spendSum != 0) {
@@ -326,6 +326,7 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
                     if (isAdded) {
                         valueString.delete(0, valueString.length());
                         valueString.append("0");
+                        spendCashDescriptionEdit.setText("");
                         Toast.makeText(getContext(), R.string.added_sum_text, Toast.LENGTH_SHORT).show();
                         Log.d("VOlga", getString(R.string.added_sum_text));
                         finishSpendSubject.onNext(isAdded);

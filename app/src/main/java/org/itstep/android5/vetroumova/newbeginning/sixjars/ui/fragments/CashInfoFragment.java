@@ -224,13 +224,13 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
 
     public Date getDateTimeDataFromStrings(String date) {
         // from string to date
-        Toast.makeText(getContext(), "Concat : " + date, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Concat : " + date, Toast.LENGTH_SHORT).show();
         Log.d("VOlga", "Concat : " + date);
 
         SimpleDateFormat format = new SimpleDateFormat("d-M-yyyy H:mm");
         try {
             Date fullDate = format.parse(date);
-            Toast.makeText(getContext(), "Parsed : " + fullDate, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Parsed : " + fullDate, Toast.LENGTH_SHORT).show();
             Log.d("VOlga", "Parsed : " + fullDate);
             return fullDate;
 
@@ -444,6 +444,7 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
                         /*valueString.delete(0, valueString.length());
                         valueString.append("0");*/
                         Toast.makeText(getContext(), R.string.edited_cashflow, Toast.LENGTH_SHORT).show();
+                        descriptionEdit.setText("");
 
                         //to correct maxvalue in prefs
                         // не учитывает перевод в разные кувшины

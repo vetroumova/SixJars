@@ -28,11 +28,25 @@
                     android:layout_height="0dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
+                    android:gravity="center"
                     android:text="@string/tutorial_title_text"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/item_title_dimension"
+                    app:layout_heightPercent="12%"
+                    app:layout_marginBottomPercent="2%"
+                    app:layout_marginTopPercent="1%"
+                    app:layout_widthPercent="95%" />
+
+                <TextView
+                    android:id="@+id/tutorialMainText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialTitleText"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_main_text"
                     android:textColor="@color/colorSecondaryText"
                     android:textSize="@dimen/item_description_dimension"
-                    app:layout_heightPercent="15%"
-                    app:layout_marginBottomPercent="2%"
+                    app:layout_heightPercent="18%"
                     app:layout_marginTopPercent="1%"
                     app:layout_widthPercent="95%" />
 
@@ -42,7 +56,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignLeft="@+id/tutorialNECImage"
-                    android:layout_below="@+id/tutorialTitleText"
+                    android:layout_below="@+id/tutorialMainText"
                     android:gravity="center"
                     android:text="@string/db_jar_id_NEC"
                     android:textAllCaps="true"
@@ -83,7 +97,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignLeft="@+id/tutorialPLAYImage"
-                    android:layout_below="@+id/tutorialTitleText"
+                    android:layout_below="@+id/tutorialMainText"
                     android:gravity="center"
                     android:text="@string/db_jar_id_PLAY"
                     android:textAllCaps="true"
@@ -126,7 +140,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignLeft="@+id/tutorialGIVEImage"
-                    android:layout_below="@+id/tutorialTitleText"
+                    android:layout_below="@+id/tutorialMainText"
                     android:gravity="center"
                     android:text="@string/db_jar_id_GIVE"
                     android:textAllCaps="true"
@@ -169,7 +183,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignLeft="@+id/tutorialEDUImage"
-                    android:layout_below="@+id/tutorialTitleText"
+                    android:layout_below="@+id/tutorialMainText"
                     android:gravity="center"
                     android:text="@string/db_jar_id_EDU"
                     android:textAllCaps="true"
@@ -212,7 +226,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignLeft="@+id/tutorialLTSSImage"
-                    android:layout_below="@+id/tutorialTitleText"
+                    android:layout_below="@+id/tutorialMainText"
                     android:gravity="center"
                     android:text="@string/db_jar_id_LTSS"
                     android:textAllCaps="true"
@@ -255,7 +269,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignLeft="@+id/tutorialFFAImage"
-                    android:layout_below="@+id/tutorialTitleText"
+                    android:layout_below="@+id/tutorialMainText"
                     android:gravity="center"
                     android:text="@string/db_jar_id_FFA"
                     android:textAllCaps="true"
@@ -294,15 +308,125 @@
 
                 <!--description text-->
                 <TextView
-                    android:id="@+id/tutorialDescriptionText"
+                    android:id="@+id/tutorialDescription1Text"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_below="@+id/tutorialNECPercentText"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/tutorial_description_text"
+                    android:text="@string/tutorial_description1_text"
                     android:textColor="@color/colorSecondaryText"
                     android:textSize="@dimen/item_description_dimension"
-                    app:layout_heightPercent="15%"
+                    app:layout_heightPercent="16%"
+                    app:layout_marginTopPercent="3%"
+                    app:layout_widthPercent="95%" />
+
+                <TextView
+                    android:id="@+id/tutorialDescription2Text"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialDescription1Text"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_description2_text"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="12%"
+                    app:layout_widthPercent="95%" />
+
+
+                <TextView
+                    android:id="@+id/tutorialDescription3Text"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialDescription2Text"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_description3_text"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="14%"
+                    app:layout_widthPercent="95%" />
+
+
+                <TextView
+                    android:id="@+id/tutorialDescription4Text"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialDescription3Text"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_description4_text"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="14%"
+                    app:layout_widthPercent="95%" />
+
+
+                <TextView
+                    android:id="@+id/tutorialDescription5Text"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialDescription4Text"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_description5_text"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="24%"
+                    app:layout_widthPercent="95%" />
+
+
+                <TextView
+                    android:id="@+id/tutorialDescription6Text"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialDescription5Text"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_description6_text"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="16%"
+                    app:layout_widthPercent="95%" />
+
+                <ImageView
+                    android:id="@+id/tutorialIncomeImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialDescription6Text"
+                    android:src="@drawable/settings"
+                    app:layout_heightPercent="60%"
+                    app:layout_marginTopPercent="3%"
+                    app:layout_widthPercent="45%" />
+
+                <ImageView
+                    android:id="@+id/tutorialCashImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialDescription6Text"
+                    android:layout_toRightOf="@id/tutorialIncomeImage"
+                    android:src="@drawable/income"
+                    app:layout_heightPercent="60%"
+                    app:layout_marginTopPercent="3%"
+                    app:layout_widthPercent="45%" />
+
+                <TextView
+                    android:id="@+id/tutorialDescription7Text"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialCashImage"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_description7_text"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="26%"
+                    app:layout_widthPercent="95%" />
+
+                <TextView
+                    android:id="@+id/tutorialDescription8Text"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tutorialDescription7Text"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/tutorial_description8_text"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/item_description_dimension"
+                    app:layout_heightPercent="34%"
                     app:layout_marginTopPercent="3%"
                     app:layout_widthPercent="95%" />
 
@@ -313,9 +437,9 @@
                     android:id="@+id/tutorialRecyclerImage"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_below="@+id/tutorialDescriptionText"
+                    android:layout_below="@+id/tutorialDescription8Text"
                     android:src="@drawable/main_recycler_item_click"
-                    app:layout_heightPercent="30%"
+                    app:layout_heightPercent="60%"
                     app:layout_marginTopPercent="3%"
                     app:layout_widthPercent="45%" />
 
@@ -323,25 +447,12 @@
                     android:id="@+id/tutorialItemImage"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_below="@+id/tutorialDescriptionText"
+                    android:layout_below="@+id/tutorialDescription8Text"
                     android:layout_toRightOf="@id/tutorialRecyclerImage"
                     android:src="@drawable/item_save_cashflow"
-                    app:layout_heightPercent="30%"
+                    app:layout_heightPercent="60%"
                     app:layout_marginTopPercent="3%"
                     app:layout_widthPercent="45%" />
-
-                <TextView
-                    android:id="@+id/tutorialRecyclerText"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_below="@+id/tutorialRecyclerImage"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/tutorial_description_text"
-                    android:textColor="@color/colorSecondaryText"
-                    android:textSize="@dimen/item_description_dimension"
-                    app:layout_heightPercent="15%"
-                    app:layout_marginTopPercent="3%"
-                    app:layout_widthPercent="95%" />
 
 
                 <!--cashflow image & text-->

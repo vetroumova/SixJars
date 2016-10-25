@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
@@ -38,8 +37,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-        Toast.makeText(getContext(), "Hour: " + view.getCurrentHour() + " Minute: " + view.getCurrentMinute(),
-                Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Hour: " + view.getCurrentHour() + " Minute: " + view.getCurrentMinute(),
+        //Toast.LENGTH_SHORT).show();
 
         // Notice the use of `getTargetFragment` which will be set when the dialog is displayed
         OnNewTimeListener listener = (OnNewTimeListener) getTargetFragment();

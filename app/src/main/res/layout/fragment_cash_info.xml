@@ -181,13 +181,13 @@
                 <EditText
                     android:id="@+id/cashEditDescriptionText"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="70dp"
                     android:layout_below="@+id/cashEditInputText"
                     android:layout_marginLeft="@dimen/margin_large"
                     android:layout_marginRight="@dimen/margin_large"
                     android:gravity="right|center_vertical"
                     android:hint="@string/enter_the_description"
-                    android:padding="@dimen/margin_large"
+                    android:padding="@dimen/margin_normal"
                     android:textSize="@dimen/item_description_dimension" />
 
                 <GridLayout

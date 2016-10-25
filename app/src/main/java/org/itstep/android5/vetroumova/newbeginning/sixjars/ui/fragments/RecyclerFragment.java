@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
@@ -98,8 +97,8 @@ public class RecyclerFragment extends Fragment {
         Subscription jarInAdapterSubscription = realmJarsAdapter.getPositionClicks()
                 .subscribe(jar -> {
                             DebugLogger.log("recycler JAR info: " + jar.getJar_id());
-                            Toast.makeText(getContext(), "recycler JAR info: " + jar.getJar_id(),
-                                    Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(), "recycler JAR info: " + jar.getJar_id(),
+                            //Toast.LENGTH_SHORT).show();
 
                             jarInRecyclerPublishSubject.onNext(jar);
                         },

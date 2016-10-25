@@ -11,6 +11,7 @@ import android.widget.RemoteViews;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.MainActivity;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -47,28 +48,15 @@ import io.realm.Sort;
 public class JarsWidget extends AppWidgetProvider {
 
     public static final String LOG_TAG = "VOlga";
-    public static int FIRST_JARS = 0;
-    /* private static final String ACTION_CLICK
-             = "org.itstep.android5.vetroumova.newbeginning.sixjars.ui.widget.JarsWidget.ACTION_CLICK";*/
+    public static String TO_ACTIVITY_CLICK = "toActivity";
     public static String NEXT_JARS_CLICK = "nextThreeJars";
     private static Realm realm = Realm.getDefaultInstance();
     private static Boolean isNextJars = false;
 
     public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                        int widgetId) {
-        Log.d("VOlga", "updating widget with id " + widgetId);
-
-        realm = Realm.getDefaultInstance();
+        Log.d(LOG_TAG, "updating widget with id " + widgetId);
         RealmResults<Jar> jars = realm.where(Jar.class).findAllSorted("jar_float_id", Sort.ASCENDING);
-        /*ArrayList<Float> jarsSumList = new ArrayList<>();
-
-        for (Jar jar : jars) {
-            jarsSumList.add(jar.getTotalCash());
-            Log.d(LOG_TAG, "add " + jar.getJar_id() + " sum " + jar.getTotalCash() + " in " + widgetId);
-            Toast.makeText(context, "add " + jar.getJar_id() + " sum " + jar.getTotalCash()
-                    + " in " + widgetId, Toast.LENGTH_SHORT).show();
-        }*/
-
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
 
         //Set the text
@@ -86,6 +74,8 @@ public class JarsWidget extends AppWidgetProvider {
         Locale locale = Locale.getDefault();
 
         if (isNextJars) {
+            // TODO ProgressBar to animate arrow
+            remoteViews.setImageViewResource(R.id.appwidget_go, R.drawable.go_back);
             remoteViews.setTextViewText(R.id.jar_textView1, String.valueOf(jars.get(3).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView1, String.valueOf(jars.get(3).getJar_name()));
             remoteViews.setTextViewText(R.id.jar_sumView1, sum3.concat(" ГРН"));
@@ -97,7 +87,9 @@ public class JarsWidget extends AppWidgetProvider {
             remoteViews.setTextViewText(R.id.jar_textView3, String.valueOf(jars.get(5).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView3, String.valueOf(jars.get(5).getJar_name()));
             remoteViews.setTextViewText(R.id.jar_sumView3, sum5.concat(" ГРН"));
+            remoteViews.setTextViewTextSize(R.id.jar_infoView3, 1, 8);
         } else {
+            remoteViews.setImageViewResource(R.id.appwidget_go, R.drawable.go);
             remoteViews.setTextViewText(R.id.jar_textView1, String.valueOf(jars.get(0).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView1, String.valueOf(jars.get(0).getJar_name()));
             remoteViews.setTextViewText(R.id.jar_sumView1, sum0.concat(" ГРН"));
@@ -109,6 +101,7 @@ public class JarsWidget extends AppWidgetProvider {
             remoteViews.setTextViewText(R.id.jar_textView3, String.valueOf(jars.get(2).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView3, String.valueOf(jars.get(2).getJar_name()));
             remoteViews.setTextViewText(R.id.jar_sumView3, sum2.concat(" ГРН"));
+            remoteViews.setTextViewTextSize(R.id.jar_infoView3, 1, 10);
         }
 
         //Register an onClickListener
@@ -127,6 +120,17 @@ public class JarsWidget extends AppWidgetProvider {
             intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
             PendingIntent pendIntent = PendingIntent.getActivity(context, 0, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);*/
+        Intent intentStartActivity = new Intent(context, MainActivity.class);
+        //intentStartActivity.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);  // Identifies the particular widget...
+        //intentStartActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //intentStartActivity.setAction(TO_ACTIVITY_CLICK);
+        // Make the pending intent unique...
+        //intentStartActivity.setData(Uri.parse(intentStartActivity.toUri(Intent.URI_INTENT_SCHEME)));
+
+        PendingIntent pendingToActivity = PendingIntent.getActivity(context, 0, intentStartActivity, 0);
+        //RemoteViews views = new RemoteViews(context.getPackageName(),R.layout.activity_main);
+
+        remoteViews.setOnClickPendingIntent(R.id.appwidget_first_jar, pendingToActivity);
 
         //to set next jars
         Intent intentNextJars = new Intent(context, JarsWidget.class);
@@ -206,11 +210,9 @@ public class JarsWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-
-        ComponentName thisWidget = new ComponentName(context, JarsWidget.class);
-
-        //int[] allWidgetsIds = appWidgetManager.getAppWidgetIds(thisWidget);
-
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
+        realm = Realm.getDefaultInstance();
+        //ComponentName thisWidget = new ComponentName(context, JarsWidget.class);
         // There may be multiple widgets active, so update all of them
         for (int widgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, widgetId);
@@ -220,15 +222,17 @@ public class JarsWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
 
         if (intent.getAction().equals(NEXT_JARS_CLICK)) {
             ComponentName thisWidget = new ComponentName(context, JarsWidget.class);
             int[] allWidgetsIds = AppWidgetManager.getInstance(context).getAppWidgetIds(thisWidget);
             isNextJars = !isNextJars;
             this.onUpdate(context, AppWidgetManager.getInstance(context), allWidgetsIds);
-            /*this.updateAppWidget(context,AppWidgetManager.getInstance(context),
-                    intent.getIntExtra("widgetID",allWidgetsIds[0]));*/
+        } else if (intent.getAction().equals(TO_ACTIVITY_CLICK)) {
+            Log.d(LOG_TAG, "open an activity");
+            super.onReceive(context, intent);
+        } else {
+            super.onReceive(context, intent);
         }
     }
 

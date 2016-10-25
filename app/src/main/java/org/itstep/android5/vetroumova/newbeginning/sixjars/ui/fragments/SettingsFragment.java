@@ -89,7 +89,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         if (persentageList == null) {
             persentageList = defaultPercentage;
             Log.d("VOlya", "default");
-            Toast.makeText(getContext(), "default", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "default", Toast.LENGTH_SHORT).show();
         }
         DebugLogger.log("Pref Logger list : " + persentageList.toString());
         Log.d("Volya", "Pref list : " + persentageList.toString());

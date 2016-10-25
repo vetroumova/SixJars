@@ -256,8 +256,9 @@ public class RealmManager {
     public RealmResults<Cashflow> getCashflowInJar(String jarID) {
         return realm.where(Cashflow.class)
                 .equalTo("jar.jar_id", jarID)
-                .findAllSortedAsync("date", Sort.DESCENDING);
-        //.findAllSorted("date", Sort.DESCENDING);
+                //.greaterThan("date",(new Date(System.currentTimeMillis()-(30*24*60*60*1000))))
+                //.findAllSortedAsync("date", Sort.DESCENDING);
+                .findAllSorted("date", Sort.DESCENDING);
 
     }
 

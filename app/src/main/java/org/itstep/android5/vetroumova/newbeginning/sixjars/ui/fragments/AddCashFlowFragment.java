@@ -26,11 +26,13 @@ import java.util.List;
 
 import io.realm.Realm;
 
-public class AddCashFlowFragment extends Fragment implements View.OnClickListener {
+public class AddCashFlowFragment extends Fragment implements View.OnClickListener,
+        PourToJarFragment.OnPourInJarListener {
     public static final String ARG_JAR_ID = "jarID";
-
+    private static final int POUR_RQ_CODE = 6;
     private static final List<String> jarIDs
             = Arrays.asList("NEC", "PLAY", "GIVE", "EDU", "LTSS", "FFA");
+
     EditText sumEditText;
     TextView getCurrBalanceJars;
     TextView currBalanceNEC;
@@ -132,7 +134,6 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
         saveButton.setOnClickListener(this);
 
         setBalance();
-        setCheckedJar();
         return view;
     }
 
@@ -228,26 +229,15 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
                     // add to one jar or to all
                     sum = Float.parseFloat(sumEditText.getText().toString());
 
+                    //GLOBAL INCOME
                     if (jarID.equals("AllJars")) {
-                        for (String jarID : jarIDs) {
-                            currPercent = Prefs.with(getContext()).getPercentJar(jarID);
-                            Log.d("VOlga", "perc in jar before adding sum " + jarID + " " + currPercent);
-                            float sumInJar = sum * ((float) currPercent / 100);
-                            //adding in DB
-                            boolean resultAdd = RealmManager.with(this).addCashToJar(jarID, sumInJar,
-                                    new Date(System.currentTimeMillis()), currPercent, getString(R.string.new_income_text));
-                            Log.d("VOlga", "add to " + jarID + " new Cashflow "
-                                    + sumInJar + " - " + resultAdd);
-                            Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
-                                    : R.string.not_added_sum_text), Toast.LENGTH_SHORT).show();
-                            if (resultAdd) {
-                                sumEditText.setText("");
-                                //new MaxVolume for bottle
-                                Prefs.with(getContext()).setMaxVolumeInJar(RealmManager.with(this)
-                                        .getJar(jarID).getTotalCash(), jarID);
-                            }
-                        }
-                        setBalance();
+                        //CHOOSE if pour to FFA or LTSS jar needed
+                        PourToJarFragment pourFragment = new PourToJarFragment();
+                        // SETS the target fragment for use later when sending results
+                        pourFragment.setTargetFragment(AddCashFlowFragment.this, POUR_RQ_CODE);
+                        pourFragment.show(getFragmentManager(), "choosePourInJar");
+                        //////
+                        //see onChooseToPour()
                     } else if (jarID.equals("NoID")) {
                         Toast.makeText(getContext(), R.string.choose_jar_text, Toast.LENGTH_SHORT).show();
                     } else {
@@ -279,5 +269,37 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
     public void onSaveInstanceState(Bundle outState) {
 
         outState.putString(ARG_JAR_ID, jarID);
+    }
+
+    @Override
+    public void onChooseToPour(String jarIdToPour) {
+        boolean resultAdd = false;
+        for (String jarID : jarIDs) {
+            currPercent = Prefs.with(getContext()).getPercentJar(jarID);
+            Log.d("VOlga", "perc in jar before adding sum " + jarID + " " + currPercent);
+            float sumInJar = sum * ((float) currPercent / 100);
+            //adding in DB
+            resultAdd = RealmManager.with(this).addCashToJar(jarID, sumInJar,
+                    new Date(System.currentTimeMillis()), currPercent, getString(R.string.new_income_text));
+            Log.d("VOlga", "add to " + jarID + " new Cashflow "
+                    + sumInJar + " - " + resultAdd);
+            Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
+                    : R.string.not_added_sum_text), Toast.LENGTH_SHORT).show();
+            if (resultAdd) {
+                sumEditText.setText("");
+                //new MaxVolume for bottle
+                Prefs.with(getContext()).setMaxVolumeInJar(RealmManager.with(this)
+                        .getJar(jarID).getTotalCash(), jarID);
+            }
+        }
+        if (jarIdToPour.equals("NoJar")) {
+            Toast.makeText(getContext(), getString(R.string.no_poured_text),
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), getString(R.string.poured_text) + jarIdToPour,
+                    Toast.LENGTH_SHORT).show();
+        }
+        jarID = "NoID";
+        setBalance();
     }
 }

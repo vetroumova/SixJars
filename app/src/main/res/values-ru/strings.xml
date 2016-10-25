@@ -78,4 +78,15 @@
     <string name="statistics_payments_text">Расходы</string>
     <string name="no_data_chart_text">Нет данных</string>
     <string name="statistics_bar_title2">s Расходы</string>
+    <string name="global_pour_to_ffa_text">Остаток из банок - в FFA</string>
+    <string name="no_pour_text">Не переливать остаток от предыдущих поступлений</string>
+    <string name="no_poured_text">Остаток от предыдущих поступлений остался в банках</string>
+    <string name="not_from_ffa_text">Остаток предыдущих поступлених слили в LTSS (кроме FFA)</string>
+    <string name="pour_to_ffa_text">Остаток от предыдущих поступлений переливаем в FFA (кроме LTSS)</string>
+    <string name="pour_to_ltss_text">Остаток от предыдущих поступлений переливаем в LTSS (кроме FFA)</string>
+    <string name="poured_text">Остаток от предыдущих поступлений переливаем в </string>
+    <string name="tutorial_title_text">Метод «кувшинов» (JARS budgeting)</string>
+    <string name="pour_button_text">Далее</string>
+    <string name="global_pour_to_ltss_text">Остаток из банок - в LTSS (кроме FFA)</string>
+    <string name="title_pour_in_jar">Перелить остаток от предыдущих пополнений в банку для хранения?</string>
 </resources>

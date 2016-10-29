@@ -225,8 +225,6 @@ public class RealmManager {
             e.printStackTrace();
         }
         setRealm();
-        /*for (int i=0;i<1000000000;i++) {
-        }*/
         return null;
     }
 

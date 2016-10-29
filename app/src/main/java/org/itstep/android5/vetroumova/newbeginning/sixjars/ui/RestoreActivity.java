@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
 
 /**
  * A db restore screen that offers to restore from archive.
@@ -48,6 +49,7 @@ public class RestoreActivity extends AppCompatActivity
         //cannot work with realm in another thread except asynctransactions
         progressBar.setVisibility(View.VISIBLE);
         restoreButton.setVisibility(View.GONE);
+        RealmManager.with(this).restore(getApplicationContext());
         restoreText.setText(R.string.restore_process_text);
         progressBar.setVisibility(View.GONE);
         restoreButton.setVisibility(View.VISIBLE);

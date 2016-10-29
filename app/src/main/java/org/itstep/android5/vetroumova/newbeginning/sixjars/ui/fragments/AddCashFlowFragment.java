@@ -283,8 +283,7 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
                     new Date(System.currentTimeMillis()), currPercent, getString(R.string.new_income_text));
             Log.d("VOlga", "add to " + jarID + " new Cashflow "
                     + sumInJar + " - " + resultAdd);
-            Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
-                    : R.string.not_added_sum_text), Toast.LENGTH_SHORT).show();
+
             if (resultAdd) {
                 sumEditText.setText("");
                 //new MaxVolume for bottle
@@ -292,6 +291,8 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
                         .getJar(jarID).getTotalCash(), jarID);
             }
         }
+        Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
+                : R.string.not_added_sum_text), Toast.LENGTH_SHORT).show();
         if (jarIdToPour.equals("NoJar")) {
             Toast.makeText(getContext(), getString(R.string.no_poured_text),
                     Toast.LENGTH_SHORT).show();

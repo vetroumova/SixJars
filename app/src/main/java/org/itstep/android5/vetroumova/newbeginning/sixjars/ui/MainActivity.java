@@ -1,12 +1,21 @@
 package org.itstep.android5.vetroumova.newbeginning.sixjars.ui;
 
+import android.Manifest;
+import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -20,6 +29,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.adapters.RxRecyclerAdapter;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.AddCashFlowFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.CashInfoFragment;
@@ -38,10 +48,18 @@ import java.util.List;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
+import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
+
 
 public class MainActivity extends AppCompatActivity {
-
+    // Storage Permissions
+    private static final int REQUEST_EXTERNAL_STORAGE = 810;
+    private static final int GOOGLEPLUS_REQUEST_CODE = 1001;
     private static final String TAG = "VOlga";
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
     private static long back_pressed;
     FrameLayout contentLayout;
     AHBottomNavigation bottomNavigation;
@@ -70,10 +88,14 @@ public class MainActivity extends AppCompatActivity {
     private SpendFragment spendFragment;
     private CashInfoFragment cashInfoFragment;
 
+    private int menuItem = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //todo check if needed
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //WindowManager.LayoutParams params = getWindow().getAttributes();
         //params.rotationAnimation = WindowManager.LayoutParams.ROTATION_ANIMATION_ROTATE;
@@ -124,7 +146,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //set toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        toolbar.setLogo(R.mipmap.ic_launcher);
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.colorAccent));
         setSupportActionBar(toolbar);
 
         contentLayout = (FrameLayout) findViewById(R.id.content_layout);
@@ -214,6 +238,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*Realm realm = RealmManager.with(this).getRealm();
+        Log.d(TAG,"Path to db: " + realm.getPath() + " schema : " + realm.getSchema());*/
+
         //if (savedInstanceState == null && fragmentManager.getBackStackEntryCount() == 0) {
         if (fragmentManager.getBackStackEntryCount() == 0
                 && !(fragmentManager.findFragmentById(R.id.content_layout) instanceof RecyclerFragment)) {
@@ -223,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
         }
+        updateAllWidgets();
 
         Subscription jarInRecyclerSubscription = recyclerFragment.getJar()
                 .subscribe(jar -> {
@@ -401,11 +429,102 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_share) {
+
+            /*DialogFragment shareFragment = DialogFragment.instantiate(getApplicationContext(),
+
+            )*/
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle(getString(R.string.share_title_text))
+                    .setMessage(getString(R.string.share_message_text))
+                    .setIcon(R.mipmap.ic_launcher)
+                    //.setCancelable(false)
+
+                    .setNegativeButton(getString(R.string.share_cancel_text),
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+            return true;
+        } else if (id == R.id.action_save_base) {
+            menuItem = 1;
+            checkStoragePermissions(this);
+            return true;
+        } else if (id == R.id.action_restore_base) {
+            menuItem = 2;
+            checkStoragePermissions(this);
+            return true;
+        } else if (id == R.id.action_send_base) {
+            menuItem = 3;
+            checkStoragePermissions(this);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        } else {
+            if (menuItem == 1) {
+                RealmManager.with(this).backup(this);
+            } else if (menuItem == 2) {
+                startActivity(new Intent(MainActivity.this, RestoreActivity.class)
+                        .addFlags(FLAG_ACTIVITY_NO_HISTORY));
+            } else if (menuItem == 3) {
+                RealmManager.with(this).exportDatabase(this);
+            }
+            menuItem = 0;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_EXTERNAL_STORAGE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                    grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                if (menuItem == 1) {
+                    RealmManager.with(this).backup(this);
+                } else if (menuItem == 2) {
+                    startActivity(new Intent(MainActivity.this, RestoreActivity.class)
+                            .addFlags(FLAG_ACTIVITY_NO_HISTORY));
+                } else if (menuItem == 3) {
+                    RealmManager.with(this).exportDatabase(this);
+                }
+                menuItem = 0;
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    public void onShareClick(View view) {
+        /*Intent shareIntent = new PlusShare.Builder(this)
+                .setType("text/plain")
+                .setText(text)
+                .setContentUrl(Uri.parse(link))
+                .getIntent();
+        startActivityForResult(shareIntent, GOOGLEPLUS_REQUEST_CODE);*/
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if ((requestCode == GOOGLEPLUS_REQUEST_CODE) && (resultCode == -1)) {
+            //Do something if success
+        }
     }
 
     @Override

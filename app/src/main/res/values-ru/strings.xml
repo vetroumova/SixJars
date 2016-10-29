@@ -89,4 +89,16 @@
     <string name="pour_button_text">Далее</string>
     <string name="global_pour_to_ltss_text">Остаток из банок - в LTSS (кроме FFA)</string>
     <string name="title_pour_in_jar">Перелить остаток от предыдущих пополнений в банку для хранения?</string>
+    <string name="changes_saved_text">Изменения сохранены.</string>
+    <string name="changes_not_saved_text">Изменения НЕ сохранены. Сумма всех процентовок должна составлять 100%</string>
+    <string name="restore_base_text">Восстановить базу</string>
+    <string name="save_base_text">Сохранить базу</string>
+    <string name="share_text">Поделиться</string>
+    <string name="send_base_text">Отправить копию базы данных</string>
+    <string name="share_cancel_text">Не хочу делиться</string>
+    <string name="share_message_text">Я экономлю с приложением \"Шесть банок\"</string>
+    <string name="share_title_text">Поделиться</string>
+    <string name="warning_restore_text">Вы действительно хотите восстановить базу данных из архива? \nЭто уничтожит все несохраненные данные.</string>
+    <string name="restore_done_text">Восстановление завершено</string>
+    <string name="restore_process_text">Восстанавливаем... Пожалуйста, подождите.</string>
 </resources>

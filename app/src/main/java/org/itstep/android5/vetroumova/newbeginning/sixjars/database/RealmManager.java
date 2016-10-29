@@ -3,32 +3,51 @@ package org.itstep.android5.vetroumova.newbeginning.sixjars.database;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Cashflow;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import io.realm.Sort;
+import io.realm.internal.IOException;
 
 /**
  * Created by OLGA on 11.09.2016.
  */
 public class RealmManager {
+    /*private static final File EXPORT_REALM_PATH = Environment.getExternalStoragePublicDirectory
+            (Environment.DIRECTORY_DOCUMENTS);*/
+    private static final File EXPORT_REALM_PATH = new File(Environment.getExternalStorageDirectory()
+            + "/SixJars");
+    private static final String EXPORT_REALM_FILE_NAME = "backup_sixjars.realm";
+    private static final String IMPORT_REALM_FILE_NAME = Realm.DEFAULT_REALM_NAME;
+    private static final String TAG = "VOlga";
 
     //from Realm
     private static RealmManager realmManagerInstance;
     private static RealmChangeListener listener;
-    private final Realm realm;
+    //private final Realm realm;
+    private Realm realm;
 
     public RealmManager(Application application) {
+
+        // Automatically run migration if needed
         realm = Realm.getDefaultInstance();
         realm.setAutoRefresh(true);
     }
@@ -137,17 +156,155 @@ public class RealmManager {
         //realm.addChangeListener(listener);
     }
 
-    // for statistics
-    @NonNull
-    public static RealmResults<Jar> getAllJars() {
-        final Realm realm = Realm.getDefaultInstance();
-        final RealmResults<Jar> result = realm.where(Jar.class)
-                //was findAllSortedAsync
-                .findAllSorted(Jar.ID_FIELD);
-        return result;
+    public void setRealm() {
+        realm = Realm.getDefaultInstance();
+        realm.setAutoRefresh(true);
+    }
+
+    public void backup(Context context) {
+        boolean isPresent = true;
+        if (!EXPORT_REALM_PATH.exists()) {
+            isPresent = EXPORT_REALM_PATH.mkdir();
+        }
+        if (isPresent) {
+            try {
+                // create a backup file
+                File exportRealmFile;
+                exportRealmFile = new File(EXPORT_REALM_PATH, EXPORT_REALM_FILE_NAME);
+
+                // if backup file already exists, delete it
+                exportRealmFile.delete();
+
+                // copy current realm to backup file
+                realm.writeCopyTo(exportRealmFile);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String msg = "File exported to Path: " + EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
+            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+            Log.d(TAG, msg);
+            //realm.close();
+        } else {
+            // Failure to find a directory
+        }
+    }
+
+    public void restore(Context context) {
+        String restoreFilePath = EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
+        Log.d(TAG, "oldFilePath = " + restoreFilePath);
+        copyBundledRealmFile(context, restoreFilePath, IMPORT_REALM_FILE_NAME);
+        Log.d(TAG, "Data restore is done");
+    }
+
+    private String copyBundledRealmFile(Context context, String restoreFilePath, String outFileName) {
+        realm.close();
+        try {
+            try {
+                File file = new File(context.getFilesDir(), outFileName);
+
+                FileOutputStream outputStream = new FileOutputStream(file);
+
+                FileInputStream inputStream = new FileInputStream(new File(restoreFilePath));
+
+                byte[] buf = new byte[1024];
+                int bytesRead;
+                try {
+                    while ((bytesRead = inputStream.read(buf)) > 0) {
+                        outputStream.write(buf, 0, bytesRead);
+                    }
+                    outputStream.close();
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+                return file.getAbsolutePath();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setRealm();
+        /*for (int i=0;i<1000000000;i++) {
+        }*/
+        return null;
+    }
+
+    //export by email
+    public void exportDatabase(Activity activity) {
+
+        File exportRealmFile = null;
+        try {
+            // get or create an export.realm" file
+            exportRealmFile = new File(activity.getExternalCacheDir(), "export.realm");
+
+            // if "export.realm" already exists, delete
+            exportRealmFile.delete();
+
+            // copy current realm to "export.realm"
+            realm.writeCopyTo(exportRealmFile);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //realm.close();
+
+        // init email intent and add export.realm as attachment
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("plain/text");
+        intent.putExtra(Intent.EXTRA_EMAIL, "YOUR MAIL");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "YOUR SUBJECT");
+        intent.putExtra(Intent.EXTRA_TEXT, "YOUR TEXT");
+        Uri u = Uri.fromFile(exportRealmFile);
+        intent.putExtra(Intent.EXTRA_STREAM, u);
+
+        // start email intent
+        //activity.startActivity(Intent.createChooser(intent, "YOUR CHOOSER TITLE"));
+        activity.startActivity(Intent.createChooser(intent, activity.getString(R.string.send_base_text)));
+    }
+
+    public String savePrefs(Context context) {
+        //restore preferences from totalSum
+        /*RealmResults<Jar> jars = RealmManager.getInstance().getJars();
+        float[] sums = new float[6];
+        for(int i=0;i<sums.length;i++) {
+            sums[i]=jars.get(i).getTotalCash();
+        }
+        Prefs.with(context).setMaxVolumes(sums);*/
+        String outFileName = "prefs.xml";
+        String restoreFilePath = "";
+        try {
+            try {
+                File file = new File(context.getFilesDir(), outFileName);
+
+                FileOutputStream outputStream = new FileOutputStream(file);
+
+                FileInputStream inputStream = new FileInputStream(new File(restoreFilePath));
+
+                byte[] buf = new byte[1024];
+                int bytesRead;
+                try {
+                    while ((bytesRead = inputStream.read(buf)) > 0) {
+                        outputStream.write(buf, 0, bytesRead);
+                    }
+                    outputStream.close();
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+                return file.getAbsolutePath();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Realm getRealm() {
+        if (realm.isClosed()) {
+            setRealm();
+        }
         return realm;
     }
 

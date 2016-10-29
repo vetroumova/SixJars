@@ -426,7 +426,7 @@
                     android:text="@string/tutorial_description8_text"
                     android:textColor="@color/colorSecondaryText"
                     android:textSize="@dimen/item_description_dimension"
-                    app:layout_heightPercent="34%"
+                    app:layout_heightPercent="35%"
                     app:layout_marginTopPercent="3%"
                     app:layout_widthPercent="95%" />
 

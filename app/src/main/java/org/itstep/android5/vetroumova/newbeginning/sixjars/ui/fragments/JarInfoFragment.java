@@ -2,6 +2,7 @@ package org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -127,14 +128,14 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         jar = RealmManager.with(this).getJar(jarIDString);
 
         //jarImage.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), jarIDString));
-        jarImage.setImageResource(BottleDrawableManager
+        /*jarImage.setImageResource(BottleDrawableManager
                 .setAnimationJar(Prefs.with(getContext()), jarIDString));
 
         AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
 
         //Управлять объектом AnimationDrawable можно через методы start() и stop().
         animation.start();
-
+*/
         /*CountDownTimer countDownTimer = new CountDownTimer(3500, 500) {
             int i = 0;
             @Override
@@ -155,7 +156,7 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
 
         jarID.setText(jar.getJar_id());
         jarName.setText(getString(R.string.item_name_in_fragment_text, jar.getJar_name()));
-        jarBalance.setText(getString(R.string.item_balance_text, jar.getTotalCash()));
+        jarBalance.setText(getString(R.string.item_balance_text, String.valueOf(jar.getTotalCash())));
         percent = Prefs.with(getContext()).getPercentJar(jar.getJar_id());
         jarPercentage.setText(getString(R.string.item_percentage_text, percent));
         jarDescription.setText(jar.getJar_info());
@@ -257,13 +258,19 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         //Toast.makeText(getContext(), "reSum : " + jar.getTotalCash(),
         //Toast.LENGTH_SHORT).show();
         jarBalance.setText(getString(R.string.item_balance_text,
-                jar.getTotalCash()));
+                String.valueOf(jar.getTotalCash())));
 
-        jarImage.setImageResource(BottleDrawableManager.setAnimationJar
-                (Prefs.with(getContext()), jarIDString));
-        AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
-        //Управлять объектом AnimationDrawable можно через методы start() и stop().
-        animation.start();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            jarImage.setImageResource(BottleDrawableManager.setAnimationJar
+                    (Prefs.with(getContext()), jarIDString));
+            AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
+            //Управлять объектом AnimationDrawable можно через методы start() и stop().
+            animation.start();
+        } else {
+            jarImage.setImageResource(BottleDrawableManager.setDrawableJar
+                    (Prefs.with(getContext()), jarIDString));
+        }
+
     }
 
     private void setupRecycler() {

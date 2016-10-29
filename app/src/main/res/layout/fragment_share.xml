@@ -1,0 +1,18 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/colorTranspBG"
+    tools:context="org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.PourToJarFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onShareClick"
+            android:src="@drawable/g_plus_svg" />
+    </LinearLayout>
+</FrameLayout>

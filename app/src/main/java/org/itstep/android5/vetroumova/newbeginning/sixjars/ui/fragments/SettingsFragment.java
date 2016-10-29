@@ -145,6 +145,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 previousPersentageList = persentageList;
                 //restoreButton.setEnabled(true);
                 persentageList.clear();
+                int sum = 0;
 
                 //TODO make a check for non-integer values
                 persentageList.add(Integer.parseInt(necPercentEdit.getText().toString()));
@@ -154,10 +155,18 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 persentageList.add(Integer.parseInt(ltssPercentEdit.getText().toString()));
                 persentageList.add(Integer.parseInt(ffaPercentEdit.getText().toString()));
 
-                for (Integer i : persentageList) {
-                    Toast.makeText(getContext(), "add in list : " + i, Toast.LENGTH_SHORT).show();
+                for (Integer percent : persentageList) {
+                    sum += percent;
                 }
-                Prefs.with(getContext()).setPercentage(persentageList);
+
+                if (sum == 100) {
+                    Prefs.with(getContext()).setPercentage(persentageList);
+                    Toast.makeText(getContext(), getString(R.string.changes_saved_text),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), getString(R.string.changes_not_saved_text),
+                            Toast.LENGTH_SHORT).show();
+                }
                 break;
             }
             case R.id.restoreSettingsButton: {

@@ -135,4 +135,17 @@
     <string name="poured_text">Rest of previous incomes poured in</string>
     <string name="global_pour_to_ltss_text">Rest of all jars goes to LTSS (except FFA)</string>
     <string name="title_pour_in_jar">Pour the rest of previous incomes in saving jar?</string>
+    <string name="changes_saved_text">Changes are saved.</string>
+    <string name="changes_not_saved_text">Changes are not saved. Sum of percentage must be 100%</string>
+    <string name="save_base_text">Save database</string>
+    <string name="restore_base_text">Restore database</string>
+    <string name="share_text">Share</string>
+    <string name="share_title_text">Share</string>
+    <string name="share_message_text">I\'m saving my money with SixJars</string>
+    <string name="share_cancel_text">Don\'t want to share</string>
+    <string name="send_base_text">Send a database copy</string>
+    <string name="title_activity_restore">Restore a database from archive</string>
+    <string name="warning_restore_text">Do you really want to restore database from archive? \nThis action will destroy all unsaved data.</string>
+    <string name="restore_done_text">Restore is done</string>
+    <string name="restore_process_text">Restoring data... Please, wait.</string>
 </resources>

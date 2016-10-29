@@ -88,5 +88,17 @@
     <string name="pour_button_text">Далі</string>
     <string name="global_pour_to_ltss_text">Залишок з пляшок - в LTSS (окрім FFA)</string>
     <string name="title_pour_in_jar">Злити залишок від попередніх надходжень в пляшку для зберігання коштів?</string>
+    <string name="changes_saved_text">Змінення збережені.</string>
+    <string name="changes_not_saved_text">Змінення НЕ збережені. Сума усіх відсотків має становити 100%</string>
+    <string name="restore_base_text">Відновити базу</string>
+    <string name="share_text">Поділитися</string>
+    <string name="save_base_text">Зберегти базу</string>
+    <string name="send_base_text">Надіслати копію бази даних</string>
+    <string name="share_cancel_text">Не хочу ділитися</string>
+    <string name="share_message_text">Я заощаджую з програмою \"Шість пляшок\"</string>
+    <string name="share_title_text">Поділитися</string>
+    <string name="warning_restore_text">Ви дійсно хочете відновити базу даних з архіву? \nЦе знищить  усі незбережені дані.</string>
+    <string name="restore_done_text">Відновлення закінчене</string>
+    <string name="restore_process_text">Відновлюємо... Будьласка, зачекайте.</string>
 
 </resources>

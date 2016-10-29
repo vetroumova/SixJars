@@ -392,6 +392,7 @@
                 android:layout_height="50dp"
                 android:layout_below="@+id/percentageSettingsGrid"
                 android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_large"
                 android:layout_marginLeft="@dimen/margin_normal"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:layout_toStartOf="@+id/restoreSettingsButton"

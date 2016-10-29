@@ -3,8 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share_white_24dp"
+        android:title="@string/share_text"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_save_base"
+        android:title="@string/save_base_text"
+        app:icon="@drawable/ic_archive_white_24dp"
+        app:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/action_restore_base"
+        android:title="@string/restore_base_text"
+        app:icon="@drawable/ic_unarchive_white_24dp"
+        app:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/action_send_base"
+        android:title="@string/send_base_text"
+        app:icon="@drawable/ic_unarchive_white_24dp"
+        app:showAsAction="ifRoom|withText" />
 </menu>

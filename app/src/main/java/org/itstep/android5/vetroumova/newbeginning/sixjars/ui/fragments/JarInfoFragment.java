@@ -27,6 +27,9 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.adapters.Cashflows
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.adapters.RealmCashflowsAdapter;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.utils.DebugLogger;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
@@ -156,7 +159,11 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
 
         jarID.setText(jar.getJar_id());
         jarName.setText(getString(R.string.item_name_in_fragment_text, jar.getJar_name()));
-        jarBalance.setText(getString(R.string.item_balance_text, String.valueOf(jar.getTotalCash())));
+        //Set the text
+        DecimalFormatSymbols s = new DecimalFormatSymbols();
+        //s.setDecimalSeparator('.');
+        DecimalFormat f = new DecimalFormat("##,##0.00", s);
+        jarBalance.setText(getString(R.string.item_balance_text, f.format(jar.getTotalCash())));
         percent = Prefs.with(getContext()).getPercentJar(jar.getJar_id());
         jarPercentage.setText(getString(R.string.item_percentage_text, percent));
         jarDescription.setText(jar.getJar_info());
@@ -257,8 +264,11 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         Log.d("VOlga", "reSum : " + jar.getTotalCash());
         //Toast.makeText(getContext(), "reSum : " + jar.getTotalCash(),
         //Toast.LENGTH_SHORT).show();
-        jarBalance.setText(getString(R.string.item_balance_text,
-                String.valueOf(jar.getTotalCash())));
+        //Set the text
+        DecimalFormatSymbols s = new DecimalFormatSymbols();
+        //s.setDecimalSeparator('.');
+        DecimalFormat f = new DecimalFormat("##,##0.00", s);
+        jarBalance.setText(getString(R.string.item_balance_text, f.format(jar.getTotalCash())));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             jarImage.setImageResource(BottleDrawableManager.setAnimationJar

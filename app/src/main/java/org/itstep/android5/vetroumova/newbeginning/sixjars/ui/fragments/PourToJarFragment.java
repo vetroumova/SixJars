@@ -19,6 +19,8 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -104,8 +106,12 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
         // get all Jars
         jars = RealmManager.with(this).getJars();
         Log.d("VOlga", "Getting jars elements: " + jars.size());
-        currBalanceLTSS.setText(getString(R.string.cash_balance_text, jars.get(4).getTotalCash()));
-        currBalanceFFA.setText(getString(R.string.cash_balance_text, jars.get(5).getTotalCash()));
+        //Set the text
+        DecimalFormatSymbols s = new DecimalFormatSymbols();
+        //s.setDecimalSeparator('.');
+        DecimalFormat f = new DecimalFormat("##,##0.00", s);
+        currBalanceLTSS.setText(getString(R.string.cash_balance_text, f.format(jars.get(4).getTotalCash())));
+        currBalanceFFA.setText(getString(R.string.cash_balance_text, f.format(jars.get(5).getTotalCash())));
         setBottles();
     }
 

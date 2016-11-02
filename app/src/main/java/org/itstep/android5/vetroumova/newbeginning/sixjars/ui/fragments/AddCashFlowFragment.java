@@ -20,6 +20,8 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -172,18 +174,23 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
         jars = RealmManager.with(this).getJars();
         Log.d("VOlga", "Getting jars elements: " + jars.size());
 
-        currBalanceNEC.setText(getString(R.string.cash_balance_text, jars.get(0).getTotalCash()));
-        currBalancePLAY.setText(getString(R.string.cash_balance_text, jars.get(1).getTotalCash()));
-        currBalanceGIVE.setText(getString(R.string.cash_balance_text, jars.get(2).getTotalCash()));
-        currBalanceEDU.setText(getString(R.string.cash_balance_text, jars.get(3).getTotalCash()));
-        currBalanceLTSS.setText(getString(R.string.cash_balance_text, jars.get(4).getTotalCash()));
-        currBalanceFFA.setText(getString(R.string.cash_balance_text, jars.get(5).getTotalCash()));
+        //Set the text
+        DecimalFormatSymbols s = new DecimalFormatSymbols();
+        //s.setDecimalSeparator('.');
+        DecimalFormat f = new DecimalFormat("##,##0.00", s);
+
+        currBalanceNEC.setText(getString(R.string.cash_balance_text, f.format(jars.get(0).getTotalCash())));
+        currBalancePLAY.setText(getString(R.string.cash_balance_text, f.format(jars.get(1).getTotalCash())));
+        currBalanceGIVE.setText(getString(R.string.cash_balance_text, f.format(jars.get(2).getTotalCash())));
+        currBalanceEDU.setText(getString(R.string.cash_balance_text, f.format(jars.get(3).getTotalCash())));
+        currBalanceLTSS.setText(getString(R.string.cash_balance_text, f.format(jars.get(4).getTotalCash())));
+        currBalanceFFA.setText(getString(R.string.cash_balance_text, f.format(jars.get(5).getTotalCash())));
 
         sumOfJars = 0;
         for (Jar jar : jars) {
             sumOfJars += jar.getTotalCash();
         }
-        getCurrBalanceJars.setText(getString(R.string.cash_balance_text, sumOfJars));
+        getCurrBalanceJars.setText(getString(R.string.cash_balance_text, f.format(sumOfJars)));
 
         setBottles();
     }

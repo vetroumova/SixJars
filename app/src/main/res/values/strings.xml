@@ -48,7 +48,8 @@
     <string name="percent_sign_text" translatable="false">%</string>
     <string name="default_settings_text">DEFAULT</string>
     <string name="set_the_percentage_of_jars">Set the percentage of JARS</string>
-    <string name="cash_balance_text"><b>%1$.2f</b> UAH</string>
+    <!--<string name="cash_balance_text"><b>%1$.2f</b> UAH</string>-->
+    <string name="cash_balance_text"><b>%1$s</b> UAH</string>
     <string name="total_cash_balance_text"><b>Total: %1$.2f</b> UAH</string>
     <string name="enter_sum_text">Enter a sum</string>
     <string name="choose_jar_text">You must choose a jar!</string>
@@ -148,4 +149,10 @@
     <string name="warning_restore_text">Do you really want to restore database from archive? \nThis action will destroy all unsaved data.</string>
     <string name="restore_done_text">Restore is done</string>
     <string name="restore_process_text">Restoring data... Please, wait.</string>
+    <string name="vk_cant_authorize_text">Can\'t authorize in VK</string>
+    <string name="vk_cant_upload_text">Can\'t upload a photo</string>
+    <string name="vk_posted_text">Пост успешно размещен на Вашей стене</string>
+    <string name="vk_not_posted_text">Создание поста прервано</string>
+    <string name="vk_error_posted_text">Ошибка при создании поста</string>
+    <integer name="com_vk_sdk_AppId">5696879</integer>
 </resources>

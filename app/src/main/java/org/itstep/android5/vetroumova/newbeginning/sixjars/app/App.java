@@ -2,6 +2,8 @@ package org.itstep.android5.vetroumova.newbeginning.sixjars.app;
 
 import android.app.Application;
 
+import com.vk.sdk.VKSdk;
+
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Migration;
 
 import io.realm.Realm;
@@ -39,6 +41,8 @@ public class App extends Application {
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 
+        // Initialize the SDK before executing any other operations,
+        VKSdk.initialize(getApplicationContext());
 
     }
 }

@@ -34,7 +34,8 @@
     <string name="save_settings_text">ЗБЕРЕГТИ</string>
     <string name="item_percentage_text">%1$d %% розподілу</string>
     <string name="set_the_percentage_of_jars">Налаштуйте % розбиття сум по пляшкам</string>
-    <string name="cash_balance_text"><b>%1$.2f</b> ГРН</string>
+    <!--<string name="cash_balance_text"><b>%1$.2f</b> ГРН</string>-->
+    <string name="cash_balance_text"><b>%1$s</b> ГРН</string>
     <string name="to_all_jars_by_percentage">Розподілити в %</string>
     <string name="spend_a_cash_text">Витратити</string>
     <string name="not_added_sum_text">Недостатньо коштів</string>

@@ -4,16 +4,23 @@ import android.Manifest;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +34,21 @@ import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.vk.sdk.VKAccessToken;
+import com.vk.sdk.VKCallback;
+import com.vk.sdk.VKSdk;
+import com.vk.sdk.api.VKApi;
+import com.vk.sdk.api.VKApiConst;
+import com.vk.sdk.api.VKError;
+import com.vk.sdk.api.VKParameters;
+import com.vk.sdk.api.VKRequest;
+import com.vk.sdk.api.VKResponse;
+import com.vk.sdk.api.model.VKApiLink;
+import com.vk.sdk.api.model.VKApiPhoto;
+import com.vk.sdk.api.model.VKAttachments;
+import com.vk.sdk.api.model.VKPhotoArray;
+import com.vk.sdk.api.photo.VKImageParameters;
+import com.vk.sdk.api.photo.VKUploadImage;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
@@ -37,6 +59,7 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.HelpFrag
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.JarInfoFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.RecyclerFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.SettingsFragment;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.ShareFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.SpendFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.StatisticsFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.widget.JarsWidget;
@@ -87,8 +110,82 @@ public class MainActivity extends AppCompatActivity {
     private AddCashFlowFragment addCashFlowFragment;
     private SpendFragment spendFragment;
     private CashInfoFragment cashInfoFragment;
+    private ShareFragment shareFragment;
 
     private int menuItem = 0;
+
+    public static Bitmap getBitmapFromDrawable(Context context, @DrawableRes int drawableId) {
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        } else if (drawable instanceof VectorDrawable || drawable instanceof VectorDrawableCompat) {
+            /*Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(),
+                    Bitmap.Config.ARGB_8888);*/
+            Bitmap bitmap = Bitmap.createBitmap(300, 400, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+
+            return bitmap;
+        } else {
+            throw new IllegalArgumentException("unsupported drawable type");
+        }
+    }
+
+        /*rxList = (RecyclerView) findViewById(R.id.rxRecycler);
+        for (int i = 0; i < 20; i++) {
+            mockItems.add(String.valueOf(i));
+        }
+        rxList.setHasFixedSize(true);
+        rxList.setAdapter(rxRecyclerAdapter);
+        layoutManager = new LinearLayoutManager(this);
+        rxList.setLayoutManager(layoutManager);
+
+        rxRecyclerAdapter.addAll(mockItems);
+
+        Observable<Void> pageDetector = Observable.create(new Observable.OnSubscribe<Void>() {
+            @Override
+            public void call(final Subscriber<? super Void> subscriber) {
+                rxList.setOnScrollListener(new RecyclerView.OnScrollListener() {
+                    int pastVisibleItems, visibleItemCount, totalItemCount;
+                    @Override
+                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                        visibleItemCount = layoutManager.getChildCount();
+                        totalItemCount = layoutManager.getItemCount();
+                        pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
+
+                        if ((visibleItemCount+pastVisibleItems) >= totalItemCount) {
+                            subscriber.onNext(null);
+                        }
+                    }
+                });
+            }
+        }).debounce(400, TimeUnit.MILLISECONDS);*/
+
+        /*bindActivity(this, pageDetector);
+        Observable<List<String>> listItemObservable = RepresentativeApi.paginatedThings(pageDetector);
+        bindActivity(this, listItemObservable);
+        subscriptions.add(listItemObservable.observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<String>>() {
+            @Override
+            public void onCompleted() {
+                //Timber.d("completed");
+                Log.d(TAG,"completed");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                //Timber.e("error: " + e.getMessage());
+                Log.d(TAG,"error: " + e.getMessage());
+            }
+
+            @Override
+            public void onNext(List<String> strings) {
+                rxRecyclerAdapter.addAll(strings);
+            }
+        }));
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -356,60 +453,6 @@ public class MainActivity extends AppCompatActivity {
         subscriptions.add(finishSpendCashSubscription);
     }
 
-        /*rxList = (RecyclerView) findViewById(R.id.rxRecycler);
-        for (int i = 0; i < 20; i++) {
-            mockItems.add(String.valueOf(i));
-        }
-        rxList.setHasFixedSize(true);
-        rxList.setAdapter(rxRecyclerAdapter);
-        layoutManager = new LinearLayoutManager(this);
-        rxList.setLayoutManager(layoutManager);
-
-        rxRecyclerAdapter.addAll(mockItems);
-
-        Observable<Void> pageDetector = Observable.create(new Observable.OnSubscribe<Void>() {
-            @Override
-            public void call(final Subscriber<? super Void> subscriber) {
-                rxList.setOnScrollListener(new RecyclerView.OnScrollListener() {
-                    int pastVisibleItems, visibleItemCount, totalItemCount;
-                    @Override
-                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                        visibleItemCount = layoutManager.getChildCount();
-                        totalItemCount = layoutManager.getItemCount();
-                        pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
-
-                        if ((visibleItemCount+pastVisibleItems) >= totalItemCount) {
-                            subscriber.onNext(null);
-                        }
-                    }
-                });
-            }
-        }).debounce(400, TimeUnit.MILLISECONDS);*/
-
-        /*bindActivity(this, pageDetector);
-        Observable<List<String>> listItemObservable = RepresentativeApi.paginatedThings(pageDetector);
-        bindActivity(this, listItemObservable);
-        subscriptions.add(listItemObservable.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<String>>() {
-            @Override
-            public void onCompleted() {
-                //Timber.d("completed");
-                Log.d(TAG,"completed");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                //Timber.e("error: " + e.getMessage());
-                Log.d(TAG,"error: " + e.getMessage());
-            }
-
-            @Override
-            public void onNext(List<String> strings) {
-                rxRecyclerAdapter.addAll(strings);
-            }
-        }));
-    }*/
-
     public void refreshRxRecycler() {
         rxRecyclerAdapter.notifyDataSetChanged();
     }
@@ -431,10 +474,14 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_share) {
 
-            /*DialogFragment shareFragment = DialogFragment.instantiate(getApplicationContext(),
+            shareFragment = ShareFragment.newInstance();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_layout, shareFragment)
+                    .addToBackStack("Share")
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .commit();
 
-            )*/
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            /*AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle(getString(R.string.share_title_text))
                     .setMessage(getString(R.string.share_message_text))
                     .setIcon(R.mipmap.ic_launcher)
@@ -447,7 +494,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
             AlertDialog alert = builder.create();
-            alert.show();
+            alert.show();*/
 
             return true;
         } else if (id == R.id.action_save_base) {
@@ -525,6 +572,81 @@ public class MainActivity extends AppCompatActivity {
         if ((requestCode == GOOGLEPLUS_REQUEST_CODE) && (resultCode == -1)) {
             //Do something if success
         }
+        if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
+            @Override
+            public void onResult(VKAccessToken res) {
+                uploadPhotoToVk(res.userId);
+            }
+
+            @Override
+            public void onError(VKError error) {
+                Toast.makeText(getBaseContext(), getString(R.string.vk_cant_authorize_text),
+                        Toast.LENGTH_LONG).show();
+            }
+        })) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void uploadPhotoToVk(String userID) {
+        //Bitmap photo = ((BitmapDrawable) ContextCompat.getDrawable(this,R.drawable.logo_on_bg_64)).getBitmap();
+        Bitmap photo = getBitmapFromDrawable(getApplicationContext(), R.mipmap.ic_launcher);
+        Log.w("VK photo", "owner id " + userID);
+        Log.w("VK photo", "photo " + photo);
+        VKRequest request = VKApi.uploadWallPhotoRequest(new VKUploadImage(photo, VKImageParameters.pngImage()),
+                Integer.parseInt(userID), 0);
+        request.executeWithListener(new VKRequest.VKRequestListener() {
+            @Override
+            public void onComplete(VKResponse response) {
+                super.onComplete(response);
+                VKApiPhoto photoModel = ((VKPhotoArray) response.parsedModel).get(0);
+                makeVKWallPost(new VKAttachments(photoModel));
+            }
+
+            @Override
+            public void attemptFailed(VKRequest request, int attemptNumber, int totalAttempts) {
+                super.attemptFailed(request, attemptNumber, totalAttempts);
+                Toast.makeText(getBaseContext(), getString(R.string.vk_cant_upload_text), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(VKError error) {
+                super.onError(error);
+                Log.w("VK photo", "error " + error.toString());
+                Toast.makeText(getBaseContext(), getString(R.string.vk_cant_upload_text), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void makeVKWallPost(VKAttachments attachments) {
+        attachments.add(new VKApiLink("http://vetroumova.github.io/SixJars/"));
+        VKRequest request = VKApi.wall().post(VKParameters.from(VKAccessToken.currentToken().userId,
+                -1,
+                VKApiConst.ATTACHMENTS, attachments,
+                VKApiConst.MESSAGE, getString(R.string.share_message_text)));
+        request.executeWithListener(new VKRequest.VKRequestListener() {
+            @Override
+            public void onComplete(VKResponse response) {
+                super.onComplete(response);
+                //Toast.makeText(getBaseContext(),"Пост успешно размещен на Вашей стене",Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), getString(R.string.vk_posted_text), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void attemptFailed(VKRequest request, int attemptNumber, int totalAttempts) {
+                super.attemptFailed(request, attemptNumber, totalAttempts);
+                //Toast.makeText(getBaseContext(),"Создание поста прервано",Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), getString(R.string.vk_not_posted_text), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(VKError error) {
+                super.onError(error);
+                Log.w("VK post", "error " + error.toString());
+                //Toast.makeText(getBaseContext(),"Ошибка при создании поста",Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), getString(R.string.vk_error_posted_text), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

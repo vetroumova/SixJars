@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Cashflow;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
 
@@ -36,6 +37,7 @@ public class RealmManager {
     private static final File EXPORT_REALM_PATH = new File(Environment.getExternalStorageDirectory()
             + "/SixJars");
     private static final String EXPORT_REALM_FILE_NAME = "backup_sixjars.realm";
+    private static final String EXPORT_PREFS_FILE_NAME = "preferences_sixjars.xml";
     private static final String IMPORT_REALM_FILE_NAME = Realm.DEFAULT_REALM_NAME;
     private static final String TAG = "VOlga";
 
@@ -169,19 +171,23 @@ public class RealmManager {
         if (isPresent) {
             try {
                 // create a backup file
-                File exportRealmFile;
-                exportRealmFile = new File(EXPORT_REALM_PATH, EXPORT_REALM_FILE_NAME);
+                File exportRealmFile = new File(EXPORT_REALM_PATH, EXPORT_REALM_FILE_NAME);
+                File exportPrefsFile = new File(EXPORT_REALM_PATH, EXPORT_PREFS_FILE_NAME);
 
                 // if backup file already exists, delete it
                 exportRealmFile.delete();
+                exportPrefsFile.delete();
 
                 // copy current realm to backup file
                 realm.writeCopyTo(exportRealmFile);
+                Prefs.with(context).saveSharedPreferencesToFile(exportPrefsFile);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String msg = "File exported to Path: " + EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
+            String msg = "DB File exported to Path: " + EXPORT_REALM_PATH + "/"
+                    + EXPORT_REALM_FILE_NAME + " , \nPreferences exported to Path: " +
+                    EXPORT_REALM_PATH + "/" + EXPORT_PREFS_FILE_NAME;
             Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
             Log.d(TAG, msg);
             //realm.close();
@@ -192,8 +198,10 @@ public class RealmManager {
 
     public void restore(Context context) {
         String restoreFilePath = EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
+        String restorePrefsPath = EXPORT_REALM_PATH + "/" + EXPORT_PREFS_FILE_NAME;
         Log.d(TAG, "oldFilePath = " + restoreFilePath);
         copyBundledRealmFile(context, restoreFilePath, IMPORT_REALM_FILE_NAME);
+        Prefs.with(context).loadSharedPreferencesFromFile(new File(restorePrefsPath));
         Log.d(TAG, "Data restore is done");
     }
 

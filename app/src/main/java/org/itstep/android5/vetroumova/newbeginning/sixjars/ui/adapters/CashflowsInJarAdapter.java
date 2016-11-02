@@ -13,6 +13,8 @@ import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Cashflow;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 
 import io.realm.Realm;
@@ -58,7 +60,12 @@ public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy  HH:mm");
         String formatted = simpleDateFormat.format(cashflow.getDate());
         holder.textCashDate.setText(formatted);
-        String total = String.format(context.getString(R.string.item_balance_text), cashflow.getSum());
+        //Set the text
+        DecimalFormatSymbols s = new DecimalFormatSymbols();
+        //s.setDecimalSeparator('.');
+        DecimalFormat f = new DecimalFormat("##,##0.00", s);
+        String sum = (f.format(cashflow.getSum()));
+        String total = String.format(context.getString(R.string.item_balance_text), sum);
         holder.textCashSum.setText(total);
 
         //remove single match from realm

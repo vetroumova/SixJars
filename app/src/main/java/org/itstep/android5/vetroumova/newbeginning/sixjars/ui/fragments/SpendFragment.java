@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.itstep.android5.vetroumova.newbeginning.sixjars.InputSumWatcher;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
@@ -46,7 +47,8 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
 
     TextView dateViewClicable;
     TextView timeViewClickable;
-    TextView spendCashValueText;
+    //TextView spendCashValueText;
+    EditText spendCashValueText;
     EditText spendCashDescriptionEdit;
     Button button1;
     Button button2;
@@ -113,7 +115,8 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
         timeViewClickable = (TextView) view.findViewById(R.id.timeTextView);
         setDateTimeView(fullDate);
 
-        spendCashValueText = (TextView) view.findViewById(R.id.spendCashInputText);
+        spendCashValueText = (EditText) view.findViewById(R.id.spendCashInputText);
+        spendCashValueText.addTextChangedListener(new InputSumWatcher(spendCashValueText));
         spendCashDescriptionEdit = (EditText) view.findViewById(R.id.spendCashDescriptionText);
         //spendCashDescriptionEdit.setText("");
 
@@ -297,9 +300,11 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
                 break;
             }
             case R.id.spendBackButton: {
-                valueString.deleteCharAt(valueString.length() - 1);
-                if (valueString.length() == 0) {
-                    valueString.append("0");
+                if (valueString.length() != 0) {
+                    valueString.deleteCharAt(valueString.length() - 1);
+                    if (valueString.length() == 0) {
+                        valueString.append("0");
+                    }
                 }
                 break;
             }
@@ -338,9 +343,11 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
                     }
                 }
             }
-
         }
-        spendCashValueText.setText(valueString);
+        String correctSum = InputSumWatcher.editSum(valueString.toString());
+        valueString.delete(0, valueString.length());
+        valueString.append(correctSum);
+        spendCashValueText.setText(valueString.toString());
     }
 
     @Override

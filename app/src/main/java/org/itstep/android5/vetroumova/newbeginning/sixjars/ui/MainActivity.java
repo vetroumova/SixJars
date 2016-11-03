@@ -422,7 +422,8 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "open spendcash fragment : " + jar.getJar_id());
                     //Toast.makeText(getApplicationContext(), "open spendcash fragment : " + jar.getJar_id(),
                     //Toast.LENGTH_SHORT).show();
-                    spendFragment.setJarId(jar.getJar_id());
+                    spendFragment = SpendFragment.newInstance(jar.getJar_id());
+                    //spendFragment.setJarId(jar.getJar_id());
                     fragmentManager.beginTransaction()
                             .replace(R.id.content_layout, spendFragment, "spend")
                             .addToBackStack("Spend")

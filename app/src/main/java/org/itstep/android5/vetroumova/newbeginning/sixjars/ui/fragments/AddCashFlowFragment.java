@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.itstep.android5.vetroumova.newbeginning.sixjars.BottleDrawableManager;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.InputSumWatcher;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
@@ -90,7 +91,9 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
 
         sumEditText = (EditText) view.findViewById(R.id.cashAddEdit);
         sumEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        sumEditText.setSelection(sumEditText.getText().length());
+        //sumEditText.setSelection(sumEditText.getText().length());
+        sumEditText.setText("");
+        sumEditText.addTextChangedListener(new InputSumWatcher(sumEditText));
 
         getCurrBalanceJars = (TextView) view.findViewById(R.id.currBalanceJars);
         currBalanceNEC = (TextView) view.findViewById(R.id.currBalanceNECJar);

@@ -52,13 +52,14 @@
                 android:textColor="@color/colorWhiteTextAndIcons"
                 android:textSize="@dimen/item_balance_dimension" />
 
-            <TextView
+            <EditText
                 android:id="@+id/spendCashInputText"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@id/dateTextView"
                 android:layout_margin="@dimen/margin_normal"
                 android:background="@drawable/jar_widget_bg"
+                android:editable="false"
                 android:focusable="false"
                 android:gravity="right|center_vertical"
                 android:paddingRight="@dimen/margin_large"

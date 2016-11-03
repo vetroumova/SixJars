@@ -33,7 +33,7 @@ import rx.subjects.PublishSubject;
  * Use the {@link SpendFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SpendFragment extends Fragment implements View.OnClickListener,
+public class SpendFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener,
         DatePickerFragment.OnNewDateListener, TimePickerFragment.OnNewTimeListener {
     private static final String JAR_ID = "jarId";
     private static final String VALUE = "valueString";
@@ -146,6 +146,7 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
         button0.setOnClickListener(this);
         buttonDot.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
+        buttonBack.setOnLongClickListener(this);
         buttonSpend.setOnClickListener(this);
         dateViewClicable.setOnClickListener(this);
         timeViewClickable.setOnClickListener(this);
@@ -348,6 +349,12 @@ public class SpendFragment extends Fragment implements View.OnClickListener,
         valueString.delete(0, valueString.length());
         valueString.append(correctSum);
         spendCashValueText.setText(valueString.toString());
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        valueString.delete(0, valueString.length());
+        return false;
     }
 
     @Override

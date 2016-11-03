@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.itstep.android5.vetroumova.newbeginning.sixjars.InputSumWatcher;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
@@ -35,7 +36,7 @@ import rx.subjects.PublishSubject;
  * Use the {@link CashInfoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CashInfoFragment extends DialogFragment implements View.OnClickListener,
+public class CashInfoFragment extends DialogFragment implements View.OnClickListener, View.OnLongClickListener,
         DatePickerFragment.OnNewDateListener, TimePickerFragment.OnNewTimeListener {
 
     private static final String CASH_ID = "cashflowId";
@@ -129,7 +130,7 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
         View view = inflater.inflate(R.layout.fragment_cash_info, container, false);
 
         cashIDText = (TextView) view.findViewById(R.id.cashIDText);
-        cashIDText.setText(getString(R.string.cash_id_text, cashflowID));
+        cashIDText.setText(getString(R.string.cash_id_text, String.valueOf(cashflowID)));
         inputSumView = (TextView) view.findViewById(R.id.cashEditInputText);
         inputSumView.setText(valueString);
         descriptionEdit = (EditText) view.findViewById(R.id.cashEditDescriptionText);
@@ -176,6 +177,7 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
         button0.setOnClickListener(this);
         buttonDot.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
+        buttonBack.setOnLongClickListener(this);
         buttonNegative.setOnClickListener(this);
         buttonSave.setOnClickListener(this);
         jarNECButton.setOnClickListener(this);
@@ -359,7 +361,7 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
                 float newSum = 0;
                 try {
                     newSum = Float.parseFloat(valueString.toString());
-                    if (newSum == 0) {
+                    if (newSum == 0 && !valueString.toString().equals("")) {
                         valueString.deleteCharAt(0);
                         valueString.append("-");
                     } else {
@@ -372,10 +374,14 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
                         }
                     }
                 } catch (NumberFormatException e) {
-                    valueString.delete(0, valueString.length());
-                    valueString.append("0");
+                    if (valueString.toString().equals("")) {
+                        valueString.delete(0, valueString.length());
+                        valueString.append("-");
+                    } else {
+                        valueString.delete(0, valueString.length());
+                        valueString.append("0");
+                    }
                 }
-
                 break;
             }
             case R.id.cashEditNECButton: {
@@ -464,7 +470,16 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
                 }
             }
         }
+        String correctSum = InputSumWatcher.editSum(valueString.toString());
+        valueString.delete(0, valueString.length());
+        valueString.append(correctSum);
         inputSumView.setText(valueString);
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        valueString.delete(0, valueString.length());
+        return false;
     }
 
     public Observable<Boolean> isFinishEdit() {

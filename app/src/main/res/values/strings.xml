@@ -154,5 +154,6 @@
     <string name="vk_posted_text">Пост успешно размещен на Вашей стене</string>
     <string name="vk_not_posted_text">Создание поста прервано</string>
     <string name="vk_error_posted_text">Ошибка при создании поста</string>
+    <string name="statistics_period_text">Period of charts</string>
     <integer name="com_vk_sdk_AppId">5696879</integer>
 </resources>

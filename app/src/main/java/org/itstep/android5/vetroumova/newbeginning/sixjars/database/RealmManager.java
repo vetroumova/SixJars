@@ -20,10 +20,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import io.realm.Sort;
 import io.realm.internal.IOException;
@@ -43,8 +44,7 @@ public class RealmManager {
 
     //from Realm
     private static RealmManager realmManagerInstance;
-    private static RealmChangeListener listener;
-    //private final Realm realm;
+    //private static RealmChangeListener listener;
     private Realm realm;
 
     public RealmManager(Application application) {
@@ -69,25 +69,6 @@ public class RealmManager {
         }
         return realmManagerInstance;
     }
-
-    //TODO CHECK !!!
-    /*public static RealmManager with(Activity activity, RealmChangeListener realmChangeListener) {
-
-        if (realmManagerInstance == null) {
-            realmManagerInstance = new RealmManager(activity.getApplication());
-        }
-        realmManagerInstance.realm.addChangeListener(realmChangeListener);
-        return realmManagerInstance;
-    }
-
-    public static RealmManager with(Fragment fragment, RealmChangeListener realmChangeListener) {
-
-        if (realmManagerInstance == null) {
-            realmManagerInstance = new RealmManager(fragment.getActivity().getApplication());
-        }
-        realmManagerInstance.realm.addChangeListener(realmChangeListener);
-        return realmManagerInstance;
-    }*/
 
     public static RealmManager with(Application application) {
 
@@ -153,9 +134,6 @@ public class RealmManager {
                 realm.copyToRealmOrUpdate(jar);
             }
         });
-
-        //already have listener in constructor
-        //realm.addChangeListener(listener);
     }
 
     public void setRealm() {
@@ -326,30 +304,6 @@ public class RealmManager {
         return realm.where(Jar.class).equalTo("jar_id", id).findFirst();
     }
 
-    /*public boolean editCash(long cashflowID, float cashSum, Date newDate, String description) {
-
-        Cashflow cash = realm.where(Cashflow.class).equalTo("id", cashflowID).findFirst();
-        float cashInJar = cash.getJar().getTotalCash();
-        //TODO check for negatives
-        if ((cashInJar - cash.getSum() + cashSum) < 0) {
-            return false;
-        }
-        //TODO check if needed DatePick checking
-        *//*else if(newDate > ) {
-
-            }*//*
-        else {
-            realm.beginTransaction();
-            Jar currentJar = cash.getJar();
-            cash.setSum(cashSum);
-            cash.setDate(newDate);
-            cash.setDescription(description);
-            realm.commitTransaction();
-            checkSumTotalInJar(currentJar.getJar_id());
-            return true;
-        }
-    }*/
-
     public boolean editCashflow(long cashID, Date newDate, float newSum, String description, String jarID) {
 
         Cashflow oldCashflow = realm.where(Cashflow.class).equalTo("id", cashID).findFirst();
@@ -399,8 +353,8 @@ public class RealmManager {
                 .findFirst();
     }
 
-    public RealmResults<Cashflow> getAllCashflow() {
-         /*Observable<Cashflow> result = realm.where(Cashflow.class)
+    /*public RealmResults<Cashflow> getAllCashflow() {
+         *//*Observable<Cashflow> result = realm.where(Cashflow.class)
                  .findAllSortedAsync("date", Sort.DESCENDING).asObservable()
                 //.filter(result.isLoaded())
                 .filter(result.isLoaded())
@@ -412,24 +366,35 @@ public class RealmManager {
                         // null realmObject
                     }
                 });
-        return result;*/
+        return result;*//*
         return null;
-    }
+    }*/
 
     public RealmResults<Cashflow> getCashflowInJar(String jarID) {
+        //one month back
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.add(Calendar.MONTH, -1);
         return realm.where(Cashflow.class)
                 .equalTo("jar.jar_id", jarID)
-                //.greaterThan("date",(new Date(System.currentTimeMillis()-(30*24*60*60*1000))))
+                .greaterThan("date", new Date(calendar.getTimeInMillis()))
                 //.findAllSortedAsync("date", Sort.DESCENDING);
                 .findAllSorted("date", Sort.DESCENDING);
-
     }
 
-    public RealmResults<Cashflow> getCashflowInJarFromDate(String jarID, Date fromDayToNow) {
+    public RealmResults<Cashflow> getCashflowInJarFromDate(String jarID, Date startDate, Date endDate) {
 
         return realm.where(Cashflow.class)
-                .greaterThanOrEqualTo("date", fromDayToNow)
+                //.greaterThanOrEqualTo("date", fromDayToNow)
+                .between("date", startDate, endDate)
                 .equalTo("jar.jar_id", jarID)
+                .findAllSorted("date", Sort.DESCENDING);
+    }
+
+    public RealmResults<Cashflow> getCashflowsFromDate(Date startDate, Date endDate) {
+
+        return realm.where(Cashflow.class)
+                //.greaterThanOrEqualTo("date", fromDayToNow)
+                .between("date", startDate, endDate)
                 .findAllSorted("date", Sort.DESCENDING);
     }
 

@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -33,16 +34,47 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/item_name_dimension"
                     android:textStyle="bold"
-                    app:layout_heightPercent="15%"
-                    app:layout_marginTopPercent="2%"
+                    app:layout_heightPercent="10%"
+                    app:layout_marginTopPercent="1%"
                     app:layout_widthPercent="100%" />
+
+                <TextView
+                    android:id="@+id/statisticsPeriodText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/statisticsTextView"
+                    android:text="@string/statistics_period_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryTextDark"
+                    android:textSize="@dimen/item_description_dimension"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="7%"
+                    app:layout_marginTopPercent="1%"
+                    app:layout_widthPercent="100%" />
+                <!--app:thumbShadow="true"-->
+
+                <org.florescu.android.rangeseekbar.RangeSeekBar
+                    android:id="@+id/statisticsSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/statisticsPeriodText"
+                    app:layout_heightPercent="12%"
+                    app:layout_widthPercent="90%"
+                    rsb:absoluteMaxValue="100"
+                    rsb:absoluteMinValue="0"
+                    rsb:thumbShadow="true"
+                    rsb:thumbShadowBlur="3dp"
+                    rsb:thumbShadowColor="@color/colorTranspBG"
+                    rsb:thumbShadowXOffset="1dp"
+                    rsb:thumbShadowYOffset="2dp"
+                    rsb:valuesAboveThumbs="false" />
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/statJarPieChart"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_below="@+id/statisticsTextView"
-                    app:layout_heightPercent="80%"
+                    android:layout_below="@+id/statisticsSeekBar"
+                    app:layout_heightPercent="60%"
                     app:layout_marginPercent="1%"
                     app:layout_widthPercent="100%" />
 

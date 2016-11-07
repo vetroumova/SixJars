@@ -6,7 +6,6 @@ package org.itstep.android5.vetroumova.newbeginning.sixjars.model;
 
 import io.realm.DynamicRealm;
 import io.realm.RealmMigration;
-import io.realm.RealmObjectSchema;
 import io.realm.RealmSchema;
 
 /**
@@ -45,9 +44,9 @@ public class Migration implements RealmMigration {
          private int jar_color;     //new field
          ************************************************/
         // Migrate from version 0 to version 1
-        if (oldVersion == 0) {
+        /*if (oldVersion == 0) {
             RealmObjectSchema personSchema = schema.get("Jar");
-            /*// Combine 'firstName' and 'lastName' in a new field called 'fullName'
+            // Combine 'firstName' and 'lastName' in a new field called 'fullName'
             personSchema
                     .addField("fullName", String.class, FieldAttribute.REQUIRED)
                     .transform(new RealmObjectSchema.Function() {
@@ -57,10 +56,10 @@ public class Migration implements RealmMigration {
                         }
                     })
                     .removeField("firstName")
-                    .removeField("lastName");*/
+                    .removeField("lastName");*//*
             personSchema.addField("jar_color", String.class);
             oldVersion++;
-        }
+        }*/
 
         /************************************************
          // Version 2

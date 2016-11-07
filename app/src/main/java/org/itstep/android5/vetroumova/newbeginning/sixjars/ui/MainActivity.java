@@ -347,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
         }
-        updateAllWidgets();
+        //updateAllWidgets();
 
         Subscription jarInRecyclerSubscription = recyclerFragment.getJar()
                 .subscribe(jar -> {

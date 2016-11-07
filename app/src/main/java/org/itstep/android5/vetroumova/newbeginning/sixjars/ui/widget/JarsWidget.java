@@ -22,8 +22,8 @@ import io.realm.RealmResults;
 import io.realm.Sort;
 
 /**
- * Implementation of App Widget functionality.
- * App Widget Configuration implemented in {@link JarsWidgetConfigureActivity JarsWidgetConfigureActivity}
+ * Implementation of MainApplication Widget functionality.
+ * MainApplication Widget Configuration implemented in {@link JarsWidgetConfigureActivity JarsWidgetConfigureActivity}
  * <p>
  * stackoverflow
  * One Widget that is available for use in a RemoteView is the ProgressBar.

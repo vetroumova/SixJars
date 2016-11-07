@@ -1,13 +1,9 @@
 package org.itstep.android5.vetroumova.newbeginning.sixjars.model;
 
-import io.realm.RealmList;
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * Created by OLGA on 11.09.2016.
  */
-public class User extends RealmObject {
+public class User {/*extends RealmObject {
 
     public static final String LOGIN_FIELD = "login";
     public static final String PASSWORD_FIELD = "password";
@@ -54,5 +50,5 @@ public class User extends RealmObject {
 
     public void setJars(RealmList<Jar> jars) {
         this.jars = jars;
-    }
+    }*/
 }

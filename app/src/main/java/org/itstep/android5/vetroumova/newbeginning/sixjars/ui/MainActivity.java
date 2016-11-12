@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -90,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
     AHBottomNavigationItem itemStatistics;
     AHBottomNavigationItem itemTutorial;
     AHBottomNavigationItem itemAbout;
-
+    AlphaAnimation animationDisapear;
+    AlphaAnimation animationGetVisible;
     //RecyclerView rxList;
     //ArrayList<AnimationDrawable> jars;
     private RxRecyclerAdapter rxRecyclerAdapter = new RxRecyclerAdapter();
@@ -111,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
     private SpendFragment spendFragment;
     private CashInfoFragment cashInfoFragment;
     private ShareFragment shareFragment;
-
     private int menuItem = 0;
 
     public static Bitmap getBitmapFromDrawable(Context context, @DrawableRes int drawableId) {
@@ -226,11 +227,21 @@ public class MainActivity extends AppCompatActivity {
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        //add new item
+        animationDisapear = new AlphaAnimation(1, 0);
+        animationGetVisible = new AlphaAnimation(0, 1);
+        animationDisapear.setDuration(500);
+        animationDisapear.setStartOffset(100);
+        animationDisapear.setFillAfter(true);
+        animationGetVisible.setDuration(500);
+        animationGetVisible.setStartOffset(200);
+        animationGetVisible.setFillAfter(true);
+        //fab.setAnimation(animation1);
+        //add new income
         fab.setOnClickListener(view -> {
 
             //Snackbar.make(view, "Add to JARS", Snackbar.LENGTH_LONG)
             //        .setAction("Cashflow", null).show();
+            fab.startAnimation(animationDisapear);
             Log.d(TAG, "FAB");
             fragmentManager.beginTransaction()
                     .replace(R.id.content_layout, addCashFlowFragment)
@@ -239,7 +250,8 @@ public class MainActivity extends AppCompatActivity {
                     .addToBackStack("addCash")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
-            fab.setVisibility(View.INVISIBLE);
+            //fab.setVisibility(View.INVISIBLE);
+            fab.hide();
         });
 
         //set toolbar
@@ -299,7 +311,14 @@ public class MainActivity extends AppCompatActivity {
                                 .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
-                        fab.setVisibility(View.VISIBLE);
+                        /*if (fab.getVisibility() == View.INVISIBLE) {
+                            fab.setVisibility(View.VISIBLE);
+                            fab.startAnimation(animationGetVisible);
+                        }*/
+                        if (!fab.isShown()) {
+                            fab.show();
+                            fab.startAnimation(animationGetVisible);
+                        }
                         break;
                     }
                     case 1: {
@@ -307,8 +326,10 @@ public class MainActivity extends AppCompatActivity {
                                 .replace(R.id.content_layout, settingsFragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
-                        /*}*/
-                        fab.setVisibility(View.VISIBLE);
+                        if (!fab.isShown()) {
+                            fab.show();
+                            fab.startAnimation(animationGetVisible);
+                        }
                         break;
                     }
                     case 2: {
@@ -316,7 +337,10 @@ public class MainActivity extends AppCompatActivity {
                                 .replace(R.id.content_layout, statisticsFragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
-                        fab.setVisibility(View.VISIBLE);
+                        if (!fab.isShown()) {
+                            fab.show();
+                            fab.startAnimation(animationGetVisible);
+                        }
                         break;
                     }
                     case 3: {
@@ -324,7 +348,10 @@ public class MainActivity extends AppCompatActivity {
                                 .replace(R.id.content_layout, helpFragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
-                        fab.setVisibility(View.INVISIBLE);
+                        if (!fab.isShown()) {
+                            fab.show();
+                            fab.startAnimation(animationGetVisible);
+                        }
                         break;
                     }
                     default: {
@@ -679,7 +706,12 @@ public class MainActivity extends AppCompatActivity {
             } catch (NullPointerException e) {
                 Log.d("VOlga", "No backstack onBackPressed");
             }*/
-            fab.setVisibility(View.VISIBLE);
+            //fab.setVisibility(View.VISIBLE);
+
+            if (!fab.isShown()) {
+                fab.show();
+                fab.startAnimation(animationGetVisible);
+            }
             super.onBackPressed();
         }
     }

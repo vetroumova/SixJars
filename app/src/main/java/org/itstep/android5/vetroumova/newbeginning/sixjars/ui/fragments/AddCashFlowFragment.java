@@ -239,8 +239,15 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
                     // add to one jar or to all
                     sum = Float.parseFloat(sumEditText.getText().toString());
 
+                    //todo in all sum corrections
+                    if (sum > 10_000_000 || (sumOfJars + sum) > 60_000_000) {
+                        Toast.makeText(getContext(), R.string.too_much_text, Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+
                     //GLOBAL INCOME
                     if (jarID.equals("AllJars")) {
+
                         //CHOOSE if pour to FFA or LTSS jar needed
                         PourToJarFragment pourFragment = new PourToJarFragment();
                         // SETS the target fragment for use later when sending results

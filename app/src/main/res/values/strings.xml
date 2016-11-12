@@ -155,5 +155,6 @@
     <string name="vk_not_posted_text">Создание поста прервано</string>
     <string name="vk_error_posted_text">Ошибка при создании поста</string>
     <string name="statistics_period_text">Period of charts</string>
+    <string name="too_much_text">Sorry, Mr. Rockfeller, you can\'t put so much money in Jar</string>
     <integer name="com_vk_sdk_AppId">5696879</integer>
 </resources>

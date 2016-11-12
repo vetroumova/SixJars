@@ -2,7 +2,6 @@ package org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -270,7 +269,8 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         DecimalFormat f = new DecimalFormat("##,##0.00", s);
         jarBalance.setText(getString(R.string.item_balance_text, f.format(jar.getTotalCash())));
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        //todo check in lower versions
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             jarImage.setImageResource(BottleDrawableManager.setAnimationJar
                     (Prefs.with(getContext()), jarIDString));
             AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
@@ -279,7 +279,12 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         } else {
             jarImage.setImageResource(BottleDrawableManager.setDrawableJar
                     (Prefs.with(getContext()), jarIDString));
-        }
+        }*/
+        jarImage.setImageResource(BottleDrawableManager.setAnimationJar
+                (Prefs.with(getContext()), jarIDString));
+        AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
+        //Управлять объектом AnimationDrawable можно через методы start() и stop().
+        animation.start();
 
     }
 

@@ -34,7 +34,7 @@
             android:background="@drawable/jar_widget_bg"
             android:gravity="center"
             android:padding="@dimen/margin_normal"
-            app:layout_heightPercent="8%"
+            app:layout_heightPercent="12%"
             app:layout_widthPercent="100%">
 
             <TextView
@@ -62,7 +62,7 @@
             app:layout_heightPercent="20%"
             app:layout_marginRightPercent="4%"
             app:layout_marginTopPercent="2%"
-            app:layout_widthPercent="44%">
+            app:layout_widthPercent="46%">
 
             <ImageView
                 android:id="@+id/pourLTSSJar_imageView"
@@ -126,13 +126,13 @@
             android:id="@+id/pourFFAJar"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/pourNoJar"
-            android:layout_toRightOf="@+id/pourLTSSJar"
             android:background="@drawable/jar_widget_bg"
             android:padding="@dimen/margin_normal"
             app:layout_heightPercent="20%"
             app:layout_marginTopPercent="2%"
-            app:layout_widthPercent="44%">
+            app:layout_widthPercent="46%">
 
             <ImageView
                 android:id="@+id/pourFFAJar_imageView"

@@ -24,7 +24,7 @@ public class InputSumWatcher implements TextWatcher {
         if (input.startsWith(".") || input.startsWith(",")) {
             Log.d("VOlga", input);
             input = "0".concat(input);
-        } else if (len == 12) {
+        } else if (len == 8) {
             //edt.setText(edt.getText().delete(edt.getText().length()-1, edt.getText().length()) );
             input = input.substring(0, input.length() - 1);
         } else if (len > 4) {
@@ -63,7 +63,7 @@ public class InputSumWatcher implements TextWatcher {
                 Log.d("VOlga", edt.getText().toString());
             }
         }
-        if (len == 12) {
+        if (len == 8) {
             edt.setText(edt.getText().delete(edt.getText().length() - 1, edt.getText().length()));
         }
         edt.setSelection(edt.getText().length());

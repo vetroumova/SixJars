@@ -156,14 +156,14 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_centerVertical="true"
+                android:layout_alignBottom="@id/itemCashSpendButton"
                 android:layout_toRightOf="@+id/itemCashSpendButton"
                 android:gravity="center"
                 android:shadowColor="@color/cardview_dark_background"
                 android:text="@string/delete_cash_info_text"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="8%"
+                app:layout_heightPercent="10%"
                 app:layout_marginBottomPercent="2%"
                 app:layout_marginLeftPercent="1%"
                 app:layout_widthPercent="54%" />

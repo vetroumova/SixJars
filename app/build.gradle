@@ -15,7 +15,7 @@ android {
         versionName "1.0"
 
         // Enabling multidex support.
-        multiDexEnabled true
+        /*multiDexEnabled true*/
     }
     aaptOptions {
         additionalParameters "--no-version-vectors"
@@ -54,8 +54,9 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
     compile 'com.github.PhilJay:MPAndroidChart-Realm:v1.1.0@aar'
     compile 'com.vk:androidsdk:1.6.5'
-    compile 'com.google.android.gms:play-services:8.3.0'
-    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.google.android.gms:play-services-plus:9.0.0'
+    compile 'com.google.android.gms:play-services-auth:9.0.0'
+    compile 'com.google.android.gms:play-services-base:9.0.0'
+    /*compile 'com.android.support:multidex:1.0.1'*/
     compile 'org.florescu.android.rangeseekbar:rangeseekbar-library:0.3.0'
-    compile 'com.android.support:multidex:1.0.1'
 }

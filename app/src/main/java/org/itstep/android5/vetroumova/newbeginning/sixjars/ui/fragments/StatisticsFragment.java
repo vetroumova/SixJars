@@ -49,6 +49,9 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
     PieChart pieChart;
     RangeSeekBar<Integer> rangeSeekBar;
     TextView periodTextView;
+    TextView barTextView;
+    TextView barTextView2;
+    TextView noDataTextView;
     private String[] jarIDs = {"NEC", "PLAY", "GIVE", "EDU", "LTSS", "FFA"};
     private Date[] dates;
     private Typeface tf;
@@ -87,6 +90,11 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
 
+        //for visibility change
+        barTextView = (TextView) view.findViewById(R.id.statisticsBarTextView);
+        barTextView2 = (TextView) view.findViewById(R.id.statisticsBarTextView2);
+        noDataTextView = (TextView) view.findViewById(R.id.statisticsNoDataTextView);
+
         rangeSeekBar = (RangeSeekBar) view.findViewById(R.id.statisticsSeekBar);
         rangeSeekBar.setRangeValues(0, 100);
         rangeSeekBar.setOnRangeSeekBarChangeListener(this);
@@ -98,60 +106,71 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
         barChart = (BarChart) view.findViewById(R.id.statJarBarChart);
         pieChart = (PieChart) view.findViewById(R.id.statJarPieChart);
 
-        tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Bold.ttf");
+        //for noData
+        if (globalResults.size() == 0) {
+            barChart.setVisibility(View.GONE);
+            pieChart.setVisibility(View.GONE);
+            rangeSeekBar.setVisibility(View.GONE);
+            periodTextView.setVisibility(View.GONE);
+            barTextView.setVisibility(View.GONE);
+            barTextView2.setVisibility(View.GONE);
+            noDataTextView.setVisibility(View.VISIBLE);
+        } else {
+            tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Bold.ttf");
 
-        pieChart.setCenterTextTypeface(tf);
-        pieChart.setCenterText(generateCenterText());
-        pieChart.setCenterTextSize(10f);
-        pieChart.setCenterTextTypeface(tf);
-        pieChart.setDescription(getString(R.string.statistics_pie_title));
+            pieChart.setCenterTextTypeface(tf);
+            pieChart.setCenterText(generateCenterText());
+            pieChart.setCenterTextSize(10f);
+            pieChart.setCenterTextTypeface(tf);
+            pieChart.setDescription(getString(R.string.statistics_pie_title));
 
-        // radius of the center hole in percent of maximum radius
-        pieChart.setHoleRadius(40f);
-        pieChart.setTransparentCircleRadius(45f);
-        pieChart.animateY(500, Easing.EasingOption.EaseInOutQuad);
-        pieChart.setDrawEntryLabels(false);
+            // radius of the center hole in percent of maximum radius
+            pieChart.setHoleRadius(40f);
+            pieChart.setTransparentCircleRadius(45f);
+            pieChart.animateY(500, Easing.EasingOption.EaseInOutQuad);
+            pieChart.setDrawEntryLabels(false);
 
-        Legend l = pieChart.getLegend();
-        //l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+            Legend l = pieChart.getLegend();
+            //l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         /*l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);*/
-        l.setMaxSizePercent(0.8f);
-        l.setForm(Legend.LegendForm.CIRCLE);
-        l.setPosition(LegendPosition.ABOVE_CHART_CENTER);
-        l.setDrawInside(false);
+            l.setMaxSizePercent(0.8f);
+            l.setForm(Legend.LegendForm.CIRCLE);
+            l.setPosition(LegendPosition.ABOVE_CHART_CENTER);
+            l.setDrawInside(false);
 
-        pieChart.setData(generatePieData());
+            pieChart.setData(generatePieData());
 
-        //barchart
-        barChart.setDescription(getString(R.string.statistics_bar_title));
-        barChart.setDescriptionPosition(0f, 1f);
-        barChart.setFitBars(true);
-        barChart.setNoDataText(getString(R.string.no_data_chart_text));
-        //barChart.setMaxVisibleValueCount(6);
+            //barchart
+            barChart.setDescription(getString(R.string.statistics_bar_title));
+            barChart.setDescriptionPosition(0f, 1f);
+            barChart.setFitBars(true);
+            barChart.setNoDataText(getString(R.string.no_data_chart_text));
+            //barChart.setMaxVisibleValueCount(6);
 
         /*XAxis xLabels = barChart.getXAxis();
         xLabels.setPosition(XAxis.XAxisPosition.TOP);*/
 
-        Legend lb = barChart.getLegend();
-        lb.setForm(Legend.LegendForm.SQUARE);
-        lb.setPosition(LegendPosition.ABOVE_CHART_CENTER);
-        lb.setFormSize(6f);
-        lb.setFormToTextSpace(2f);
-        lb.setXEntrySpace(4f);
+            Legend lb = barChart.getLegend();
+            lb.setForm(Legend.LegendForm.SQUARE);
+            lb.setPosition(LegendPosition.ABOVE_CHART_CENTER);
+            lb.setFormSize(6f);
+            lb.setFormToTextSpace(2f);
+            lb.setXEntrySpace(4f);
 
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setTypeface(tf);
-        xAxis.setGranularity(1f);
-        xAxis.setCenterAxisLabels(true);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGridColor(Color.LTGRAY);
-        xAxis.setDrawLabels(false);
-        barChart.getAxisRight().setEnabled(false);
+            XAxis xAxis = barChart.getXAxis();
+            xAxis.setTypeface(tf);
+            xAxis.setGranularity(1f);
+            xAxis.setCenterAxisLabels(true);
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis.setGridColor(Color.LTGRAY);
+            xAxis.setDrawLabels(false);
+            barChart.getAxisRight().setEnabled(false);
 
-        //barChart.setData(generateStackedBarData());
-        barChart.setData(generateBarData());
+            //barChart.setData(generateStackedBarData());
+            barChart.setData(generateBarData());
+        }
         return view;
     }
 
@@ -184,6 +203,9 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
             if (-sumOfPaymentsInJar > 0) {      //to not add jars with no payments
                 entries1.add(new PieEntry(-sumOfPaymentsInJar, jarID));
             }
+        }
+        if (entries1.isEmpty()) {
+            pieChart.setVisibility(View.GONE);
         }
 
         PieDataSet ds1 = new PieDataSet(entries1, getString(R.string.statistics_pie_title));

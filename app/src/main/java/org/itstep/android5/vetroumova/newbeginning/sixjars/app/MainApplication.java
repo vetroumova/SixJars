@@ -1,6 +1,6 @@
 package org.itstep.android5.vetroumova.newbeginning.sixjars.app;
 
-import android.support.multidex.MultiDexApplication;
+import android.app.Application;
 
 import com.vk.sdk.VKSdk;
 
@@ -10,7 +10,8 @@ import io.realm.RealmConfiguration;
 /**
  * Created by OLGA on 12.09.2016.
  */
-public class MainApplication extends MultiDexApplication {
+public class MainApplication extends Application {
+    /*public class MainApplication extends MultiDexApplication {*/
 
     //Application is a Singleton
 

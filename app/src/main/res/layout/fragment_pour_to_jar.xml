@@ -42,6 +42,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_centerInParent="true"
+                android:gravity="center"
                 android:text="@string/no_pour_text"
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
@@ -70,9 +71,12 @@
                 android:layout_height="0dp"
                 android:layout_alignParentLeft="true"
                 android:contentDescription="@string/appwidget_text"
-                app:layout_heightPercent="90%"
-                app:layout_marginPercent="5%"
-                app:layout_widthPercent="30%"
+                app:layout_heightPercent="85%"
+                app:layout_marginBottomPercent="5%"
+                app:layout_marginLeftPercent="12%"
+                app:layout_marginRightPercent="4%"
+                app:layout_marginTopPercent="5%"
+                app:layout_widthPercent="20%"
                 app:srcCompat="@drawable/water_to_jar_empty" />
 
             <TextView
@@ -88,6 +92,7 @@
                 android:textSize="@dimen/item_name_dimension"
                 android:textStyle="bold"
                 app:layout_heightPercent="25%"
+                app:layout_marginTopPercent="5%"
                 app:layout_widthPercent="50%" />
 
             <TextView
@@ -140,9 +145,12 @@
                 android:layout_height="0dp"
                 android:layout_alignParentLeft="true"
                 android:contentDescription="@string/appwidget_text"
-                app:layout_heightPercent="90%"
-                app:layout_marginPercent="5%"
-                app:layout_widthPercent="30%"
+                app:layout_heightPercent="85%"
+                app:layout_marginBottomPercent="5%"
+                app:layout_marginLeftPercent="12%"
+                app:layout_marginRightPercent="4%"
+                app:layout_marginTopPercent="5%"
+                app:layout_widthPercent="20%"
                 app:srcCompat="@drawable/water_to_jar_empty" />
 
             <TextView
@@ -158,6 +166,7 @@
                 android:textSize="@dimen/item_name_dimension"
                 android:textStyle="bold"
                 app:layout_heightPercent="25%"
+                app:layout_marginTopPercent="5%"
                 app:layout_widthPercent="50%" />
 
             <TextView

@@ -60,32 +60,6 @@
                 app:layout_marginTopPercent="2%"
                 app:layout_widthPercent="100%">
 
-                <ImageView
-                    android:id="@+id/addAllJars_imageView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentLeft="true"
-                    android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="2%"
-                    app:layout_widthPercent="25%"
-                    app:srcCompat="@drawable/water_to_jar_empty" />
-
-                <TextView
-                    android:id="@+id/addAllJars_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/addAllJars_imageView"
-                    android:text="@string/to_all_jars_by_percentage"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/item_name_dimension"
-                    android:textStyle="bold"
-                    app:layout_heightPercent="40%"
-                    app:layout_marginLeftPercent="2%"
-                    app:layout_marginTopPercent="2%"
-                    app:layout_widthPercent="60%" />
-
                 <TextView
                     android:id="@+id/currBalanceJars"
                     android:layout_width="0dp"
@@ -101,6 +75,37 @@
                     app:layout_marginTopPercent="2%"
                     app:layout_widthPercent="60%" />
 
+                <TextView
+                    android:id="@+id/addAllJars_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignTop="@+id/addAllJars_imageView"
+                    android:layout_toEndOf="@+id/addAllJars_imageView"
+                    android:text="@string/to_all_jars_by_percentage"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_name_dimension"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="40%"
+                    app:layout_marginLeftPercent="2%"
+                    app:layout_marginTopPercent="2%"
+                    app:layout_widthPercent="60%" />
+
+                <ImageView
+                    android:id="@+id/addAllJars_imageView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="12dp"
+                    android:contentDescription="@string/appwidget_text"
+                    app:layout_heightPercent="75%"
+                    app:layout_marginBottomPercent="5%"
+                    app:layout_marginLeftPercent="5%"
+                    app:layout_marginRightPercent="3%"
+                    app:layout_marginTopPercent="5%"
+                    app:layout_widthPercent="25%"
+                    app:srcCompat="@drawable/water_to_jar_empty" />
+
             </android.support.percent.PercentRelativeLayout>
 
             <android.support.percent.PercentRelativeLayout
@@ -115,17 +120,6 @@
                 app:layout_marginRightPercent="4%"
                 app:layout_marginTopPercent="2%"
                 app:layout_widthPercent="46%">
-
-                <ImageView
-                    android:id="@+id/addNECJar_imageView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentLeft="true"
-                    android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
-                    app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
                     android:id="@+id/addNECJar_textView"
@@ -156,6 +150,21 @@
                     app:layout_heightPercent="40%"
                     app:layout_widthPercent="50%" />
 
+                <ImageView
+                    android:id="@+id/addNECJar_imageView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/addNECJar_textView"
+                    android:contentDescription="@string/appwidget_text"
+                    app:layout_heightPercent="85%"
+                    app:layout_marginBottomPercent="5%"
+                    app:layout_marginLeftPercent="12%"
+                    app:layout_marginRightPercent="10%"
+                    app:layout_marginTopPercent="5%"
+                    app:layout_widthPercent="20%"
+                    app:srcCompat="@drawable/water_to_jar_empty" />
+
             </android.support.percent.PercentRelativeLayout>
 
             <android.support.percent.PercentRelativeLayout
@@ -176,10 +185,14 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="85%"
+                    app:layout_marginBottomPercent="5%"
+                    app:layout_marginLeftPercent="12%"
+                    app:layout_marginRightPercent="10%"
+                    app:layout_marginTopPercent="5%"
+                    app:layout_widthPercent="20%"
                     app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
@@ -230,10 +243,14 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="85%"
+                    app:layout_marginBottomPercent="5%"
+                    app:layout_marginLeftPercent="12%"
+                    app:layout_marginRightPercent="10%"
+                    app:layout_marginTopPercent="5%"
+                    app:layout_widthPercent="20%"
                     app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
@@ -285,10 +302,14 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="85%"
+                    app:layout_marginBottomPercent="5%"
+                    app:layout_marginLeftPercent="12%"
+                    app:layout_marginRightPercent="10%"
+                    app:layout_marginTopPercent="5%"
+                    app:layout_widthPercent="20%"
                     app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
@@ -339,10 +360,14 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="85%"
+                    app:layout_marginBottomPercent="5%"
+                    app:layout_marginLeftPercent="12%"
+                    app:layout_marginRightPercent="10%"
+                    app:layout_marginTopPercent="5%"
+                    app:layout_widthPercent="20%"
                     app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView
@@ -406,10 +431,14 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="85%"
+                    app:layout_marginBottomPercent="5%"
+                    app:layout_marginLeftPercent="12%"
+                    app:layout_marginRightPercent="10%"
+                    app:layout_marginTopPercent="5%"
+                    app:layout_widthPercent="20%"
                     app:srcCompat="@drawable/water_to_jar_empty" />
 
                 <TextView

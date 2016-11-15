@@ -27,6 +27,7 @@
                     android:id="@+id/statisticsTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_large"
                     android:gravity="center_horizontal|top"
                     android:shadowColor="@color/cardview_dark_background"
                     android:text="@string/statistics"
@@ -41,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/statisticsTextView"
+                    android:layout_marginTop="@dimen/margin_large"
                     android:text="@string/statistics_period_text"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryTextDark"
@@ -53,6 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/statisticsPeriodText"
+                    android:layout_margin="@dimen/margin_large"
                     rsb:absoluteMaxValue="100"
                     rsb:absoluteMinValue="0"
                     rsb:thumbShadow="true"
@@ -65,68 +68,72 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/statJarPieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="280dp"
                     android:layout_below="@+id/statisticsSeekBar" />
 
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margin_large"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/margin_normal">
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/statisticsBarTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/statJarPieChart"
-                    android:gravity="center_horizontal"
-                    android:shadowColor="@color/cardview_dark_background"
-                    android:text="@string/statistics_bar_title"
-                    android:textAlignment="textEnd"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/item_balance_dimension"
-                    android:textStyle="bold" />
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/statisticsArrowImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/margin_small"
+                        app:srcCompat="@drawable/ic_arrow_downward_black_24dp" />
 
-                <TextView
-                    android:id="@+id/statisticsBarTextView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/statJarPieChart"
-                    android:layout_toRightOf="@+id/statisticsBarTextView"
-                    android:gravity="center_horizontal"
-                    android:shadowColor="@color/cardview_dark_background"
-                    android:text="@string/statistics_bar_title2"
-                    android:textAlignment="textStart"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/item_balance_dimension"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/statisticsBarTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/statJarPieChart"
+                        android:gravity="center_horizontal"
+                        android:shadowColor="@color/cardview_dark_background"
+                        android:text="@string/statistics_bar_title"
+                        android:textAlignment="textEnd"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/item_balance_dimension"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/statisticsBarTextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/statJarPieChart"
+                        android:layout_toRightOf="@+id/statisticsBarTextView"
+                        android:gravity="center_horizontal"
+                        android:shadowColor="@color/cardview_dark_background"
+                        android:text="@string/statistics_bar_title2"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/item_balance_dimension"
+                        android:textStyle="bold" />
 
                 </android.support.v7.widget.LinearLayoutCompat>
-
-
-                <TextView
-                    android:id="@+id/statisticsSpaceTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/statJarBarChart"
-                    android:text="@string/statistics_bar_title2"
-                    android:visibility="invisible" />
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/statJarBarChart"
                     android:layout_width="300dp"
                     android:layout_height="300dp"
-                    android:layout_below="@+id/statisticsBarTextView" />
+                    android:layout_below="@+id/statisticsBarTextView"
+                    android:layout_margin="@dimen/margin_large" />
 
                 <TextView
                     android:id="@+id/statisticsNoDataTextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="400dp"
+                    android:layout_height="200dp"
                     android:layout_below="@+id/statJarBarChart"
+                    android:layout_margin="@dimen/margin_large"
                     android:text="@string/no_statistics_data_text"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/item_giant_title_dimension"
+                    android:textStyle="bold"
                     android:visibility="gone" />
 
             </android.support.v7.widget.LinearLayoutCompat>

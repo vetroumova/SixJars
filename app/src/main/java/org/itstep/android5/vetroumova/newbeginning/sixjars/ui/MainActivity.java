@@ -333,6 +333,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                     case 2: {
+                        statisticsFragment = StatisticsFragment.newInstance();
                         fragmentManager.beginTransaction()
                                 .replace(R.id.content_layout, statisticsFragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

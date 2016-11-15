@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -49,6 +51,7 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
     PieChart pieChart;
     RangeSeekBar<Integer> rangeSeekBar;
     TextView periodTextView;
+    ImageView arrowImage;
     TextView barTextView;
     TextView barTextView2;
     TextView noDataTextView;
@@ -91,6 +94,7 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
 
         //for visibility change
+        arrowImage = (ImageView) view.findViewById(R.id.statisticsArrowImage);
         barTextView = (TextView) view.findViewById(R.id.statisticsBarTextView);
         barTextView2 = (TextView) view.findViewById(R.id.statisticsBarTextView2);
         noDataTextView = (TextView) view.findViewById(R.id.statisticsNoDataTextView);
@@ -99,10 +103,11 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
         rangeSeekBar.setRangeValues(0, 100);
         rangeSeekBar.setOnRangeSeekBarChangeListener(this);
         periodTextView = (TextView) view.findViewById(R.id.statisticsPeriodText);
-        setPeriod(dates);
-        //todo normal scaling
-        rangeSeekBar.setSelectedMinValue(90);
-        rangeSeekBar.setSelectedMaxValue(100);
+        setPeriodText(dates);
+
+        setSeekValueByPeriod(dates[0], dates[1]);
+        /*rangeSeekBar.setSelectedMinValue(90);
+        rangeSeekBar.setSelectedMaxValue(100);*/
         barChart = (BarChart) view.findViewById(R.id.statJarBarChart);
         pieChart = (PieChart) view.findViewById(R.id.statJarPieChart);
 
@@ -112,6 +117,7 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
             pieChart.setVisibility(View.GONE);
             rangeSeekBar.setVisibility(View.GONE);
             periodTextView.setVisibility(View.GONE);
+            arrowImage.setVisibility(View.GONE);
             barTextView.setVisibility(View.GONE);
             barTextView2.setVisibility(View.GONE);
             noDataTextView.setVisibility(View.VISIBLE);
@@ -125,8 +131,8 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
             pieChart.setDescription(getString(R.string.statistics_pie_title));
 
             // radius of the center hole in percent of maximum radius
-            pieChart.setHoleRadius(40f);
-            pieChart.setTransparentCircleRadius(45f);
+            pieChart.setHoleRadius(50f);
+            pieChart.setTransparentCircleRadius(55f);
             pieChart.animateY(500, Easing.EasingOption.EaseInOutQuad);
             pieChart.setDrawEntryLabels(false);
 
@@ -154,7 +160,7 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
 
             Legend lb = barChart.getLegend();
             lb.setForm(Legend.LegendForm.SQUARE);
-            lb.setPosition(LegendPosition.ABOVE_CHART_CENTER);
+            lb.setPosition(LegendPosition.ABOVE_CHART_LEFT);
             lb.setFormSize(6f);
             lb.setFormToTextSpace(2f);
             lb.setXEntrySpace(4f);
@@ -174,7 +180,7 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
         return view;
     }
 
-    private void setPeriod(Date[] dates) {
+    private void setPeriodText(Date[] dates) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("d-MMMM-yyyy", Locale.getDefault());
         String startDate = dateFormat.format(dates[0]);
         String endDate = dateFormat.format(dates[1]);
@@ -206,6 +212,8 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
         }
         if (entries1.isEmpty()) {
             pieChart.setVisibility(View.GONE);
+        } else {
+            pieChart.setVisibility(View.VISIBLE);
         }
 
         PieDataSet ds1 = new PieDataSet(entries1, getString(R.string.statistics_pie_title));
@@ -261,22 +269,37 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
 
             if (-sumOfPaymentsInJar < 1) {
                 sumOfPaymentsInJar = -sumOfPaymentsInJar;
-                float[] bars = {-sumOfPaymentsInJar, sumOfIncome};
+                //float[] bars = {-sumOfPaymentsInJar, sumOfIncome};
             }
                 //entries2.add(new BarEntry(jar.getJar_float_id(),bars, jarID));
-            float jarFloatID = realm.where(Jar.class)
-                    .equalTo("jar_id", jarID)
-                    .findFirst()
-                    .getJar_float_id();
-            entries2.add(new BarEntry(jarFloatID, sumOfIncome));
-            entries2.add(new BarEntry(jarFloatID, -sumOfPaymentsInJar));
-            BarDataSet ds2 = new BarDataSet(entries2, getLabel(i));
-            int[] colors = {R.color.colorPrimaryDark, R.color.colorAccent};
-            ds2.setColors(ColorTemplate.createColors(getResources(), colors));
-            ds2.setValueTextColor(Color.BLACK);
-            ds2.setValueTextSize(10f);
-            ds2.setDrawValues(true);
-            sets.add(ds2);
+
+            //for visibility
+            if (sumOfIncome != 0 || sumOfPaymentsInJar != 0) {
+                float jarFloatID = realm.where(Jar.class)
+                        .equalTo("jar_id", jarID)
+                        .findFirst()
+                        .getJar_float_id();
+                entries2.add(new BarEntry(jarFloatID, sumOfIncome));
+                entries2.add(new BarEntry(jarFloatID, -sumOfPaymentsInJar));
+                BarDataSet ds2 = new BarDataSet(entries2, getLabel(i));
+                int[] colors = {R.color.colorPrimaryDark, R.color.colorAccent};
+                ds2.setColors(ColorTemplate.createColors(getResources(), colors));
+                ds2.setValueTextColor(Color.BLACK);
+                ds2.setValueTextSize(10f);
+                ds2.setDrawValues(true);
+                sets.add(ds2);
+            }
+        }
+        if (sets.isEmpty()) {
+            barChart.setVisibility(View.GONE);
+            arrowImage.setVisibility(View.GONE);
+            barTextView.setVisibility(View.GONE);
+            barTextView2.setVisibility(View.GONE);
+        } else {
+            barChart.setVisibility(View.VISIBLE);
+            arrowImage.setVisibility(View.VISIBLE);
+            barTextView.setVisibility(View.VISIBLE);
+            barTextView2.setVisibility(View.VISIBLE);
         }
         BarData d = new BarData(sets);
         d.setValueTypeface(tf);
@@ -310,22 +333,49 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
     @Override
     public void onRangeSeekBarValuesChanged(RangeSeekBar bar, Object minValue, Object maxValue) {
         //update dates[]
-        getPeriodBySeekValue(minValue, maxValue);
-        setPeriod(dates);
+        setPeriodBySeekValue(minValue, maxValue);
+        setPeriodText(dates);
         setRealmDataForPeriod();
         barChart.setData(generateBarData());
         pieChart.setData(generatePieData());
         //setData(mSeekBarX.getProgress() + 1 , mSeekBarY.getProgress());
         barChart.invalidate();
         pieChart.invalidate();
+        if (barChart.getVisibility() == View.GONE && pieChart.getVisibility() == View.GONE) {
+            noDataTextView.setVisibility(View.VISIBLE);
+        } else {
+            noDataTextView.setVisibility(View.GONE);
+        }
     }
 
-    private void getPeriodBySeekValue(Object minValue, Object maxValue) {
+    private void setPeriodBySeekValue(Object minValue, Object maxValue) {
         int lengthOfSeek = rangeSeekBar.getAbsoluteMaxValue() - rangeSeekBar.getAbsoluteMinValue();
-        Date max = globalResults.maxDate("date");
-        Date min = globalResults.minDate("date");
-        long millisUnit = (max.getTime() - min.getTime()) / lengthOfSeek;
-        dates[0] = new Date(min.getTime() + ((int) minValue * millisUnit));
-        dates[1] = new Date(min.getTime() + ((int) maxValue * millisUnit));
+        Date globalMin = globalResults.minDate("date");
+        Date globalMax = globalResults.maxDate("date");
+        long millisUnit = (globalMax.getTime() - globalMin.getTime()) / lengthOfSeek;
+        dates[0] = new Date(globalMin.getTime() + ((int) minValue * millisUnit));
+        dates[1] = new Date(globalMin.getTime() + ((int) maxValue * millisUnit));
+    }
+
+    private void setSeekValueByPeriod(Date minDate, Date maxDate) {
+        int lengthOfSeek = rangeSeekBar.getAbsoluteMaxValue() - rangeSeekBar.getAbsoluteMinValue();
+        Date globalMin = globalResults.minDate("date");
+        Date globalMax = globalResults.maxDate("date");
+        Log.d("VOlga", "globalMin " + globalMin + " globalMax " + globalMax);
+        //todo fix null lengthOfSeek;
+        long millisUnit = 1;
+        Log.d("VOlga", "lengthOfSeek " + lengthOfSeek);
+        if (lengthOfSeek != 0) {
+            millisUnit = (globalMax.getTime() - globalMin.getTime()) / lengthOfSeek;
+            if (millisUnit == 0) // case of same dates of min and max\
+            {
+                millisUnit = lengthOfSeek;
+            }
+        }
+        Log.d("VOlga", "millisUnit " + millisUnit);
+        int minSeek = (int) ((minDate.getTime() - globalMin.getTime()) / millisUnit);
+        int maxSeek = (int) ((maxDate.getTime() - globalMin.getTime()) / millisUnit);
+        rangeSeekBar.setSelectedMinValue(minSeek);
+        rangeSeekBar.setSelectedMaxValue(maxSeek);
     }
 }

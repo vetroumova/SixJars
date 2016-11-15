@@ -102,4 +102,8 @@
     <string name="warning_restore_text">Вы действительно хотите восстановить базу данных из архива? \nЭто уничтожит все несохраненные данные.</string>
     <string name="restore_done_text">Восстановление завершено</string>
     <string name="restore_process_text">Восстанавливаем... Пожалуйста, подождите.</string>
+    <string name="no_statistics_data_text">НЕТ ДАННЫХ</string>
+    <string name="title_activity_restore">Восстановить базу из архива</string>
+    <string name="statistics_period_text">Период отчетности</string>
+    <string name="too_much_text">Извините, господин Рокфелер, Вы не можете добавить такую большую сумму.</string>
 </resources>

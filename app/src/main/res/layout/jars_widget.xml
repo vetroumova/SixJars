@@ -1,18 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/widget_bg"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:weightSum="15">
+    <!--android:background="@drawable/widget_bg"-->
 
     <RelativeLayout
         android:id="@+id/appwidget_first_jar"
-        android:layout_width="86dp"
-        android:layout_height="86dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/widget_button_margin"
+        android:layout_weight="4"
         android:background="@drawable/jar_widget_bg">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/jar_imageView1"
             android:layout_width="26dp"
             android:layout_height="61dp"
@@ -20,6 +22,7 @@
             android:layout_margin="3dp"
             android:background="@color/colorWhiteBG"
             android:contentDescription="@string/appwidget_text"
+            android:focusableInTouchMode="false"
             android:scaleType="centerInside"
             android:src="@drawable/jar_with_bubbles" />
 
@@ -27,7 +30,7 @@
             android:id="@+id/jar_textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_above="@+id/jar_infoView1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_normal"
             android:text="@string/db_jar_id_NEC"
@@ -39,11 +42,9 @@
             android:id="@+id/jar_infoView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="false"
-            android:layout_below="@+id/jar_textView1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
             android:text="@string/account_name"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryText"
@@ -57,8 +58,7 @@
             android:layout_alignParentEnd="false"
             android:layout_below="@+id/jar_infoView1"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_margin="@dimen/margin_small"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/item_balance_dimension"
@@ -68,12 +68,13 @@
 
     <RelativeLayout
         android:id="@+id/appwidget_second_jar"
-        android:layout_width="86dp"
-        android:layout_height="86dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/widget_button_margin"
+        android:layout_weight="4"
         android:background="@drawable/jar_widget_bg">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/jar_imageView2"
             android:layout_width="31dp"
             android:layout_height="71dp"
@@ -81,6 +82,7 @@
             android:layout_margin="3dp"
             android:background="@color/colorWhiteBG"
             android:contentDescription="@string/appwidget_text"
+            android:focusableInTouchMode="false"
             android:scaleType="centerInside"
             android:src="@drawable/jar_with_bubbles" />
 
@@ -88,7 +90,7 @@
             android:id="@+id/jar_textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_above="@+id/jar_infoView2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_normal"
             android:text="@string/db_jar_id_PLAY"
@@ -100,11 +102,9 @@
             android:id="@+id/jar_infoView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="false"
-            android:layout_below="@+id/jar_textView2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
             android:text="@string/account_name"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryText"
@@ -118,8 +118,7 @@
             android:layout_alignParentEnd="false"
             android:layout_below="@+id/jar_infoView2"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_margin="@dimen/margin_small"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/item_balance_dimension"
@@ -129,12 +128,13 @@
 
     <RelativeLayout
         android:id="@+id/appwidget_third_jar"
-        android:layout_width="86dp"
-        android:layout_height="86dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/widget_button_margin"
+        android:layout_weight="4"
         android:background="@drawable/jar_widget_bg">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/jar_imageView3"
             android:layout_width="31dp"
             android:layout_height="71dp"
@@ -142,6 +142,7 @@
             android:layout_margin="3dp"
             android:background="@color/colorWhiteBG"
             android:contentDescription="@string/appwidget_text"
+            android:focusableInTouchMode="false"
             android:scaleType="centerInside"
             android:src="@drawable/jar_with_bubbles" />
 
@@ -149,7 +150,7 @@
             android:id="@+id/jar_textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_above="@+id/jar_infoView3"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_normal"
             android:text="@string/db_jar_id_NEC"
@@ -161,11 +162,9 @@
             android:id="@+id/jar_infoView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="false"
-            android:layout_below="@+id/jar_textView3"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
             android:text="@string/account_name"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryText"
@@ -179,8 +178,7 @@
             android:layout_alignParentEnd="false"
             android:layout_below="@+id/jar_infoView3"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_margin="@dimen/margin_small"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/item_balance_dimension"
@@ -189,20 +187,23 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="62dp"
-        android:layout_height="86dp"
+        android:id="@+id/appwidget_go_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/widget_button_margin"
+        android:layout_weight="2"
         android:background="@drawable/jar_widget_bg"
         android:gravity="center"
         android:orientation="vertical">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/appwidget_go"
-            android:layout_width="34dp"
-            android:layout_height="77dp"
+            android:layout_width="17dp"
+            android:layout_height="39dp"
             android:layout_margin="1dp"
             android:background="@color/colorWhiteBG"
             android:contentDescription="@string/appwidget_text"
+            android:focusableInTouchMode="false"
             android:scaleType="centerInside"
             android:src="@drawable/go" />
 

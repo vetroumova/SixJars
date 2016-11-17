@@ -181,7 +181,7 @@
                 <EditText
                     android:id="@+id/cashEditDescriptionText"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="50dp"
                     android:layout_below="@+id/cashEditInputText"
                     android:layout_marginLeft="@dimen/margin_large"
                     android:layout_marginRight="@dimen/margin_large"

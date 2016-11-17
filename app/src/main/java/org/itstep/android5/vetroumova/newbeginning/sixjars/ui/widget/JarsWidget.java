@@ -48,6 +48,11 @@ import io.realm.Sort;
 public class JarsWidget extends AppWidgetProvider {
 
     public static final String LOG_TAG = "VOlga";
+    //Set the text
+    private static final DecimalFormatSymbols SYMBOLS = new DecimalFormatSymbols();
+    //s.setDecimalSeparator('.'); not needed
+    private static final DecimalFormat FLOAT_FORMAT = new DecimalFormat("##,##0.00", SYMBOLS);
+    private static final DecimalFormat INT_FORMAT = new DecimalFormat("##,##0", SYMBOLS);
     public static String TO_ACTIVITY_CLICK = "toActivity";
     public static String NEXT_JARS_CLICK = "nextThreeJars";
     private static Realm realm = Realm.getDefaultInstance();
@@ -60,17 +65,6 @@ public class JarsWidget extends AppWidgetProvider {
 
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
 
-        //Set the text
-        DecimalFormatSymbols s = new DecimalFormatSymbols();
-        //s.setDecimalSeparator('.');
-        DecimalFormat f = new DecimalFormat("##,##0.00", s);
-        String sum0 = (f.format(jars.get(0).getTotalCash()));
-        String sum1 = (f.format(jars.get(1).getTotalCash()));
-        String sum2 = (f.format(jars.get(2).getTotalCash()));
-        String sum3 = (f.format(jars.get(3).getTotalCash()));
-        String sum4 = (f.format(jars.get(4).getTotalCash()));
-        String sum5 = (f.format(jars.get(5).getTotalCash()));
-
         //TODO use locale
         Locale locale = Locale.getDefault();
 
@@ -81,33 +75,39 @@ public class JarsWidget extends AppWidgetProvider {
             remoteViews.setTextViewText(R.id.jar_infoView1, getLoyalJarName(jars.get(3)));
             remoteViews.setTextViewTextSize(R.id.jar_infoView1, 1, getLoyalJarSize(jars.get(3)));
             //remoteViews.setTextViewText(R.id.jar_sumView1, sum3.concat(" ГРН"));
-            remoteViews.setTextViewText(R.id.jar_sumView1, sum3);
+            remoteViews.setTextViewText(R.id.jar_sumView1, getLoyalSum(jars.get(3)));
+            remoteViews.setTextViewTextSize(R.id.jar_sumView1, 1, getLoyalSumSize(jars.get(3)));
 
             remoteViews.setTextViewText(R.id.jar_textView2, String.valueOf(jars.get(4).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView2, getLoyalJarName(jars.get(4)));
             remoteViews.setTextViewTextSize(R.id.jar_infoView2, 1, getLoyalJarSize(jars.get(4)));
-            remoteViews.setTextViewText(R.id.jar_sumView2, sum4);
+            remoteViews.setTextViewText(R.id.jar_sumView2, getLoyalSum(jars.get(4)));
+            remoteViews.setTextViewTextSize(R.id.jar_sumView2, 1, getLoyalSumSize(jars.get(4)));
 
             remoteViews.setTextViewText(R.id.jar_textView3, String.valueOf(jars.get(5).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView3, getLoyalJarName(jars.get(5)));
             remoteViews.setTextViewTextSize(R.id.jar_infoView3, 1, getLoyalJarSize(jars.get(5)));
-            remoteViews.setTextViewText(R.id.jar_sumView3, sum5);
+            remoteViews.setTextViewText(R.id.jar_sumView3, getLoyalSum(jars.get(5)));
+            remoteViews.setTextViewTextSize(R.id.jar_sumView3, 1, getLoyalSumSize(jars.get(5)));
         } else {
             remoteViews.setImageViewResource(R.id.appwidget_go, R.drawable.go);
             remoteViews.setTextViewText(R.id.jar_textView1, String.valueOf(jars.get(0).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView1, getLoyalJarName(jars.get(0)));
             remoteViews.setTextViewTextSize(R.id.jar_infoView1, 1, getLoyalJarSize(jars.get(0)));
-            remoteViews.setTextViewText(R.id.jar_sumView1, sum0);
+            remoteViews.setTextViewText(R.id.jar_sumView1, getLoyalSum(jars.get(0)));
+            remoteViews.setTextViewTextSize(R.id.jar_sumView1, 1, getLoyalSumSize(jars.get(0)));
 
             remoteViews.setTextViewText(R.id.jar_textView2, String.valueOf(jars.get(1).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView2, getLoyalJarName(jars.get(1)));
             remoteViews.setTextViewTextSize(R.id.jar_infoView2, 1, getLoyalJarSize(jars.get(1)));
-            remoteViews.setTextViewText(R.id.jar_sumView2, sum1);
+            remoteViews.setTextViewText(R.id.jar_sumView2, getLoyalSum(jars.get(1)));
+            remoteViews.setTextViewTextSize(R.id.jar_sumView2, 1, getLoyalSumSize(jars.get(1)));
 
             remoteViews.setTextViewText(R.id.jar_textView3, String.valueOf(jars.get(2).getJar_id()));
             remoteViews.setTextViewText(R.id.jar_infoView3, getLoyalJarName(jars.get(2)));
             remoteViews.setTextViewTextSize(R.id.jar_infoView3, 1, getLoyalJarSize(jars.get(2)));
-            remoteViews.setTextViewText(R.id.jar_sumView3, sum2);
+            remoteViews.setTextViewText(R.id.jar_sumView3, getLoyalSum(jars.get(2)));
+            remoteViews.setTextViewTextSize(R.id.jar_sumView3, 1, getLoyalSumSize(jars.get(2)));
         }
 
         //Register an onClickListener
@@ -137,6 +137,8 @@ public class JarsWidget extends AppWidgetProvider {
         //RemoteViews views = new RemoteViews(context.getPackageName(),R.layout.activity_main);
 
         remoteViews.setOnClickPendingIntent(R.id.appwidget_first_jar, pendingToActivity);
+        remoteViews.setOnClickPendingIntent(R.id.appwidget_second_jar, pendingToActivity);
+        remoteViews.setOnClickPendingIntent(R.id.appwidget_third_jar, pendingToActivity);
 
         //to set next jars
         Intent intentNextJars = new Intent(context, JarsWidget.class);
@@ -145,7 +147,7 @@ public class JarsWidget extends AppWidgetProvider {
         PendingIntent pendingIntentNextJars = PendingIntent.getBroadcast(context, 0,
                 intentNextJars, 0);
 
-        remoteViews.setOnClickPendingIntent(R.id.appwidget_go, pendingIntentNextJars);
+        remoteViews.setOnClickPendingIntent(R.id.appwidget_go_layout, pendingIntentNextJars);
 
         appWidgetManager.updateAppWidget(widgetId, remoteViews);
 
@@ -232,6 +234,28 @@ public class JarsWidget extends AppWidgetProvider {
             textSize = 8;
         } else if (jarName.length() > 12) {
             textSize = 10;
+        }
+        return textSize;
+    }
+
+    public static String getLoyalSum(Jar jar) {
+        float jarSum = jar.getTotalCash();
+        if (jarSum % 1 < 0.01) {
+            return INT_FORMAT.format(jarSum);
+        } else {
+            return FLOAT_FORMAT.format(jarSum);
+        }
+    }
+
+    public static int getLoyalSumSize(Jar jar) {
+        String jarSum = getLoyalSum(jar);
+        int textSize = 14;
+        if (jarSum.length() > 12) {
+            textSize = 6;
+        } else if (jarSum.length() > 9) {
+            textSize = 9;
+        } else if (jarSum.length() > 6) {
+            textSize = 12;
         }
         return textSize;
     }

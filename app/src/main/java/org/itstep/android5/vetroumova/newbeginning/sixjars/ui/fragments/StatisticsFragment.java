@@ -352,9 +352,13 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
         int lengthOfSeek = rangeSeekBar.getAbsoluteMaxValue() - rangeSeekBar.getAbsoluteMinValue();
         Date globalMin = globalResults.minDate("date");
         Date globalMax = globalResults.maxDate("date");
-        long millisUnit = (globalMax.getTime() - globalMin.getTime()) / lengthOfSeek;
-        dates[0] = new Date(globalMin.getTime() + ((int) minValue * millisUnit));
-        dates[1] = new Date(globalMin.getTime() + ((int) maxValue * millisUnit));
+        if (globalMax != null && globalMin != null) {
+            long millisUnit = (globalMax.getTime() - globalMin.getTime()) / lengthOfSeek;
+            dates[0] = new Date(globalMin.getTime() + ((int) minValue * millisUnit));
+            dates[1] = new Date(globalMin.getTime() + ((int) maxValue * millisUnit));
+        }
+        //else default dates
+
     }
 
     private void setSeekValueByPeriod(Date minDate, Date maxDate) {
@@ -365,17 +369,18 @@ public class StatisticsFragment extends SimpleChartFragment implements RangeSeek
         //todo fix null lengthOfSeek;
         long millisUnit = 1;
         Log.d("VOlga", "lengthOfSeek " + lengthOfSeek);
-        if (lengthOfSeek != 0) {
+        if (lengthOfSeek != 0 && globalMax != null && globalMin != null) {
             millisUnit = (globalMax.getTime() - globalMin.getTime()) / lengthOfSeek;
             if (millisUnit == 0) // case of same dates of min and max\
             {
                 millisUnit = lengthOfSeek;
             }
+            Log.d("VOlga", "millisUnit " + millisUnit);
+            int minSeek = (int) ((minDate.getTime() - globalMin.getTime()) / millisUnit);
+            int maxSeek = (int) ((maxDate.getTime() - globalMin.getTime()) / millisUnit);
+            rangeSeekBar.setSelectedMinValue(minSeek);
+            rangeSeekBar.setSelectedMaxValue(maxSeek);
         }
-        Log.d("VOlga", "millisUnit " + millisUnit);
-        int minSeek = (int) ((minDate.getTime() - globalMin.getTime()) / millisUnit);
-        int maxSeek = (int) ((maxDate.getTime() - globalMin.getTime()) / millisUnit);
-        rangeSeekBar.setSelectedMinValue(minSeek);
-        rangeSeekBar.setSelectedMaxValue(maxSeek);
+
     }
 }

@@ -33,7 +33,7 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="cash_jar_dimension">13sp</dimen>
 
     <dimen name="margin_normal">8dp</dimen>
-    <dimen name="margin_small">0dp</dimen>
+    <dimen name="margin_small">1dp</dimen>
     <dimen name="margin_large">16dp</dimen>
     <dimen name="item_giant_title_dimension">36dp</dimen>
     <dimen name="text_big_margin">12dp</dimen>

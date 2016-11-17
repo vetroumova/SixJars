@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/widget_bg"
@@ -8,21 +7,21 @@
 
     <RelativeLayout
         android:id="@+id/appwidget_first_jar"
-        android:layout_width="88dp"
-        android:layout_height="96dp"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
         android:layout_margin="@dimen/widget_button_margin"
         android:background="@drawable/jar_widget_bg">
 
-        <android.support.v7.widget.AppCompatImageButton
+        <ImageButton
             android:id="@+id/jar_imageView1"
-            android:layout_width="31dp"
-            android:layout_height="71dp"
+            android:layout_width="26dp"
+            android:layout_height="61dp"
             android:layout_centerInParent="true"
             android:layout_margin="3dp"
             android:background="@color/colorWhiteBG"
             android:contentDescription="@string/appwidget_text"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/jar_with_bubbles" />
+            android:src="@drawable/jar_with_bubbles" />
 
         <TextView
             android:id="@+id/jar_textView1"
@@ -69,12 +68,12 @@
 
     <RelativeLayout
         android:id="@+id/appwidget_second_jar"
-        android:layout_width="88dp"
-        android:layout_height="96dp"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
         android:layout_margin="@dimen/widget_button_margin"
         android:background="@drawable/jar_widget_bg">
 
-        <android.support.v7.widget.AppCompatImageButton
+        <ImageButton
             android:id="@+id/jar_imageView2"
             android:layout_width="31dp"
             android:layout_height="71dp"
@@ -83,7 +82,7 @@
             android:background="@color/colorWhiteBG"
             android:contentDescription="@string/appwidget_text"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/jar_with_bubbles" />
+            android:src="@drawable/jar_with_bubbles" />
 
         <TextView
             android:id="@+id/jar_textView2"
@@ -130,12 +129,12 @@
 
     <RelativeLayout
         android:id="@+id/appwidget_third_jar"
-        android:layout_width="88dp"
-        android:layout_height="96dp"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
         android:layout_margin="@dimen/widget_button_margin"
         android:background="@drawable/jar_widget_bg">
 
-        <android.support.v7.widget.AppCompatImageButton
+        <ImageButton
             android:id="@+id/jar_imageView3"
             android:layout_width="31dp"
             android:layout_height="71dp"
@@ -144,7 +143,7 @@
             android:background="@color/colorWhiteBG"
             android:contentDescription="@string/appwidget_text"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/jar_with_bubbles" />
+            android:src="@drawable/jar_with_bubbles" />
 
         <TextView
             android:id="@+id/jar_textView3"
@@ -190,14 +189,14 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="60dp"
-        android:layout_height="96dp"
+        android:layout_width="62dp"
+        android:layout_height="86dp"
         android:layout_margin="@dimen/widget_button_margin"
         android:background="@drawable/jar_widget_bg"
         android:gravity="center"
         android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatImageButton
+        <ImageButton
             android:id="@+id/appwidget_go"
             android:layout_width="34dp"
             android:layout_height="77dp"
@@ -205,7 +204,7 @@
             android:background="@color/colorWhiteBG"
             android:contentDescription="@string/appwidget_text"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/go" />
+            android:src="@drawable/go" />
 
         <ProgressBar
             android:id="@+id/appwidget_go_bar"
@@ -214,9 +213,8 @@
             android:layout_margin="1dp"
             android:background="@color/colorWhiteBG"
             android:contentDescription="@string/appwidget_text"
-            android:progressDrawable="@drawable/appwidget_pr_bar_anim"
-            android:src="@drawable/ic_go_48dp"
             android:visibility="gone" />
+        <!--android:progressDrawable="@drawable/appwidget_pr_bar_anim"-->
 
     </LinearLayout>
 

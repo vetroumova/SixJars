@@ -24,7 +24,7 @@
     <string name="app_name">Шесть Банок</string>
     <string name="img_of_bottle">Изображение банки</string>
 
-    <string name="item_balance_text">%1$s ГРН</string>
+    <string name="item_balance_text">%1$s $</string>
     <string name="item_name_in_fragment_text">(%1$s)</string>
     <string name="item_description_text">Описание банки</string>
     <string name="item_name_of_jar">Наименование банки</string>
@@ -35,7 +35,7 @@
     <string name="item_percentage_text">%1$d %% распределения</string>
     <string name="set_the_percentage_of_jars">Настройте % разбиения сумм по банкам</string>
     <!--<string name="cash_balance_text"><b>%1$.2f</b> ГРН</string>-->
-    <string name="cash_balance_text"><b>%1$s</b> ГРН</string>
+    <string name="cash_balance_text"><b>%1$s</b> $</string>
     <string name="to_all_jars_by_percentage">Распределить в %</string>
     <string name="spend_a_cash_text">Потратить</string>
     <string name="not_added_sum_text">Недостаточно средств</string>
@@ -58,7 +58,7 @@
     <string name="yes_text">ДА</string>
     <string name="no_text">НЕТ</string>
     <string name="click_to_exit_text">Нажмите еще раз, чтобы выйти</string>
-    <string name="total_cash_balance_text"><b>Всего: %1$.2f</b> ГРН</string>
+    <string name="total_cash_balance_text"><b>Всего: %1$.2f</b> $</string>
     <string name="enter_the_description">Добавьте примечание</string>
     <string name="delete_cash_info_text">Для удаления суммы - долгое нажатие на эл-те списка</string>
     <string name="delete_not_edit_text">Для удаления суммы - кнопка "назад" и долгое нажатие на эл-те списка</string>
@@ -106,4 +106,7 @@
     <string name="title_activity_restore">Восстановить базу из архива</string>
     <string name="statistics_period_text">Период отчетности</string>
     <string name="too_much_text">Извините, господин Рокфелер, Вы не можете добавить такую большую сумму.</string>
+    <string name="cash_id_text" translatable="false">Информация о транзакции ID : %1$s</string>
+    <string name="db_jar_name_short_FFA">Финансовая независимость</string>
+    <string name="db_jar_name_short_LTSS">Сбережения</string>
 </resources>

@@ -55,7 +55,7 @@ public class JarsWidget extends AppWidgetProvider {
     private static final DecimalFormat INT_FORMAT = new DecimalFormat("##,##0", SYMBOLS);
     public static String TO_ACTIVITY_CLICK = "toActivity";
     public static String NEXT_JARS_CLICK = "nextThreeJars";
-    private static Realm realm = Realm.getDefaultInstance();
+    private static Realm realm = Realm.getDefaultInstance();        // TODO use nonstatic
     private static Boolean isNextJars = false;
 
     public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
@@ -229,11 +229,13 @@ public class JarsWidget extends AppWidgetProvider {
 
     public static int getLoyalJarSize(Jar jar) {
         String jarName = getLoyalJarName(jar);
-        int textSize = 11;
-        if (jarName.length() > 22) {
-            textSize = 8;
+        int textSize = 12;
+        if (jarName.length() > 20) {
+            textSize = 9;
         } else if (jarName.length() > 12) {
-            textSize = 10;
+            textSize = 11;
+        } else if (jarName.length() > 9 && !jarName.contains(" ")) {
+            textSize = 9;
         }
         return textSize;
     }

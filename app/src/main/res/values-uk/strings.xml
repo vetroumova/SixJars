@@ -105,5 +105,8 @@
     <string name="title_activity_restore">Відновити базу з архіву</string>
     <string name="statistics_period_text">Період звіту</string>
     <string name="too_much_text">Пробачте, пане Рокфелер, Ви не маєте можливості додати таку велику кількість грошей.</string>
+    <string name="cash_id_text">Інформація про транзакцію ID : %1$s</string>
+    <string name="db_jar_name_short_FFA">Фінансова  незалежність</string>
+    <string name="db_jar_name_short_LTSS">Заощадження</string>
 
 </resources>

@@ -44,6 +44,12 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String ARG_JAR_ID = "ID";
+    private static final int[] IDS = {R.string.db_jar_id_NEC, R.string.db_jar_id_PLAY, R.string.db_jar_id_GIVE,
+            R.string.db_jar_id_EDU, R.string.db_jar_id_LTSS, R.string.db_jar_id_FFA};
+    private static final int[] NAMES = {R.string.db_jar_name_NEC, R.string.db_jar_name_PLAY, R.string.db_jar_name_GIVE,
+            R.string.db_jar_name_EDU, R.string.db_jar_name_LTSS, R.string.db_jar_name_FFA};
+    private static final int[] DESCRIPTIONS = {R.string.db_jar_info_NEC, R.string.db_jar_info_PLAY, R.string.db_jar_info_GIVE,
+            R.string.db_jar_info_EDU, R.string.db_jar_info_LTSS, R.string.db_jar_info_FFA};
     String jarIDString;
     ImageView jarImage;
     TextView jarID;
@@ -157,7 +163,8 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         }.start();*/
 
         jarID.setText(jar.getJar_id());
-        jarName.setText(getString(R.string.item_name_in_fragment_text, jar.getJar_name()));
+        int nameResourceNumber = NAMES[(int) jar.getJar_float_id()];
+        jarName.setText(getString(R.string.item_name_in_fragment_text, getString(nameResourceNumber)));
         //Set the text
         DecimalFormatSymbols s = new DecimalFormatSymbols();
         //s.setDecimalSeparator('.');
@@ -165,7 +172,8 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         jarBalance.setText(getString(R.string.item_balance_text, f.format(jar.getTotalCash())));
         percent = Prefs.with(getContext()).getPercentJar(jar.getJar_id());
         jarPercentage.setText(getString(R.string.item_percentage_text, percent));
-        jarDescription.setText(jar.getJar_info());
+        int descResourceNumber = DESCRIPTIONS[(int) jar.getJar_float_id()];
+        jarDescription.setText(getString(descResourceNumber));
 
         spendCashEdit.setText("");
         spendCashSave.setOnClickListener(this);

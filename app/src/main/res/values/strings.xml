@@ -12,7 +12,7 @@
     <string name="configure">Widget name</string>
     <string name="add_widget">Add widget</string>
     <string name="item_name_of_jar">Name Of Jar</string>
-    <string name="item_balance_text">%1$s uah</string>
+    <string name="item_balance_text">%1$s $</string>
     <string name="item_description_text">Description of JAR and some useful information</string>
 
     <string name="db_jar_id_NEC" translatable="false">NEC</string>
@@ -49,8 +49,8 @@
     <string name="default_settings_text">DEFAULT</string>
     <string name="set_the_percentage_of_jars">Set the percentage of JARS</string>
     <!--<string name="cash_balance_text"><b>%1$.2f</b> UAH</string>-->
-    <string name="cash_balance_text"><b>%1$s</b> UAH</string>
-    <string name="total_cash_balance_text"><b>Total: %1$.2f</b> UAH</string>
+    <string name="cash_balance_text"><b>%1$s</b> $</string>
+    <string name="total_cash_balance_text"><b>Total: %1$.2f</b> $</string>
     <string name="enter_sum_text">Enter a sum</string>
     <string name="choose_jar_text">You must choose a jar!</string>
     <string name="add_a_new_cash">ADD A NEW CASH</string>
@@ -86,7 +86,7 @@
     <string name="new_income_text">New Income</string>
     <string name="text_back">BACK</string>
     <string name="backspace_text" translatable="false"><![CDATA[<<]]></string>
-    <string name="cash_id_text" translatable="false">ID : %1$s</string>
+    <string name="cash_id_text">Details of Cashflow ID : %1$s</string>
     <string name="edited_cashflow">Cashflow edited</string>
     <string name="text_negative" translatable="false">-</string>
     <string name="delete_not_edit_text">For delete a cashflow, press back and long press on cashflow in list</string>
@@ -157,5 +157,7 @@
     <string name="statistics_period_text">Period of charts</string>
     <string name="too_much_text">Sorry, Mr. Rockfeller, you can\'t put so much money in Jar</string>
     <string name="no_statistics_data_text">NO DATA</string>
+    <string name="db_jar_name_short_LTSS">LongTerm Saving</string>
+    <string name="db_jar_name_short_FFA">Financial Freedom</string>
     <integer name="com_vk_sdk_AppId">5696879</integer>
 </resources>

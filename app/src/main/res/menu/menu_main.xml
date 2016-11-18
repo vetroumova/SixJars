@@ -11,15 +11,15 @@
         android:id="@+id/action_save_base"
         android:title="@string/save_base_text"
         app:icon="@drawable/ic_archive_white_24dp"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="never|withText" />
     <item
         android:id="@+id/action_restore_base"
         android:title="@string/restore_base_text"
         app:icon="@drawable/ic_unarchive_white_24dp"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="never|withText" />
     <item
         android:id="@+id/action_send_base"
         android:title="@string/send_base_text"
         app:icon="@drawable/ic_unarchive_white_24dp"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="never|withText" />
 </menu>

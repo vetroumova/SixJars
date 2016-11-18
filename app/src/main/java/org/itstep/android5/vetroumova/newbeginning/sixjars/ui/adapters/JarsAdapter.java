@@ -28,13 +28,13 @@ import rx.subjects.PublishSubject;
 
 public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
 
+    private static final int[] NAMES = {R.string.db_jar_name_NEC, R.string.db_jar_name_PLAY, R.string.db_jar_name_GIVE,
+            R.string.db_jar_name_EDU, R.string.db_jar_name_LTSS, R.string.db_jar_name_FFA};
     final Context context;
     private final PublishSubject<Jar> jarInAdapterPublishSubject = PublishSubject.create();
     private Realm realm;
     private LayoutInflater inflater;
     private List<Integer> percentJars;
-
-
 
     public JarsAdapter(Context context) {
 
@@ -59,12 +59,15 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
 
         // get the article
         final Jar jar = getItem(position);
+        final String jarID = jar.getJar_id();
         // cast the generic view holder to our specific one
         final CardViewHolder holder = (CardViewHolder) viewHolder;
 
         // set the title and the snippet
-        holder.textID.setText(jar.getJar_id());
-        holder.textName.setText(jar.getJar_name());
+        holder.textID.setText(jarID);
+        String nameForWidget = context.getString(NAMES[position]);
+        RealmManager.getInstance().changeJarName(jar, nameForWidget); // for correct locale name in appwidget
+        holder.textName.setText(nameForWidget);
         //Set the text
         DecimalFormatSymbols s = new DecimalFormatSymbols();
         //s.setDecimalSeparator('.');

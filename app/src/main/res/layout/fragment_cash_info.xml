@@ -27,7 +27,7 @@
                 android:text="@string/cash_id_text"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/item_balance_dimension"
+                android:textSize="@dimen/item_description_dimension"
                 android:textStyle="bold"
                 android:translationZ="3dp"
                 app:layout_heightPercent="6%"

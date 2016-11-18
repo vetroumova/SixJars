@@ -136,6 +136,13 @@ public class RealmManager {
         });
     }
 
+    public void changeJarName(Jar jar, String newName) {
+        realm.beginTransaction();
+        jar.setJar_name(newName);
+        realm.commitTransaction();
+
+    }
+
     public void setRealm() {
         realm = Realm.getDefaultInstance();
         realm.setAutoRefresh(true);

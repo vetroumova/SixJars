@@ -29,7 +29,7 @@ import java.util.List;
 
 import io.realm.Realm;
 
-public class AddCashFlowFragment extends Fragment implements View.OnClickListener,
+public class AddCashFragment extends Fragment implements View.OnClickListener,
         PourToJarFragment.OnPourInJarListener {
     public static final String ARG_JAR_ID = "jarID";
     private static final int POUR_RQ_CODE = 6;
@@ -67,7 +67,7 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
     private float sumOfJars;
 
 
-    public AddCashFlowFragment() {
+    public AddCashFragment() {
         // Required empty public constructor
     }
 
@@ -87,7 +87,7 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_cash_flow, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_cash, container, false);
 
         sumEditText = (EditText) view.findViewById(R.id.cashAddEdit);
         sumEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -248,13 +248,17 @@ public class AddCashFlowFragment extends Fragment implements View.OnClickListene
                     //GLOBAL INCOME
                     if (jarID.equals("AllJars")) {
 
-                        //CHOOSE if pour to FFA or LTSS jar needed
-                        PourToJarFragment pourFragment = new PourToJarFragment();
-                        // SETS the target fragment for use later when sending results
-                        pourFragment.setTargetFragment(AddCashFlowFragment.this, POUR_RQ_CODE);
-                        pourFragment.show(getFragmentManager(), "choosePourInJar");
-                        //////
-                        //see onChooseToPour()
+                        if (sumOfJars > 0) {
+                            //CHOOSE if pour to FFA or LTSS jar needed
+                            PourToJarFragment pourFragment = new PourToJarFragment();
+                            // SETS the target fragment for use later when sending results
+                            pourFragment.setTargetFragment(AddCashFragment.this, POUR_RQ_CODE);
+                            pourFragment.show(getFragmentManager(), "choosePourInJar");
+                            //////
+                            //see onChooseToPour()
+                        } else {
+                            onChooseToPour("NoJar");
+                        }
                     } else if (jarID.equals("NoID")) {
                         Toast.makeText(getContext(), R.string.choose_jar_text, Toast.LENGTH_SHORT).show();
                     } else {

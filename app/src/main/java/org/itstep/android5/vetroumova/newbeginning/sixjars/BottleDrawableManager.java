@@ -49,7 +49,7 @@ public class BottleDrawableManager {
         if (sum > 0) {
             //TODO will be more iterable
             float partOfMax = sum / maxVolume;
-            if (partOfMax < 0.1f) {
+            if (partOfMax < 0.0005f) {
                 item = 0;
             } else if (partOfMax < 0.2f) {
                 item = 1;

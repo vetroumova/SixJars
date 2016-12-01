@@ -21,13 +21,13 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="@dimen/margin_normal">
+                android:padding="@dimen/margin_small">
 
                 <TextView
                     android:id="@+id/statisticsTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_large"
+                    android:layout_margin="@dimen/margin_normal"
                     android:gravity="center_horizontal|top"
                     android:shadowColor="@color/cardview_dark_background"
                     android:text="@string/statistics"
@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/statisticsPeriodText"
-                    android:layout_margin="@dimen/margin_large"
+                    android:layout_margin="@dimen/margin_normal"
                     rsb:absoluteMaxValue="100"
                     rsb:absoluteMinValue="0"
                     rsb:thumbShadow="true"
@@ -74,7 +74,7 @@
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/margin_large"
+                    android:layout_margin="@dimen/margin_normal"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -121,7 +121,7 @@
                     android:layout_width="300dp"
                     android:layout_height="300dp"
                     android:layout_below="@+id/statisticsBarTextView"
-                    android:layout_margin="@dimen/margin_large" />
+                    android:layout_margin="@dimen/margin_normal" />
 
                 <TextView
                     android:id="@+id/statisticsNoDataTextView"

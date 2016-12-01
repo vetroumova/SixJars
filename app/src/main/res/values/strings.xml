@@ -54,21 +54,21 @@
     <string name="enter_sum_text">Enter a sum</string>
     <string name="choose_jar_text">You must choose a jar!</string>
     <string name="add_a_new_cash">ADD A NEW CASH</string>
-    <string name="item_id_of_cash">cashflow ID</string>
-    <string name="item_date_of_cash">date of cashflow</string>
-    <string name="item_sum_of_cash">cash SUM</string>
-    <string name="item_jar_of_cash">cashflow Jar</string>
-    <string name="item_perc_of_cash">cashflow\'s jar Percentage</string>
-    <string name="no_cashflows">No cashflows</string>
+    <string name="item_id_of_cash">Cashflow ID</string>
+    <string name="item_date_of_cash">Date of cashflow</string>
+    <string name="item_sum_of_cash">Cash SUM</string>
+    <string name="item_jar_of_cash">Cashflow\'s Jar</string>
+    <string name="item_perc_of_cash">Cashflow\'s jar Percentage</string>
+    <string name="no_cashflows">No cashflow</string>
     <string name="added_sum_text">New Sum Added</string>
-    <string name="not_added_sum_text">Not added, not enougth cash in jar</string>
+    <string name="not_added_sum_text">Not added, not enough cash in jar</string>
     <string name="spend_a_cash_text">Spend a cash</string>
     <string name="to_all_jars_by_percentage">To all JARS by %</string>
     <string name="exit_text">Close SixJars</string>
     <string name="want_exit_text">Do you really want to exit?</string>
     <string name="yes_text">YES</string>
     <string name="no_text">NO</string>
-    <string name="enter_widget_name_text">enter a widget name</string>
+    <string name="enter_widget_name_text">Enter a widget name</string>
     <string name="tutorial_title_text" formatted="false">JARS budgeting</string>
     <string name="click_to_exit_text">Press back one more time to exit</string>
     <string name="text_0" translatable="false">0</string>
@@ -83,51 +83,47 @@
     <string name="text_8" translatable="false">8</string>
     <string name="text_9" translatable="false">9</string>
     <string name="text_point" translatable="false">.</string>
-    <string name="new_income_text">New Income</string>
+    <string name="new_income_text">New income</string>
     <string name="text_back">BACK</string>
     <string name="backspace_text" translatable="false"><![CDATA[<<]]></string>
     <string name="cash_id_text">Details of Cashflow ID : %1$s</string>
     <string name="edited_cashflow">Cashflow edited</string>
     <string name="text_negative" translatable="false">-</string>
-    <string name="delete_not_edit_text">For delete a cashflow, press back and long press on cashflow in list</string>
-    <string name="delete_cash_info_text">To delete a cashflow longpress on item</string>
+    <string name="delete_not_edit_text">To delete a cashflow, press back and make a long press on cashflow in list</string>
+    <string name="delete_cash_info_text">To delete a cashflow make a long press on item</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="statistics_text">Statistics</string>
     <string name="tutorial_text">Tutorial</string>
     <string name="jars_text">JARS</string>
-    <string name="percentage_toast_text">Jar\'s percent, that explaining what sum goes to jar with new Total Income.</string>
-    <string name="account_name">Account Name</string>
+    <string name="percentage_toast_text">Jar\'s percent explaining what sum goes to jar with new total income.</string>
+    <string name="account_name">Account name</string>
     <string name="statistics_pie_title">\nPayments</string>
     <string name="statistics_pie_hole_title">Payments \n in jars</string>
     <string name="statistics">STATISTICS</string>
-    <string name="statistics_bar_title">income v</string>
+    <string name="statistics_bar_title">Income v</string>
     <string name="no_data_chart_text">NO DATA</string>
     <string name="statistics_payments_text">Payments</string>
     <string name="statistics_income_text">Income</string>
-    <string name="statistics_bar_title2">s payments</string>
-    <string name="tutorial_aftertitle_text">    Данный метод – некоторое развитие метода конвертов. Классический метод конвертов использовали наши мамы и бабушки, он проверен временем, прост и действенен. Идея очень проста – для каждой важной категории расходов заводится специальный конверт, на нем подписывается название и сумма. Если закончились деньги в конверте «Питание», придется взять их из другого менее важного конверта, а на будущий месяц пересмотреть сумму этого конверта. Деньги, которые остались в конвертахв конце месяца, можно отложить в накопления или потратить на развлечения, в зависимости от их количества и Ваших финансовых целей.</string>
-    <string name="tutorial_main_text">  Автор метода «кувшинов» предлагает взять 6 «кувшинов» (к примеру, стеклянных баночек, но и конверты тоже подойдут) и каждый из них подписать в соответствии с целями,на которые будут потрачены деньги из данного кувшина:</string>
-    <string name="tutorial_description1_text" formatted="false">    Самое необходимое или текущие траты (Necessity Account, NEC) - 55%. В этом кувшине лежат деньги на текущие расходы: питание, коммунальные платежи, одежда,
-  аренда, транспорт, медицина и т.п.</string>
-    <string name="tutorial_description2_text" formatted="false">    Счет развлечений (Play Account, PLAY) - 10%.На деньги из этого кувшина можно сходить в японский ресторан,
- на боулинг или в картинг-клуб.</string>
-    <string name="tutorial_description3_text" formatted="false">    Счет подарков и благотворительности (Give Account, GIVE) - 5%. Деньги из этого кувшина можно использовать на цели благотворительности либо на подарки друзьям, близким, соседям.</string>
-    <string name="tutorial_description4_text" formatted="false">    Образовательный счет (Education Account, EDU) - 10%. Из этого кувшина деньги тратятся на образование, как напрямую (оплата обучения, репетиторов), так и на покупку книг, фильмов, посещение тренингов и т.п.</string>
-    <string name="tutorial_description5_text" formatted="false">    Резервный фонд и счет будущих покупок (Long Term Saving for Spending Account, LTSS) - 10%. На этом счету аккумулируются деньги, которые могут быть использованы и как «подушка безопасности»
- (резервный фонд), и как накопления на крупные покупки (отпуск, машина, телевизор, лечение зубов и т.п.).</string>
-    <string name="tutorial_description6_text" formatted="false">    Счет финансовой свободы (Financial Freedom Account, FFA) - 10%. Данный кувшин – залог
- Вашего финансового благополучия. Деньги из этого кувшина не тратятся ни при каких условиях, а используются для инвестиций и получения пассивного дохода.</string>
-    <string name="tutorial_description7_text" formatted="false">Далее схема соответствует методу конвертов: каждый месяц весь совокупный доход распределяется по данным кувшинам: сначала на текущие расходы, затем на счет финансовой свободы, а затем на остальные счета. Конечно, у Вас могут получиться другие процентные соотношения между кувшинами, но эти достаточно близки к идеальной структуре трат и инвестиций, и стоит к ним стремиться. </string>
+    <string name="statistics_bar_title2">s Payments</string>
+    <string name="tutorial_main_text">"   Author of \"jars\" method offers to get 6 \"jars\" (it can be not only jar or jug, but even an envelope) and sign each of them in accordance to the purposes for what money will be spent out of the jar:"</string>
+    <string name="tutorial_aftertitle_text">This method is an evolution of envelope method. The classical method of envelopes used by our mothers and grandmothers, it\'s simple and effective. The idea is very simple - start up a special envelope for each major category of spending, signed by name and amount. If you run out of money in the \"Food\" envelope, you will have to take them out from other less important envelope. For the next month you should review the amount of envelope. You can put savings or spend the money left in an envelope at the end of the month.</string>
+    <string name="tutorial_description1_text" formatted="false">    The necessity spending (Necessity Account, NEC) - 55%. This jar contains money for most important expenses: food, utilities, clothing, rent, transport, medicine, etc.</string>
+    <string name="tutorial_description2_text" formatted="false">    Entertainment Account (Play Account, PLAY) - 10% .Money from this jar you can spend to go to a Japanese restaurant, bowling or movie. Fun, in over words…</string>
+    <string name="tutorial_description3_text" formatted="false">    Account for gifts and charity (Give Account, GIVE) - 5%. Money from this jar can be used for charity or gifts to friends, family, neighbors.</string>
+    <string name="tutorial_description4_text" formatted="false">    Educational expenses jar (Education Account, EDU) - 10%.  You can spend money from this jar to education, directly to tutoring or college, or purchase a books, films, trainings etc.</string>
+    <string name="tutorial_description5_text" formatted="false">    Reserve fund and the account for big purchases (Long Term Saving for Spending Account, LTSS) - 10%. This account accumulates money that can be used both as a \"safety cushion\" (reserve fund) and as savings for big purchases (vacation, car, TV, dentistry, etc.).</string>
+    <string name="tutorial_description6_text" formatted="false">    Financial Freedom Account (Financial Freedom Account, FFA) - 10%. This jar is the key to your financial well-being. Money from this jar is not wasted in any condition. It\'s used for investment and passive income source.</string>
+    <string name="tutorial_description7_text" formatted="false">    This budgeting scheme is consistent with the method of envelopes: each month the entire gross income is distributing to jars: first for current necessities jar, then at the jar of financial freedom, and then to the rest of the account. Of course, you can get other percentages between jars, but it\'s close enough to the ideal structure of spending and investment, and you should strive for it.</string>
     <string name="tutorial_description8_text" formatted="false">
-        ПОЧЕМУ МЕТОД 6 КУВШИНОВ ТАК ЭФФЕКТИВЕН?
-        Простота. Не нужно быть семи пядей во лбу, чтобы распределить деньги по 6 категориям.
-        На все про все у вас уйдет одна-две минуты. И в тоже время — вы будете эффективно управлять вашим семейным бюджетом. Все что нужно, это распределить деньги по нескольким категориям и придерживаться нехитрых правил. А точнее одного правила.
-        "Никогда не берите деньги на расходы из кувшина, предназначенного для других трат."
-        Вы научитесь жить по средствам. По крайне мере будете стараться. Полностью откажетесь от кредитов и денег в долг.</string>
+        WHY method of 6 jars are so effective?\n
+        Simplicity. No need to be a rocket scientist to distribute the money in 6 categories.
+        It will take one to two minutes for everything. And at the same time - you effectively manage your family budget. All you need is to distribute the money in several categories and stick to simple rules. Or rather one rule.
+        \"Do not take money for expenses from a jar intended for other expenses.\"
+        You will learn to live within your incomes. At least you will try. Maybe you\'ll refuse loans and borrow money.</string>
     <string name="no_pour_text">Don\'t pour the rest of previous incomes to any jar</string>
-    <string name="pour_button_text">FINISH ADD INCOME</string>
+    <string name="pour_button_text">Finish adding income</string>
     <string name="not_from_ffa_text">Rest of all jars EXCEPT FFA goes to LTSS</string>
     <string name="global_pour_to_ffa_text">Rest of all jars goes to FFA</string>
     <string name="pour_to_ffa_text">Rest of jar goes to FFA</string>
@@ -135,13 +131,13 @@
     <string name="no_poured_text">Not poured a rest of previous incomes</string>
     <string name="poured_text">Rest of previous incomes poured in</string>
     <string name="global_pour_to_ltss_text">Rest of all jars goes to LTSS (except FFA)</string>
-    <string name="title_pour_in_jar">Pour the rest of previous incomes in saving jar?</string>
+    <string name="title_pour_in_jar">Pour the rest of previous incomes in savings jar?</string>
     <string name="changes_saved_text">Changes are saved.</string>
     <string name="changes_not_saved_text">Changes are not saved. Sum of percentage must be 100%</string>
     <string name="save_base_text">Save database</string>
     <string name="restore_base_text">Restore database</string>
     <string name="share_text">Share</string>
-    <string name="share_title_text">Share</string>
+    <string name="share_title_text">@string/share_text</string>
     <string name="share_message_text">I\'m saving my money with SixJars</string>
     <string name="share_cancel_text">Don\'t want to share</string>
     <string name="send_base_text">Send a database copy</string>
@@ -151,13 +147,21 @@
     <string name="restore_process_text">Restoring data... Please, wait.</string>
     <string name="vk_cant_authorize_text">Can\'t authorize in VK</string>
     <string name="vk_cant_upload_text">Can\'t upload a photo</string>
-    <string name="vk_posted_text">Пост успешно размещен на Вашей стене</string>
-    <string name="vk_not_posted_text">Создание поста прервано</string>
-    <string name="vk_error_posted_text">Ошибка при создании поста</string>
+    <string name="vk_posted_text">The post was successfully posted on your wall</string>
+    <string name="vk_not_posted_text">Creating the post is aborted</string>
+    <string name="vk_error_posted_text">Error creating post</string>
     <string name="statistics_period_text">Period of charts</string>
     <string name="too_much_text">Sorry, Mr. Rockfeller, you can\'t put so much money in Jar</string>
     <string name="no_statistics_data_text">NO DATA</string>
     <string name="db_jar_name_short_LTSS">LongTerm Saving</string>
     <string name="db_jar_name_short_FFA">Financial Freedom</string>
+    <string name="set_language_text">Select language</string>
     <integer name="com_vk_sdk_AppId">5696879</integer>
+
+    <string-array name="languages">
+        <item>English</item>
+        <item>Русский</item>
+        <item>Українська</item>
+    </string-array>
+
 </resources>

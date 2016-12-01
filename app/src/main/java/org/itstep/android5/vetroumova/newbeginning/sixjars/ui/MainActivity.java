@@ -54,7 +54,7 @@ import com.vk.sdk.api.photo.VKUploadImage;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.R;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.adapters.RxRecyclerAdapter;
-import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.AddCashFlowFragment;
+import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.AddCashFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.CashInfoFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.HelpFragment;
 import org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.JarInfoFragment;
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     private SettingsFragment settingsFragment;
     private StatisticsFragment statisticsFragment;
     private HelpFragment helpFragment;
-    private AddCashFlowFragment addCashFlowFragment;
+    private AddCashFragment addCashFragment;
     private SpendFragment spendFragment;
     private CashInfoFragment cashInfoFragment;
     private ShareFragment shareFragment;
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         settingsFragment = new SettingsFragment();
         statisticsFragment = new StatisticsFragment();
         helpFragment = new HelpFragment();
-        addCashFlowFragment = new AddCashFlowFragment();
+        addCashFragment = new AddCashFragment();
         spendFragment = new SpendFragment();
         cashInfoFragment = new CashInfoFragment();
 
@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
             fab.startAnimation(animationDisapear);
             Log.d(TAG, "FAB");
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_layout, addCashFlowFragment)
+                    .replace(R.id.content_layout, addCashFragment)
                     /*.setCustomAnimations(android.R.animator
                     .fade_in, android.R.animator.fade_out)*/
                     .addToBackStack("addCash")

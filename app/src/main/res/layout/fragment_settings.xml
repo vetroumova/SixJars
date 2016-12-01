@@ -10,14 +10,14 @@
         style="@style/AppTheme.Card.Margins"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="top|center_horizontal"
         android:shadowColor="@color/cardview_dark_background"
         app:cardCornerRadius="@dimen/margin_normal">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="top|center_horizontal"
             android:padding="@dimen/margin_normal">
 
             <TextView
@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/margin_large"
+                android:layout_margin="@dimen/margin_normal"
                 android:gravity="center"
                 android:text="@string/set_the_percentage_of_jars"
                 android:textAllCaps="true"
@@ -38,15 +38,15 @@
                 android:id="@+id/percentageSettingsGrid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/settingsTitleText"
-                android:layout_centerInParent="true"
                 android:columnCount="3"
                 android:padding="@dimen/margin_normal">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_marginBottom="@dimen/margin_normal"
                     android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_normal"
@@ -69,6 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/db_jar_name_NEC"
+                        android:textAlignment="center"
                         android:textColor="@color/colorSecondaryText"
                         android:textSize="@dimen/item_description_dimension" />
                 </LinearLayout>
@@ -101,9 +102,9 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_marginBottom="@dimen/margin_normal"
                     android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_normal"
@@ -126,6 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/db_jar_name_PLAY"
+                        android:textAlignment="center"
                         android:textColor="@color/colorSecondaryText"
                         android:textSize="@dimen/item_description_dimension" />
                 </LinearLayout>
@@ -159,9 +161,9 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_marginBottom="@dimen/margin_normal"
                     android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_normal"
@@ -184,6 +186,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/db_jar_name_GIVE"
+                        android:textAlignment="center"
                         android:textColor="@color/colorSecondaryText"
                         android:textSize="@dimen/item_description_dimension" />
                 </LinearLayout>
@@ -216,9 +219,9 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_marginBottom="@dimen/margin_normal"
                     android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_normal"
@@ -241,6 +244,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/db_jar_name_EDU"
+                        android:textAlignment="center"
                         android:textColor="@color/colorSecondaryText"
                         android:textSize="@dimen/item_description_dimension" />
                 </LinearLayout>
@@ -273,9 +277,9 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_marginBottom="@dimen/margin_normal"
                     android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_normal"
@@ -297,7 +301,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@string/db_jar_name_LTSS"
+                        android:text="@string/db_jar_name_short_LTSS"
+                        android:textAlignment="center"
                         android:textColor="@color/colorSecondaryText"
                         android:textSize="@dimen/item_description_dimension" />
                 </LinearLayout>
@@ -330,9 +335,9 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_marginBottom="@dimen/margin_normal"
                     android:layout_marginLeft="@dimen/margin_small"
                     android:layout_marginRight="@dimen/margin_normal"
@@ -354,7 +359,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@string/db_jar_name_FFA"
+                        android:text="@string/db_jar_name_short_FFA"
+                        android:textAlignment="center"
                         android:textColor="@color/colorSecondaryText"
                         android:textSize="@dimen/item_description_dimension" />
                 </LinearLayout>
@@ -391,12 +397,11 @@
                 android:id="@+id/saveSettingsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_below="@+id/percentageSettingsGrid"
+                android:layout_alignTop="@+id/percentageSettingsGrid"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/margin_large"
-                android:layout_marginLeft="@dimen/margin_normal"
-                android:layout_marginTop="@dimen/margin_normal"
-                android:layout_toStartOf="@+id/restoreSettingsButton"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_giant"
+                android:layout_toEndOf="@+id/percentageSettingsGrid"
                 android:background="@drawable/jar_widget_bg"
                 android:maxWidth="72dp"
                 android:shadowColor="@color/cardview_dark_background"
@@ -408,10 +413,11 @@
                 android:id="@+id/restoreSettingsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_alignBottom="@id/saveSettingsButton"
-                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/saveSettingsButton"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_toEndOf="@+id/percentageSettingsGrid"
                 android:background="@drawable/jar_widget_bg"
                 android:maxWidth="72dp"
                 android:shadowColor="@color/cardview_dark_background"
@@ -423,14 +429,42 @@
                 android:id="@+id/defaultSettingsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_alignBottom="@id/saveSettingsButton"
+                android:layout_below="@+id/restoreSettingsButton"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/margin_normal"
-                android:layout_toEndOf="@+id/restoreSettingsButton"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_toEndOf="@+id/percentageSettingsGrid"
                 android:background="@drawable/jar_widget_bg"
                 android:maxWidth="72dp"
                 android:shadowColor="@color/cardview_dark_background"
                 android:text="@string/default_settings_text"
+                android:textColor="@color/colorBottle"
+                android:textSize="@dimen/button_text_sp_dimension" />
+
+            <TextView
+                android:id="@+id/settingsLangText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/percentageSettingsGrid"
+                android:layout_margin="@dimen/margin_normal"
+                android:gravity="center"
+                android:text="@string/set_language_text"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/item_balance_dimension"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/settingsLangSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/settingsLangText"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_normal"
+                android:layout_toRightOf="@+id/settingsLangText"
+                android:entries="@array/languages"
                 android:textColor="@color/colorBottle"
                 android:textSize="@dimen/button_text_sp_dimension" />
 

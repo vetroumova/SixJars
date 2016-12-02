@@ -7,7 +7,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "23.0.3"
     defaultConfig {
-        applicationId "org.itstep.android5.vetroumova.newbeginning.sixjars"
+        applicationId "com.vetroumova.sixjars"
         minSdkVersion 17
         targetSdkVersion 25
         vectorDrawables.useSupportLibrary(true)

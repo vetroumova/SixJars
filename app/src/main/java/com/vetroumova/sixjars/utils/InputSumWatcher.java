@@ -1,4 +1,4 @@
-package org.itstep.android5.vetroumova.newbeginning.sixjars;
+package com.vetroumova.sixjars.utils;
 
 import android.text.Editable;
 import android.text.TextWatcher;

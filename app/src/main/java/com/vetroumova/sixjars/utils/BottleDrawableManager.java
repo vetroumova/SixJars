@@ -1,10 +1,11 @@
-package org.itstep.android5.vetroumova.newbeginning.sixjars;
+package com.vetroumova.sixjars.utils;
 
 import android.util.Log;
 
-import org.itstep.android5.vetroumova.newbeginning.sixjars.app.Prefs;
-import org.itstep.android5.vetroumova.newbeginning.sixjars.database.RealmManager;
-import org.itstep.android5.vetroumova.newbeginning.sixjars.model.Jar;
+import com.vetroumova.sixjars.R;
+import com.vetroumova.sixjars.app.Prefs;
+import com.vetroumova.sixjars.database.RealmManager;
+import com.vetroumova.sixjars.model.Jar;
 
 import io.realm.RealmResults;
 

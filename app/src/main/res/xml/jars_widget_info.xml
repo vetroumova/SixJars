@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:configure="org.itstep.android5.vetroumova.newbeginning.sixjars.ui.widget.JarsWidgetConfigureActivity"
+    android:configure="com.vetroumova.sixjars.ui.widget.JarsWidgetConfigureActivity"
     android:initialKeyguardLayout="@layout/jars_widget"
     android:initialLayout="@layout/jars_widget"
     android:minHeight="40dp"

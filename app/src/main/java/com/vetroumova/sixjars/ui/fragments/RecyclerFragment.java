@@ -1,6 +1,5 @@
 package com.vetroumova.sixjars.ui.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,11 +24,6 @@ import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
 
 public class RecyclerFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     //REALM
     private JarsAdapter realmJarsAdapter;
     private Realm realm;
@@ -44,12 +38,9 @@ public class RecyclerFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static RecyclerFragment newInstance(String param1, String param2) {
+    public static RecyclerFragment newInstance() {
         RecyclerFragment fragment = new RecyclerFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,9 +48,6 @@ public class RecyclerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-
         //get realm instance
         this.realm = RealmManager.with(this).getRealm();
 
@@ -74,39 +62,21 @@ public class RecyclerFragment extends Fragment {
                 container, false);
 
         realmRecycler = (RecyclerView) view.findViewById(R.id.mainRecycler);
-
         setupRecycler();
 
-        //TODO get back Prefs
         if (!Prefs.with(getContext()).getPreLoad()) {
             setRealmData();
         }
-        //setRealmData();
-
-        // refresh the realm instance
-        //RealmManager.with(this).refresh();
-
-        // get all persisted objects
-        // create the helper adapter and notify data set changes
-        // changes will be reflected automatically
         setRealmJarsAdapter(RealmManager.with(this).getJars());
-
-        /*Snackbar.make(contentLayout, "Press card item for edit, long press to remove item",
-                Snackbar.LENGTH_SHORT).show();*/
 
         Subscription jarInAdapterSubscription = realmJarsAdapter.getPositionClicks()
                 .subscribe(jar -> {
                             DebugLogger.log("recycler JAR info: " + jar.getJar_id());
-                            //Toast.makeText(getContext(), "recycler JAR info: " + jar.getJar_id(),
-                            //Toast.LENGTH_SHORT).show();
-
                             jarInRecyclerPublishSubject.onNext(jar);
                         },
                         error -> DebugLogger.log(error.getMessage())
                 );
-
         recyclerSubscriptions.add(jarInAdapterSubscription);
-
         return view;
     }
 
@@ -128,8 +98,6 @@ public class RecyclerFragment extends Fragment {
     }
 
     public void setRealmJarsAdapter(RealmResults<Jar> jars) {
-
-        //RealmJarsAdapter realmAdapter = new RealmJarsAdapter(this.getApplicationContext(), jars, true);
         RealmJarsAdapter realmAdapter = new RealmJarsAdapter(getContext(), jars, true);
         // Set the data and tell the RecyclerView to draw
         realmJarsAdapter.setRealmAdapter(realmAdapter);
@@ -138,36 +106,16 @@ public class RecyclerFragment extends Fragment {
 
 
     private void setRealmData() {
-
-        //RealmManager.initialiseJars(getApplicationContext());
         RealmManager.initialiseJars(getContext());
-
-        //TODO CHECK - WAS with(this) in activity
         Prefs.with(getContext()).setPreLoad(true);
 
     }
-
     public Observable<Jar> getJar() {
         return jarInRecyclerPublishSubject.asObservable();
     }
 
-    /*public JarsAdapter getRealmJarsAdapter() {
-        return realmJarsAdapter;
-    }*/
-
     public void refreshRecycler() {
         realmJarsAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        /*if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
     }
 
     @Override

@@ -10,17 +10,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vetroumova.sixjars.utils.BottleDrawableManager;
 import com.vetroumova.sixjars.R;
 import com.vetroumova.sixjars.app.Prefs;
 import com.vetroumova.sixjars.database.RealmManager;
 import com.vetroumova.sixjars.model.Jar;
+import com.vetroumova.sixjars.utils.BottleDrawableManager;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import rx.Observable;
 import rx.subjects.PublishSubject;
 
@@ -47,6 +48,14 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
         // inflate a new card view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_jar_recycler,
                 parent, false);
+
+        // for correct locale name in appwidget
+        RealmResults<Jar> jars = RealmManager.getInstance().getJars();
+        //for localisation
+        for (int i = 0; i < jars.size(); i++) {
+            String nameForWidget = context.getString(NAMES[i]);
+            RealmManager.getInstance().changeJarName(jars.get(i), nameForWidget);
+        }
         return new CardViewHolder(view);
     }
 
@@ -54,9 +63,7 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position) {
 
-        realm = RealmManager.getInstance().getRealm();
         percentJars = Prefs.with(context).getPercentage();
-
         // get the article
         final Jar jar = getItem(position);
         final String jarID = jar.getJar_id();
@@ -84,137 +91,17 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
                         Toast.LENGTH_SHORT).show();
             }
         });
-
-        /*// load the background image
-        if (book.getImageUrl() != null) {
-            Glide.with(context)
-                    .load(book.getImageUrl().replace("https", "http"))
-                    .asBitmap()
-                    .fitCenter()
-                    .into(holder.imageBackground);
-        }*/
         holder.imageJar.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(context),
                 jar.getJar_id()));
 
-        //add a negative cashflow
         //TODO make a swipe delete?
-        /*holder.card.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-
-                inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View content = inflater.inflate(R.layout.edit_item, null);
-                final EditText editID = (EditText) content.findViewById(R.id.id_edit);
-                final EditText editName = (EditText) content.findViewById(R.id.name_edit);
-                final EditText editThumbnail = (EditText) content.findViewById(R.id.thumbnail_edit);
-
-                editID.setText(jar.getJar_id());
-                editName.setText(jar.getJar_name());
-                //TODO
-                editThumbnail.setText(jar.getJar_info());
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setView(content)
-                        .setTitle("Edit Jar")
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                RealmResults<Jar> results = realm.where(Jar.class).findAll();
-
-                                realm.beginTransaction();
-                                results.get(position).setJar_id(editID.getText().toString());
-                                results.get(position).setJar_name(editName.getText().toString());
-                                results.get(position).setJar_info(editThumbnail.getText().toString());
-
-                                realm.commitTransaction();
-
-                                notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-
-                //RealmResults<Jar> results = realm.where(Jar.class).findAll();
-
-                // Get the jar title to show it in toast message
-                //Jar jarItem = results.get(position);
-                //String title = jarItem.getJar_id() + " " + jarItem.getJar_name();
-
-                RealmManager.getInstance().addCashToJar(jar.getJar_id(),)
-
-                // All changes to data must happen in a transaction
-                realm.beginTransaction();
-
-                // remove single match
-                results.remove(position);
-                realm.commitTransaction();
-
-                if (results.size() == 0) {
-                    Prefs.with(context).setPreLoad(false);
-                }
-                notifyDataSetChanged();
-                Toast.makeText(context, title + " is removed from Realm", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });*/
 
         //update single match from realm
         holder.card.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                //int itemJarPosition = position;
-
                 jarInAdapterPublishSubject.onNext(jar);
-
-                /*inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View content = inflater.inflate(R.layout.edit_item, null);
-                final EditText editID = (EditText) content.findViewById(R.id.id_edit);
-                final EditText editName = (EditText) content.findViewById(R.id.name_edit);
-                final EditText editThumbnail = (EditText) content.findViewById(R.id.thumbnail_edit);
-
-                editID.setText(jar.getJar_id());
-                editName.setText(jar.getJar_name());
-                //TODO
-                editThumbnail.setText(jar.getJar_info());
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setView(content)
-                        .setTitle("Edit Jar")
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                RealmResults<Jar> results = realm.where(Jar.class).findAll();
-
-                                realm.beginTransaction();
-                                results.get(position).setJar_id(editID.getText().toString());
-                                results.get(position).setJar_name(editName.getText().toString());
-                                results.get(position).setJar_info(editThumbnail.getText().toString());
-
-                                realm.commitTransaction();
-
-                                notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();*/
             }
         });
     }
@@ -244,9 +131,7 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
         public ImageView imageJar;
 
         public CardViewHolder(View itemView) {
-            // standard view holder pattern with Butterknife view injection
             super(itemView);
-
             card = (CardView) itemView.findViewById(R.id.itemFragmentCardJars);
             textID = (TextView) itemView.findViewById(R.id.itemIdText);
             textName = (TextView) itemView.findViewById(R.id.itemNameText);

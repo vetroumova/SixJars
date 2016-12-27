@@ -6,7 +6,7 @@
     android:background="@color/colorTranspBG"
     android:gravity="center_vertical"
     android:padding="@dimen/margin_normal"
-    tools:context="org.itstep.android5.vetroumova.newbeginning.sixjars.ui.fragments.PourToJarFragment">
+    tools:context="com.vetroumova.sixjars.ui.fragments.PourToJarFragment">
 
     <TextView
         android:id="@+id/share_title_text"
@@ -39,7 +39,7 @@
         android:layout_toRightOf="@+id/share_vk_button"
         android:background="@color/colorWhiteBG"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/g_plus_svg" />
+        app:srcCompat="@drawable/ic_g_plus_svg" />
 
     <ImageButton
         android:id="@+id/share_twitter_button"
@@ -126,7 +126,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_margin="@dimen/margin_normal"
                 android:layout_toRightOf="@+id/share_icon"
-                android:text="http://vetroumova.github.io/SixJars/"
+                android:autoLink="web"
+                android:linksClickable="true"
+                android:text="@string/link_app_google_play"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/item_balance_dimension"

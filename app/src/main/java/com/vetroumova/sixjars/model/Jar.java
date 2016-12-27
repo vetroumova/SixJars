@@ -12,8 +12,8 @@ public class Jar extends RealmObject {
     public static final String NAME_FIELD = "jar_name";
     public static final String INFO_FIELD = "jar_info";
     public static final String CASH_FIELD = "cashflows";
-    //TODO CHECK necessity of this field
     public static final String TOTAL_FIELD = "totalCash";
+    public static final String USER_FIELD = "user";
     //public static final String COLOR_FIELD = "color";
 
     @PrimaryKey
@@ -23,6 +23,7 @@ public class Jar extends RealmObject {
     private String jar_info;
     private float totalCash;
     private float jar_float_id;
+    private User user;
     //private int jar_color;
 
     public Jar() {
@@ -66,6 +67,14 @@ public class Jar extends RealmObject {
 
     public void setJar_float_id(float jar_float_id) {
         this.jar_float_id = jar_float_id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /*public int getJar_color() {

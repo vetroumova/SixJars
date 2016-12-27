@@ -75,14 +75,15 @@ public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
             public boolean onLongClick(View v) {
 
                 long cashID = cashflow.getId();
+                float sum = cashflow.getSum();
 
                 if (!RealmManager.getInstance().deleteCashflow(cashID)) {
-                    Toast.makeText(context, cashID + " NOT removed from Realm, not enough money",
+                    Toast.makeText(context, sum + context.getString(R.string.not_removed_text),
                             Toast.LENGTH_SHORT).show();
                 } else {
                     notifyDataSetChanged();
                     cashflowDeletePublishSubject.onNext(cashID);
-                    Toast.makeText(context, cashID + " is removed from Realm",
+                    Toast.makeText(context, sum + context.getString(R.string.removed_cashflow_text),
                             Toast.LENGTH_SHORT).show();
                 }
                 return false;
@@ -96,46 +97,6 @@ public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
             public void onClick(View v) {
 
                 cashflowInAdapterPublishSubject.onNext(cashflow);
-
-                /*inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View content = inflater.inflate(R.layout.edit_item, null);
-                final EditText editID = (EditText) content.findViewById(R.id.id_edit);
-                final EditText editName = (EditText) content.findViewById(R.id.name_edit);
-                final EditText editThumbnail = (EditText) content.findViewById(R.id.thumbnail_edit);
-
-                editID.setText(jar.getJar_id());
-                editName.setText(jar.getJar_name());
-                //TODO
-                editThumbnail.setText(jar.getJar_info());
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setView(content)
-                        .setTitle("Edit Jar")
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                RealmResults<Jar> results = realm.where(Jar.class).findAll();
-
-                                realm.beginTransaction();
-                                results.get(position).setJar_id(editID.getText().toString());
-                                results.get(position).setJar_name(editName.getText().toString());
-                                results.get(position).setJar_info(editThumbnail.getText().toString());
-
-                                realm.commitTransaction();
-
-                                notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();*/
             }
         });
     }

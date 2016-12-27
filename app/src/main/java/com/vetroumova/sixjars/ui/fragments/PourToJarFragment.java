@@ -13,11 +13,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vetroumova.sixjars.utils.BottleDrawableManager;
 import com.vetroumova.sixjars.R;
 import com.vetroumova.sixjars.app.Prefs;
 import com.vetroumova.sixjars.database.RealmManager;
 import com.vetroumova.sixjars.model.Jar;
+import com.vetroumova.sixjars.utils.BottleDrawableManager;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -63,12 +63,8 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
             chosenJar = getArguments().getString(CHOSEN_JAR, "NoJar"); //default - no pour
         }
         // Pick a style based on the num.
-        int style = DialogFragment.STYLE_NO_FRAME, theme = android.R.style.Theme_Holo_Light_Dialog_NoActionBar;
-            /*case 4: theme = android.R.style.Theme_Holo; break;
-            case 5: theme = android.R.style.Theme_Holo_Light_Dialog; break;
-            case 6: theme = android.R.style.Theme_Holo_Light; break;
-            case 7: theme = android.R.style.Theme_Holo_Light_Panel; break;
-            case 8: theme = android.R.style.Theme_Holo_Light; break;*/
+        int style = DialogFragment.STYLE_NO_FRAME,
+                theme = android.R.style.Theme_Holo_Light_Dialog_NoActionBar;
         setStyle(style, theme);
         jars = new ArrayList<>();
     }
@@ -108,7 +104,6 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
         Log.d("VOlga", "Getting jars elements: " + jars.size());
         //Set the text
         DecimalFormatSymbols s = new DecimalFormatSymbols();
-        //s.setDecimalSeparator('.');
         DecimalFormat f = new DecimalFormat("##,##0.00", s);
         currBalanceLTSS.setText(getString(R.string.cash_balance_text, f.format(jars.get(4).getTotalCash())));
         currBalanceFFA.setText(getString(R.string.cash_balance_text, f.format(jars.get(5).getTotalCash())));
@@ -174,7 +169,6 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
                             if (!resultDeleteSum) {
                                 Log.d("VOlga", "not poured from " + jar.getJar_id()
                                         + " to LTSS - " + resultDeleteSum);
-                                //break;
                             }
                         }
                     }
@@ -191,8 +185,10 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
                             //new MaxVolume for bottle
                             Prefs.with(getContext()).setMaxVolumeInJar(RealmManager.with(this)
                                     .getJar(chosenJar).getTotalCash(), chosenJar);
+                            //save new prefs to user in realm
+                            RealmManager.setUserPrefsFromSharedPrefs(getContext(),
+                                    RealmManager.with(this).getJar(chosenJar).getUser());
                         }
-                        //setBalance();
                     }
 
                 } else if (chosenJar.equals("FFA")) {
@@ -225,14 +221,15 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
                             //new MaxVolume for bottle
                             Prefs.with(getContext()).setMaxVolumeInJar(RealmManager.with(this)
                                     .getJar(chosenJar).getTotalCash(), chosenJar);
+                            //save new prefs to user in realm
+                            RealmManager.setUserPrefsFromSharedPrefs(getContext(),
+                                    RealmManager.with(this).getJar(chosenJar).getUser());
                         }
-                        //setBalance();
                     }
                 }
                 //for all cases
                 OnPourInJarListener listener = (OnPourInJarListener) getTargetFragment();
                 listener.onChooseToPour(chosenJar);
-                //chosenJar = "NoJar";
                 dismiss();
                 break;
             }

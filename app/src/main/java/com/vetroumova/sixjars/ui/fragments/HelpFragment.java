@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vetroumova.sixjars.R;
-/**
- * The tutotial fragment
- */
+
 public class HelpFragment extends Fragment {
 
     public HelpFragment() {

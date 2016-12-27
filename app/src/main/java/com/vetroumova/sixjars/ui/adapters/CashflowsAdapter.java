@@ -13,6 +13,9 @@ import com.vetroumova.sixjars.R;
 import com.vetroumova.sixjars.database.RealmManager;
 import com.vetroumova.sixjars.model.Cashflow;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
@@ -23,11 +26,11 @@ import rx.subjects.PublishSubject;
 public class CashflowsAdapter extends RealmRecyclerViewAdapter<Cashflow> {
 
     final Context context;
+    private final PublishSubject<Cashflow> cashflowInAdapterPublishSubject = PublishSubject.create();
     private Realm realm;
     private LayoutInflater inflater;
-    //private List<Integer> percentJars;
-
-    private final PublishSubject<Cashflow> cashflowInAdapterPublishSubject = PublishSubject.create();
+    private DecimalFormatSymbols s = new DecimalFormatSymbols();
+    private DecimalFormat f = new DecimalFormat("##,##0.00", s);
 
 
     public CashflowsAdapter(Context context) {
@@ -56,20 +59,11 @@ public class CashflowsAdapter extends RealmRecyclerViewAdapter<Cashflow> {
         // set the title and the snippet
         holder.textCashID.setText(String.valueOf(cashflow.getId()));
         holder.textCashDate.setText(String.valueOf(cashflow.getDate()));
-        String total = String.format(context.getString(R.string.item_balance_text), cashflow.getSum());
-        holder.textCashSum.setText(total);
+        holder.textCashSum.setText(context.getString(R.string.item_balance_text,
+                f.format(cashflow.getSum())));
         holder.textCashJar.setText(cashflow.getJar().getJar_id());
         holder.textCashPercentage.setText(context.getString(R.string.item_percentage_text,
                 cashflow.getCurrpercent()));
-
-        /*// load the background image
-        if (book.getImageUrl() != null) {
-            Glide.with(context)
-                    .load(book.getImageUrl().replace("https", "http"))
-                    .asBitmap()
-                    .fitCenter()
-                    .into(holder.imageBackground);
-        }*/
 
         //remove single match from realm
         //TODO make a swipe delete
@@ -81,7 +75,8 @@ public class CashflowsAdapter extends RealmRecyclerViewAdapter<Cashflow> {
 
                 // Get the book title to show it in toast message
                 Cashflow cashflowItem = results.get(position);
-                String title = cashflowItem.getDate() + " " + cashflowItem.getSum();
+                String title = context.getString(R.string.removed_cashflow_text)
+                        + (cashflowItem.getDate() + " " + cashflowItem.getSum());
 
                 // All changes to data must happen in a transaction
                 realm.beginTransaction();
@@ -89,14 +84,9 @@ public class CashflowsAdapter extends RealmRecyclerViewAdapter<Cashflow> {
                 // remove single match
                 results.remove(position);
                 realm.commitTransaction();
-
-                /*if (results.size() == 0) {
-                    Prefs.with(context).setPreLoad(false);
-                }*/
-
                 notifyDataSetChanged();
 
-                Toast.makeText(context, title + " is removed from Realm", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -106,52 +96,10 @@ public class CashflowsAdapter extends RealmRecyclerViewAdapter<Cashflow> {
 
             @Override
             public void onClick(View v) {
-
                 cashflowInAdapterPublishSubject.onNext(cashflow);
-
-                /*inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View content = inflater.inflate(R.layout.edit_item, null);
-                final EditText editID = (EditText) content.findViewById(R.id.id_edit);
-                final EditText editName = (EditText) content.findViewById(R.id.name_edit);
-                final EditText editThumbnail = (EditText) content.findViewById(R.id.thumbnail_edit);
-
-                editID.setText(jar.getJar_id());
-                editName.setText(jar.getJar_name());
-                //TODO
-                editThumbnail.setText(jar.getJar_info());
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setView(content)
-                        .setTitle("Edit Jar")
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                RealmResults<Jar> results = realm.where(Jar.class).findAll();
-
-                                realm.beginTransaction();
-                                results.get(position).setJar_id(editID.getText().toString());
-                                results.get(position).setJar_name(editName.getText().toString());
-                                results.get(position).setJar_info(editThumbnail.getText().toString());
-
-                                realm.commitTransaction();
-
-                                notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();*/
             }
         });
     }
-
 
     public Observable<Cashflow> getPositionCashClicks() {
         return cashflowInAdapterPublishSubject.asObservable();

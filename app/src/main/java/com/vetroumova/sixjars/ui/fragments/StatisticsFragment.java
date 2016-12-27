@@ -27,12 +27,12 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-
-import org.florescu.android.rangeseekbar.RangeSeekBar;
 import com.vetroumova.sixjars.R;
 import com.vetroumova.sixjars.database.RealmManager;
 import com.vetroumova.sixjars.model.Cashflow;
 import com.vetroumova.sixjars.model.Jar;
+
+import org.florescu.android.rangeseekbar.RangeSeekBar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,9 +44,8 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
-//import com.google.android.gms.plus.PlusOneButton;
-
-public class StatisticsFragment extends SimpleChartFragment implements RangeSeekBar.OnRangeSeekBarChangeListener {
+public class StatisticsFragment extends SimpleChartFragment
+        implements RangeSeekBar.OnRangeSeekBarChangeListener {
     BarChart barChart;
     PieChart pieChart;
     RangeSeekBar<Integer> rangeSeekBar;

@@ -6,3 +6,11 @@
 .DS_Store
 /build
 /captures
+/app/src/main/java/com/vetroumova/sixjars/utils/ApiService.java
+/app/src/main/java/com/vetroumova/sixjars/utils/VerticalTextView.java
+/app/src/main/res/
+/app/src/main/assets/
+/app/src/main/java/com/vetroumova/sixjars/model/Migration.java
+/app/src/main/java/com/vetroumova/sixjars/ui/adapters/RxRecyclerAdapter.java
+/app/src/main/java/com/vetroumova/sixjars/utils/RxRecyclerAdapter.java
+/app/src/main/java/com/vetroumova/sixjars/ui/adapters/CashflowsAdapter.java

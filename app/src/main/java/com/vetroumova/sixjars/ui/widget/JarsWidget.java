@@ -109,23 +109,6 @@ public class JarsWidget extends AppWidgetProvider {
             remoteViews.setTextViewText(R.id.jar_sumView3, getLoyalSum(jars.get(2)));
             remoteViews.setTextViewTextSize(R.id.jar_sumView3, 1, getLoyalSumSize(jars.get(2)));
         }
-
-        //Register an onClickListener
-            /*Intent intent = new Intent(context, JarsWidget.class);
-
-            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-
-            PendingIntent pendingIntent = PendingIntent.getBroadcast
-                    (context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);*/
-
-            /*Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);  // Identifies the particular widget...
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Make the pending intent unique...
-            intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-            PendingIntent pendIntent = PendingIntent.getActivity(context, 0, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);*/
         Intent intentStartActivity = new Intent(context, MainActivity.class);
         //intentStartActivity.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);  // Identifies the particular widget...
         //intentStartActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -150,70 +133,6 @@ public class JarsWidget extends AppWidgetProvider {
         remoteViews.setOnClickPendingIntent(R.id.appwidget_go_layout, pendingIntentNextJars);
 
         appWidgetManager.updateAppWidget(widgetId, remoteViews);
-
-        //realm.close();
-
-        /*String taskListId = prefHelper.getWidgetTaskListId(appWidgetId);
-
-        // Set up the intent that starts the TasksWidgetService, which will
-        // provide the views for this collection.
-        Intent intent = new Intent(context, TasksWidgetService.class);
-
-        intent.putExtra(TaskDetailActivity.EXTRA_TASK_LIST_ID, taskListId);
-
-        // Add the app widget ID to the intent extras.
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-*/
-        // Instantiate the RemoteViews object for the app widget layout.
-        //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
-
-        // Set up the RemoteViews object to use a RemoteViews adapter.
-        // This adapter connects to a RemoteViewsService  through the specified intent.
-        // This is how you populate the data.
-        //views.setRemoteAdapter(R.id.widget_task_list, intent);
-
-        // The empty view is displayed when the collection has no items.
-        // It should be in the same layout used to instantiate the RemoteViews
-        // object above.
-//        views.setEmptyView(R.id.stack_view, R.id.empty_view);
-
-        // This section makes it possible for items to have individualized behavior.
-        // It does this by setting up a pending intent template. Individuals items of a collection
-        // cannot set up their own pending intents. Instead, the collection as a whole sets
-        // up a pending intent template, and the individual items set a fillInIntent
-        // to create unique behavior on an item-by-item basis.
-        //Intent taskDetailIntent = TaskDetailActivity.getIntentTemplate(context, taskListId);
-        //taskDetailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        //PendingIntent taskDetailPendingIntent = PendingIntent.getActivity(context, 0, taskDetailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        //views.setPendingIntentTemplate(R.id.widget_task_list, taskDetailPendingIntent);
-
-        //
-        // Do additional processing specific to this app widget...
-        //
-
-        //RealmResults<Jar> jarList = realm.where(Jar.class).findAll();
-
-        // The task list can be null when upgrading the Realm scheme, prevent crashing
-        /*if (taskList != null) {
-            // Set the task list title
-            views.setTextViewText(R.id.task_list_title, taskList.getTitle());
-        }*/
-
-        // Setup the header
-        /*Intent viewTaskListIntent = new Intent(context, MainActivity.class);
-        viewTaskListIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent viewTaskListPendingIntent = PendingIntent.getActivity(context, 0, viewTaskListIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.task_list_header, viewTaskListPendingIntent);*/
-
-        // Setup the Add Task button
-        // Set the icon
-        /*views.setImageViewResource(R.id.add_task, R.drawable.ic_add_white_24dp);
-        // Set the click action
-        Intent addTaskIntent = EditTaskActivity.getTaskCreateIntent(context, taskListId);
-        addTaskIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, addTaskIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.add_task, pendingIntent);*/
     }
 
     public static String getLoyalJarName(Jar jar) {
@@ -296,16 +215,6 @@ public class JarsWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             JarsWidgetConfigureActivity.deleteTitlePref(context, appWidgetId);
         }
-    }
-
-    @Override
-    public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
-    }
-
-    @Override
-    public void onDisabled(Context context) {
-        // Enter relevant functionality for when the last widget is disabled
     }
 }
 

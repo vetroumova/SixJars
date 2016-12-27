@@ -12,10 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.google.android.gms.plus.PlusShare;
+import com.vetroumova.sixjars.R;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.model.VKScopes;
-
-import com.vetroumova.sixjars.R;
 
 public class ShareFragment extends DialogFragment implements View.OnClickListener {
 
@@ -23,6 +22,7 @@ public class ShareFragment extends DialogFragment implements View.OnClickListene
     ImageButton vkButton;
     ImageButton facebookButton;
     ImageButton twitterButton;
+    String appPackageName;
 
     public ShareFragment() {
         // Required empty public constructor
@@ -37,13 +37,7 @@ public class ShareFragment extends DialogFragment implements View.OnClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Pick a style based on the num.
         int style = DialogFragment.STYLE_NO_FRAME, theme = android.R.style.Theme_Holo_Light_Dialog_NoActionBar;
-            /*case 4: theme = android.R.style.Theme_Holo; break;
-            case 5: theme = android.R.style.Theme_Holo_Light_Dialog; break;
-            case 6: theme = android.R.style.Theme_Holo_Light; break;
-            case 7: theme = android.R.style.Theme_Holo_Light_Panel; break;
-            case 8: theme = android.R.style.Theme_Holo_Light; break;*/
         setStyle(style, theme);
     }
 
@@ -72,11 +66,13 @@ public class ShareFragment extends DialogFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.share_google_button: {
-                Snackbar.make(getView(), "google", Snackbar.LENGTH_SHORT).show();
+                appPackageName = getActivity().getApplicationContext().getPackageName();
+                //Snackbar.make(getView(), "google", Snackbar.LENGTH_SHORT).show();
                 Intent shareIntent = new PlusShare.Builder(getActivity())
                         .setType("text/plain")
                         .setText(getString(R.string.share_message_text))
-                        .setContentUrl(Uri.parse("http://com.vetroumova.github.io/SixJars/"))
+                        .setContentDeepLinkId("https://play.google.com/store/apps/details?id=" + appPackageName)
+                        .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName))
                         .getIntent();
                 startActivityForResult(shareIntent, 0);
                 break;

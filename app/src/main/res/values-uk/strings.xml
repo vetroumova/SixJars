@@ -124,5 +124,18 @@
     <string name="vk_error_posted_text">Помилка при створенні поста</string>
     <string name="vk_posted_text">Пост успішно розміщений на вашій стіні</string>
     <string name="vk_not_posted_text">Створення поста скасовано</string>
+    <string name="db_restore_done_text">База даних відновлена</string>
+    <string name="prefs_restore_done_text">Налаштунки відновлені</string>
+    <string name="restore_not_found">Не знайдено файл для відновлення</string>
+    <string name="db_saved_text">Файл бази даних збережено в:</string>
+    <string name="prefs_saved_text">", файл налаштунків збережено в: "</string>
+    <string name="export_mail_text">Адреса одержувача</string>
+    <string name="export_message_text">Експортовані файли бази даних та налаштунків програми \"Шість пляшок\"</string>
+    <string name="export_subject_text">Експорт \"Шість Пляшок\"</string>
+    <string name="send_prefs_text">налаштунки</string>
+    <string name="rest_of_cash">Залишок: \n$s грн</string>
+    <string name="removed_cashflow_text">" видалено з бази"</string>
+    <string name="not_removed_text">" НЕ видалено, недостатньо коштів"</string>
+    <string name="prefs_not_restored_text">Налаштунки користувача не відновлені</string>
 
 </resources>

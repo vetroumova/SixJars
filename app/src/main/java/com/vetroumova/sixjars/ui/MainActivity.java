@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
@@ -28,13 +29,26 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.vetroumova.sixjars.R;
+import com.vetroumova.sixjars.app.Prefs;
+import com.vetroumova.sixjars.database.RealmManager;
+import com.vetroumova.sixjars.ui.fragments.AddCashFragment;
+import com.vetroumova.sixjars.ui.fragments.CashInfoFragment;
+import com.vetroumova.sixjars.ui.fragments.HelpFragment;
+import com.vetroumova.sixjars.ui.fragments.JarInfoFragment;
+import com.vetroumova.sixjars.ui.fragments.RecyclerFragment;
+import com.vetroumova.sixjars.ui.fragments.SettingsFragment;
+import com.vetroumova.sixjars.ui.fragments.ShareFragment;
+import com.vetroumova.sixjars.ui.fragments.SpendFragment;
+import com.vetroumova.sixjars.ui.fragments.StatisticsFragment;
+import com.vetroumova.sixjars.ui.widget.JarsWidget;
+import com.vetroumova.sixjars.utils.DebugLogger;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
@@ -51,23 +65,9 @@ import com.vk.sdk.api.model.VKPhotoArray;
 import com.vk.sdk.api.photo.VKImageParameters;
 import com.vk.sdk.api.photo.VKUploadImage;
 
-import com.vetroumova.sixjars.R;
-import com.vetroumova.sixjars.database.RealmManager;
-import com.vetroumova.sixjars.ui.adapters.RxRecyclerAdapter;
-import com.vetroumova.sixjars.ui.fragments.AddCashFragment;
-import com.vetroumova.sixjars.ui.fragments.CashInfoFragment;
-import com.vetroumova.sixjars.ui.fragments.HelpFragment;
-import com.vetroumova.sixjars.ui.fragments.JarInfoFragment;
-import com.vetroumova.sixjars.ui.fragments.RecyclerFragment;
-import com.vetroumova.sixjars.ui.fragments.SettingsFragment;
-import com.vetroumova.sixjars.ui.fragments.ShareFragment;
-import com.vetroumova.sixjars.ui.fragments.SpendFragment;
-import com.vetroumova.sixjars.ui.fragments.StatisticsFragment;
-import com.vetroumova.sixjars.ui.widget.JarsWidget;
-import com.vetroumova.sixjars.utils.DebugLogger;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -93,9 +93,6 @@ public class MainActivity extends AppCompatActivity {
     AHBottomNavigationItem itemAbout;
     AlphaAnimation animationDisapear;
     AlphaAnimation animationGetVisible;
-    //RecyclerView rxList;
-    //ArrayList<AnimationDrawable> jars;
-    private RxRecyclerAdapter rxRecyclerAdapter = new RxRecyclerAdapter();
     private LinearLayoutManager layoutManager;
     private CompositeSubscription subscriptions = new CompositeSubscription();
     private List<String> mockItems = new ArrayList<>();
@@ -134,60 +131,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-        /*rxList = (RecyclerView) findViewById(R.id.rxRecycler);
-        for (int i = 0; i < 20; i++) {
-            mockItems.add(String.valueOf(i));
-        }
-        rxList.setHasFixedSize(true);
-        rxList.setAdapter(rxRecyclerAdapter);
-        layoutManager = new LinearLayoutManager(this);
-        rxList.setLayoutManager(layoutManager);
-
-        rxRecyclerAdapter.addAll(mockItems);
-
-        Observable<Void> pageDetector = Observable.create(new Observable.OnSubscribe<Void>() {
-            @Override
-            public void call(final Subscriber<? super Void> subscriber) {
-                rxList.setOnScrollListener(new RecyclerView.OnScrollListener() {
-                    int pastVisibleItems, visibleItemCount, totalItemCount;
-                    @Override
-                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                        visibleItemCount = layoutManager.getChildCount();
-                        totalItemCount = layoutManager.getItemCount();
-                        pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
-
-                        if ((visibleItemCount+pastVisibleItems) >= totalItemCount) {
-                            subscriber.onNext(null);
-                        }
-                    }
-                });
-            }
-        }).debounce(400, TimeUnit.MILLISECONDS);*/
-
-        /*bindActivity(this, pageDetector);
-        Observable<List<String>> listItemObservable = RepresentativeApi.paginatedThings(pageDetector);
-        bindActivity(this, listItemObservable);
-        subscriptions.add(listItemObservable.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<String>>() {
-            @Override
-            public void onCompleted() {
-                //Timber.d("completed");
-                Log.d(TAG,"completed");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                //Timber.e("error: " + e.getMessage());
-                Log.d(TAG,"error: " + e.getMessage());
-            }
-
-            @Override
-            public void onNext(List<String> strings) {
-                rxRecyclerAdapter.addAll(strings);
-            }
-        }));
-    }*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -201,21 +144,6 @@ public class MainActivity extends AppCompatActivity {
         //getWindow().setAttributes(params);
 
         fragmentManager = getSupportFragmentManager();
-        /*int count = fragmentManager.getBackStackEntryCount();
-        Log.d(TAG,"In stack : " + count);*//*
-
-        if (savedInstanceState != null) {
-            if (fragmentManager.getFragment(savedInstanceState, "backstackfragment")
-                    instanceof RecyclerFragment) {
-                recyclerFragment = (RecyclerFragment) fragmentManager.getFragment(savedInstanceState,
-                        "backstackfragment");
-            } else {
-                recyclerFragment = new RecyclerFragment();
-            }
-
-        } else {
-            recyclerFragment = new RecyclerFragment();
-        }*/
         recyclerFragment = new RecyclerFragment();
         jarInfoFragment = new JarInfoFragment();
         settingsFragment = new SettingsFragment();
@@ -238,10 +166,8 @@ public class MainActivity extends AppCompatActivity {
         //fab.setAnimation(animation1);
         //add new income
         fab.setOnClickListener(view -> {
-
-            //Snackbar.make(view, "Add to JARS", Snackbar.LENGTH_LONG)
-            //        .setAction("Cashflow", null).show();
             fab.startAnimation(animationDisapear);
+            DebugLogger.log("DebugLogger");
             Log.d(TAG, "FAB");
             fragmentManager.beginTransaction()
                     .replace(R.id.content_layout, addCashFragment)
@@ -250,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
                     .addToBackStack("addCash")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
-            //fab.setVisibility(View.INVISIBLE);
             fab.hide();
         });
 
@@ -276,24 +201,10 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.addItem(itemSettings);
         bottomNavigation.addItem(itemStatistics);
         bottomNavigation.addItem(itemTutorial);
-
-        //bottomNavigation.setDefaultBackgroundColor(getResources().getColor(R.color.colorBottomNavigationPrimary));
-        //bottomNavigation.setAccentColor(R.color.colorBottomNavigationPrimaryDark);
-        //bottomNavigation.setInactiveColor(R.color.colorBottomNavigationActiveColored);
-
-        //icon and text colors
-        /*bottomNavigation.setColoredModeColors(getResources().getColor(R.color.colorBottomNavigationPrimaryDark),
-                getResources().getColor(R.color.colorPrimaryLight));*/
-
-        // Disable the translation inside the CoordinatorLayout
-        //bottomNavigation.setBehaviorTranslationEnabled(false);
         bottomNavigation.setBehaviorTranslationEnabled(true);
-
-        // Use colored navigation with circle reveal effect
         bottomNavigation.setColored(true);
         //to color an icon font
         bottomNavigation.setForceTint(true);
-
         bottomNavigation.setCurrentItem(0);
 
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
@@ -311,10 +222,6 @@ public class MainActivity extends AppCompatActivity {
                                 .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
-                        /*if (fab.getVisibility() == View.INVISIBLE) {
-                            fab.setVisibility(View.VISIBLE);
-                            fab.startAnimation(animationGetVisible);
-                        }*/
                         if (!fab.isShown()) {
                             fab.show();
                             fab.startAnimation(animationGetVisible);
@@ -322,6 +229,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                     case 1: {
+                        settingsFragment = SettingsFragment.newInstance(
+                                Prefs.with(getApplicationContext()).getPrefLanguage());
                         fragmentManager.beginTransaction()
                                 .replace(R.id.content_layout, settingsFragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -363,10 +272,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*Realm realm = RealmManager.with(this).getRealm();
-        Log.d(TAG,"Path to db: " + realm.getPath() + " schema : " + realm.getSchema());*/
-
-        //if (savedInstanceState == null && fragmentManager.getBackStackEntryCount() == 0) {
         if (fragmentManager.getBackStackEntryCount() == 0
                 && !(fragmentManager.findFragmentById(R.id.content_layout) instanceof RecyclerFragment)) {
             fragmentManager.beginTransaction()
@@ -416,12 +321,8 @@ public class MainActivity extends AppCompatActivity {
 
         Subscription finishEditCashSubscription = cashInfoFragment.isFinishEdit()
                 .subscribe(isEdited -> {
-                    DebugLogger.log("cash was edited : " + isEdited);
+                    DebugLogger.log("DL cash was edited : " + isEdited);
                     Log.d(TAG, "cash was edited : " + isEdited);
-                    //Toast.makeText(getApplicationContext(), "cash was edited : " + isEdited,
-                    //Toast.LENGTH_SHORT).show();
-
-                    //fragmentManager.popBackStackImmediate();
                     recyclerFragment.refreshRecycler();
                     jarInfoFragment.refreshData();
                     jarInfoFragment.refreshRecyclerArterDeleteItem();
@@ -430,14 +331,10 @@ public class MainActivity extends AppCompatActivity {
 
         Subscription cashDeleteSubscription = jarInfoFragment.refreshRecyclerArterDeleteItem()
                 .subscribe(deletedCashID -> {
-                            DebugLogger.log("refreshing mainRecycler after deleted cash : "
+                            DebugLogger.log("DL refreshing mainRecycler after deleted cash : "
                                     + deletedCashID);
                             Log.d(TAG, "refreshing mainRecycler after deleted cash : "
                                     + deletedCashID);
-                            //Toast.makeText(getApplicationContext(),
-                            //"refreshing mainRecycler after deleted cash : " + deletedCashID,
-                            //Toast.LENGTH_SHORT).show();
-                            //rxRecyclerAdapter.notifyDataSetChanged();
                             recyclerFragment.refreshRecycler();
                             updateAllWidgets();
                         },
@@ -446,12 +343,9 @@ public class MainActivity extends AppCompatActivity {
 
         Subscription spendCashInJar = jarInfoFragment.spendCashInJar()
                 .subscribe(jar -> {
-                    DebugLogger.log("open spendcash fragment : " + jar.getJar_id());
+                    DebugLogger.log("DL open spendcash fragment : " + jar.getJar_id());
                     Log.d(TAG, "open spendcash fragment : " + jar.getJar_id());
-                    //Toast.makeText(getApplicationContext(), "open spendcash fragment : " + jar.getJar_id(),
-                    //Toast.LENGTH_SHORT).show();
                     spendFragment = SpendFragment.newInstance(jar.getJar_id());
-                    //spendFragment.setJarId(jar.getJar_id());
                     fragmentManager.beginTransaction()
                             .replace(R.id.content_layout, spendFragment, "spend")
                             .addToBackStack("Spend")
@@ -462,12 +356,9 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(isSpend -> {
                     DebugLogger.log("spend cash and close : " + isSpend);
                     Log.d(TAG, "spend cash and close : " + isSpend);
-                    //Toast.makeText(getApplicationContext(), "spend cash and close : " + isSpend,
-                    //Toast.LENGTH_SHORT).show();
                     //TODO CHECK if working and close the spend
                     fragmentManager.popBackStackImmediate();
                     fab.show();
-                    //rxRecyclerAdapter.notifyDataSetChanged();
                     recyclerFragment.refreshRecycler();
                     jarInfoFragment.refreshData();
                     jarInfoFragment.refreshRecyclerArterDeleteItem();
@@ -481,11 +372,6 @@ public class MainActivity extends AppCompatActivity {
         subscriptions.add(spendCashInJar);
         subscriptions.add(finishSpendCashSubscription);
     }
-
-    public void refreshRxRecycler() {
-        rxRecyclerAdapter.notifyDataSetChanged();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -509,22 +395,6 @@ public class MainActivity extends AppCompatActivity {
                     .addToBackStack("Share")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
-
-            /*AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle(getString(R.string.share_title_text))
-                    .setMessage(getString(R.string.share_message_text))
-                    .setIcon(R.mipmap.ic_launcher)
-                    //.setCancelable(false)
-
-                    .setNegativeButton(getString(R.string.share_cancel_text),
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();*/
-
             return true;
         } else if (id == R.id.action_save_base) {
             menuItem = 1;
@@ -587,15 +457,6 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    public void onShareClick(View view) {
-        /*Intent shareIntent = new PlusShare.Builder(this)
-                .setType("text/plain")
-                .setText(text)
-                .setContentUrl(Uri.parse(link))
-                .getIntent();
-        startActivityForResult(shareIntent, GOOGLEPLUS_REQUEST_CODE);*/
-    }
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if ((requestCode == GOOGLEPLUS_REQUEST_CODE) && (resultCode == -1)) {
@@ -648,7 +509,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void makeVKWallPost(VKAttachments attachments) {
-        attachments.add(new VKApiLink("http://com.vetroumova.github.io/SixJars/"));
+        final String appPackageName = getApplicationContext().getPackageName();
+        attachments.add(new VKApiLink("https://play.google.com/store/apps/details?id=" + appPackageName));
         VKRequest request = VKApi.wall().post(VKParameters.from(VKAccessToken.currentToken().userId,
                 -1,
                 VKApiConst.ATTACHMENTS, attachments,
@@ -672,7 +534,6 @@ public class MainActivity extends AppCompatActivity {
             public void onError(VKError error) {
                 super.onError(error);
                 Log.w("VK post", "error " + error.toString());
-                //Toast.makeText(getBaseContext(),"Ошибка при создании поста",Toast.LENGTH_LONG).show();
                 Toast.makeText(getBaseContext(), getString(R.string.vk_error_posted_text), Toast.LENGTH_LONG).show();
             }
         });
@@ -680,11 +541,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        //TODO work with fragments
         outState.putBoolean("IsSavedInst", true);
-        //nullpointer
-        /*fragmentManager.putFragment(outState, "backstackfragment", fragmentManager
-                .findFragmentByTag("RECYCLER"));*/
         super.onSaveInstanceState(outState);
     }
 
@@ -701,14 +558,6 @@ public class MainActivity extends AppCompatActivity {
             back_pressed = System.currentTimeMillis();
             return;
         } else {
-            /*// TODO how to clear backstack to recycler
-            try {
-                fragmentManager.popBackStackImmediate();
-            } catch (NullPointerException e) {
-                Log.d("VOlga", "No backstack onBackPressed");
-            }*/
-            //fab.setVisibility(View.VISIBLE);
-
             if (!fab.isShown()) {
                 fab.show();
                 fab.startAnimation(animationGetVisible);
@@ -721,8 +570,37 @@ public class MainActivity extends AppCompatActivity {
     private void updateAllWidgets() {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, JarsWidget.class));
-        if (appWidgetIds.length > 0) {
+        if (appWidgetIds != null && appWidgetIds.length > 0) {
             new JarsWidget().onUpdate(this, appWidgetManager, appWidgetIds);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (Prefs.with(getApplicationContext()).getPrefRestoreMark()) {
+            Log.d(TAG, "onStart - restore true");
+            //todo check
+            RealmManager.loadUserPrefsToSharedPrefs(getApplicationContext(),
+                    RealmManager.with(this).getJar("NEC").getUser());
+            Log.d(TAG, "");
+            Prefs.with(getApplicationContext()).setPrefRestoreMark(false);
+            Log.d(TAG, "onStart - restore false");
+
+
+            Configuration config = getApplicationContext().getResources().getConfiguration();
+            Locale locale = new Locale(Prefs.with(this).getPrefLanguage());
+            /*Locale previousLocale = getApplicationContext().
+            if (!"".equals(lang) && !Prefs.with(getContext().getApplicationContext()).equals(lang))*/
+            Locale.setDefault(locale);
+            config.locale = locale;
+            getApplicationContext().getResources().updateConfiguration(config,
+                    getApplicationContext().getResources().getDisplayMetrics());
+
+            Intent intent = getApplicationContext().getApplicationContext().getPackageManager()
+                    .getLaunchIntentForPackage(getApplicationContext().getPackageName());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
     }
 
@@ -734,13 +612,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
+        if (Prefs.with(getApplicationContext()).getPrefRestoreMark()) {
+            Log.d(TAG, "onPostResume - restore true");
+            //todo check
+            RealmManager.loadUserPrefsToSharedPrefs(getApplicationContext(),
+                    RealmManager.with(this).getJar("NEC").getUser());
+            Log.d(TAG, "");
+            Prefs.with(getApplicationContext()).setPrefRestoreMark(false);
+            Log.d(TAG, "onPostResume - restore false");
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //TODO CHECK
-        //Realm.getDefaultInstance().close();
         subscriptions.clear();
     }
 }

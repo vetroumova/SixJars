@@ -93,7 +93,7 @@
     <string name="delete_cash_info_text">To delete a cashflow make a long press on item</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="statistics_text">Statistics</string>
     <string name="tutorial_text">Tutorial</string>
     <string name="jars_text">JARS</string>
@@ -117,11 +117,7 @@
     <string name="tutorial_description6_text" formatted="false">    Financial Freedom Account (Financial Freedom Account, FFA) - 10%. This jar is the key to your financial well-being. Money from this jar is not wasted in any condition. It\'s used for investment and passive income source.</string>
     <string name="tutorial_description7_text" formatted="false">    This budgeting scheme is consistent with the method of envelopes: each month the entire gross income is distributing to jars: first for current necessities jar, then at the jar of financial freedom, and then to the rest of the account. Of course, you can get other percentages between jars, but it\'s close enough to the ideal structure of spending and investment, and you should strive for it.</string>
     <string name="tutorial_description8_text" formatted="false">
-        WHY method of 6 jars are so effective?\n
-        Simplicity. No need to be a rocket scientist to distribute the money in 6 categories.
-        It will take one to two minutes for everything. And at the same time - you effectively manage your family budget. All you need is to distribute the money in several categories and stick to simple rules. Or rather one rule.
-        \"Do not take money for expenses from a jar intended for other expenses.\"
-        You will learn to live within your incomes. At least you will try. Maybe you\'ll refuse loans and borrow money.</string>
+        WHY method of 6 jars are so effective?\n\nSimplicity. No need to be a rocket scientist to distribute the money in 6 categories.\nIt will take one to two minutes for everything. And at the same time - you effectively manage your family budget. All you need is to distribute the money in several categories and stick to simple rules. Or rather one rule.\n\"Do not take money for expenses from a jar intended for other expenses.\"\nYou will learn to live within your incomes. At least you will try. Maybe you\'ll refuse loans and borrow money.</string>
     <string name="no_pour_text">Don\'t pour the rest of previous incomes to any jar</string>
     <string name="pour_button_text">Finish adding income</string>
     <string name="not_from_ffa_text">Rest of all jars EXCEPT FFA goes to LTSS</string>
@@ -156,6 +152,20 @@
     <string name="db_jar_name_short_LTSS">LongTerm Saving</string>
     <string name="db_jar_name_short_FFA">Financial Freedom</string>
     <string name="set_language_text">Select language</string>
+    <string name="restore_not_found">Restore file is not found</string>
+    <string name="db_restore_done_text">DB restore is done</string>
+    <string name="prefs_restore_done_text">Preferences restore is done</string>
+    <string name="db_saved_text">DB File exported to Path:</string>
+    <string name="prefs_saved_text">,  Preferences exported to Path:</string>
+    <string name="send_prefs_text">preferences</string>
+    <string name="export_mail_text">Receiver\'s e-mail</string>
+    <string name="export_subject_text">Export of SixJars app</string>
+    <string name="export_message_text">Exported database and preferences files of SixJars app</string>
+    <string name="rest_of_cash">Rest:\n$s $</string>
+    <string name="removed_cashflow_text">" is removed from Realm"</string>
+    <string name="not_removed_text">" NOT removed from Realm, not enough money"</string>
+    <string name="prefs_not_restored_text">User preferences NOT restored</string>
+    <string name="link_app_google_play" translatable="false">https://play.google.com/store/apps/details?id=com.vetroumova.sixjars</string>
     <integer name="com_vk_sdk_AppId">5696879</integer>
 
     <string-array name="languages">

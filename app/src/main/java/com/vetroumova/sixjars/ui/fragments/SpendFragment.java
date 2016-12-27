@@ -1,6 +1,5 @@
 package com.vetroumova.sixjars.ui.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,11 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vetroumova.sixjars.utils.InputSumWatcher;
 import com.vetroumova.sixjars.R;
 import com.vetroumova.sixjars.app.Prefs;
 import com.vetroumova.sixjars.database.RealmManager;
+import com.vetroumova.sixjars.utils.InputSumWatcher;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,15 +25,6 @@ import java.util.Locale;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * SpendFragment.OnFragmentInteractionListener interface
- * to handle interaction events.
- * Use the {@link SpendFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SpendFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener,
         DatePickerFragment.OnNewDateListener, TimePickerFragment.OnNewTimeListener {
     private static final String JAR_ID = "jarId";
@@ -47,7 +39,7 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
 
     TextView dateViewClicable;
     TextView timeViewClickable;
-    //TextView spendCashValueText;
+    TextView restCashValueText;
     EditText spendCashValueText;
     EditText spendCashDescriptionEdit;
     Button button1;
@@ -72,8 +64,8 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
     private String newTime = "NoTime";
     private Date fullDate;
     private int[] partsOfDate = new int[5];
-
-    //private OnFragmentInteractionListener mListener;
+    private DecimalFormatSymbols s = new DecimalFormatSymbols();
+    private DecimalFormat f = new DecimalFormat("##,##0.00", s);
 
     public SpendFragment() {
         // Required empty public constructor
@@ -115,10 +107,12 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
         timeViewClickable = (TextView) view.findViewById(R.id.timeTextView);
         setDateTimeView(fullDate);
 
+        restCashValueText = (TextView) view.findViewById(R.id.restTextView);
+        restCashValueText.setText(getString(R.string.item_balance_text,
+                f.format(realmManager.getJar(jarId).getTotalCash())));
         spendCashValueText = (EditText) view.findViewById(R.id.spendCashInputText);
         spendCashValueText.addTextChangedListener(new InputSumWatcher(spendCashValueText));
         spendCashDescriptionEdit = (EditText) view.findViewById(R.id.spendCashDescriptionText);
-        //spendCashDescriptionEdit.setText("");
 
         button1 = (Button) view.findViewById(R.id.spend1Button);
         button2 = (Button) view.findViewById(R.id.spend2Button);
@@ -151,7 +145,6 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
         dateViewClicable.setOnClickListener(this);
         timeViewClickable.setOnClickListener(this);
 
-        // Inflate the layout for this fragment
         return view;
     }
 
@@ -166,7 +159,6 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
         // to correct a visible date
         dateFormat = new SimpleDateFormat("d-MMMM-yyyy", Locale.getDefault());
         dateViewClicable.setText(dateFormat.format(fullDate));
-
         timeViewClickable.setText(newTime);
     }
 
@@ -207,23 +199,6 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
 
     public Observable<Boolean> finishSpend() {
         return finishSpendSubject.asObservable();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        /*if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        /*mListener = null;*/
     }
 
     @Override
@@ -330,6 +305,8 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
                             spendCashDescriptionEdit.getText().toString());
                     Log.d("VOlga", "Trying to add a cashflow");
                     if (isAdded) {
+                        restCashValueText.setText(getString(R.string.item_balance_text,
+                                f.format(realmManager.getJar(jarId).getTotalCash())));
                         valueString.delete(0, valueString.length());
                         valueString.append("0");
                         spendCashDescriptionEdit.setText("");
@@ -370,10 +347,6 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
     public void onNewDate(int year, int month, int day) {
         //data from DatePickerDialog    "d-M-yyyy H:mm", Locale.getDefault()
         StringBuilder sb = new StringBuilder();
-        /*String dayString = String.valueOf(day);
-        if (day < 10) {
-            dayString = "0".concat(dayString);
-        }*/
         sb.append(day).append("-").append(month + 1).append("-").append(year);
         Log.d("VOlga", "StringBuilder " + sb);
         newDate = sb.toString();

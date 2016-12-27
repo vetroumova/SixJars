@@ -14,12 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vetroumova.sixjars.utils.BottleDrawableManager;
-import com.vetroumova.sixjars.utils.InputSumWatcher;
 import com.vetroumova.sixjars.R;
 import com.vetroumova.sixjars.app.Prefs;
 import com.vetroumova.sixjars.database.RealmManager;
 import com.vetroumova.sixjars.model.Jar;
+import com.vetroumova.sixjars.utils.BottleDrawableManager;
+import com.vetroumova.sixjars.utils.InputSumWatcher;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -91,7 +91,6 @@ public class AddCashFragment extends Fragment implements View.OnClickListener,
 
         sumEditText = (EditText) view.findViewById(R.id.cashAddEdit);
         sumEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        //sumEditText.setSelection(sumEditText.getText().length());
         sumEditText.setText("");
         sumEditText.addTextChangedListener(new InputSumWatcher(sumEditText));
 
@@ -179,7 +178,6 @@ public class AddCashFragment extends Fragment implements View.OnClickListener,
 
         //Set the text
         DecimalFormatSymbols s = new DecimalFormatSymbols();
-        //s.setDecimalSeparator('.');
         DecimalFormat f = new DecimalFormat("##,##0.00", s);
 
         currBalanceNEC.setText(getString(R.string.cash_balance_text, f.format(jars.get(0).getTotalCash())));
@@ -275,6 +273,9 @@ public class AddCashFragment extends Fragment implements View.OnClickListener,
                             //new MaxVolume for bottle
                             Prefs.with(getContext()).setMaxVolumeInJar(RealmManager.with(this)
                                     .getJar(jarID).getTotalCash(), jarID);
+                            //save new prefs to user in realm
+                            RealmManager.setUserPrefsFromSharedPrefs(getContext(),
+                                    RealmManager.with(this).getJar(jarID).getUser());
                         }
                         setBalance();
                     }
@@ -310,6 +311,9 @@ public class AddCashFragment extends Fragment implements View.OnClickListener,
                 //new MaxVolume for bottle
                 Prefs.with(getContext()).setMaxVolumeInJar(RealmManager.with(this)
                         .getJar(jarID).getTotalCash(), jarID);
+                //save new prefs to user in realm
+                RealmManager.setUserPrefsFromSharedPrefs(getContext(),
+                        RealmManager.with(this).getJar(jarID).getUser());
             }
         }
         Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text

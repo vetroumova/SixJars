@@ -14,9 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.vetroumova.sixjars.utils.BottleDrawableManager;
 import com.vetroumova.sixjars.R;
 import com.vetroumova.sixjars.app.Prefs;
 import com.vetroumova.sixjars.database.RealmManager;
@@ -24,6 +22,7 @@ import com.vetroumova.sixjars.model.Cashflow;
 import com.vetroumova.sixjars.model.Jar;
 import com.vetroumova.sixjars.ui.adapters.CashflowsInJarAdapter;
 import com.vetroumova.sixjars.ui.adapters.RealmCashflowsAdapter;
+import com.vetroumova.sixjars.utils.BottleDrawableManager;
 import com.vetroumova.sixjars.utils.DebugLogger;
 
 import java.text.DecimalFormat;
@@ -39,10 +38,6 @@ import rx.subscriptions.CompositeSubscription;
 
 
 public class JarInfoFragment extends Fragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private static final String ARG_JAR_ID = "ID";
     private static final int[] IDS = {R.string.db_jar_id_NEC, R.string.db_jar_id_PLAY, R.string.db_jar_id_GIVE,
             R.string.db_jar_id_EDU, R.string.db_jar_id_LTSS, R.string.db_jar_id_FFA};
@@ -76,27 +71,13 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     private PublishSubject<Jar> spendCashPublishSubject = PublishSubject.create();
     private CompositeSubscription recyclerCashSubscriptions;
 
-
-/*    private OnFragmentInteractionListener mListener;*/
-
     public JarInfoFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment JarInfoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static JarInfoFragment newInstance(String param1, String param2, String jarID) {
+    public static JarInfoFragment newInstance(String jarID) {
         JarInfoFragment fragment = new JarInfoFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         args.putString(ARG_JAR_ID, jarID);
         fragment.setArguments(args);
         return fragment;
@@ -135,39 +116,11 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         // get all Object with ID
         jar = RealmManager.with(this).getJar(jarIDString);
 
-        //jarImage.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(getContext()), jarIDString));
-        /*jarImage.setImageResource(BottleDrawableManager
-                .setAnimationJar(Prefs.with(getContext()), jarIDString));
-
-        AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
-
-        //Управлять объектом AnimationDrawable можно через методы start() и stop().
-        animation.start();
-*/
-        /*CountDownTimer countDownTimer = new CountDownTimer(3500, 500) {
-            int i = 0;
-            @Override
-            public void onTick(long millisUntilFinished) {
-                // do something after 1s
-                if (i < jars.size()) {
-                    jars.get(i).start();
-                    i++;
-                    Log.d(TAG,"Tick " + i + " animation");
-                }
-            }
-            @Override
-            public void onFinish() {
-                // do something end times 5s
-                Log.d(TAG,"Finish animation");
-            }
-        }.start();*/
-
         jarID.setText(jar.getJar_id());
         int nameResourceNumber = NAMES[(int) jar.getJar_float_id()];
         jarName.setText(getString(R.string.item_name_in_fragment_text, getString(nameResourceNumber)));
         //Set the text
         DecimalFormatSymbols s = new DecimalFormatSymbols();
-        //s.setDecimalSeparator('.');
         DecimalFormat f = new DecimalFormat("##,##0.00", s);
         jarBalance.setText(getString(R.string.item_balance_text, f.format(jar.getTotalCash())));
         percent = Prefs.with(getContext()).getPercentJar(jar.getJar_id());
@@ -182,39 +135,14 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         realmRecycler = (RecyclerView) view.findViewById(R.id.cashRecycler);
         setupRecycler();
 
-        /*//TODO get back Prefs
-        if (!Prefs.with(getContext()).getPreLoad()) {
-            setRealmData();
-        }*/
-
         realm = RealmManager.with(this).getRealm();
-        /*realmListener = new RealmChangeListener() {
-            @Override
-            public void onChange(Object element) {
-                refreshData();
-            }
-        };
-        realm.addChangeListener(realmListener);*/
-        // get all persisted objects
-        // create the helper adapter and notify data set changes
-        // changes will be reflected automatically
-
-        //setRealmCashAdapter(RealmManager.with(this).getCashflowInJar(jarIDString));
         refreshData();
-
-        /*Snackbar.make(contentLayout, "Press card item for edit, long press to remove item",
-                Snackbar.LENGTH_SHORT).show();*/
-
         Subscription cashClickSubscription = cashflowsInJarAdapter.getPositionCashClicks()
                 .subscribe(cash -> {
                             DebugLogger.log("recycler cash info: " + cash.getId() + ", "
                                     + cash.getDate() + ", " + cash.getSum());
                             Log.d("VOlga", "recycler cash info: " + cash.getId() + ", "
                                     + cash.getDate() + ", " + cash.getSum());
-                            //Toast.makeText(getContext(), "recycler cash info: " + cash.getId() + ", "
-                            //+ cash.getDate() + ", " + cash.getSum(),
-                            //Toast.LENGTH_SHORT).show();
-
                             cashInRecyclerPublishSubject.onNext(cash);
                         },
                         error -> DebugLogger.log(error.getMessage())
@@ -224,70 +152,28 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
                 .subscribe(deletedCashID -> {
                             DebugLogger.log("deleted : " + deletedCashID);
                             Log.d("VOlga", "deleted : " + deletedCashID);
-                            Toast.makeText(getContext(), "deleted : " + deletedCashID,
-                                    Toast.LENGTH_SHORT).show();
-
+                            /*Toast.makeText(getContext(), "deleted : " + deletedCashID,
+                                    Toast.LENGTH_SHORT).show();*/
                             refreshData();
                             cashDeletedPublishSubject.onNext(deletedCashID);
                         },
                         error -> DebugLogger.log(error.getMessage())
                 );
 
-
         recyclerCashSubscriptions.add(cashClickSubscription);
-
         recyclerCashSubscriptions.add(cashDeleteSubscription);
-
         return view;
     }
 
     public void refreshData() {
-
-        //noCashTextView.setVisibility(View.INVISIBLE);
-        //TODO progressbardialog fragment
-        /*ProgressDialog pDialog  = ProgressDialog.show(getContext(), null,
-                null, true);
-        pDialog.setCancelable(true);
-        pDialog.setOnCancelListener(dialog -> {
-            //do something with long work to cancel;
-        });*/
         jar = RealmManager.with(this).getJar(jarIDString);
-        //realm = RealmManager.with(this).getRealm();
         RealmResults<Cashflow> cashflowRealmResults =
                 RealmManager.with(this).getCashflowInJar(jarIDString);
-        /*cashflowRealmResults.addChangeListener(new RealmChangeListener<RealmResults<Cashflow>>() {
-            @Override
-            public void onChange(RealmResults<Cashflow> element) {
-                if (element.isLoaded() && element.isValid()) {
-                    setRealmCashAdapter(cashflowRealmResults);
-                    //jar = RealmManager.with(this).getJar(jarIDString);
-                    //getFragmentManager().popBackStackImmediate();
-                    //pDialog.dismiss();
-                }
-            }
-        });*/
-
         setRealmCashAdapter(cashflowRealmResults);
         Log.d("VOlga", "reSum : " + jar.getTotalCash());
-        //Toast.makeText(getContext(), "reSum : " + jar.getTotalCash(),
-        //Toast.LENGTH_SHORT).show();
-        //Set the text
         DecimalFormatSymbols s = new DecimalFormatSymbols();
-        //s.setDecimalSeparator('.');
         DecimalFormat f = new DecimalFormat("##,##0.00", s);
         jarBalance.setText(getString(R.string.item_balance_text, f.format(jar.getTotalCash())));
-
-        //todo check in lower versions
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            jarImage.setImageResource(BottleDrawableManager.setAnimationJar
-                    (Prefs.with(getContext()), jarIDString));
-            AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
-            //Управлять объектом AnimationDrawable можно через методы start() и stop().
-            animation.start();
-        } else {
-            jarImage.setImageResource(BottleDrawableManager.setDrawableJar
-                    (Prefs.with(getContext()), jarIDString));
-        }*/
         jarImage.setImageResource(BottleDrawableManager.setAnimationJar
                 (Prefs.with(getContext()), jarIDString));
         AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
@@ -297,12 +183,6 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setupRecycler() {
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        //realmRecycler.setHasFixedSize(true);
-
-        // use a linear layout manager since the cards are vertically scrollable
-        //final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         realmRecycler.setLayoutManager(layoutManager);
@@ -314,20 +194,11 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
 
 
     public void setRealmCashAdapter(RealmResults<Cashflow> cashflows) {
-
         RealmCashflowsAdapter realmAdapter = new RealmCashflowsAdapter(getContext(), cashflows, true);
         // Set the data and tell the RecyclerView to draw
         cashflowsInJarAdapter.setRealmAdapter(realmAdapter);
         cashflowsInJarAdapter.notifyDataSetChanged();
-
-        /*for (Cashflow cashflow:cashflows) {
-            Log.d("VOlga","Cash date " + cashflow.getDate() + ", sum " + cashflow.getSum());
-            Toast.makeText(getContext(),"Cash date " + cashflow.getDate() + ", sum "
-                    + cashflow.getSum(),Toast.LENGTH_SHORT).show();
-        }*/
-
         noCashTextView.setVisibility(cashflows.isEmpty() ? View.VISIBLE : View.INVISIBLE);
-        //noCashTextView.setVisibility(View.INVISIBLE);
     }
 
     public void setJarID(String jarID) {
@@ -336,7 +207,6 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
 
 
     public Observable<Cashflow> getCashflowItem() {
-        //todo check
         if (cashInRecyclerPublishSubject.asObservable() == null) {
             cashInRecyclerPublishSubject.onNext(new Cashflow());
         }
@@ -365,33 +235,11 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        /*if (spendCashEdit.getText().toString().equals("")) {
-            Toast.makeText(getContext(), R.string.enter_sum_text, Toast.LENGTH_SHORT).show();
-        } else {
-            // add to one jar or to all
-            spendSum = Float.parseFloat(spendCashEdit.getText().toString());
-            //adding in DB
-            boolean resultAdd = RealmManager.with(this).addCashToJar(jarIDString, -spendSum, percent,getString(R.string.new_income_text));
-            Log.d("VOlga", "add to " + jarID + " new Cashflow "
-                    + spendSum + " - " + resultAdd);
-            Toast.makeText(getContext(), getString(resultAdd ? R.string.added_sum_text
-                    : R.string.not_added_sum_text), Toast.LENGTH_SHORT).show();
-            spendCashEdit.setText("");
-            jarBalance.setText(getString(R.string.cash_balance_text, jar.getTotalCash()));
-            jarImage.setImageResource(jar.getTotalCash() > 0 ? R.drawable.jar_with_water : R.drawable.jar);
-            setRealmCashAdapter(RealmManager.with(this).getCashflowInJar(jarIDString));
-            //TODO normal id
-            long virtual = 0;
-            cashDeletedPublishSubject.onNext(virtual);
-        }*/
-
-        //TODO CHECK JAR
         spendCashPublishSubject.onNext(jar);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-
         outState.putString(ARG_JAR_ID, jarIDString);
     }
 

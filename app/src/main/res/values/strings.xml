@@ -166,6 +166,7 @@
     <string name="not_removed_text">" NOT removed from Realm, not enough money"</string>
     <string name="prefs_not_restored_text">User preferences NOT restored</string>
     <string name="link_app_google_play" translatable="false">https://play.google.com/store/apps/details?id=com.vetroumova.sixjars</string>
+    <string name="location_restore_text">If you have restore file and  it\'s not found - put it manually to SixJars folder in external storage.</string>
     <integer name="com_vk_sdk_AppId">5696879</integer>
 
     <string-array name="languages">

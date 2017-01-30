@@ -498,6 +498,22 @@ public class RealmManager {
         return realm.where(Jar.class).equalTo("jar_id", id).findFirst();
     }
 
+    /*public void changeColorOfJar(String jar_id, int color) {
+        Jar jar = realm.where(Jar.class).equalTo("jar_id",jar_id).findFirst();
+        realm.beginTransaction();
+        jar.setJar_color(color);
+        realm.commitTransaction();
+    }
+
+    public List<Integer> getColors() {
+        List<Integer> listOfColors = new ArrayList<Integer>();
+        RealmResults<Jar> jars = realm.where(Jar.class).findAll();
+        for (Jar jar:jars) {
+            listOfColors.add(jar.getJar_color());
+        }
+        return listOfColors;
+    }*/
+
     public boolean editCashflow(long cashID, Date newDate, float newSum, String description, String jarID) {
 
         Cashflow oldCashflow = realm.where(Cashflow.class).equalTo("id", cashID).findFirst();
@@ -567,7 +583,7 @@ public class RealmManager {
     public RealmResults<Cashflow> getCashflowInJar(String jarID) {
         //one month back
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.add(Calendar.MONTH, -1);
+        calendar.add(Calendar.MONTH, -3);
         return realm.where(Cashflow.class)
                 .equalTo("jar.jar_id", jarID)
                 .greaterThan("date", new Date(calendar.getTimeInMillis()))

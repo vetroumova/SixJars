@@ -137,5 +137,6 @@
     <string name="removed_cashflow_text">" видалено з бази"</string>
     <string name="not_removed_text">" НЕ видалено, недостатньо коштів"</string>
     <string name="prefs_not_restored_text">Налаштунки користувача не відновлені</string>
+    <string name="location_restore_text">Якщо у Вас є файл для відновлення,але програма не знаходить його - скопіюйте файл в папку SixJars на своєму пристрої (SD card)</string>
 
 </resources>

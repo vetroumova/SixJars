@@ -110,7 +110,8 @@ public class JarsWidget extends AppWidgetProvider {
             remoteViews.setTextViewTextSize(R.id.jar_sumView3, 1, getLoyalSumSize(jars.get(2)));
         }
         Intent intentStartActivity = new Intent(context, MainActivity.class);
-        //intentStartActivity.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);  // Identifies the particular widget...
+        //intentStartActivity.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+        // Identifies the particular widget...
         //intentStartActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //intentStartActivity.setAction(TO_ACTIVITY_CLICK);
         // Make the pending intent unique...
@@ -171,7 +172,7 @@ public class JarsWidget extends AppWidgetProvider {
     public static int getLoyalSumSize(Jar jar) {
         String jarSum = getLoyalSum(jar);
         int textSize = 14;
-        if (jarSum.length() > 12) {
+        if (jarSum.length() > 11) {
             textSize = 6;
         } else if (jarSum.length() > 9) {
             textSize = 9;

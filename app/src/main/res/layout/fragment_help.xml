@@ -5,17 +5,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.HelpFragment">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/itemFragmentCardJars"
-        style="@style/AppTheme.Card.Margins"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="@dimen/margin_normal">
+        android:fillViewport="true">
 
-        <ScrollView
+        <android.support.v7.widget.CardView
+            android:id="@+id/itemFragmentCardJars"
+            style="@style/AppTheme.Card.Margins"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            app:cardCornerRadius="@dimen/margin_normal">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -398,65 +398,7 @@
                     android:textColor="@color/colorSecondaryText"
                     android:textSize="@dimen/item_description_dimension" />
 
-                <!--recycler & item image & text-->
-
-                <!--<ImageView
-                    android:id="@+id/tutorialRecyclerImage"
-                    android:layout_width="120dp"
-                    android:layout_height="214dp"
-                    android:layout_margin="@dimen/margin_large"
-                    android:layout_below="@+id/tutorialDescription8Text"
-                    android:src="@drawable/spend_screen" />
-
-                <ImageView
-                    android:id="@+id/tutorialItemImage"
-                    android:layout_width="120dp"
-                    android:layout_height="214dp"
-                    android:layout_margin="@dimen/margin_large"
-                    android:layout_alignBottom="@id/tutorialRecyclerImage"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/tutorialDescription8Text"
-                    android:src="@drawable/settings_screen" />-->
-
-
-                <!--cashflow image & text-->
-                <!--<ImageView
-                    android:id="@+id/tutorialCashflowImage"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_heightPercent="30%"
-                    app:layout_marginTopPercent="3%"
-                    app:layout_widthPercent="45%"
-                    android:src="@drawable/main_recycler_item_click"
-                    android:layout_below="@+id/tutorialDescriptionText"
-                    android:layout_alignParentLeft="true" />
-                <ImageView
-                    android:id="@+id/tutorialCashflowImage"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_heightPercent="30%"
-                    app:layout_marginTopPercent="3%"
-                    app:layout_widthPercent="45%"
-                    android:src="@drawable/main_recycler_item_click"
-                    android:layout_below="@+id/tutorialDescriptionText"
-                    android:layout_alignParentLeft="true" />
-                <TextView
-                    android:id="@+id/tutorialcashflowText"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_below="@+id/tutorialCashflowImage"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/tutorial_description_text"
-                    android:textColor="@color/colorSecondaryText"
-                    android:textSize="@dimen/item_description_dimension"
-                    app:layout_heightPercent="15%"
-                    app:layout_marginTopPercent="3%"
-                    app:layout_widthPercent="95%" />-->
-
             </RelativeLayout>
-
-        </ScrollView>
-
-    </android.support.v7.widget.CardView>
-
+        </android.support.v7.widget.CardView>
+    </ScrollView>
 </FrameLayout>

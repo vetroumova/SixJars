@@ -3,6 +3,8 @@ package com.vetroumova.sixjars.app;
 import android.app.Application;
 import android.content.res.Configuration;
 
+import com.vetroumova.sixjars.database.RealmManager;
+import com.vetroumova.sixjars.model.Migration;
 import com.vk.sdk.VKSdk;
 
 import java.util.Locale;
@@ -34,11 +36,19 @@ public class MainApplication extends Application {
                 .schemaVersion(SCHEMA_VERSION)
                 //you can set .deleteRealmIfMigrationNeeded() if you don't want to bother with migrations.
                 // WARNING: This will delete all data in the Realm though.
-                .deleteRealmIfMigrationNeeded()
+                //.deleteRealmIfMigrationNeeded()
                 // Or you can add the migration code to the configuration.
                 // This will run the migration code without throwing
                 // a RealmMigrationNeededException.
-                //.migration(new Migration())
+                /*.migration((realm, oldVersion, newVersion) -> {
+                    if(oldVersion == 0) {
+                        final RealmObjectSchema colorSchema = realm.getSchema().get("jar_color");
+                        colorSchema.addField("jar_color", int.class);
+                        oldVersion++;
+                    }
+                })
+                .build();*/
+                .migration(new Migration())
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 
@@ -56,5 +66,18 @@ public class MainApplication extends Application {
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        //todo work with it
+    }
+
+    @Override
+    public void onTerminate() {
+        //todo check
+        RealmManager.with(this).getRealm().close();
+        super.onTerminate();
     }
 }

@@ -14,7 +14,7 @@ public class Jar extends RealmObject {
     public static final String CASH_FIELD = "cashflows";
     public static final String TOTAL_FIELD = "totalCash";
     public static final String USER_FIELD = "user";
-    //public static final String COLOR_FIELD = "color";
+    //public static final String COLOR_FIELD = "jar_color";
 
     @PrimaryKey
     private String jar_id;

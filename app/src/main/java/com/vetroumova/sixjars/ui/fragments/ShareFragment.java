@@ -1,5 +1,6 @@
 package com.vetroumova.sixjars.ui.fragments;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -74,7 +75,11 @@ public class ShareFragment extends DialogFragment implements View.OnClickListene
                         .setContentDeepLinkId("https://play.google.com/store/apps/details?id=" + appPackageName)
                         .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName))
                         .getIntent();
-                startActivityForResult(shareIntent, 0);
+                try {
+                    startActivityForResult(shareIntent, 0);
+                } catch (ActivityNotFoundException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
             case R.id.share_facebook_button: {

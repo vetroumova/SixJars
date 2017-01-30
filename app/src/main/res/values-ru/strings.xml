@@ -138,4 +138,5 @@
     <string name="removed_cashflow_text">" удалено из базы"</string>
     <string name="not_removed_text">" НЕ удалено, недостаточно средств"</string>
     <string name="prefs_not_restored_text">Настройки пользователя не восстановлены</string>
+    <string name="location_restore_text">Если у Вас есть файл для восстановления, но приложение не находит его - скопируйте файл в папку SixJars на своем устройстве (SD card)</string>
 </resources>

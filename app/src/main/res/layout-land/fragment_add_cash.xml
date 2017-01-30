@@ -4,452 +4,473 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.AddCashFragment">
 
-    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/itemFragmentCardJars"
-        style="@style/AppTheme.Card.Margins"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="@dimen/margin_normal">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top">
 
-        <android.support.percent.PercentRelativeLayout
+        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/itemFragmentCardJars"
+            style="@style/AppTheme.Card.Margins"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:padding="@dimen/margin_giant"
+            app:cardCornerRadius="@dimen/margin_normal">
 
-            <TextView
-                android:id="@+id/cashAddText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/add_a_new_cash"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/item_balance_dimension"
-                android:textStyle="bold"
-                app:layout_heightPercent="24%"
-                app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="25%" />
-
-            <EditText
-                android:id="@+id/cashAddEdit"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignBottom="@+id/cashAddText"
-                android:layout_toRightOf="@+id/cashAddText"
-                android:gravity="center"
-                android:hint="@string/enter_sum_text"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="@dimen/item_description_dimension"
-                app:layout_heightPercent="24%"
-                app:layout_marginRightPercent="2%"
-                app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="20%" />
-
-            <android.support.percent.PercentRelativeLayout
-                android:id="@+id/addAllJars"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignBottom="@+id/cashAddEdit"
-                android:layout_toRightOf="@+id/cashAddEdit"
-                android:background="@drawable/jar_widget_bg"
-                android:padding="@dimen/margin_normal"
-                app:layout_heightPercent="24%"
-                app:layout_marginTopPercent="1%"
-                app:layout_widthPercent="45%">
-
-                <ImageView
-                    android:id="@+id/addAllJars_imageView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentLeft="true"
-                    android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="2%"
-                    app:layout_widthPercent="25%"
-                    app:srcCompat="@drawable/water_to_jar" />
+                android:padding="@dimen/activity_horizontal_margin">
 
                 <TextView
-                    android:id="@+id/addAllJars_textView"
+                    android:id="@+id/cashAddText"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/addAllJars_imageView"
-                    android:text="@string/to_all_jars_by_percentage"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/item_name_dimension"
-                    android:textStyle="bold"
-                    app:layout_heightPercent="40%"
-                    app:layout_marginLeftPercent="2%"
-                    app:layout_marginTopPercent="2%"
-                    app:layout_widthPercent="60%" />
-
-                <TextView
-                    android:id="@+id/currBalanceJars"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignStart="@+id/addAllJars_textView"
-                    android:layout_below="@+id/addAllJars_textView"
-                    android:text="@string/cash_balance_text"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/item_balance_dimension"
-                    android:textStyle="bold"
-                    app:layout_heightPercent="40%"
-                    app:layout_marginLeftPercent="2%"
-                    app:layout_marginTopPercent="2%"
-                    app:layout_widthPercent="60%" />
-
-            </android.support.percent.PercentRelativeLayout>
-
-            <android.support.percent.PercentRelativeLayout
-                android:id="@+id/addNECJar"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignLeft="@+id/cashAddText"
-                android:layout_below="@+id/addAllJars"
-                android:layout_toLeftOf="@+id/addPLAYJar"
-                android:background="@drawable/jar_widget_bg"
-                android:padding="@dimen/margin_normal"
-                app:layout_heightPercent="20%"
-                app:layout_marginRightPercent="1%"
-                app:layout_marginTopPercent="3%"
-                app:layout_widthPercent="29%">
-
-                <ImageView
-                    android:id="@+id/addNECJar_imageView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentLeft="true"
-                    android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
-                    app:srcCompat="@drawable/water_to_jar_empty" />
-
-                <TextView
-                    android:id="@+id/addNECJar_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/addNECJar_imageView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/db_jar_id_NEC"
+                    android:gravity="center"
+                    android:text="@string/add_a_new_cash"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/item_balance_dimension"
                     android:textStyle="bold"
-                    app:layout_heightPercent="40%"
                     app:layout_marginLeftPercent="2%"
+                    app:layout_marginRightPercent="2%"
                     app:layout_marginTopPercent="2%"
                     app:layout_widthPercent="50%" />
 
-                <TextView
-                    android:id="@+id/currBalanceNECJar"
+                <EditText
+                    android:id="@+id/cashAddEdit"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignLeft="@+id/addNECJar_textView"
-                    android:layout_below="@+id/addNECJar_textView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/cash_balance_text"
-                    android:textColor="@color/colorPrimaryTextDark"
+                    android:layout_height="50dp"
+                    android:layout_alignBottom="@+id/cashAddText"
+                    android:layout_toRightOf="@+id/cashAddText"
+                    android:gravity="center"
+                    android:hint="@string/enter_sum_text"
+                    android:textColor="@color/colorSecondaryText"
                     android:textSize="@dimen/item_description_dimension"
-                    app:layout_heightPercent="40%"
-                    app:layout_widthPercent="50%" />
-
-            </android.support.percent.PercentRelativeLayout>
-
-            <android.support.percent.PercentRelativeLayout
-                android:id="@+id/addPLAYJar"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignBottom="@+id/addNECJar"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/jar_widget_bg"
-                android:padding="@dimen/margin_normal"
-                app:layout_heightPercent="20%"
-                app:layout_marginRightPercent="1%"
-                app:layout_widthPercent="29%">
-
-                <ImageView
-                    android:id="@+id/addPLAYJar_imageView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentLeft="true"
-                    android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
-                    app:srcCompat="@drawable/water_to_jar_empty" />
-
-                <TextView
-                    android:id="@+id/addPLAYJar_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/addPLAYJar_imageView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/db_jar_id_PLAY"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/item_balance_dimension"
-                    android:textStyle="bold"
-                    app:layout_heightPercent="40%"
                     app:layout_marginLeftPercent="2%"
                     app:layout_marginTopPercent="2%"
-                    app:layout_widthPercent="50%" />
+                    app:layout_widthPercent="40%" />
 
-                <TextView
-                    android:id="@+id/currBalancePLAYJar"
+                <android.support.percent.PercentRelativeLayout
+                    android:id="@+id/addAllJars"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignLeft="@+id/addPLAYJar_textView"
-                    android:layout_below="@+id/addPLAYJar_textView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/cash_balance_text"
-                    android:textColor="@color/colorPrimaryTextDark"
-                    android:textSize="@dimen/item_description_dimension"
-                    app:layout_heightPercent="40%"
-                    app:layout_widthPercent="50%" />
-
-            </android.support.percent.PercentRelativeLayout>
-
-            <android.support.percent.PercentRelativeLayout
-                android:id="@+id/addGIVEJar"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignBottom="@+id/addPLAYJar"
-                android:layout_alignRight="@+id/addAllJars"
-                android:layout_toRightOf="@+id/addPLAYJar"
-                android:background="@drawable/jar_widget_bg"
-                android:padding="@dimen/margin_normal"
-                app:layout_heightPercent="20%"
-                app:layout_widthPercent="29%">
-
-                <ImageView
-                    android:id="@+id/addGIVEJar_imageView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentLeft="true"
-                    android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
-                    app:srcCompat="@drawable/water_to_jar_empty" />
-
-                <TextView
-                    android:id="@+id/addGIVEJar_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/addGIVEJar_imageView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/db_jar_id_GIVE"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/item_balance_dimension"
-                    android:textStyle="bold"
-                    app:layout_heightPercent="40%"
-                    app:layout_marginLeftPercent="2%"
+                    android:layout_height="80dp"
+                    android:layout_below="@+id/cashAddText"
+                    android:background="@drawable/jar_widget_bg"
+                    android:padding="@dimen/margin_normal"
                     app:layout_marginTopPercent="2%"
-                    app:layout_widthPercent="50%" />
+                    app:layout_widthPercent="100%">
 
-                <TextView
-                    android:id="@+id/currBalanceGIVEJar"
+                    <TextView
+                        android:id="@+id/currBalanceJars"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignStart="@+id/addAllJars_textView"
+                        android:layout_below="@+id/addAllJars_textView"
+                        android:text="@string/total_cash_balance_text"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/item_balance_dimension"
+                        android:textStyle="bold"
+                        app:layout_heightPercent="40%"
+                        app:layout_marginLeftPercent="2%"
+                        app:layout_marginTopPercent="2%"
+                        app:layout_widthPercent="60%" />
+
+                    <TextView
+                        android:id="@+id/addAllJars_textView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignTop="@+id/addAllJars_imageView"
+                        android:layout_toEndOf="@+id/addAllJars_imageView"
+                        android:text="@string/to_all_jars_by_percentage"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/item_name_dimension"
+                        android:textStyle="bold"
+                        app:layout_heightPercent="40%"
+                        app:layout_marginLeftPercent="2%"
+                        app:layout_marginTopPercent="2%"
+                        app:layout_widthPercent="60%" />
+
+                    <ImageView
+                        android:id="@+id/addAllJars_imageView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="12dp"
+                        android:contentDescription="@string/appwidget_text"
+                        app:layout_heightPercent="75%"
+                        app:layout_marginBottomPercent="5%"
+                        app:layout_marginLeftPercent="5%"
+                        app:layout_marginRightPercent="3%"
+                        app:layout_marginTopPercent="5%"
+                        app:layout_widthPercent="25%"
+                        app:srcCompat="@drawable/water_to_jar_empty" />
+
+                </android.support.percent.PercentRelativeLayout>
+
+                <android.support.percent.PercentRelativeLayout
+                    android:id="@+id/addEDUJar"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignLeft="@+id/addGIVEJar_textView"
-                    android:layout_below="@+id/addGIVEJar_textView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/cash_balance_text"
-                    android:textColor="@color/colorPrimaryTextDark"
-                    android:textSize="@dimen/item_description_dimension"
-                    app:layout_heightPercent="40%"
-                    app:layout_widthPercent="50%" />
-
-            </android.support.percent.PercentRelativeLayout>
-
-
-            <android.support.percent.PercentRelativeLayout
-                android:id="@+id/addEDUJar"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignLeft="@+id/cashAddText"
-                android:layout_below="@+id/addNECJar"
-                android:layout_toLeftOf="@+id/addLTSSJar"
-                android:background="@drawable/jar_widget_bg"
-                android:padding="@dimen/margin_normal"
-                app:layout_heightPercent="20%"
-                app:layout_marginRightPercent="1%"
-                app:layout_marginTopPercent="3%"
-                app:layout_widthPercent="28%">
-
-                <ImageView
-                    android:id="@+id/addEDUJar_imageView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentLeft="true"
-                    android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
-                    app:srcCompat="@drawable/water_to_jar_empty" />
-
-                <TextView
-                    android:id="@+id/addEDUJar_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/addEDUJar_imageView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/db_jar_id_EDU"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/item_balance_dimension"
-                    android:textStyle="bold"
-                    app:layout_heightPercent="40%"
-                    app:layout_marginLeftPercent="2%"
+                    android:layout_height="80dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/addPLAYJar"
+                    android:background="@drawable/jar_widget_bg"
+                    android:padding="@dimen/margin_normal"
                     app:layout_marginTopPercent="2%"
-                    app:layout_widthPercent="50%" />
+                    app:layout_widthPercent="48%">
 
-                <TextView
-                    android:id="@+id/currBalanceEDUJar"
+                    <ImageView
+                        android:id="@+id/addEDUJar_imageView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/appwidget_text"
+                        app:layout_heightPercent="85%"
+                        app:layout_marginBottomPercent="5%"
+                        app:layout_marginLeftPercent="12%"
+                        app:layout_marginRightPercent="10%"
+                        app:layout_marginTopPercent="5%"
+                        app:layout_widthPercent="20%"
+                        app:srcCompat="@drawable/water_to_jar_empty" />
+
+                    <TextView
+                        android:id="@+id/addEDUJar_textView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/addEDUJar_imageView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/db_jar_id_EDU"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/item_balance_dimension"
+                        android:textStyle="bold"
+                        app:layout_heightPercent="40%"
+                        app:layout_marginLeftPercent="2%"
+                        app:layout_marginTopPercent="2%"
+                        app:layout_widthPercent="50%" />
+
+                    <TextView
+                        android:id="@+id/currBalanceEDUJar"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignLeft="@+id/addEDUJar_textView"
+                        android:layout_below="@+id/addEDUJar_textView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/cash_balance_text"
+                        android:textColor="@color/colorPrimaryTextDark"
+                        android:textSize="@dimen/item_description_dimension"
+                        app:layout_heightPercent="40%"
+                        app:layout_widthPercent="50%" />
+
+                </android.support.percent.PercentRelativeLayout>
+
+                <android.support.percent.PercentRelativeLayout
+                    android:id="@+id/addLTSSJar"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignLeft="@+id/addEDUJar_textView"
-                    android:layout_below="@+id/addEDUJar_textView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/cash_balance_text"
-                    android:textColor="@color/colorPrimaryTextDark"
-                    android:textSize="@dimen/item_description_dimension"
-                    app:layout_heightPercent="40%"
-                    app:layout_widthPercent="50%" />
-
-            </android.support.percent.PercentRelativeLayout>
-
-            <android.support.percent.PercentRelativeLayout
-                android:id="@+id/addLTSSJar"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignBottom="@+id/addEDUJar"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/jar_widget_bg"
-                android:padding="@dimen/margin_normal"
-                app:layout_heightPercent="20%"
-                app:layout_marginRightPercent="1%"
-                app:layout_widthPercent="28%">
-
-                <ImageView
-                    android:id="@+id/addLTSSJar_imageView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="80dp"
                     android:layout_alignParentLeft="true"
-                    android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
-                    app:srcCompat="@drawable/water_to_jar_empty" />
-
-                <TextView
-                    android:id="@+id/addLTSSJar_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/addLTSSJar_imageView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/db_jar_id_LTSS"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/item_balance_dimension"
-                    android:textStyle="bold"
-                    app:layout_heightPercent="40%"
-                    app:layout_marginLeftPercent="2%"
+                    android:layout_below="@+id/addGIVEJar"
+                    android:background="@drawable/jar_widget_bg"
+                    android:padding="@dimen/margin_normal"
+                    app:layout_marginRightPercent="4%"
                     app:layout_marginTopPercent="2%"
-                    app:layout_widthPercent="50%" />
+                    app:layout_widthPercent="48%">
 
-                <TextView
-                    android:id="@+id/currBalanceLTSSJar"
+                    <ImageView
+                        android:id="@+id/addLTSSJar_imageView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/appwidget_text"
+                        app:layout_heightPercent="85%"
+                        app:layout_marginBottomPercent="5%"
+                        app:layout_marginLeftPercent="12%"
+                        app:layout_marginRightPercent="10%"
+                        app:layout_marginTopPercent="5%"
+                        app:layout_widthPercent="20%"
+                        app:srcCompat="@drawable/water_to_jar_empty" />
+
+                    <TextView
+                        android:id="@+id/addLTSSJar_textView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/addLTSSJar_imageView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/db_jar_id_LTSS"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/item_balance_dimension"
+                        android:textStyle="bold"
+                        app:layout_heightPercent="40%"
+                        app:layout_marginLeftPercent="2%"
+                        app:layout_marginTopPercent="2%"
+                        app:layout_widthPercent="50%" />
+
+                    <TextView
+                        android:id="@+id/currBalanceLTSSJar"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignLeft="@+id/addLTSSJar_textView"
+                        android:layout_below="@+id/addLTSSJar_textView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/cash_balance_text"
+                        android:textColor="@color/colorPrimaryTextDark"
+                        android:textSize="@dimen/item_description_dimension"
+                        app:layout_heightPercent="40%"
+                        app:layout_widthPercent="50%" />
+
+                </android.support.percent.PercentRelativeLayout>
+
+                <android.support.percent.PercentRelativeLayout
+                    android:id="@+id/addFFAJar"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignLeft="@+id/addLTSSJar_textView"
-                    android:layout_below="@+id/addLTSSJar_textView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/cash_balance_text"
-                    android:textColor="@color/colorPrimaryTextDark"
-                    android:textSize="@dimen/item_description_dimension"
-                    app:layout_heightPercent="40%"
-                    app:layout_widthPercent="50%" />
-
-            </android.support.percent.PercentRelativeLayout>
-
-            <android.support.percent.PercentRelativeLayout
-                android:id="@+id/addFFAJar"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignBottom="@+id/addLTSSJar"
-                android:layout_alignRight="@+id/addAllJars"
-                android:layout_toRightOf="@+id/addLTSSJar"
-                android:background="@drawable/jar_widget_bg"
-                android:padding="@dimen/margin_normal"
-                app:layout_heightPercent="20%"
-                app:layout_widthPercent="28%">
-
-                <ImageView
-                    android:id="@+id/addFFAJar_imageView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentLeft="true"
-                    android:contentDescription="@string/appwidget_text"
-                    app:layout_heightPercent="90%"
-                    app:layout_marginLeftPercent="5%"
-                    app:layout_widthPercent="30%"
-                    app:srcCompat="@drawable/water_to_jar_empty" />
-
-                <TextView
-                    android:id="@+id/addFFAJar_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/addFFAJar_imageView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/db_jar_id_FFA"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/item_balance_dimension"
-                    android:textStyle="bold"
-                    app:layout_heightPercent="40%"
-                    app:layout_marginLeftPercent="2%"
+                    android:layout_height="80dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/addEDUJar"
+                    android:background="@drawable/jar_widget_bg"
+                    android:padding="@dimen/margin_normal"
                     app:layout_marginTopPercent="2%"
-                    app:layout_widthPercent="50%" />
+                    app:layout_widthPercent="48%">
 
-                <TextView
-                    android:id="@+id/currBalanceFFAJar"
+                    <ImageView
+                        android:id="@+id/addFFAJar_imageView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/appwidget_text"
+                        app:layout_heightPercent="85%"
+                        app:layout_marginBottomPercent="5%"
+                        app:layout_marginLeftPercent="12%"
+                        app:layout_marginRightPercent="10%"
+                        app:layout_marginTopPercent="5%"
+                        app:layout_widthPercent="20%"
+                        app:srcCompat="@drawable/water_to_jar_empty" />
+
+                    <TextView
+                        android:id="@+id/addFFAJar_textView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/addFFAJar_imageView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/db_jar_id_FFA"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/item_balance_dimension"
+                        android:textStyle="bold"
+                        app:layout_heightPercent="40%"
+                        app:layout_marginLeftPercent="2%"
+                        app:layout_marginTopPercent="2%"
+                        app:layout_widthPercent="50%" />
+
+                    <TextView
+                        android:id="@+id/currBalanceFFAJar"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignLeft="@+id/addFFAJar_textView"
+                        android:layout_below="@+id/addFFAJar_textView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/cash_balance_text"
+                        android:textColor="@color/colorPrimaryTextDark"
+                        android:textSize="@dimen/item_description_dimension"
+                        app:layout_heightPercent="40%"
+                        app:layout_widthPercent="50%" />
+
+                </android.support.percent.PercentRelativeLayout>
+
+                <Button
+                    android:id="@+id/saveCashAddButton"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignLeft="@+id/addFFAJar_textView"
-                    android:layout_below="@+id/addFFAJar_textView"
-                    android:gravity="center_vertical|left"
-                    android:text="@string/cash_balance_text"
-                    android:textColor="@color/colorPrimaryTextDark"
-                    android:textSize="@dimen/item_description_dimension"
-                    app:layout_heightPercent="40%"
-                    app:layout_widthPercent="50%" />
+                    android:layout_height="80dp"
+                    android:layout_below="@+id/addLTSSJar"
+                    android:background="@drawable/jar_button_transp_orange_bg"
+                    android:shadowColor="@color/cardview_dark_background"
+                    android:text="@string/save_settings_text"
+                    android:textColor="@color/colorBottle"
+                    android:textSize="@dimen/button_large_text_sp_dimension"
+                    app:layout_marginTopPercent="2%"
+                    app:layout_widthPercent="100%" />
 
+                <android.support.percent.PercentRelativeLayout
+                    android:id="@+id/addGIVEJar"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_alignBaseline="@+id/addEDUJar"
+                    android:layout_alignBottom="@+id/addEDUJar"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/jar_widget_bg"
+                    android:padding="@dimen/margin_normal"
+                    app:layout_marginRightPercent="4%"
+                    app:layout_marginTopPercent="2%"
+                    app:layout_widthPercent="48%">
+
+                    <ImageView
+                        android:id="@+id/addGIVEJar_imageView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/appwidget_text"
+                        app:layout_heightPercent="85%"
+                        app:layout_marginBottomPercent="5%"
+                        app:layout_marginLeftPercent="12%"
+                        app:layout_marginRightPercent="10%"
+                        app:layout_marginTopPercent="5%"
+                        app:layout_widthPercent="20%"
+                        app:srcCompat="@drawable/water_to_jar_empty" />
+
+                    <TextView
+                        android:id="@+id/addGIVEJar_textView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/addGIVEJar_imageView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/db_jar_id_GIVE"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/item_balance_dimension"
+                        android:textStyle="bold"
+                        app:layout_heightPercent="40%"
+                        app:layout_marginLeftPercent="2%"
+                        app:layout_marginTopPercent="2%"
+                        app:layout_widthPercent="50%" />
+
+                    <TextView
+                        android:id="@+id/currBalanceGIVEJar"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignLeft="@+id/addGIVEJar_textView"
+                        android:layout_below="@+id/addGIVEJar_textView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/cash_balance_text"
+                        android:textColor="@color/colorPrimaryTextDark"
+                        android:textSize="@dimen/item_description_dimension"
+                        app:layout_heightPercent="40%"
+                        app:layout_widthPercent="50%" />
+
+                </android.support.percent.PercentRelativeLayout>
+
+                <android.support.percent.PercentRelativeLayout
+                    android:id="@+id/addPLAYJar"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/addAllJars"
+                    android:background="@drawable/jar_widget_bg"
+                    android:padding="@dimen/margin_normal"
+                    app:layout_marginTopPercent="2%"
+                    app:layout_widthPercent="48%">
+
+                    <ImageView
+                        android:id="@+id/addPLAYJar_imageView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/appwidget_text"
+                        app:layout_heightPercent="85%"
+                        app:layout_marginBottomPercent="5%"
+                        app:layout_marginLeftPercent="12%"
+                        app:layout_marginRightPercent="10%"
+                        app:layout_marginTopPercent="5%"
+                        app:layout_widthPercent="20%"
+                        app:srcCompat="@drawable/water_to_jar_empty" />
+
+                    <TextView
+                        android:id="@+id/addPLAYJar_textView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/addPLAYJar_imageView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/db_jar_id_PLAY"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/item_balance_dimension"
+                        android:textStyle="bold"
+                        app:layout_heightPercent="40%"
+                        app:layout_marginLeftPercent="2%"
+                        app:layout_marginTopPercent="2%"
+                        app:layout_widthPercent="50%" />
+
+                    <TextView
+                        android:id="@+id/currBalancePLAYJar"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignLeft="@+id/addPLAYJar_textView"
+                        android:layout_below="@+id/addPLAYJar_textView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/cash_balance_text"
+                        android:textColor="@color/colorPrimaryTextDark"
+                        android:textSize="@dimen/item_description_dimension"
+                        app:layout_heightPercent="40%"
+                        app:layout_widthPercent="50%" />
+
+                </android.support.percent.PercentRelativeLayout>
+
+                <android.support.percent.PercentRelativeLayout
+                    android:id="@+id/addNECJar"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_alignBaseline="@+id/addPLAYJar"
+                    android:layout_alignBottom="@+id/addPLAYJar"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/jar_widget_bg"
+                    android:padding="@dimen/margin_normal"
+                    app:layout_marginRightPercent="4%"
+                    app:layout_marginTopPercent="2%"
+                    app:layout_widthPercent="48%">
+
+                    <TextView
+                        android:id="@+id/addNECJar_textView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/addNECJar_imageView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/db_jar_id_NEC"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/item_balance_dimension"
+                        android:textStyle="bold"
+                        app:layout_heightPercent="40%"
+                        app:layout_marginLeftPercent="2%"
+                        app:layout_marginTopPercent="2%"
+                        app:layout_widthPercent="50%" />
+
+                    <TextView
+                        android:id="@+id/currBalanceNECJar"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignLeft="@+id/addNECJar_textView"
+                        android:layout_below="@+id/addNECJar_textView"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/cash_balance_text"
+                        android:textColor="@color/colorPrimaryTextDark"
+                        android:textSize="@dimen/item_description_dimension"
+                        app:layout_heightPercent="40%"
+                        app:layout_widthPercent="50%" />
+
+                    <ImageView
+                        android:id="@+id/addNECJar_imageView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignTop="@+id/addNECJar_textView"
+                        android:contentDescription="@string/appwidget_text"
+                        app:layout_heightPercent="85%"
+                        app:layout_marginBottomPercent="5%"
+                        app:layout_marginLeftPercent="12%"
+                        app:layout_marginRightPercent="10%"
+                        app:layout_marginTopPercent="5%"
+                        app:layout_widthPercent="20%"
+                        app:srcCompat="@drawable/water_to_jar_empty" />
+
+                </android.support.percent.PercentRelativeLayout>
             </android.support.percent.PercentRelativeLayout>
-
-
-            <Button
-                android:id="@+id/saveCashAddButton"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_below="@+id/addEDUJar"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/jar_button_transp_orange_bg"
-                android:shadowColor="@color/cardview_dark_background"
-                android:text="@string/save_settings_text"
-                android:textColor="@color/colorBottle"
-                android:textSize="@dimen/button_large_text_sp_dimension"
-                app:layout_heightPercent="16%"
-                app:layout_marginBottomPercent="1%"
-                app:layout_marginTopPercent="4%"
-                app:layout_widthPercent="50%" />
-
-        </android.support.percent.PercentRelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
+        </android.support.v7.widget.CardView>
+    </ScrollView>
 </FrameLayout>

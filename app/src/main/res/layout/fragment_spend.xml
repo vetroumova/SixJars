@@ -86,13 +86,13 @@
             <EditText
                 android:id="@+id/spendCashDescriptionText"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="45dp"
                 android:layout_below="@+id/spendCashInputText"
                 android:layout_marginLeft="@dimen/margin_large"
                 android:layout_marginRight="@dimen/margin_large"
                 android:gravity="right|center_vertical"
                 android:hint="@string/enter_the_description"
-                android:padding="@dimen/margin_large"
+                android:padding="@dimen/margin_normal"
                 android:textSize="@dimen/item_description_dimension" />
 
             <GridLayout
@@ -108,7 +108,7 @@
                 <Button
                     android:id="@+id/spend1Button"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"
@@ -121,7 +121,7 @@
                 <Button
                     android:id="@+id/spend2Button"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"
@@ -134,7 +134,7 @@
                 <Button
                     android:id="@+id/spend3Button"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"
@@ -147,7 +147,7 @@
                 <Button
                     android:id="@+id/spend4Button"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"
@@ -160,7 +160,7 @@
                 <Button
                     android:id="@+id/spend5Button"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"
@@ -173,7 +173,7 @@
                 <Button
                     android:id="@+id/spend6Button"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"
@@ -186,7 +186,7 @@
                 <Button
                     android:id="@+id/spend7Button"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"
@@ -199,7 +199,7 @@
                 <Button
                     android:id="@+id/spend8Button"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"
@@ -212,7 +212,7 @@
                 <Button
                     android:id="@+id/spend9Button"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"
@@ -225,7 +225,7 @@
                 <Button
                     android:id="@+id/spend0Button"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"
@@ -238,7 +238,7 @@
                 <Button
                     android:id="@+id/spendDecimalButton"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"
@@ -251,7 +251,7 @@
                 <Button
                     android:id="@+id/spendBackButton"
                     android:layout_width="80dp"
-                    android:layout_height="55dp"
+                    android:layout_height="45dp"
                     android:layout_margin="@dimen/margin_small"
                     android:background="@drawable/btn_selector"
                     android:gravity="center"

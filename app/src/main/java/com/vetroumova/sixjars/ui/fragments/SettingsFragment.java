@@ -80,6 +80,7 @@ public class SettingsFragment extends Fragment
             DebugLogger.log("Pref Logger list : " + i);
             Log.d(TAG, "Pref list : " + i);
         }
+        //checkTheColorsMigration();
     }
 
     @Override
@@ -218,12 +219,21 @@ public class SettingsFragment extends Fragment
                 startActivity(intent);
             }
         }
-
-
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+    /*private void checkTheColorsMigration () {
+        RealmManager.with(this).changeColorOfJar("NEC", 124);
+        RealmManager.with(this).changeColorOfJar("PLAY", 86);
+
+        List<Integer> colors = RealmManager.with(this).getColors();
+
+        for (int color : colors) {
+            Log.d(TAG, "Color " + color);
+        }
+    }*/
 }

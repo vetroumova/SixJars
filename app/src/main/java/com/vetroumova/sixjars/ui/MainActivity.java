@@ -144,7 +144,9 @@ public class MainActivity extends AppCompatActivity {
         //getWindow().setAttributes(params);
 
         fragmentManager = getSupportFragmentManager();
-        recyclerFragment = new RecyclerFragment();
+        //recyclerFragment = new RecyclerFragment();
+        recyclerFragment = RecyclerFragment.newInstance();
+        //todo all new instances with bundle
         jarInfoFragment = new JarInfoFragment();
         settingsFragment = new SettingsFragment();
         statisticsFragment = new StatisticsFragment();
@@ -170,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
             DebugLogger.log("DebugLogger");
             Log.d(TAG, "FAB");
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_layout, addCashFragment)
+                    .replace(R.id.content_layout, addCashFragment)  //todo new instance
                     /*.setCustomAnimations(android.R.animator
                     .fade_in, android.R.animator.fade_out)*/
                     .addToBackStack("addCash")
@@ -181,9 +183,10 @@ public class MainActivity extends AppCompatActivity {
 
         //set toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-        toolbar.setLogo(R.mipmap.ic_launcher);
+        //toolbar.setLogo(R.mipmap.ic_launcher);
         //toolbar.setTitleTextColor(getResources().getColor(R.color.colorAccent));
         setSupportActionBar(toolbar);
+        //getSupportActionBar().setLogo(R.mipmap.ic_launcher);
 
         contentLayout = (FrameLayout) findViewById(R.id.content_layout);
         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
@@ -219,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0: {
                         fragmentManager.beginTransaction()
-                                .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
+                                .replace(R.id.content_layout, recyclerFragment, "RECYCLER") //todo new instance
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         if (!fab.isShown()) {
@@ -229,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                     case 1: {
+                        Log.d(TAG, "settings instance lang pref - " + Prefs.with(getApplicationContext()).getPrefLanguage());
                         settingsFragment = SettingsFragment.newInstance(
                                 Prefs.with(getApplicationContext()).getPrefLanguage());
                         fragmentManager.beginTransaction()
@@ -255,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case 3: {
                         fragmentManager.beginTransaction()
-                                .replace(R.id.content_layout, helpFragment)
+                                .replace(R.id.content_layout, helpFragment) //todo new instance ??
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         if (!fab.isShown()) {
@@ -275,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
         if (fragmentManager.getBackStackEntryCount() == 0
                 && !(fragmentManager.findFragmentById(R.id.content_layout) instanceof RecyclerFragment)) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
+                    .replace(R.id.content_layout, recyclerFragment, "RECYCLER") //todo new instance
                     //.addToBackStack("Recycler")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
@@ -292,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
                             //Toast.LENGTH_SHORT).show();
                             Log.d(TAG, jarInfoFragment.toString());
                             fragmentManager.beginTransaction()
-                                    .replace(R.id.content_layout, jarInfoFragment)
+                                    .replace(R.id.content_layout, jarInfoFragment) //todo new instance
                                     .addToBackStack("JarInfo")
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                     .commit();

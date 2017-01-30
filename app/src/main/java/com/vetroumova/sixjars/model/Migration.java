@@ -6,6 +6,7 @@ package com.vetroumova.sixjars.model;
 
 import io.realm.DynamicRealm;
 import io.realm.RealmMigration;
+import io.realm.RealmObjectSchema;
 import io.realm.RealmSchema;
 
 /**
@@ -44,8 +45,8 @@ public class Migration implements RealmMigration {
          private int jar_color;     //new field
          ************************************************/
         // Migrate from version 0 to version 1
-        /*if (oldVersion == 0) {
-            RealmObjectSchema personSchema = schema.get("Jar");
+        if (oldVersion == 0) {
+            /*RealmObjectSchema personSchema = schema.get("Jar");
             // Combine 'firstName' and 'lastName' in a new field called 'fullName'
             personSchema
                     .addField("fullName", String.class, FieldAttribute.REQUIRED)
@@ -56,10 +57,16 @@ public class Migration implements RealmMigration {
                         }
                     })
                     .removeField("firstName")
-                    .removeField("lastName");*//*
+                    .removeField("lastName");
             personSchema.addField("jar_color", String.class);
+            oldVersion++;*/
+            RealmObjectSchema jarSchema = schema.get("Jar");
+            // add a new field called 'jar_color'
+            if (!jarSchema.hasField("jar_color")) {
+                jarSchema.addField("jar_color", int.class);
+            }
             oldVersion++;
-        }*/
+        }
 
         /************************************************
          // Version 2

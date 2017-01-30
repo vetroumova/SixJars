@@ -4,6 +4,10 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        OlhaVetroumova {
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "23.0.3"
     defaultConfig {

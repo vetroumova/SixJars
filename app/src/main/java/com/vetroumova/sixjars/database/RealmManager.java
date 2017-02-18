@@ -495,7 +495,13 @@ public class RealmManager {
     //query a single item with the given id
     public Jar getJar(String id) {
 
-        return realm.where(Jar.class).equalTo("jar_id", id).findFirst();
+        Jar jar = new Jar();
+        try {
+            jar = realm.where(Jar.class).equalTo("jar_id", id).findFirst();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return jar;
     }
 
     /*public void changeColorOfJar(String jar_id, int color) {

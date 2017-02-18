@@ -588,9 +588,12 @@ public class MainActivity extends AppCompatActivity {
     //TODO check
     private void updateAllWidgets() {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, JarsWidget.class));
+        ComponentName thisWidget = new ComponentName(this, JarsWidget.class);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
         if (appWidgetIds != null && appWidgetIds.length > 0) {
-            new JarsWidget().onUpdate(this, appWidgetManager, appWidgetIds);
+            for (int appWidgetId : appWidgetIds) {
+                JarsWidget.updateAppWidget(this, appWidgetManager, appWidgetId);
+            }
         }
     }
 
@@ -640,6 +643,7 @@ public class MainActivity extends AppCompatActivity {
             Prefs.with(getApplicationContext()).setPrefRestoreMark(false);
             Log.d(TAG, "onPostResume - restore false");
         }
+
     }
 
     @Override
@@ -657,9 +661,9 @@ public class MainActivity extends AppCompatActivity {
         //String value = intentFromWidget.getBundleExtra().getString("JarInfoFragment");
         if (value != null) {
             Log.d(TAG, "    widget value from intent " + value);
-            /*if (fragmentManager.findFragmentById(R.id.content_layout) instanceof JarInfoFragment) {
+            if (fragmentManager.findFragmentById(R.id.content_layout) instanceof JarInfoFragment) {
                 fragmentManager.popBackStackImmediate();
-            }*/
+            }
             jarInfoFragment = JarInfoFragment.newInstance(value);
             fragmentManager.beginTransaction()
                     .replace(R.id.content_layout, jarInfoFragment)
@@ -667,6 +671,7 @@ public class MainActivity extends AppCompatActivity {
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
             getInnerSubscriptionsJar(value);
+            updateAllWidgets();
         } else {
             Log.d(TAG, "     widget value from intent null");
         }

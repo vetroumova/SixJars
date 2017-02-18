@@ -22,7 +22,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
-import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
+import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 
 /**
  * One Widget that is available for use in a RemoteView is the ProgressBar.
@@ -126,7 +126,6 @@ public class JarsWidget extends AppWidgetProvider {
         Intent intentStartActivityJar5 = new Intent(context, MainActivity.class);
         Intent intentStartActivityJar6 = new Intent(context, MainActivity.class);
 
-        //intentStartActivityFirst.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
         intentStartActivityJar1.putExtra("JarInfoFragment", jars.get(0).getJar_id());
         intentStartActivityJar2.putExtra("JarInfoFragment", jars.get(1).getJar_id());
         intentStartActivityJar3.putExtra("JarInfoFragment", jars.get(2).getJar_id());
@@ -155,12 +154,12 @@ public class JarsWidget extends AppWidgetProvider {
         /*Bundle bundle = new Bundle();
         bundle.putString("JarInfoFragment",first);*/
 
-        PendingIntent pendingToActivity1 = PendingIntent.getActivity(context, 0, intentStartActivityJar1, FLAG_UPDATE_CURRENT);
-        PendingIntent pendingToActivity2 = PendingIntent.getActivity(context, 1, intentStartActivityJar2, FLAG_UPDATE_CURRENT);
-        PendingIntent pendingToActivity3 = PendingIntent.getActivity(context, 2, intentStartActivityJar3, FLAG_UPDATE_CURRENT);
-        PendingIntent pendingToActivity4 = PendingIntent.getActivity(context, 3, intentStartActivityJar4, FLAG_UPDATE_CURRENT);
-        PendingIntent pendingToActivity5 = PendingIntent.getActivity(context, 4, intentStartActivityJar5, FLAG_UPDATE_CURRENT);
-        PendingIntent pendingToActivity6 = PendingIntent.getActivity(context, 5, intentStartActivityJar6, FLAG_UPDATE_CURRENT);
+        PendingIntent pendingToActivity1 = PendingIntent.getActivity(context, 0, intentStartActivityJar1, FLAG_CANCEL_CURRENT);
+        PendingIntent pendingToActivity2 = PendingIntent.getActivity(context, 1, intentStartActivityJar2, FLAG_CANCEL_CURRENT);
+        PendingIntent pendingToActivity3 = PendingIntent.getActivity(context, 2, intentStartActivityJar3, FLAG_CANCEL_CURRENT);
+        PendingIntent pendingToActivity4 = PendingIntent.getActivity(context, 3, intentStartActivityJar4, FLAG_CANCEL_CURRENT);
+        PendingIntent pendingToActivity5 = PendingIntent.getActivity(context, 4, intentStartActivityJar5, FLAG_CANCEL_CURRENT);
+        PendingIntent pendingToActivity6 = PendingIntent.getActivity(context, 5, intentStartActivityJar6, FLAG_CANCEL_CURRENT);
 
         remoteViews.setOnClickPendingIntent(R.id.appwidget_first_jar, pendingToActivity1);
         remoteViews.setOnClickPendingIntent(R.id.appwidget_second_jar, pendingToActivity2);
@@ -175,7 +174,6 @@ public class JarsWidget extends AppWidgetProvider {
         intentNextJars.setAction(NEXT_JARS_CLICK);
         PendingIntent pendingIntentNextJars = PendingIntent.getBroadcast(context, 0,
                 intentNextJars, 0);
-
         remoteViews.setOnClickPendingIntent(R.id.appwidget_go_layout, pendingIntentNextJars);
 
         appWidgetManager.updateAppWidget(widgetId, remoteViews);
@@ -226,6 +224,15 @@ public class JarsWidget extends AppWidgetProvider {
         }
         return textSize;
     }
+/*
+    @Override
+    public void onEnabled(Context context) {
+        //todo check
+        super.onEnabled(context);
+        ComponentName thisWidget = new ComponentName(context, JarsWidget.class);
+        int[] allWidgetsIds = AppWidgetManager.getInstance(context).getAppWidgetIds(thisWidget);
+        onUpdate(context, AppWidgetManager.getInstance(context), allWidgetsIds);
+    }*/
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -244,10 +251,10 @@ public class JarsWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        ComponentName thisWidget = new ComponentName(context, JarsWidget.class);
+        int[] allWidgetsIds = AppWidgetManager.getInstance(context).getAppWidgetIds(thisWidget);
 
         if (intent.getAction().equals(NEXT_JARS_CLICK)) {
-            ComponentName thisWidget = new ComponentName(context, JarsWidget.class);
-            int[] allWidgetsIds = AppWidgetManager.getInstance(context).getAppWidgetIds(thisWidget);
             //TODO CHECK
             Log.d(LOG_TAG, "Value of widgets array in onReceive " + allWidgetsIds.length);
             boolean isNextJars = false;
@@ -258,11 +265,8 @@ public class JarsWidget extends AppWidgetProvider {
             widgetsMap.put(allWidgetsIds[0], !isNextJars);
             // old isNextJars = !isNextJars;
             this.onUpdate(context, AppWidgetManager.getInstance(context), allWidgetsIds);
-        } else if (intent.getAction().equals(TO_ACTIVITY_CLICK)) {
-            Log.d(LOG_TAG, "open an activity");
-
-            super.onReceive(context, intent);
         } else {
+            //this.onUpdate(context, AppWidgetManager.getInstance(context), allWidgetsIds);
             super.onReceive(context, intent);
         }
     }

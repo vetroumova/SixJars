@@ -153,7 +153,7 @@
             android:layout_above="@+id/jar_infoView3"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_normal"
-            android:text="@string/db_jar_id_NEC"
+            android:text="@string/db_jar_id_GIVE"
             android:textColor="@color/colorBottle"
             android:textSize="@dimen/item_balance_dimension"
             android:textStyle="bold" />
@@ -177,6 +177,189 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="false"
             android:layout_below="@+id/jar_infoView3"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_small"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/item_balance_dimension"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/appwidget_fourth_jar"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/widget_button_margin"
+        android:layout_weight="4"
+        android:background="@drawable/jar_widget_bg"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/jar_imageView4"
+            android:layout_width="31dp"
+            android:layout_height="71dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="3dp"
+            android:background="@color/colorWhiteBG"
+            android:contentDescription="@string/appwidget_text"
+            android:focusableInTouchMode="false"
+            android:scaleType="centerInside"
+            android:src="@drawable/jar_with_bubbles"/>
+
+        <TextView
+            android:id="@+id/jar_textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/jar_infoView4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/db_jar_id_EDU"
+            android:textColor="@color/colorBottle"
+            android:textSize="@dimen/item_balance_dimension"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/jar_infoView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
+            android:text="@string/account_name"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/widget_text_size"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/jar_sumView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="false"
+            android:layout_below="@+id/jar_infoView4"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_small"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/item_balance_dimension"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/appwidget_fifth_jar"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/widget_button_margin"
+        android:layout_weight="4"
+        android:background="@drawable/jar_widget_bg"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/jar_imageView5"
+            android:layout_width="31dp"
+            android:layout_height="71dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="3dp"
+            android:background="@color/colorWhiteBG"
+            android:contentDescription="@string/appwidget_text"
+            android:focusableInTouchMode="false"
+            android:scaleType="centerInside"
+            android:src="@drawable/jar_with_bubbles"/>
+
+        <TextView
+            android:id="@+id/jar_textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/jar_infoView5"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/db_jar_id_LTSS"
+            android:textColor="@color/colorBottle"
+            android:textSize="@dimen/item_balance_dimension"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/jar_infoView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
+            android:text="@string/account_name"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/widget_text_size"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/jar_sumView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="false"
+            android:layout_below="@+id/jar_infoView5"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_small"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/item_balance_dimension"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/appwidget_sixth_jar"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/widget_button_margin"
+        android:layout_weight="4"
+        android:background="@drawable/jar_widget_bg"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/jar_imageView6"
+            android:layout_width="31dp"
+            android:layout_height="71dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="3dp"
+            android:background="@color/colorWhiteBG"
+            android:contentDescription="@string/appwidget_text"
+            android:focusableInTouchMode="false"
+            android:scaleType="centerInside"
+            android:src="@drawable/jar_with_bubbles"/>
+
+        <TextView
+            android:id="@+id/jar_textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/jar_infoView6"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/db_jar_id_FFA"
+            android:textColor="@color/colorBottle"
+            android:textSize="@dimen/item_balance_dimension"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/jar_infoView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
+            android:text="@string/account_name"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/widget_text_size"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/jar_sumView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="false"
+            android:layout_below="@+id/jar_infoView6"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/margin_small"
             android:textAlignment="center"

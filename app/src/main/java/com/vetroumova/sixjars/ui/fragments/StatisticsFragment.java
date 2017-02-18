@@ -79,7 +79,7 @@ public class StatisticsFragment extends SimpleChartFragment
         Calendar calendar = Calendar.getInstance();
         Date now = new Date(System.currentTimeMillis());
         calendar.set(Calendar.MILLISECOND, 0);
-        calendar.add(Calendar.MONTH, -1);
+        calendar.add(Calendar.MONTH, -3);
         dates[0] = new Date(calendar.getTimeInMillis());
         dates[1] = now;
         //primary dates

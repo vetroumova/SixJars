@@ -65,8 +65,6 @@ import com.vk.sdk.api.model.VKPhotoArray;
 import com.vk.sdk.api.photo.VKImageParameters;
 import com.vk.sdk.api.photo.VKUploadImage;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import rx.Subscription;
@@ -94,10 +92,17 @@ public class MainActivity extends AppCompatActivity {
     AlphaAnimation animationDisapear;
     AlphaAnimation animationGetVisible;
     private LinearLayoutManager layoutManager;
+    private Subscription jarInRecyclerSubscription;
+    private Subscription cashClickSubscription;
+    private Subscription finishEditCashSubscription;
+    private Subscription cashDeleteSubscription;
+    private Subscription spendCashInJar;
+    private Subscription finishSpendCashSubscription;
     private CompositeSubscription subscriptions = new CompositeSubscription();
-    private List<String> mockItems = new ArrayList<>();
-    /*private int[] colors = {R.color.colorPrimary,R.color.colorAccent,
-            R.color.colorPrimaryLight,R.color.colorPrimaryDark};*/
+
+    //private List<String> mockItems = new ArrayList<>();
+    private int[] colors = {R.color.colorPrimary, R.color.colorAccent,
+            R.color.colorPrimaryLight, R.color.colorPrimaryDark};
     private FloatingActionButton fab;
     //Fragments
     private FragmentManager fragmentManager;
@@ -146,14 +151,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         //recyclerFragment = new RecyclerFragment();
         recyclerFragment = RecyclerFragment.newInstance();
-        //todo all new instances with bundle
-        jarInfoFragment = new JarInfoFragment();
-        settingsFragment = new SettingsFragment();
-        statisticsFragment = new StatisticsFragment();
-        helpFragment = new HelpFragment();
-        addCashFragment = new AddCashFragment();
-        spendFragment = new SpendFragment();
-        cashInfoFragment = new CashInfoFragment();
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -171,8 +168,9 @@ public class MainActivity extends AppCompatActivity {
             fab.startAnimation(animationDisapear);
             DebugLogger.log("DebugLogger");
             Log.d(TAG, "FAB");
+            addCashFragment = AddCashFragment.newInstance();
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_layout, addCashFragment)  //todo new instance
+                    .replace(R.id.content_layout, addCashFragment)
                     /*.setCustomAnimations(android.R.animator
                     .fade_in, android.R.animator.fade_out)*/
                     .addToBackStack("addCash")
@@ -183,8 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
         //set toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-        //toolbar.setLogo(R.mipmap.ic_launcher);
-        //toolbar.setTitleTextColor(getResources().getColor(R.color.colorAccent));
+        toolbar.setLogo(R.mipmap.ic_launcher);
         setSupportActionBar(toolbar);
         //getSupportActionBar().setLogo(R.mipmap.ic_launcher);
 
@@ -206,8 +203,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.addItem(itemTutorial);
         bottomNavigation.setBehaviorTranslationEnabled(true);
         bottomNavigation.setColored(true);
+        bottomNavigation.setColoredModeColors(colors[2], colors[3]);
         //to color an icon font
-        bottomNavigation.setForceTint(true);
+        //bottomNavigation.setForceTint(true); // FIXME: 31.01.2017
         bottomNavigation.setCurrentItem(0);
 
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
@@ -222,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0: {
                         fragmentManager.beginTransaction()
-                                .replace(R.id.content_layout, recyclerFragment, "RECYCLER") //todo new instance
+                                .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         if (!fab.isShown()) {
@@ -232,7 +230,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                     case 1: {
-                        Log.d(TAG, "settings instance lang pref - " + Prefs.with(getApplicationContext()).getPrefLanguage());
+                        Log.d(TAG, "settings instance lang pref - "
+                                + Prefs.with(getApplicationContext()).getPrefLanguage());
                         settingsFragment = SettingsFragment.newInstance(
                                 Prefs.with(getApplicationContext()).getPrefLanguage());
                         fragmentManager.beginTransaction()
@@ -258,8 +257,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                     case 3: {
+                        helpFragment = HelpFragment.newInstance();
                         fragmentManager.beginTransaction()
-                                .replace(R.id.content_layout, helpFragment) //todo new instance ??
+                                .replace(R.id.content_layout, helpFragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         if (!fab.isShown()) {
@@ -279,61 +279,63 @@ public class MainActivity extends AppCompatActivity {
         if (fragmentManager.getBackStackEntryCount() == 0
                 && !(fragmentManager.findFragmentById(R.id.content_layout) instanceof RecyclerFragment)) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_layout, recyclerFragment, "RECYCLER") //todo new instance
-                    //.addToBackStack("Recycler")
+                    .replace(R.id.content_layout, recyclerFragment, "RECYCLER")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
         }
         //updateAllWidgets();
 
-        Subscription jarInRecyclerSubscription = recyclerFragment.getJar()
+        jarInRecyclerSubscription = recyclerFragment.getJar()
                 .subscribe(jar -> {
                             DebugLogger.log("opening a JAR info: " + jar.getJar_id());
-                            // Toast.makeText(getApplicationContext(), "opening a JAR info: " + jar.getJar_id(),
-                            //Toast.LENGTH_SHORT).show();
-                            jarInfoFragment.setJarID(jar.getJar_id());
-                            //Toast.makeText(getApplicationContext(), jarInfoFragment.toString(),
-                            //Toast.LENGTH_SHORT).show();
+                            jarInfoFragment = JarInfoFragment.newInstance(jar.getJar_id());
                             Log.d(TAG, jarInfoFragment.toString());
                             fragmentManager.beginTransaction()
-                                    .replace(R.id.content_layout, jarInfoFragment) //todo new instance
+                                    .replace(R.id.content_layout, jarInfoFragment)
                                     .addToBackStack("JarInfo")
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                     .commit();
+
+                            getInnerSubscriptionsJar(jar.getJar_id());
                         },
                         error -> DebugLogger.log(error.getMessage())
                 );
 
-        Subscription cashClickSubscription = jarInfoFragment.getCashflowItem()
+        subscriptions.add(jarInRecyclerSubscription);
+    }
+
+    private void getInnerSubscriptionsJar(String jar_id) {
+
+        cashClickSubscription = jarInfoFragment.getCashflowItem()
                 .subscribe(cash -> {
-                            DebugLogger.log("cash clicked : " + cash.getId() + ", " + cash.getSum());
-                            Log.d(TAG, "cash clicked : " + cash.getId() + ", " + cash.getSum());
-                            //Toast.makeText(getApplicationContext(),
-                            //"cash clicked : " + cash.getId() + ", " + cash.getSum(),
-                            //Toast.LENGTH_SHORT).show();
+                            DebugLogger.log("cash clicked : " + cash.getId()
+                                    + ", " + cash.getSum());
+                            Log.d(TAG, "cash clicked : " + cash.getId() + ", "
+                                    + cash.getSum());
 
                             cashInfoFragment = CashInfoFragment.newInstance(cash.getId());
-                            //cashInfoFragment.setCashflowID(cash.getId());
                             fragmentManager.beginTransaction()
                                     .replace(R.id.content_layout, cashInfoFragment)
                                     .addToBackStack("CashEdit")
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                     .commit();
+
+                            finishEditCashSubscription = cashInfoFragment.isFinishEdit()
+                                    .subscribe(isEdited -> {
+                                        DebugLogger.log("DL cash was edited : " + isEdited);
+                                        Log.d(TAG, "cash was edited : " + isEdited);
+                                        recyclerFragment.refreshRecycler();
+                                        jarInfoFragment.refreshData();
+                                        jarInfoFragment.refreshRecyclerArterDeleteItem();
+                                        updateAllWidgets();
+                                    });
+
+                            subscriptions.add(finishEditCashSubscription);
                         },
                         error -> DebugLogger.log(error.getMessage())
                 );
 
-        Subscription finishEditCashSubscription = cashInfoFragment.isFinishEdit()
-                .subscribe(isEdited -> {
-                    DebugLogger.log("DL cash was edited : " + isEdited);
-                    Log.d(TAG, "cash was edited : " + isEdited);
-                    recyclerFragment.refreshRecycler();
-                    jarInfoFragment.refreshData();
-                    jarInfoFragment.refreshRecyclerArterDeleteItem();
-                    updateAllWidgets();
-                });
-
-        Subscription cashDeleteSubscription = jarInfoFragment.refreshRecyclerArterDeleteItem()
+        cashDeleteSubscription = jarInfoFragment.refreshRecyclerArterDeleteItem()
                 .subscribe(deletedCashID -> {
                             DebugLogger.log("DL refreshing mainRecycler after deleted cash : "
                                     + deletedCashID);
@@ -345,37 +347,35 @@ public class MainActivity extends AppCompatActivity {
                         error -> DebugLogger.log(error.getMessage())
                 );
 
-        Subscription spendCashInJar = jarInfoFragment.spendCashInJar()
-                .subscribe(jar -> {
-                    DebugLogger.log("DL open spendcash fragment : " + jar.getJar_id());
-                    Log.d(TAG, "open spendcash fragment : " + jar.getJar_id());
-                    spendFragment = SpendFragment.newInstance(jar.getJar_id());
+        spendCashInJar = jarInfoFragment.spendCashInJar()
+                .subscribe(jarSpend -> {
+                    DebugLogger.log("DL open spendcash fragment : " + jar_id);
+                    Log.d(TAG, "open spendcash fragment : " + jar_id);
+                    spendFragment = SpendFragment.newInstance(jar_id);
                     fragmentManager.beginTransaction()
                             .replace(R.id.content_layout, spendFragment, "spend")
                             .addToBackStack("Spend")
                             .commit();
-                });
 
-        Subscription finishSpendCashSubscription = spendFragment.finishSpend()
-                .subscribe(isSpend -> {
-                    DebugLogger.log("spend cash and close : " + isSpend);
-                    Log.d(TAG, "spend cash and close : " + isSpend);
-                    //TODO CHECK if working and close the spend
-                    fragmentManager.popBackStackImmediate();
-                    fab.show();
-                    recyclerFragment.refreshRecycler();
-                    jarInfoFragment.refreshData();
-                    jarInfoFragment.refreshRecyclerArterDeleteItem();
-                    updateAllWidgets();
+                    finishSpendCashSubscription = spendFragment.finishSpend()
+                            .subscribe(isSpend -> {
+                                DebugLogger.log("spend cash and close : " + isSpend);
+                                Log.d(TAG, "spend cash and close : " + isSpend);
+                                //TODO CHECK if working and close the spend
+                                fragmentManager.popBackStackImmediate();
+                                fab.show();
+                                recyclerFragment.refreshRecycler();
+                                jarInfoFragment.refreshData();
+                                jarInfoFragment.refreshRecyclerArterDeleteItem();
+                                updateAllWidgets();
+                            });
+                    subscriptions.add(finishSpendCashSubscription);
                 });
-
-        subscriptions.add(jarInRecyclerSubscription);
         subscriptions.add(cashClickSubscription);
-        subscriptions.add(finishEditCashSubscription);
         subscriptions.add(cashDeleteSubscription);
         subscriptions.add(spendCashInJar);
-        subscriptions.add(finishSpendCashSubscription);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -545,7 +545,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean("IsSavedInst", true);
+        outState.putBoolean("IsSavedInst", true);   //don't needed anymore, I guess - todo check
         super.onSaveInstanceState(outState);
     }
 
@@ -565,6 +565,21 @@ public class MainActivity extends AppCompatActivity {
             if (!fab.isShown()) {
                 fab.show();
                 fab.startAnimation(animationGetVisible);
+            }
+            //to clear subscriptions to JarInfo cashflows
+            // FIXME: 31.01.2017
+            if (fragmentManager.findFragmentById(R.id.content_layout) instanceof CashInfoFragment) {
+            } else if (fragmentManager.findFragmentById(R.id.content_layout) instanceof SpendFragment) {
+            } else if (fragmentManager.findFragmentById(R.id.content_layout) instanceof JarInfoFragment) {
+                /*if (!cashClickSubscription.isUnsubscribed()) {
+                    finishEditCashSubscription.unsubscribe();
+                    cashClickSubscription.unsubscribe();
+                }
+                if (!spendCashInJar.isUnsubscribed()) {
+                    finishSpendCashSubscription.unsubscribe();
+                    spendCashInJar.unsubscribe();
+                }*/
+                cashDeleteSubscription.unsubscribe();
             }
             super.onBackPressed();
         }
@@ -631,5 +646,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         subscriptions.clear();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //todo check
+        Intent intentFromWidget = getIntent();
+        String value = intentFromWidget.getStringExtra("JarInfoFragment");
+        //String value = intentFromWidget.getBundleExtra().getString("JarInfoFragment");
+        if (value != null) {
+            Log.d(TAG, "    widget value from intent " + value);
+            /*if (fragmentManager.findFragmentById(R.id.content_layout) instanceof JarInfoFragment) {
+                fragmentManager.popBackStackImmediate();
+            }*/
+            jarInfoFragment = JarInfoFragment.newInstance(value);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_layout, jarInfoFragment)
+                    .addToBackStack("jarInfo")
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .commit();
+            getInnerSubscriptionsJar(value);
+        } else {
+            Log.d(TAG, "     widget value from intent null");
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        /*Can not perform this (widget value from intent) action after onSaveInstanceState*/
+        super.onNewIntent(intent);
     }
 }

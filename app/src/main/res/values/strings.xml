@@ -169,10 +169,11 @@
     <string name="location_restore_text">If you have restore file and  it\'s not found - put it manually to SixJars folder in external storage.</string>
     <integer name="com_vk_sdk_AppId">5696879</integer>
 
-    <string-array name="languages">
+    <string-array name="languages" translatable="false">
         <item>English</item>
         <item>Русский</item>
         <item>Українська</item>
     </string-array>
+    <string name="tutorial_description_text" translatable="false">tutorial</string>
 
 </resources>

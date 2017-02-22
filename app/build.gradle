@@ -6,6 +6,10 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         OlhaVetroumova {
+            keyAlias 'SixJarsKey'
+            keyPassword 'Happiness81'
+            storeFile file('C:/Users/OLGA/keystores/sixjarskey.jks')
+            storePassword 'Happiness81'
         }
     }
     compileSdkVersion 25
@@ -28,6 +32,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.OlhaVetroumova
         }
     }
     dexOptions {

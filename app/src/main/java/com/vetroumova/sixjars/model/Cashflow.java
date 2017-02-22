@@ -21,9 +21,6 @@ public class Cashflow extends RealmObject {
 
     @PrimaryKey
     private long id;
-    // from "Realm, generating RealmController.getDatabaseManagerInstance().getBooks().size() + System.currentTimeMillis()
-    //in SixJars - RealmManager.getDatabaseManagerInstance().getJars().size() + System.currentTimeMillis();
-
     private Date date;
     private float sum;
     private int currpercent;
@@ -91,12 +88,4 @@ public class Cashflow extends RealmObject {
     public void setJar(Jar jar) {
         this.jar = jar;
     }
-
-    /*public Point getLutLong() {
-        return lutLong;
-    }
-
-    public void setLutLong(Point lutLong) {
-        this.lutLong = lutLong;
-    }*/
 }

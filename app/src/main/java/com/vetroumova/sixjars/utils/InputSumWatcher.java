@@ -20,18 +20,15 @@ public class InputSumWatcher implements TextWatcher {
     //to edit a TextView
     public static String editSum(String input) {
         int len = input.length();
-
         if (input.startsWith(".") || input.startsWith(",")) {
             Log.d("VOlga", input);
             input = "0".concat(input);
         } else if (len == 8) {
-            //edt.setText(edt.getText().delete(edt.getText().length()-1, edt.getText().length()) );
             input = input.substring(0, input.length() - 1);
         } else if (len > 4) {
             char maybePoint = input.charAt(len - 4);
             Log.d("VOlga", input + " , " + maybePoint);
             if (len != 0 && (maybePoint == ',' || maybePoint == '.')) {
-                //input.delete(, input.length());
                 input = input.substring(0, input.length() - 1);
             }
         }
@@ -52,9 +49,6 @@ public class InputSumWatcher implements TextWatcher {
             edt.setText("0".concat(edt.getText().toString()));
             Log.d("VOlga", edt.getText().toString());
         }
-        /*if(input.startsWith("0") && len >1 && (input.charAt(1) !='.'|| input.charAt(1) !=',')) {
-            edt.setText(edt.getText().delete(0,1));
-        }*/
         if (len > 4) {
             char maybePoint = input.charAt(len - 4);
             Log.d("VOlga", input + " , " + maybePoint);

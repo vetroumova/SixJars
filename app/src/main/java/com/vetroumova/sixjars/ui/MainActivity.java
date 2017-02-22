@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
         }
-        //updateAllWidgets();
+        updateAllWidgets();
 
         jarInRecyclerSubscription = recyclerFragment.getJar()
                 .subscribe(jar -> {
@@ -392,7 +392,6 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_share) {
-
             shareFragment = ShareFragment.newInstance();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_layout, shareFragment)
@@ -413,7 +412,6 @@ public class MainActivity extends AppCompatActivity {
             checkStoragePermissions(this);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -464,7 +462,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if ((requestCode == GOOGLEPLUS_REQUEST_CODE) && (resultCode == -1)) {
-            //Do something if success
+            Log.d(TAG, "Success on Google posting");
         }
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override
@@ -558,7 +556,6 @@ public class MainActivity extends AppCompatActivity {
             else
                 Toast.makeText(getBaseContext(), R.string.click_to_exit_text,
                         Toast.LENGTH_SHORT).show();
-
             back_pressed = System.currentTimeMillis();
             return;
         } else {
@@ -608,8 +605,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "");
             Prefs.with(getApplicationContext()).setPrefRestoreMark(false);
             Log.d(TAG, "onStart - restore false");
-
-
             Configuration config = getApplicationContext().getResources().getConfiguration();
             Locale locale = new Locale(Prefs.with(this).getPrefLanguage());
             /*Locale previousLocale = getApplicationContext().
@@ -618,7 +613,6 @@ public class MainActivity extends AppCompatActivity {
             config.locale = locale;
             getApplicationContext().getResources().updateConfiguration(config,
                     getApplicationContext().getResources().getDisplayMetrics());
-
             Intent intent = getApplicationContext().getApplicationContext().getPackageManager()
                     .getLaunchIntentForPackage(getApplicationContext().getPackageName());
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -627,16 +621,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
     protected void onPostResume() {
         super.onPostResume();
         if (Prefs.with(getApplicationContext()).getPrefRestoreMark()) {
             Log.d(TAG, "onPostResume - restore true");
-            //todo check
             RealmManager.loadUserPrefsToSharedPrefs(getApplicationContext(),
                     RealmManager.with(this).getJar("NEC").getUser());
             Log.d(TAG, "");
@@ -659,7 +647,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intentFromWidget = getIntent();
         if (intentFromWidget.getStringExtra("JarInfoFragment") != null) {
             String value = intentFromWidget.getStringExtra("JarInfoFragment");
-            //String value = intentFromWidget.getBundleExtra().getString("JarInfoFragment");
             if (value != null) {
                 Log.d(TAG, "    widget value from intent " + value);
                 if (fragmentManager.findFragmentById(R.id.content_layout) instanceof JarInfoFragment) {

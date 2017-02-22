@@ -34,8 +34,6 @@ public class MainApplication extends Application {
                 .name(Realm.DEFAULT_REALM_NAME)
                 //.name(REALM_NAME)
                 .schemaVersion(SCHEMA_VERSION)
-                //you can set .deleteRealmIfMigrationNeeded() if you don't want to bother with migrations.
-                // WARNING: This will delete all data in the Realm though.
                 //.deleteRealmIfMigrationNeeded()
                 // Or you can add the migration code to the configuration.
                 // This will run the migration code without throwing
@@ -46,8 +44,7 @@ public class MainApplication extends Application {
                         colorSchema.addField("jar_color", int.class);
                         oldVersion++;
                     }
-                })
-                .build();*/
+                })*/
                 .migration(new Migration())
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
@@ -76,7 +73,6 @@ public class MainApplication extends Application {
 
     @Override
     public void onTerminate() {
-        //todo check
         RealmManager.with(this).getRealm().close();
         super.onTerminate();
     }

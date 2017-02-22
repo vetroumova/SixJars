@@ -13,7 +13,6 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by OLGA on 14.09.2016.
  */
 public class Prefs {
-
     private static final String PRE_LOAD = "preLoad";
     private static final String PREFS_NAME = "prefs";
     private static final String PERC_NEC = "NEC";
@@ -35,19 +34,16 @@ public class Prefs {
     private final SharedPreferences sharedPreferences;
 
     public Prefs(Context context) {
-
         sharedPreferences = context.getApplicationContext()
                 .getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
     }
 
     public static Prefs with(Context context) {
-
         if (prefsInstance == null) {
             prefsInstance = new Prefs(context);
         }
         return prefsInstance;
     }
-
     public boolean getPreLoad() {
         return sharedPreferences.getBoolean(PRE_LOAD, false);
     }
@@ -137,14 +133,7 @@ public class Prefs {
     }
 
     public void setMaxVolumeInJar(float maxVolume, String id) {
-
-        //TODO check the maxValue scheme - just total after income
-        //maxVolume in params - new TotalSum in jar
         String maxVolumePrefID = "max_sum_".concat(id);
-        /*float prevMaxVolume = sharedPreferences.getFloat(maxVolumePrefID, maxVolume);
-        if (prevMaxVolume > maxVolume) {
-            maxVolume = (prevMaxVolume + maxVolume) / 2;
-        }*/
         sharedPreferences
                 .edit()
                 .putFloat(maxVolumePrefID, maxVolume)
@@ -182,149 +171,6 @@ public class Prefs {
         }
         return maxVolume;
     }
-
-    /*public boolean saveSharedPreferencesToFile(File dst) {
-        boolean res = false;
-        ObjectOutputStream output = null;
-        try {
-            output = new ObjectOutputStream(new FileOutputStream(dst));
-            SharedPreferences pref = sharedPreferences;
-            output.writeObject(pref.getAll());
-
-            res = true;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (output != null) {
-                    output.flush();
-                    output.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return res;
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    public boolean loadSharedPreferencesFromFile(File src) {
-        boolean res = false;
-        ObjectInputStream input = null;
-        try {
-            input = new ObjectInputStream(new FileInputStream(src));
-            //SharedPreferences.Editor prefEdit = getSharedPreferences(prefName, MODE_PRIVATE).edit();
-            SharedPreferences.Editor prefEdit = sharedPreferences.edit();
-            prefEdit.clear();
-            Map<String, ?> entries = (Map<String, ?>) input.readObject();
-            for (Map.Entry<String, ?> entry : entries.entrySet()) {
-                Object v = entry.getValue();
-                String key = entry.getKey();
-
-                if (v instanceof Boolean)
-                    prefEdit.putBoolean(key, (Boolean) v);
-                else if (v instanceof Float)
-                    prefEdit.putFloat(key, (Float) v);
-                else if (v instanceof Integer)
-                    prefEdit.putInt(key, (Integer) v);
-                else if (v instanceof Long)
-                    prefEdit.putLong(key, (Long) v);
-                else if (v instanceof String)
-                    prefEdit.putString(key, ((String) v));
-            }
-            //prefEdit.commit();
-            prefEdit.apply();
-            res = true;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (input != null) {
-                    input.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return res;
-    }
-
-    //was static
-    public boolean restoreUserPrefs(File src) {
-        //final File backupFile = new File(context.getExternalFilesDir(null),"preferenceBackup.xml");
-        String error = "";
-
-        try {
-            *//*SharedPreferences sharedPreferences = PreferenceManager
-                    .getDefaultSharedPreferences(context);
-            SharedPreferences.Editor editor = sharedPreferences.edit();*//*
-            SharedPreferences.Editor prefEdit = sharedPreferences.edit();
-            prefEdit.clear();   //added
-            InputStream inputStream = new FileInputStream(src);
-
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-            Document doc = docBuilder.parse(inputStream);
-            Element root = doc.getDocumentElement();
-
-            Node child = root.getFirstChild();
-            while(child!=null) {
-                if(child.getNodeType() == Node.ELEMENT_NODE) {
-
-                    Element element = (Element)child;
-
-                    String type = element.getNodeName();
-                    String name = element.getAttribute("name");
-
-                    // In my app, all prefs seem to get serialized as either "string" or
-                    // "boolean" - this will need expanding if yours uses any other types!
-                    if(type.equals("string")) {
-                        String value = element.getTextContent();
-                        prefEdit.putString(name, value);
-                    }
-                    else if(type.equals("boolean")) {
-                        String value = element.getAttribute("value");
-                        prefEdit.putBoolean(name, value.equals("true"));
-                    }
-                    else if(type.equals("float")) {
-                        String value = element.getAttribute("value");
-                        prefEdit.putFloat(name, Float.parseFloat(value));
-                    }
-                    else if(type.equals("int")) {
-                        String value = element.getAttribute("value");
-                        prefEdit.putInt(name, Integer.parseInt(value));
-                    }
-                }
-                child = child.getNextSibling();
-            }
-            prefEdit.commit();
-
-            *//*Toast toast = Toast.makeText(context, "Restored user prefs from " +
-                    backupFile.getAbsolutePath(), Toast.LENGTH_SHORT);
-            toast.show();*//*
-            return true;
-
-        } catch (FileNotFoundException e) {
-            error = e.getMessage();
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            error = e.getMessage();
-            e.printStackTrace();
-        } catch (SAXException e) {
-            error = e.getMessage();
-            e.printStackTrace();
-        } catch (IOException e) {
-            error = e.getMessage();
-            e.printStackTrace();
-        }
-        *//*Toast toast = Toast.makeText(context, "Failed to restore user prefs from " +
-                backupFile.getAbsolutePath()+ " - "+error, Toast.LENGTH_SHORT);
-        toast.show();*//*
-        return false;
-    }*/
 
     public String getPrefLanguage() {
         return sharedPreferences.getString(PREF_LANGUAGE, "default");

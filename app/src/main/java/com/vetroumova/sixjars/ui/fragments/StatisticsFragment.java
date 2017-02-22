@@ -72,7 +72,6 @@ public class StatisticsFragment extends SimpleChartFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         realmManager = RealmManager.with(this);
         setGlobalRealmData();   // globalResults
         dates = new Date[2];
@@ -91,19 +90,16 @@ public class StatisticsFragment extends SimpleChartFragment
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
-
         //for visibility change
         arrowImage = (ImageView) view.findViewById(R.id.statisticsArrowImage);
         barTextView = (TextView) view.findViewById(R.id.statisticsBarTextView);
         barTextView2 = (TextView) view.findViewById(R.id.statisticsBarTextView2);
         noDataTextView = (TextView) view.findViewById(R.id.statisticsNoDataTextView);
-
         rangeSeekBar = (RangeSeekBar) view.findViewById(R.id.statisticsSeekBar);
         rangeSeekBar.setRangeValues(0, 100);
         rangeSeekBar.setOnRangeSeekBarChangeListener(this);
         periodTextView = (TextView) view.findViewById(R.id.statisticsPeriodText);
         setPeriodText(dates);
-
         setSeekValueByPeriod(dates[0], dates[1]);
         /*rangeSeekBar.setSelectedMinValue(90);
         rangeSeekBar.setSelectedMaxValue(100);*/
@@ -122,13 +118,11 @@ public class StatisticsFragment extends SimpleChartFragment
             noDataTextView.setVisibility(View.VISIBLE);
         } else {
             tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Bold.ttf");
-
             pieChart.setCenterTextTypeface(tf);
             pieChart.setCenterText(generateCenterText());
             pieChart.setCenterTextSize(10f);
             pieChart.setCenterTextTypeface(tf);
             pieChart.setDescription(getString(R.string.statistics_pie_title));
-
             // radius of the center hole in percent of maximum radius
             pieChart.setHoleRadius(50f);
             pieChart.setTransparentCircleRadius(55f);
@@ -136,10 +130,6 @@ public class StatisticsFragment extends SimpleChartFragment
             pieChart.setDrawEntryLabels(false);
 
             Legend l = pieChart.getLegend();
-            //l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        /*l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);*/
             l.setMaxSizePercent(0.8f);
             l.setForm(Legend.LegendForm.CIRCLE);
             l.setPosition(LegendPosition.ABOVE_CHART_CENTER);
@@ -152,10 +142,6 @@ public class StatisticsFragment extends SimpleChartFragment
             barChart.setDescriptionPosition(0f, 1f);
             barChart.setFitBars(true);
             barChart.setNoDataText(getString(R.string.no_data_chart_text));
-            //barChart.setMaxVisibleValueCount(6);
-
-        /*XAxis xLabels = barChart.getXAxis();
-        xLabels.setPosition(XAxis.XAxisPosition.TOP);*/
 
             Legend lb = barChart.getLegend();
             lb.setForm(Legend.LegendForm.SQUARE);
@@ -172,8 +158,6 @@ public class StatisticsFragment extends SimpleChartFragment
             xAxis.setGridColor(Color.LTGRAY);
             xAxis.setDrawLabels(false);
             barChart.getAxisRight().setEnabled(false);
-
-            //barChart.setData(generateStackedBarData());
             barChart.setData(generateBarData());
         }
         return view;
@@ -187,18 +171,10 @@ public class StatisticsFragment extends SimpleChartFragment
     }
 
     protected PieData generatePieData() {
-        // get realm instance
-        //Realm realm = realmManager.getRealm();
-        // load your data from Realm.io database
-
         int count = 6;
         ArrayList<PieEntry> entries1 = new ArrayList<>();
-        //RealmResults<Jar> resultsJar = realm.where(Jar.class).findAll();
 
         for (int i = 0; i < count; i++) {
-            //entries1.add(new PieEntry((float) ((Math.random() * 60) + 40), "Quarter " + (i+1)));
-            //entries1.add(new PieEntry(results.get(i).getTotalCash(),results.get(i).getJar_id()));
-            //String jarID = resultsJar.get(i).getJar_id();
             String jarID = jarIDs[i];
             float sumOfPaymentsInJar = results.where()
                     .equalTo("jar.jar_id", jarID)
@@ -222,15 +198,8 @@ public class StatisticsFragment extends SimpleChartFragment
         ds1.setSliceSpace(2f);
         ds1.setSelectionShift(5f);
         ds1.setValueTextColor(Color.WHITE);
-        //ds1.setValueTypeface(Typeface.DEFAULT_BOLD);
         ds1.setValueTextSize(14f);
         ds1.setDrawValues(true);
-
-        /*ds1.setValueLinePart1OffsetPercentage(80.f);
-        ds1.setValueLinePart1Length(0.5f);
-        ds1.setValueLinePart2Length(0.1f);
-        //dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-        ds1.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);*/
         PieData d = new PieData(ds1);
         d.setValueTypeface(tf);
         return d;
@@ -238,18 +207,11 @@ public class StatisticsFragment extends SimpleChartFragment
     protected BarData generateBarData() {
         // get realm instance
         Realm realm = realmManager.getRealm();
-        // load your data from Realm.io database
-
         int dataSets = 6; // bottles
         int count = 2; //income & payments
-
         ArrayList<IBarDataSet> sets = new ArrayList<IBarDataSet>();
-
         for (int i = 0; i < dataSets; i++) {
             ArrayList<BarEntry> entries2 = new ArrayList<>();
-            //RealmResults<Jar> resultsJar = realm.where(Jar.class).findAll();
-            //Jar jar = resultsJar.get(i);
-            //String jarID = jar.getJar_id();
             String jarID = jarIDs[i];
 
             //TODO ASYNC
@@ -264,14 +226,10 @@ public class StatisticsFragment extends SimpleChartFragment
                     .greaterThan("sum", 0f)
                     .findAll()
                     .sum("sum").floatValue();
-            //float sumOfIncome = jar.getTotalCash() - sumOfPaymentsInJar;
 
             if (-sumOfPaymentsInJar < 1) {
                 sumOfPaymentsInJar = -sumOfPaymentsInJar;
-                //float[] bars = {-sumOfPaymentsInJar, sumOfIncome};
             }
-                //entries2.add(new BarEntry(jar.getJar_float_id(),bars, jarID));
-
             //for visibility
             if (sumOfIncome != 0 || sumOfPaymentsInJar != 0) {
                 float jarFloatID = realm.where(Jar.class)
@@ -337,7 +295,6 @@ public class StatisticsFragment extends SimpleChartFragment
         setRealmDataForPeriod();
         barChart.setData(generateBarData());
         pieChart.setData(generatePieData());
-        //setData(mSeekBarX.getProgress() + 1 , mSeekBarY.getProgress());
         barChart.invalidate();
         pieChart.invalidate();
         if (barChart.getVisibility() == View.GONE && pieChart.getVisibility() == View.GONE) {
@@ -357,7 +314,6 @@ public class StatisticsFragment extends SimpleChartFragment
             dates[1] = new Date(globalMin.getTime() + ((int) maxValue * millisUnit));
         }
         //else default dates
-
     }
 
     private void setSeekValueByPeriod(Date minDate, Date maxDate) {
@@ -380,6 +336,5 @@ public class StatisticsFragment extends SimpleChartFragment
             rangeSeekBar.setSelectedMinValue(minSeek);
             rangeSeekBar.setSelectedMaxValue(maxSeek);
         }
-
     }
 }

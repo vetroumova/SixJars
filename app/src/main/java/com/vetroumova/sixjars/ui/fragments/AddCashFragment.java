@@ -186,26 +186,22 @@ public class AddCashFragment extends Fragment implements View.OnClickListener,
         //Set the text
         DecimalFormatSymbols s = new DecimalFormatSymbols();
         DecimalFormat f = new DecimalFormat("##,##0.00", s);
-
         currBalanceNEC.setText(getString(R.string.cash_balance_text, f.format(jars.get(0).getTotalCash())));
         currBalancePLAY.setText(getString(R.string.cash_balance_text, f.format(jars.get(1).getTotalCash())));
         currBalanceGIVE.setText(getString(R.string.cash_balance_text, f.format(jars.get(2).getTotalCash())));
         currBalanceEDU.setText(getString(R.string.cash_balance_text, f.format(jars.get(3).getTotalCash())));
         currBalanceLTSS.setText(getString(R.string.cash_balance_text, f.format(jars.get(4).getTotalCash())));
         currBalanceFFA.setText(getString(R.string.cash_balance_text, f.format(jars.get(5).getTotalCash())));
-
         sumOfJars = 0;
         for (Jar jar : jars) {
             sumOfJars += jar.getTotalCash();
         }
         getCurrBalanceJars.setText(getString(R.string.cash_balance_text, f.format(sumOfJars)));
-
         setBottles();
     }
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.addAllJars: {
                 jarID = (jarID.equals("AllJars") ? "NoID" : "AllJars");
@@ -237,29 +233,23 @@ public class AddCashFragment extends Fragment implements View.OnClickListener,
                 break;
             }
             case R.id.saveCashAddButton: {
-
                 if (sumEditText.getText().toString().equals("")) {
                     Toast.makeText(getContext(), R.string.enter_sum_text, Toast.LENGTH_SHORT).show();
                 } else {
                     // add to one jar or to all
                     sum = Float.parseFloat(sumEditText.getText().toString());
-
-                    //todo in all sum corrections
                     if (sum > 10_000_000 || (sumOfJars + sum) > 60_000_000) {
                         Toast.makeText(getContext(), R.string.too_much_text, Toast.LENGTH_SHORT).show();
                         break;
                     }
-
                     //GLOBAL INCOME
                     if (jarID.equals("AllJars")) {
-
                         if (sumOfJars > 0) {
                             //CHOOSE if pour to FFA or LTSS jar needed
                             PourToJarFragment pourFragment = new PourToJarFragment();
                             // SETS the target fragment for use later when sending results
                             pourFragment.setTargetFragment(AddCashFragment.this, POUR_RQ_CODE);
                             pourFragment.show(getFragmentManager(), "choosePourInJar");
-                            //////
                             //see onChooseToPour()
                         } else {
                             onChooseToPour("NoJar");

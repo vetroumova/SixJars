@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -21,36 +22,27 @@ import io.realm.Realm;
 import rx.Observable;
 import rx.subjects.PublishSubject;
 
-//import com.bumptech.glide.Glide;
-
 public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
 
     final Context context;
     private final PublishSubject<Cashflow> cashflowInAdapterPublishSubject = PublishSubject.create();
     private final PublishSubject<Long> cashflowDeletePublishSubject = PublishSubject.create();
-    //private List<Integer> percentJars;
     private Realm realm;
     private LayoutInflater inflater;
 
-
     public CashflowsInJarAdapter(Context context) {
-
         this.context = context;
     }
 
-    // create new views (invoked by the layout manager)
     @Override
     public CashCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // inflate a new card view
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_cash_in_jar_recycler, parent, false);
         return new CashCardViewHolder(view);
     }
 
-    // replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position) {
-
         realm = RealmManager.getInstance().getRealm();
         // get the article
         final Cashflow cashflow = getItem(position);
@@ -62,7 +54,6 @@ public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
         holder.textCashDate.setText(formatted);
         //Set the text
         DecimalFormatSymbols s = new DecimalFormatSymbols();
-        //s.setDecimalSeparator('.');
         DecimalFormat f = new DecimalFormat("##,##0.00", s);
         String sum = (f.format(cashflow.getSum()));
         String total = String.format(context.getString(R.string.item_balance_text), sum);
@@ -70,6 +61,13 @@ public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
 
         //remove single match from realm
         //TODO make a swipe delete
+        holder.card.setOnGenericMotionListener(new View.OnGenericMotionListener() {
+            @Override
+            public boolean onGenericMotion(View view, MotionEvent motionEvent) {
+                return false;
+            }
+        });
+
         holder.card.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -92,15 +90,12 @@ public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
 
         //update single match from realm
         holder.card.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 cashflowInAdapterPublishSubject.onNext(cashflow);
             }
         });
     }
-
 
     public Observable<Cashflow> getPositionCashClicks() {
         return cashflowInAdapterPublishSubject.asObservable();
@@ -112,7 +107,6 @@ public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
 
     // return the size of your data set (invoked by the layout manager)
     public int getItemCount() {
-
         if (getRealmAdapter() != null) {
             return getRealmAdapter().getCount();
         }
@@ -120,14 +114,12 @@ public class CashflowsInJarAdapter extends RealmRecyclerViewAdapter<Cashflow> {
     }
 
     public static class CashCardViewHolder extends RecyclerView.ViewHolder {
-
         public CardView card;
         public TextView textCashDate;
         public TextView textCashSum;
 
         public CashCardViewHolder(View itemView) {
             super(itemView);
-
             card = (CardView) itemView.findViewById(R.id.itemCardCashflow);
             textCashDate = (TextView) itemView.findViewById(R.id.itemCashDateText);
             textCashSum = (TextView) itemView.findViewById(R.id.itemCashSumText);

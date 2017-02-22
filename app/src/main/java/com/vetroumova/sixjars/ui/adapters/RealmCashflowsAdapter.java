@@ -9,7 +9,6 @@ import io.realm.RealmResults;
 public class RealmCashflowsAdapter extends RealmModelAdapter<Cashflow> {
 
     public RealmCashflowsAdapter(Context context, RealmResults<Cashflow> realmResults, boolean automaticUpdate) {
-
         super(context, realmResults, automaticUpdate);
     }
 }

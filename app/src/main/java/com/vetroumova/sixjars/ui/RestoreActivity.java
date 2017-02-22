@@ -17,13 +17,8 @@ import com.vetroumova.sixjars.database.RealmManager;
 /**
  * A db restore screen that offers to restore from archive.
  */
-public class RestoreActivity extends AppCompatActivity
-        //implements android.support.v4.app.LoaderManager.LoaderCallbacks
-{
-
+public class RestoreActivity extends AppCompatActivity {
     private static final long PAUSE = 10;
-    //public static final int LOADER_ID = 1;
-    //private Loader mLoader;
     final String TAG = "VOlga";
     ProgressBar progressBar;
     Button restoreButton;
@@ -33,14 +28,12 @@ public class RestoreActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restore);
-
         progressBar = (ProgressBar) findViewById(R.id.restore_progress);
         restoreButton = (Button) findViewById(R.id.restore_button);
         restoreText = (TextView) findViewById(R.id.restore_text);
     }
 
     public void onRestoreClick(View view) {
-
         //cannot work with realm in another thread except asynctransactions
         progressBar.setVisibility(View.VISIBLE);
         restoreButton.setVisibility(View.GONE);
@@ -50,7 +43,6 @@ public class RestoreActivity extends AppCompatActivity
         restoreButton.setVisibility(View.VISIBLE);
         Prefs.with(this).setPrefRestoreMark(true);
         Log.d(TAG, "restore mark " + Prefs.with(this).getPrefRestoreMark());
-        //Toast.makeText(getApplicationContext(), R.string.restore_done_text, Toast.LENGTH_SHORT).show();
         Intent intentToMain = new Intent(RestoreActivity.this, MainActivity.class);
         startActivity(intentToMain.addFlags(
                 Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(

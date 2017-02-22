@@ -76,12 +76,4 @@ public class Jar extends RealmObject {
     public void setUser(User user) {
         this.user = user;
     }
-
-    /*public int getJar_color() {
-        return jar_color;
-    }
-
-    public void setJar_color(int jar_color) {
-        this.jar_color = jar_color;
-    }*/
 }

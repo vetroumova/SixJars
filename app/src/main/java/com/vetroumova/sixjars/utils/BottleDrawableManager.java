@@ -13,7 +13,6 @@ import io.realm.RealmResults;
  * Created by OLGA on 17.10.2016.
  */
 public class BottleDrawableManager {
-
     private static RealmManager realmManager = RealmManager.getInstance();
     private static int[] jarDrawableResource = {R.drawable.water_to_jar_empty,
             R.drawable.water_to_jar8, R.drawable.water_to_jar7, R.drawable.water_to_jar6,
@@ -26,11 +25,9 @@ public class BottleDrawableManager {
             R.drawable.jar_anim_minus1, R.drawable.jar_anim};
 
     public static int chooseFullnesInJar(Prefs prefs, String jarId) {
-
         int item = 0;
         float sum = 0;
         float maxVolume = 0;
-
         if (jarId.equals("AllJars")) {
             RealmResults<Jar> jars = realmManager.getJars();
             for (Jar jar : jars) {
@@ -45,7 +42,6 @@ public class BottleDrawableManager {
             sum += jar.getTotalCash();
             maxVolume = prefs.getMaxVolumeJar(jarId);
         }
-
         Log.d("VOlga", "Sum " + sum + ", maxVolume " + maxVolume);
         if (sum > 0) {
             //TODO will be more iterable
@@ -83,6 +79,5 @@ public class BottleDrawableManager {
     public static int setAnimationJar(Prefs prefs, String jarId) {
         int neededItem = chooseFullnesInJar(prefs, jarId);
         return jarAnimResource[neededItem];
-
     }
 }

@@ -1,6 +1,5 @@
 package com.vetroumova.sixjars.ui.fragments;
 
-import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,13 +22,11 @@ import com.vetroumova.sixjars.model.Jar;
 import com.vetroumova.sixjars.ui.adapters.CashflowsInJarAdapter;
 import com.vetroumova.sixjars.ui.adapters.RealmCashflowsAdapter;
 import com.vetroumova.sixjars.utils.BottleDrawableManager;
-import com.vetroumova.sixjars.utils.DebugLogger;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import rx.Observable;
 import rx.Subscription;
@@ -57,15 +54,11 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
 
     private Jar jar;
     private int percent;
-    private float spendSum = 0; // to Bundle
     private Realm realm;
-    private RealmChangeListener realmListener;
-
     private CashflowsInJarAdapter cashflowsInJarAdapter;
     private LayoutInflater inflater;
     private RecyclerView realmRecycler;
     private TextView noCashTextView;
-
     private PublishSubject<Cashflow> cashInRecyclerPublishSubject = PublishSubject.create();
     private PublishSubject<Long> cashDeletedPublishSubject = PublishSubject.create();
     private PublishSubject<Jar> spendCashPublishSubject = PublishSubject.create();
@@ -92,16 +85,13 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         if (savedInstanceState != null) {
             jarIDString = savedInstanceState.getString(ARG_JAR_ID);
         }
-
         recyclerCashSubscriptions = new CompositeSubscription();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_jar_info, container, false);
-
         jarImage = (ImageView) view.findViewById(R.id.itemFragmentImage);
         jarID = (TextView) view.findViewById(R.id.itemFragmentIdText);
         jarName = (TextView) view.findViewById(R.id.itemFragmentNameText);
@@ -109,13 +99,10 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         jarPercentage = (TextView) view.findViewById(R.id.itemFragmentPercentageText);
         jarDescription = (TextView) view.findViewById(R.id.itemFragmentDescriptionText);
         noCashTextView = (TextView) view.findViewById(R.id.noCashTextView);
-
         spendCashEdit = (EditText) view.findViewById(R.id.itemCashSpendEdit);
         spendCashSave = (Button) view.findViewById(R.id.itemCashSpendButton);
-
         // get all Object with ID
         jar = RealmManager.with(this).getJar(jarIDString);
-
         jarID.setText(jar.getJar_id());
         int nameResourceNumber = NAMES[(int) jar.getJar_float_id()];
         jarName.setText(getString(R.string.item_name_in_fragment_text, getString(nameResourceNumber)));
@@ -127,39 +114,28 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         jarPercentage.setText(getString(R.string.item_percentage_text, percent));
         int descResourceNumber = DESCRIPTIONS[(int) jar.getJar_float_id()];
         jarDescription.setText(getString(descResourceNumber));
-
         spendCashEdit.setText("");
         spendCashSave.setOnClickListener(this);
-
-
         realmRecycler = (RecyclerView) view.findViewById(R.id.cashRecycler);
         setupRecycler();
-
         realm = RealmManager.with(this).getRealm();
         refreshData();
         Subscription cashClickSubscription = cashflowsInJarAdapter.getPositionCashClicks()
                 .subscribe(cash -> {
-                            DebugLogger.log("recycler cash info: " + cash.getId() + ", "
-                                    + cash.getDate() + ", " + cash.getSum());
                             Log.d("VOlga", "recycler cash info: " + cash.getId() + ", "
                                     + cash.getDate() + ", " + cash.getSum());
                             cashInRecyclerPublishSubject.onNext(cash);
                         },
-                        error -> DebugLogger.log(error.getMessage())
+                        error -> Log.d("VOlga", error.getMessage())
                 );
-
         Subscription cashDeleteSubscription = cashflowsInJarAdapter.getPositionCashDeletes()
                 .subscribe(deletedCashID -> {
-                            DebugLogger.log("deleted : " + deletedCashID);
                             Log.d("VOlga", "deleted : " + deletedCashID);
-                            /*Toast.makeText(getContext(), "deleted : " + deletedCashID,
-                                    Toast.LENGTH_SHORT).show();*/
                             refreshData();
                             cashDeletedPublishSubject.onNext(deletedCashID);
                         },
-                        error -> DebugLogger.log(error.getMessage())
+                        error -> Log.d("VOlga", error.getMessage())
                 );
-
         recyclerCashSubscriptions.add(cashClickSubscription);
         recyclerCashSubscriptions.add(cashDeleteSubscription);
         return view;
@@ -177,7 +153,7 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         jarImage.setImageResource(BottleDrawableManager.setAnimationJar
                 (Prefs.with(getContext()), jarIDString));
         AnimationDrawable animation = (AnimationDrawable) jarImage.getDrawable();
-        //Управлять объектом AnimationDrawable можно через методы start() и stop().
+        //handle an AnimationDrawable with start() and stop().
         animation.start();
 
     }
@@ -186,12 +162,10 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         realmRecycler.setLayoutManager(layoutManager);
-
         // create an empty adapter and add it to the recycler view
         cashflowsInJarAdapter = new CashflowsInJarAdapter(getContext());
         realmRecycler.setAdapter(cashflowsInJarAdapter);
     }
-
 
     public void setRealmCashAdapter(RealmResults<Cashflow> cashflows) {
         RealmCashflowsAdapter realmAdapter = new RealmCashflowsAdapter(getContext(), cashflows, true);
@@ -204,7 +178,6 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     public void setJarID(String jarID) {
         this.jarIDString = jarID;
     }
-
 
     public Observable<Cashflow> getCashflowItem() {
         if (cashInRecyclerPublishSubject.asObservable() == null) {
@@ -222,14 +195,8 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
-        //TODO CHECK
         recyclerCashSubscriptions.clear();
     }
 
@@ -242,5 +209,4 @@ public class JarInfoFragment extends Fragment implements View.OnClickListener {
     public void onSaveInstanceState(Bundle outState) {
         outState.putString(ARG_JAR_ID, jarIDString);
     }
-
 }

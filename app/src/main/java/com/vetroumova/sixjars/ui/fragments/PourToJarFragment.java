@@ -1,7 +1,6 @@
 package com.vetroumova.sixjars.ui.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +27,6 @@ import java.util.List;
 import io.realm.Realm;
 
 public class PourToJarFragment extends DialogFragment implements View.OnClickListener {
-
     private static final String CHOSEN_JAR = "chosenJar";
     ImageView bottleLTSS;
     ImageView bottleFFA;
@@ -47,8 +45,7 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static PourToJarFragment newInstance(float pourSum, String chosenJar) {
+    public static PourToJarFragment newInstance(String chosenJar) {
         PourToJarFragment fragment = new PourToJarFragment();
         Bundle args = new Bundle();
         args.putString(CHOSEN_JAR, chosenJar);
@@ -72,28 +69,22 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pour_to_jar, container, false);
         currBalanceLTSS = (TextView) view.findViewById(R.id.pourLTSSJarBalanceText);
         currBalanceFFA = (TextView) view.findViewById(R.id.pourFFAJarBalanceText);
-
         bottleLTSS = (ImageView) view.findViewById(R.id.pourLTSSJar_imageView);
         bottleFFA = (ImageView) view.findViewById(R.id.pourFFAJar_imageView);
-
         noJars = (RelativeLayout) view.findViewById(R.id.pourNoJar);
         jarLTSS = (RelativeLayout) view.findViewById(R.id.pourLTSSJar);
         jarFFA = (RelativeLayout) view.findViewById(R.id.pourFFAJar);
         noJars.setClickable(true);
         jarLTSS.setClickable(true);
         jarFFA.setClickable(true);
-
         noJars.setOnClickListener(this);
         jarLTSS.setOnClickListener(this);
         jarFFA.setOnClickListener(this);
-
         saveButton = (Button) view.findViewById(R.id.savePourButton);
         saveButton.setOnClickListener(this);
-
         setBalance();
         return view;
     }
@@ -123,7 +114,6 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
                 : R.drawable.jar_widget_bg);
         jarFFA.setBackgroundResource(chosenJar.equals("FFA") ? R.drawable.jar_widget_selected_bg
                 : R.drawable.jar_widget_bg);
-
         if (chosenJar.equals("LTSS")) {
             Toast.makeText(getContext(), getString(R.string.global_pour_to_ltss_text),
                     Toast.LENGTH_SHORT).show();
@@ -131,11 +121,6 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
             Toast.makeText(getContext(), getString(R.string.global_pour_to_ffa_text),
                     Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void setStyle(int style, @StyleRes int theme) {
-        super.setStyle(style, theme);
     }
 
     @Override
@@ -190,7 +175,6 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
                                     RealmManager.with(this).getJar(chosenJar).getUser());
                         }
                     }
-
                 } else if (chosenJar.equals("FFA")) {
                     //deleting from other jars
                     for (int i = 0; i < 4; i++) {   // skip LTSS, or 5 - with LTSS
@@ -239,7 +223,6 @@ public class PourToJarFragment extends DialogFragment implements View.OnClickLis
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-
         outState.putString(CHOSEN_JAR, chosenJar);
     }
 

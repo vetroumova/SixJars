@@ -29,14 +29,11 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
         DatePickerFragment.OnNewDateListener, TimePickerFragment.OnNewTimeListener {
     private static final String JAR_ID = "jarId";
     private static final String VALUE = "valueString";
-
     private static final String NEW_DATE = "newDate";
     private static final String NEW_TIME = "newTime";
     private static final String FULL_DATE = "fullDate";
-
     private static final int DATE_RQ_CODE = 1;
     private static final int TIME_RQ_CODE = 2;
-
     TextView dateViewClicable;
     TextView timeViewClickable;
     TextView restCashValueText;
@@ -59,7 +56,6 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
     private String jarId;
     private StringBuilder valueString = new StringBuilder();
     private RealmManager realmManager;
-
     private String newDate = "NoDate";
     private String newTime = "NoTime";
     private Date fullDate;
@@ -89,10 +85,8 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
 
             newDate = getArguments().getString(NEW_DATE, "NoDate");
             newTime = getArguments().getString(NEW_TIME, "NoTime");
-            //partsOfDate = getArguments().getIntArray("parts");
         }
         realmManager = RealmManager.with(this);
-        //fullDate = cashflow.getDate(); was in Cash info
         fullDate = new Date(System.currentTimeMillis());
         splitDateToParts(fullDate);
     }
@@ -100,20 +94,16 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_spend, container, false);
-
         dateViewClicable = (TextView) view.findViewById(R.id.dateTextView);
         timeViewClickable = (TextView) view.findViewById(R.id.timeTextView);
         setDateTimeView(fullDate);
-
         restCashValueText = (TextView) view.findViewById(R.id.restTextView);
         restCashValueText.setText(getString(R.string.item_balance_text,
                 f.format(realmManager.getJar(jarId).getTotalCash())));
         spendCashValueText = (EditText) view.findViewById(R.id.spendCashInputText);
         spendCashValueText.addTextChangedListener(new InputSumWatcher(spendCashValueText));
         spendCashDescriptionEdit = (EditText) view.findViewById(R.id.spendCashDescriptionText);
-
         button1 = (Button) view.findViewById(R.id.spend1Button);
         button2 = (Button) view.findViewById(R.id.spend2Button);
         button3 = (Button) view.findViewById(R.id.spend3Button);
@@ -127,7 +117,6 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
         buttonDot = (Button) view.findViewById(R.id.spendDecimalButton);
         buttonBack = (Button) view.findViewById(R.id.spendBackButton);
         buttonSpend = (Button) view.findViewById(R.id.spendSaveButton);
-
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
@@ -144,7 +133,6 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
         buttonSpend.setOnClickListener(this);
         dateViewClicable.setOnClickListener(this);
         timeViewClickable.setOnClickListener(this);
-
         return view;
     }
 
@@ -155,7 +143,6 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
         newDate = dateFormat.format(fullDate);
         dateFormat = new SimpleDateFormat("H:mm", Locale.getDefault());
         newTime = dateFormat.format(fullDate);
-
         // to correct a visible date
         dateFormat = new SimpleDateFormat("d-MMMM-yyyy", Locale.getDefault());
         dateViewClicable.setText(dateFormat.format(fullDate));
@@ -166,24 +153,19 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
         // from string to date
         //Toast.makeText(getContext(), "Concat : " + date, Toast.LENGTH_SHORT).show();
         Log.d("VOlga", "Concat : " + date);
-
         SimpleDateFormat format = new SimpleDateFormat("d-M-yyyy H:mm");
         try {
             Date fullDate = format.parse(date);
-            //Toast.makeText(getContext(), "Parsed : " + fullDate, Toast.LENGTH_SHORT).show();
             Log.d("VOlga", "Parsed : " + fullDate);
             return fullDate;
-
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
-            //TODO normal return
+            //fixme normal return
             return new Date(System.currentTimeMillis());
         }
     }
 
     public void splitDateToParts(Date fullDate) {
-        //partsOfDate = new int[5];
         SimpleDateFormat dateFormat = new SimpleDateFormat("d-M-yyyy-H-mm", Locale.getDefault());
         String dateString = dateFormat.format(fullDate);
         String[] str = dateString.split("-");
@@ -207,7 +189,6 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
             valueString.deleteCharAt(0);
         }
         switch (v.getId()) {
-
             case R.id.dateTextView: {
                 DatePickerFragment dateFragment = new DatePickerFragment();
                 dateFragment.setDay(partsOfDate[0]);
@@ -285,20 +266,16 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
                 break;
             }
             case R.id.spendSaveButton: {
-                //Toast.makeText(getContext(), "Click!!", Toast.LENGTH_SHORT).show();
                 Log.d("VOlga", "Click!!");
                 float spendSum = 0;
                 try {
                     spendSum = -(Float.parseFloat(valueString.toString()));
-                    //Toast.makeText(getContext(), "sum " + spendSum, Toast.LENGTH_SHORT).show();
                     Log.d("VOlga", "sum " + spendSum);
                 } catch (NumberFormatException e) {
-                    //Toast.makeText(getContext(), R.string.enter_sum_text, Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                     return;
                 }
-                //Toast.makeText(getContext(), "before adding", Toast.LENGTH_SHORT).show();
                 Log.d("VOlga", "before adding");
-
                 if (spendSum != 0) {
                     boolean isAdded = realmManager.addCashToJar(jarId, spendSum, fullDate,
                             Prefs.with(getContext()).getPercentJar(jarId),
@@ -342,10 +319,8 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
         outState.putString(NEW_TIME, newTime);
     }
 
-
     @Override
     public void onNewDate(int year, int month, int day) {
-        //data from DatePickerDialog    "d-M-yyyy H:mm", Locale.getDefault()
         StringBuilder sb = new StringBuilder();
         sb.append(day).append("-").append(month + 1).append("-").append(year);
         Log.d("VOlga", "StringBuilder " + sb);
@@ -364,7 +339,7 @@ public class SpendFragment extends Fragment implements View.OnClickListener, Vie
         if (minute < 10) {
             sb.append("0");
         }
-        sb.append(minute); //.append(":").append(second);
+        sb.append(minute);
         Log.d("VOlga", "StringBuilder " + sb);
         newTime = sb.toString();
         sb = new StringBuilder(newDate).append(" ").append(newTime);

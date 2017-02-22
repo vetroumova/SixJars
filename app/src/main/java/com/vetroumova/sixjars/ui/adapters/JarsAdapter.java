@@ -20,12 +20,9 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 
-import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
 import rx.subjects.PublishSubject;
-
-//import com.bumptech.glide.Glide;
 
 public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
 
@@ -33,22 +30,17 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
             R.string.db_jar_name_EDU, R.string.db_jar_name_LTSS, R.string.db_jar_name_FFA};
     final Context context;
     private final PublishSubject<Jar> jarInAdapterPublishSubject = PublishSubject.create();
-    private Realm realm;
     private LayoutInflater inflater;
     private List<Integer> percentJars;
 
     public JarsAdapter(Context context) {
-
         this.context = context;
     }
 
-    // create new views (invoked by the layout manager)
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // inflate a new card view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_jar_recycler,
                 parent, false);
-
         // for correct locale name in appwidget
         RealmResults<Jar> jars = RealmManager.getInstance().getJars();
         //for localisation
@@ -62,14 +54,12 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
     // replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position) {
-
         percentJars = Prefs.with(context).getPercentage();
         // get the article
         final Jar jar = getItem(position);
         final String jarID = jar.getJar_id();
         // cast the generic view holder to our specific one
         final CardViewHolder holder = (CardViewHolder) viewHolder;
-
         // set the title and the snippet
         holder.textID.setText(jarID);
         String nameForWidget = context.getString(NAMES[position]);
@@ -77,7 +67,6 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
         holder.textName.setText(nameForWidget);
         //Set the text
         DecimalFormatSymbols s = new DecimalFormatSymbols();
-        //s.setDecimalSeparator('.');
         DecimalFormat f = new DecimalFormat("##,##0.00", s);
         String sum = (f.format(jar.getTotalCash()));
         String total = String.format(context.getString(R.string.item_balance_text), sum);
@@ -94,11 +83,8 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
         holder.imageJar.setImageResource(BottleDrawableManager.setDrawableJar(Prefs.with(context),
                 jar.getJar_id()));
 
-        //TODO make a swipe delete?
-
         //update single match from realm
         holder.card.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 jarInAdapterPublishSubject.onNext(jar);
@@ -106,14 +92,12 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
         });
     }
 
-
     public Observable<Jar> getPositionClicks() {
         return jarInAdapterPublishSubject.asObservable();
     }
 
     // return the size of your data set (invoked by the layout manager)
     public int getItemCount() {
-
         if (getRealmAdapter() != null) {
             return getRealmAdapter().getCount();
         }
@@ -121,13 +105,11 @@ public class JarsAdapter extends RealmRecyclerViewAdapter<Jar> {
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {
-
         public CardView card;
         public TextView textID;
         public TextView textName;
         public TextView textTotal;
         public TextView textPercentage;
-        //public TextView textDescription;
         public ImageView imageJar;
 
         public CardViewHolder(View itemView) {

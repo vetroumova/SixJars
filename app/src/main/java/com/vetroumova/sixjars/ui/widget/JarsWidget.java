@@ -227,15 +227,6 @@ public class JarsWidget extends AppWidgetProvider {
         }
         return textSize;
     }
-/*
-    @Override
-    public void onEnabled(Context context) {
-        //todo check
-        super.onEnabled(context);
-        ComponentName thisWidget = new ComponentName(context, JarsWidget.class);
-        int[] allWidgetsIds = AppWidgetManager.getInstance(context).getAppWidgetIds(thisWidget);
-        onUpdate(context, AppWidgetManager.getInstance(context), allWidgetsIds);
-    }*/
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -258,7 +249,6 @@ public class JarsWidget extends AppWidgetProvider {
         int[] allWidgetsIds = AppWidgetManager.getInstance(context).getAppWidgetIds(thisWidget);
 
         if (intent.getAction().equals(NEXT_JARS_CLICK)) {
-            //TODO CHECK
             Log.d(LOG_TAG, "Value of widgets array in onReceive " + allWidgetsIds.length);
             boolean isNextJars = false;
             if (widgetsMap.get(allWidgetsIds[0]) != null) {
@@ -266,10 +256,8 @@ public class JarsWidget extends AppWidgetProvider {
             }
             Log.d(LOG_TAG, "Value of isNextJars of widget " + thisWidget + " is " + isNextJars);
             widgetsMap.put(allWidgetsIds[0], !isNextJars);
-            // old isNextJars = !isNextJars;
             this.onUpdate(context, AppWidgetManager.getInstance(context), allWidgetsIds);
         } else {
-            //this.onUpdate(context, AppWidgetManager.getInstance(context), allWidgetsIds);
             super.onReceive(context, intent);
         }
     }

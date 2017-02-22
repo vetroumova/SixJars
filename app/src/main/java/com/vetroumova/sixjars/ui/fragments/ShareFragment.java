@@ -18,7 +18,6 @@ import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.model.VKScopes;
 
 public class ShareFragment extends DialogFragment implements View.OnClickListener {
-
     ImageButton googleButton;
     ImageButton vkButton;
     ImageButton facebookButton;
@@ -31,7 +30,7 @@ public class ShareFragment extends DialogFragment implements View.OnClickListene
 
     public static ShareFragment newInstance() {
         ShareFragment fragment = new ShareFragment();
-        Bundle args = new Bundle();
+        //Bundle args = new Bundle();
         return fragment;
     }
 
@@ -45,7 +44,6 @@ public class ShareFragment extends DialogFragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_share, container, false);
         googleButton = (ImageButton) view.findViewById(R.id.share_google_button);
         facebookButton = (ImageButton) view.findViewById(R.id.share_facebook_button);
@@ -68,7 +66,6 @@ public class ShareFragment extends DialogFragment implements View.OnClickListene
         switch (v.getId()) {
             case R.id.share_google_button: {
                 appPackageName = getActivity().getApplicationContext().getPackageName();
-                //Snackbar.make(getView(), "google", Snackbar.LENGTH_SHORT).show();
                 Intent shareIntent = new PlusShare.Builder(getActivity())
                         .setType("text/plain")
                         .setText(getString(R.string.share_message_text))

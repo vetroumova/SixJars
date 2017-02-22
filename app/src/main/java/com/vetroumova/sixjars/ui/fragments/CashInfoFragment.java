@@ -38,7 +38,6 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
     private static final int DATE_RQ_CODE = 1;
     private static final int TIME_RQ_CODE = 2;
 
-
     TextView cashIDText;
     Button jarNECButton;
     Button jarPLAYButton;
@@ -92,9 +91,7 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         realmManager = RealmManager.with(this);
-
         if (getArguments() != null) {
             cashflowID = getArguments().getLong(CASH_ID);
             cashflow = realmManager.getCashflowByID(cashflowID);
@@ -102,7 +99,6 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
             newJarID = getArguments().getString(NEW_JAR, cashflow.getJar().getJar_id());
             newDate = getArguments().getString(NEW_DATE, "NoDate");
             newTime = getArguments().getString(NEW_TIME, "NoTime");
-            //partsOfDate = getArguments().getIntArray("parts");
         } else {
             cashflow = realmManager.getCashflowByID(cashflowID);
             valueString.append(String.valueOf(cashflow.getSum()));
@@ -115,30 +111,23 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_cash_info, container, false);
-
         cashIDText = (TextView) view.findViewById(R.id.cashIDText);
         cashIDText.setText(getString(R.string.cash_id_text, String.valueOf(cashflowID)));
         inputSumView = (TextView) view.findViewById(R.id.cashEditInputText);
         inputSumView.setText(valueString);
         descriptionEdit = (EditText) view.findViewById(R.id.cashEditDescriptionText);
         descriptionEdit.setText(cashflow.getDescription());
-
         jarNECButton = (Button) view.findViewById(R.id.cashEditNECButton);
         jarPLAYButton = (Button) view.findViewById(R.id.cashEditPLAYButton);
         jarGIVEButton = (Button) view.findViewById(R.id.cashEditGIVEButton);
         jarEDUButton = (Button) view.findViewById(R.id.cashEditEDUButton);
         jarLTSSButton = (Button) view.findViewById(R.id.cashEditLTSSButton);
         jarFFAButton = (Button) view.findViewById(R.id.cashEditFFAButton);
-
         setJarDrawable();
-
         dateViewClicable = (TextView) view.findViewById(R.id.dateTextView);
         timeViewClickable = (TextView) view.findViewById(R.id.timeTextView);
-
         setDateTimeView(fullDate);
-
         button1 = (Button) view.findViewById(R.id.spend1Button);
         button2 = (Button) view.findViewById(R.id.spend2Button);
         button3 = (Button) view.findViewById(R.id.spend3Button);
@@ -177,13 +166,11 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
         jarFFAButton.setOnClickListener(this);
         dateViewClicable.setOnClickListener(this);
         timeViewClickable.setOnClickListener(this);
-
         // Inflate the layout for this fragment
         return view;
     }
 
     public void setJarDrawable() {
-
         jarNECButton.setBackgroundResource(newJarID.equals("NEC") ?
                 R.drawable.jar_widget_selected_bg : R.drawable.jar_widget_bg);
         jarPLAYButton.setBackgroundResource(newJarID.equals("PLAY") ?
@@ -197,7 +184,6 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
         jarFFAButton.setBackgroundResource(newJarID.equals("FFA") ?
                 R.drawable.jar_widget_selected_bg : R.drawable.jar_widget_bg);
     }
-
     public void setDateTimeView(Date fullDate) {
         // from date to string
         //to cooperate with pickers
@@ -205,34 +191,27 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
         newDate = dateFormat.format(fullDate);
         dateFormat = new SimpleDateFormat("H:mm", Locale.getDefault());
         newTime = dateFormat.format(fullDate);
-
         // to correct a visible date
         dateFormat = new SimpleDateFormat("d-MMMM-yyyy", Locale.getDefault());
         dateViewClicable.setText(dateFormat.format(fullDate));
-
         timeViewClickable.setText(newTime);
     }
 
     public Date getDateTimeDataFromStrings(String date) {
         // from string to date
         Log.d("VOlga", "Concat : " + date);
-
         SimpleDateFormat format = new SimpleDateFormat("d-M-yyyy H:mm");
         try {
             Date fullDate = format.parse(date);
             Log.d("VOlga", "Parsed : " + fullDate);
             return fullDate;
-
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
-            //TODO normal return
             return new Date(System.currentTimeMillis());
         }
     }
 
     public void splitDateToParts(Date fullDate) {
-        //partsOfDate = new int[5];
         SimpleDateFormat dateFormat = new SimpleDateFormat("d-M-yyyy-H-mm", Locale.getDefault());
         String dateString = dateFormat.format(fullDate);
         String[] str = dateString.split("-");
@@ -405,16 +384,14 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
                     Toast.makeText(getContext(), R.string.enter_sum_text, Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 if (newSum != 0) {
                     boolean isEdited = realmManager.editCashflow(cashflowID, fullDate,
                             newSum, descriptionEdit.getText().toString(), newJarID);
                     if (isEdited) {
                         Toast.makeText(getContext(), R.string.edited_cashflow, Toast.LENGTH_SHORT).show();
                         descriptionEdit.setText("");
-
                         //to correct maxvalue in prefs
-                        // не учитывает перевод в разные кувшины
+                        //fixme не учитывает перевод в разные кувшины
                         if (oldSum > 0 && oldSum < newSum) {
                             Prefs.with(getContext()).setMaxVolumeInJar(
                                     cashflow.getJar().getTotalCash(), cashflow.getJar().getJar_id());
@@ -449,7 +426,6 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
 
     @Override
     public void onNewDate(int year, int month, int day) {
-        //data from DatePickerDialog    "d-M-yyyy H:mm", Locale.getDefault()
         StringBuilder sb = new StringBuilder();
         sb.append(day).append("-").append(month + 1).append("-").append(year);
         Log.d("VOlga", "StringBuilder " + sb);
@@ -468,7 +444,7 @@ public class CashInfoFragment extends DialogFragment implements View.OnClickList
         if (minute < 10) {
             sb.append("0");
         }
-        sb.append(minute); //.append(":").append(second);
+        sb.append(minute);
         Log.d("VOlga", "StringBuilder " + sb);
         newTime = sb.toString();
         sb = new StringBuilder(newDate).append(" ").append(newTime);

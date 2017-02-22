@@ -657,23 +657,26 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         //todo check
         Intent intentFromWidget = getIntent();
-        String value = intentFromWidget.getStringExtra("JarInfoFragment");
-        //String value = intentFromWidget.getBundleExtra().getString("JarInfoFragment");
-        if (value != null) {
-            Log.d(TAG, "    widget value from intent " + value);
-            if (fragmentManager.findFragmentById(R.id.content_layout) instanceof JarInfoFragment) {
-                fragmentManager.popBackStackImmediate();
+        if (intentFromWidget.getStringExtra("JarInfoFragment") != null) {
+            String value = intentFromWidget.getStringExtra("JarInfoFragment");
+            //String value = intentFromWidget.getBundleExtra().getString("JarInfoFragment");
+            if (value != null) {
+                Log.d(TAG, "    widget value from intent " + value);
+                if (fragmentManager.findFragmentById(R.id.content_layout) instanceof JarInfoFragment) {
+                    fragmentManager.popBackStackImmediate();
+                }
+                jarInfoFragment = JarInfoFragment.newInstance(value);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_layout, jarInfoFragment)
+                        .addToBackStack("jarInfo")
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit();
+                getInnerSubscriptionsJar(value);
+                updateAllWidgets();
+                intentFromWidget.removeExtra("JarInfoFragment"); //todo check
+            } else {
+                Log.d(TAG, "     widget value from intent null");
             }
-            jarInfoFragment = JarInfoFragment.newInstance(value);
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_layout, jarInfoFragment)
-                    .addToBackStack("jarInfo")
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .commit();
-            getInnerSubscriptionsJar(value);
-            updateAllWidgets();
-        } else {
-            Log.d(TAG, "     widget value from intent null");
         }
     }
 

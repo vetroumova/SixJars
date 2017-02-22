@@ -231,8 +231,12 @@ public class RealmManager {
 
     public static void loadUserPrefsToSharedPrefs(Context context, User user) {
         Prefs prefs = Prefs.with(context);
-        prefs.setPrefLanguage(user.getLanguage());
-        prefs.setPreLoad(true); //todo check need
+        if (user.getLanguage() != null) {
+            prefs.setPrefLanguage(user.getLanguage());
+            prefs.setPreLoad(true);
+        } else {
+            prefs.setPrefLanguage("default"); //todo check
+        }
         List<Integer> percentageList = Arrays.asList(user.getNecPerc(), user.getPlayPerc(),
                 user.getGivePerc(), user.getEduPerc(), user.getLtssPerc(), user.getFfaPerc());
         prefs.setPercentage(percentageList);

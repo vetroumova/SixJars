@@ -56,7 +56,7 @@
                 android:hint="@string/enter_widget_name_text"
                 android:inputType="text"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="@dimen/item_description_dimension"
+                android:textSize="@dimen/small_description_dimension"
                 app:layout_heightPercent="10%"
                 app:layout_marginLeftPercent="2%"
                 app:layout_widthPercent="50%" />

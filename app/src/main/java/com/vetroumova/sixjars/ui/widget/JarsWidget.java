@@ -61,7 +61,10 @@ public class JarsWidget extends AppWidgetProvider {
         RealmResults<Jar> jars = realm.where(Jar.class).findAllSorted("jar_float_id", Sort.ASCENDING);
 
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.jars_widget);
-        boolean isNextJars = (boolean) widgetsMap.get(widgetId);
+        boolean isNextJars = false;
+        if (widgetsMap.get(widgetId) != null) {
+            isNextJars = (boolean) widgetsMap.get(widgetId);
+        }
 
         // TODO ProgressBar to animate arrow
         remoteViews.setImageViewResource(R.id.appwidget_go, R.drawable.go);
